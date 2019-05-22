@@ -31,6 +31,20 @@ namespace BourbonAndBurial.Data
             throw new Exception("No product created");
         }
 
+        public Product UpdateProduct (Product productToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Update Product " +
+                    "Set quantity = @quantity " +
+                    "where productId = @productId", productToUpdate);
+
+                if (rowsAffected == 1)
+                    return productToUpdate;
+            }
+            throw new Exception("Didn't update product");
+        }
+
         public void DeleteProduct(int ProductId)
         {
             using (var db = new SqlConnection(ConnectionString))

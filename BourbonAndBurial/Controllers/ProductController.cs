@@ -24,10 +24,18 @@ namespace BourbonAndBurial.Controllers
 
         public ActionResult<int> AddProduct(CreateProductRequest createRequest)
         {
-
             var newProduct = _productRepository.AddProduct(createRequest.ProductTypeId, createRequest.Price, createRequest.ProductName, createRequest.ProductDescription, createRequest.Quantity);
 
             return Created($"api/product/{newProduct.ProductId}", newProduct);
+        }
+
+        [HttpPut("{ProductId}")]
+
+        public ActionResult UpdateProduct(Product product)
+        {
+            var updatedProduct = _productRepository.UpdateProduct(product);
+
+            return Ok(updatedProduct);
         }
 
         [HttpDelete("{ProductId}")]
