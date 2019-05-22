@@ -33,7 +33,7 @@ namespace BourbonAndBurial.Controllers
             return Created($"/api/order/{newOrder.OrderId}", newOrder);
         }
 
-        [HttpGet("orders")]
+        [HttpGet]
         public ActionResult GetAll()
         {
             var orders = _orderRepository.GetAll();

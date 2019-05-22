@@ -27,7 +27,7 @@ namespace BourbonAndBurial.Data
                         output inserted.*
                              VALUES
                                    (@customerId,
-                                    @paymentTypeId";
+                                    @paymentTypeId)";
 
                 var parameters = new
                 {
