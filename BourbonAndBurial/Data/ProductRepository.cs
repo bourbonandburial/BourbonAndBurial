@@ -43,5 +43,15 @@ namespace BourbonAndBurial.Data
                 }
             }
         }
+
+        public IEnumerable<Product> GetAll()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var Products = db.Query<Product>("Select * from Product").ToList();
+
+                return Products;
+            }
+        }
     }
 }
