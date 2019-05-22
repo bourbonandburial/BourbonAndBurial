@@ -12,7 +12,7 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server=localhost; Database=BourbonAndBurial; Trusted_Connection=True;";
 
-        public Product AddProduct(int ProductTypeId, int Price, string ProductName, string ProductDescription, int Quantity)
+        public Product AddProduct(int ProductTypeId, decimal Price, string ProductName, string ProductDescription, int Quantity)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -31,7 +31,7 @@ namespace BourbonAndBurial.Data
             throw new Exception("No product created");
         }
 
-        public Product UpdateProduct (Product productToUpdate)
+        public int UpdateProduct (Product productToUpdate)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -40,7 +40,7 @@ namespace BourbonAndBurial.Data
                     "where productId = @productId", productToUpdate);
 
                 if (rowsAffected == 1)
-                    return productToUpdate;
+                    return productToUpdate.Quantity;
             }
             throw new Exception("Didn't update product");
         }
