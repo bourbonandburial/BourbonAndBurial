@@ -36,11 +36,24 @@ namespace BourbonAndBurial.Controllers
         {
             if (!_validator.Validate(createRequest))
             {
-                return BadRequest(new { error = "customers must have first name, last name, username, and firebaseId" });
+                return BadRequest(new { error = "Customers must have first name, last name, username, and firebaseId" });
             }
-            var newCustomer = _customerRepository.AddCustomer(createRequest.FirstName, createRequest.LastName, createRequest.CompanyName, createRequest.Username, createRequest.FirebaseId);
+            var newCustomer = _customerRepository.AddCustomer(
+                createRequest.FirstName,
+                createRequest.LastName,
+                createRequest.CompanyName,
+                createRequest.Username,
+                createRequest.FirebaseId);
 
             return Created($"api/customers/{newCustomer.CustomerId}", newCustomer);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateCustomer(Customer customerToUpdate)
+        {
+            var updatedLeapee = _customerRepository.UpdateCustomer(customerToUpdate);
+
+            return Ok(updatedLeapee);
         }
     }
 }

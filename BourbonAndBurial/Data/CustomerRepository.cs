@@ -16,7 +16,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var getQuery = "SELECT customerId, firstname, lastName, companyName, username, firebaseId FROM customer";
+                var getQuery = "SELECT customerId, firstname, lastName, companyName, username, firebaseId FROM customers";
 
                 var customers = db.Query<Customer>(getQuery).ToList();
 
@@ -31,7 +31,7 @@ namespace BourbonAndBurial.Data
                 var customerRepo = new CustomerRepository();
 
                 var insertQuery = @"
-                    INSERT INTO [dbo].[Customer]
+                    INSERT INTO customers
                                ([FirstName]
                                ,[LastName]
                                ,[CompanyName]
