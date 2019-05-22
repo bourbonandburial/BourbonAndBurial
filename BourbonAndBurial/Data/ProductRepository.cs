@@ -30,5 +30,18 @@ namespace BourbonAndBurial.Data
 
             throw new Exception("No product created");
         }
+
+        public void DeleteProduct(int ProductId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Delete from Product where ProductId = @ProductId", new { ProductId });
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Didn't do right");
+                }
+            }
+        }
     }
 }

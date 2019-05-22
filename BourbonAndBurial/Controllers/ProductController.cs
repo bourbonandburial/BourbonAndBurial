@@ -29,5 +29,14 @@ namespace BourbonAndBurial.Controllers
 
             return Created($"api/product/{newProduct.ProductId}", newProduct);
         }
+
+        [HttpDelete("{ProductId}")]
+
+        public ActionResult DeleteProduct(int ProductId)
+        {
+            _productRepository.DeleteProduct(ProductId);
+
+            return Ok();
+        }
     }
 }
