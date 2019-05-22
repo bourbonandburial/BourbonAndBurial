@@ -10,43 +10,50 @@ namespace BourbonAndBurial.Data
 {
     public class OrderRepository
     {
+        const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
 
-        public CreateOrderRequest AddTarget(string name, string location, FitnessLevel fitnessLevel, int userId)
+
+        public CreateOrderRequest AddOrder(int customerId, int paymentTypeId)
         {
 
-            const string ConnectionString = "Server=localhost;Database;Trusted_Connection=True;";
+            //const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
 
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
-                        INSERT INTO [dbo].[Targets]
-                                   ([Location]
-                                   ,[Name]
-                                   ,[FitnessLevel]
-                                   ,[UserId])
+                        INSERT INTO [dbo].[Order]
+                                   ([CustomerId]
+                                   ,[PaymentTypeId])
                         output inserted.*
                              VALUES
-                                   (@location
-                                   ,@name
-                                   ,@fitnessLevel
-                                   ,@userId)";
+                                   (@customerId,
+                                    @paymentTypeId";
 
-                //var parameters = new
-                //{
-                //    Name = name,
-                //    Location = location,
-                //    FitnessLevel = fitnessLevel,
-                //    UserId = userId
-                //};
+                var parameters = new
+                {
+                    CustomerId = customerId,
+                    PaymentTypeId = paymentTypeId,
 
-                //var newTarget = db.QueryFirstOrDefault<Target>(insertQuery, parameters);
+                };
 
-                //if (newTarget != null)
-                //{
-                //    return newTarget;
-                //}
+                var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
+
+                if (newTarget != null)
+                {
+                    return newTarget;
+                }
 
                 throw new Exception("Could not create target");
+            }
+        }
+
+        public IEnumerable<CreateOrderRequest> GetAll()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var targets = db.Query<CreateOrderRequest>("select * from [Order]").ToList();
+
+                return targets;
             }
         }
 
