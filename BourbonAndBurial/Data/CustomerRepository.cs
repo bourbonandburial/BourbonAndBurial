@@ -23,5 +23,45 @@ namespace BourbonAndBurial.Data
                 return customers;
             }
         }
+
+        public Customer AddCustomer(string firstName, string lastName, string companyName, string username, int firebaseId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var customerRepo = new CustomerRepository();
+
+                var insertQuery = @"
+                    INSERT INTO [dbo].[Customer]
+                               ([FirstName]
+                               ,[LastName]
+                               ,[CompanyName]
+                               ,[Username]
+                               ,[FirebaseId])
+                    OUTPUT inserted.*
+                         VALUES
+                               (@firstName
+                               ,@lastName
+                               ,@companyName
+                               ,@username
+                               ,@firebaseId)";
+
+                var parameters = new
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    CompanyName = companyName,
+                    Username = username,
+                    FirebaseId = firebaseId,
+                };
+
+                var newCustomer = db.QueryFirstOrDefault<Customer>(insertQuery, parameters);
+
+                if (newCustomer != null)
+                {
+                    return newCustomer;
+                }
+            }
+            throw new Exception("Customer was not created");
+        }
     }
 }
