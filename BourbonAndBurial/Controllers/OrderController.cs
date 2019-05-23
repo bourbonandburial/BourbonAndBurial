@@ -33,6 +33,15 @@ namespace BourbonAndBurial.Controllers
             return Created($"/api/order/{newOrder.OrderId}", newOrder);
         }
 
+        [HttpDelete("{OrderId}")]
+
+        public ActionResult DeleteOrder(int OrderId)
+        {
+            _orderRepository.DeleteOrder(OrderId);
+
+            return Ok();
+        }
+
         [HttpGet]
         public ActionResult GetAll()
         {

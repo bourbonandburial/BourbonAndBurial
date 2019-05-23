@@ -57,5 +57,18 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public void DeleteOrder(int OrderId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Delete from Product where OrderId = @OrderId", new { OrderId });
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Didn't do right");
+                }
+            }
+        }
+
     }
 }
