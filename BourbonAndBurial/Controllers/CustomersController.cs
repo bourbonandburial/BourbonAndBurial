@@ -31,6 +31,14 @@ namespace BourbonAndBurial.Controllers
             return Ok(customers);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult GetSingleCustomer(int id)
+        {
+            var singleCustomer = _customerRepository.GetSingleCustomer(id);
+
+            return Ok(singleCustomer);
+        }
+
         [HttpPost]
         public ActionResult AddNewCustomer(CreateCustomerRequest createRequest)
         {
@@ -56,10 +64,12 @@ namespace BourbonAndBurial.Controllers
             return Ok();
         }
 
-        [HttpPut("{CustomerId}")]
+        [HttpPut("{id}")]
         public ActionResult UpdateCustomer(Customer customerToUpdate)
         {
-            var updatedCustomer = _customerRepository.UpdateCustomer(customerToUpdate);
+            var customer = _customerRepository.UpdateCustomer(customerToUpdate);
+
+            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.CustomerId);
 
             return Ok(updatedCustomer);
         }

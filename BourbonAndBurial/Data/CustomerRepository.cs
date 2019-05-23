@@ -24,6 +24,20 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public IEnumerable<Customer> GetSingleCustomer(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM customers WHERE customerId = @customerId";
+
+                var parameter = new { CustomerId = id };
+
+                var customers = db.Query<Customer>(getQuery, parameter).ToList();
+
+                return customers;
+            }
+        }
+
         public Customer AddCustomer(string firstName, string lastName, string companyName, string username, int firebaseId)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -85,13 +99,12 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var updateQuery = @"
-                                    UPDATE Customers
-                                    SET FirstName = @firstName,
-                                        LastName = @lastName,
-                                        CompanyName = @companyName,
-                                        Username = @username
-                                    WHERE CustomerId = @customerId";
+                var updateQuery = @"UPDATE customers
+                                    SET firstName = @firstName,
+                                        lastName = @lastName,
+                                        companyName = @companyName,
+                                        username = @username
+                                    WHERE customerId = @customerId";
 
                 var rowsAffected = db.Execute(updateQuery, customerToUpdate);
 
