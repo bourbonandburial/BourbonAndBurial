@@ -63,5 +63,43 @@ namespace BourbonAndBurial.Data
             }
             throw new Exception("Customer was not created");
         }
+
+        public void DeleteCustomer(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var delete = "DELETE FROM Customers WHERE CustomerId = @customerId";
+
+                var parameter = new { CustomerId = id };
+
+                var rowsAffected = db.Execute(delete, parameter);
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Customer was not deleted");
+                }
+            }
+        }
+
+        public Customer UpdateCustomer(Customer customerToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updateQuery = @"
+                                    UPDATE Customers
+                                    SET FirstName = @firstName,
+                                        LastName = @lastName,
+                                        CompanyName = @companyName,
+                                        Username = @username
+                                    WHERE CustomerId = @customerId";
+
+                var rowsAffected = db.Execute(updateQuery, customerToUpdate);
+
+                if (rowsAffected == 1)    
+                    return customerToUpdate;
+
+            }
+            throw new Exception("Customer was not updated");
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace BourbonAndBurial.Controllers
 
         public CustomersController()
         {
-            _customerRepository =  new CustomerRepository();
+            _customerRepository = new CustomerRepository();
             _validator = new CreateCustomerRequestValidator();
         }
 
@@ -48,12 +48,20 @@ namespace BourbonAndBurial.Controllers
             return Created($"api/customers/{newCustomer.CustomerId}", newCustomer);
         }
 
-        [HttpPut("{id}")]
+        [HttpDelete("{customerId}")]
+        public ActionResult DeleteCustomer(int customerId)
+        {
+            _customerRepository.DeleteCustomer(customerId);
+
+            return Ok();
+        }
+
+        [HttpPut("{CustomerId}")]
         public ActionResult UpdateCustomer(Customer customerToUpdate)
         {
-            var updatedLeapee = _customerRepository.UpdateCustomer(customerToUpdate);
+            var updatedCustomer = _customerRepository.UpdateCustomer(customerToUpdate);
 
-            return Ok(updatedLeapee);
+            return Ok(updatedCustomer);
         }
     }
 }
