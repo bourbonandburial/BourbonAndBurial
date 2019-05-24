@@ -61,7 +61,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("Delete from Product where OrderId = @OrderId", new { OrderId });
+                var rowsAffected = db.Execute("Delete from [Order] where OrderId = @OrderId", new { OrderId });
 
                 if (rowsAffected != 1)
                 {
