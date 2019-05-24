@@ -9,7 +9,7 @@ namespace BourbonAndBurial.Models
     {
         public int PaymentTypeId { get; set; }
         public string PaymentName { get; set; }
-        public int AcctNumber { get; set; }
+        public Int64 AcctNumber { get; set; }
         public int CustomerId { get; set; }
     }
 }
