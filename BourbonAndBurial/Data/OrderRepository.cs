@@ -47,13 +47,44 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public CreateOrderRequest AddOrderProduct(int productId, int orderId)
+        {
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+              
+                var insertQuery = @"
+                        INSERT INTO [dbo].[OrderProduct]
+                                    ([ProductId]
+                                     ,[OrderId])
+                             VALUES
+                                   (3,
+                                    1)";
+
+                var parameters = new
+                {
+                    ProductId = productId,
+                    OrderId = orderId,
+                };
+
+                var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
+
+                if (newTarget != null)
+                {
+                    return newTarget;
+                }
+
+                throw new Exception("Could not create target");
+            }
+        }
+
         public IEnumerable<CreateOrderRequest> GetAll()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var targets = db.Query<CreateOrderRequest>("select * from [Order]").ToList();
+                var orders = db.Query<CreateOrderRequest>("select * from [Order]").ToList();
 
-                return targets;
+                return orders;
             }
         }
 
