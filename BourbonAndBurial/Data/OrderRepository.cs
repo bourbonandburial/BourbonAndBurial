@@ -32,7 +32,7 @@ namespace BourbonAndBurial.Data
                 var parameters = new
                 {
                     CustomerId = customerId,
-                    PaymentTypeId = paymentTypeId,
+                    PaymentTypeId = paymentTypeId
 
                 };
 
@@ -54,7 +54,7 @@ namespace BourbonAndBurial.Data
             {
               
                 var insertQuery = @"
-                        INSERT INTO [dbo].[OrderProduct]
+                        INSERT INTO [dbo].[OrderProducts]
                                     ([ProductId]
                                      ,[OrderId])
                              VALUES
@@ -82,7 +82,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var orders = db.Query<CreateOrderRequest>("select * from [Order]").ToList();
+                var orders = db.Query<CreateOrderRequest>("select * from [Orders]").ToList();
 
 
                 return orders;
@@ -93,7 +93,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("Delete from [Order] where OrderId = @OrderId", new { OrderId });
+                var rowsAffected = db.Execute("Delete from [Orders] where OrderId = @OrderId", new { OrderId });
 
                 if (rowsAffected != 1)
                 {
