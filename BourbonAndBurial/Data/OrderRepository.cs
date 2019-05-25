@@ -12,12 +12,8 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
 
-
         public CreateOrderRequest AddOrder(int customerId, int paymentTypeId)
         {
-
-            //const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
-
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
