@@ -29,7 +29,7 @@ namespace BourbonAndBurial.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewCustomer(CreatePaymentTypeRequest createRequest)
+        public ActionResult AddNewPaymentType(CreatePaymentTypeRequest createRequest)
         {
             var newPaymentType = _paymentRepository.AddPayment(
                 createRequest.PaymentName,
@@ -38,5 +38,15 @@ namespace BourbonAndBurial.Controllers
 
             return Created($"api/payments/{newPaymentType.PaymentTypeId}", newPaymentType);
         }
+
+        [HttpDelete("{paymentTypeId}")]
+        public ActionResult DeletePaymentType(int paymentTypeId)
+        {
+            _paymentRepository.DeletePaymentType(paymentTypeId);
+
+            return Ok();
+        }
+
+
     }
 }

@@ -56,6 +56,22 @@ namespace BourbonAndBurial.Data
             throw new Exception("Payment type was not created");
         }
 
+        public void DeletePaymentType(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var delete = "DELETE FROM PaymentTypes WHERE PaymentTypeId = @paymentTypeId";
+
+                var parameter = new { PaymentTypeId = id };
+
+                var rowsAffected = db.Execute(delete, parameter);
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Payment type was not deleted");
+                }
+            }
+        }
 
     }
 }
