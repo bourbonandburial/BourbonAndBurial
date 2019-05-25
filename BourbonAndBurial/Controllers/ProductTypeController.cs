@@ -29,6 +29,15 @@ namespace BourbonAndBurial.Controllers
             return Created($"api/productType/{newProductType.ProductTypeId}", newProductType);
         }
 
+        [HttpPut]
+
+        public ActionResult UpdateProduct(ProductType productType)
+        {
+            var updatedProductType = _productTypeRepository.UpdateProductType(productType);
+
+            return Ok(updatedProductType);
+        }
+
         [HttpDelete("{ProductTypeId}")]
 
         public ActionResult DeleteProductType(int ProductTypeId)
