@@ -12,5 +12,6 @@ namespace BourbonAndBurial.Models
         public string CompanyName { get; set; }
         public string Username { get; set; }
         public int FirebaseId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

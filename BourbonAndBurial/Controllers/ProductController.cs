@@ -29,7 +29,7 @@ namespace BourbonAndBurial.Controllers
             return Created($"api/product/{newProduct.ProductId}", newProduct);
         }
 
-        [HttpPut("{ProductId}")]
+        [HttpPut]
 
         public ActionResult UpdateProduct(Product product)
         {

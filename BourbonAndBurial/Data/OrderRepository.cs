@@ -17,7 +17,7 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
-                        INSERT INTO [dbo].[Order]
+                        INSERT INTO [dbo].[Orders]
                                    ([CustomerId]
                                    ,[PaymentTypeId])
                         output inserted.*
@@ -47,7 +47,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var targets = db.Query<CreateOrderRequest>("select * from [Order]").ToList();
+                var targets = db.Query<CreateOrderRequest>("select * from [Orders]").ToList();
 
                 return targets;
             }

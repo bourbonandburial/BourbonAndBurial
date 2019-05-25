@@ -16,7 +16,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var getQuery = "SELECT customerId, firstname, lastName, companyName, username, firebaseId FROM customers";
+                var getQuery = "SELECT * FROM customers WHERE isactive = 1";
 
                 var customers = db.Query<Customer>(getQuery).ToList();
 
@@ -82,11 +82,13 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var delete = "DELETE FROM Customers WHERE CustomerId = @customerId";
+                var terminate = @"UPDATE customers
+                                    SET isActive = 0
+                                    WHERE customerId = @customerId";
 
                 var parameter = new { CustomerId = id };
 
-                var rowsAffected = db.Execute(delete, parameter);
+                var rowsAffected = db.Execute(terminate, parameter);
 
                 if (rowsAffected != 1)
                 {
@@ -108,7 +110,7 @@ namespace BourbonAndBurial.Data
 
                 var rowsAffected = db.Execute(updateQuery, customerToUpdate);
 
-                if (rowsAffected == 1)    
+                if (rowsAffected >= 1)    
                     return customerToUpdate;
 
             }

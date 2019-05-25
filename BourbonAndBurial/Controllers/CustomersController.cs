@@ -24,11 +24,11 @@ namespace BourbonAndBurial.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAllCustomers()
+        public ActionResult GetActiveCustomers()
         {
-            var customers = _customerRepository.GetAll();
+            var activeCustomers = _customerRepository.GetAll();
 
-            return Ok(customers);
+            return Ok(activeCustomers);
         }
 
         [HttpGet("{id}")]
@@ -51,22 +51,28 @@ namespace BourbonAndBurial.Controllers
                 createRequest.LastName,
                 createRequest.CompanyName,
                 createRequest.Username,
-                createRequest.FirebaseId);
+                createRequest.FirebaseId
+                );
 
             return Created($"api/customers/{newCustomer.CustomerId}", newCustomer);
         }
 
-        [HttpDelete("{customerId}")]
-        public ActionResult DeleteCustomer(int customerId)
+        [HttpPut("{customerId}")]
+        public ActionResult UpdateIsActive(int customerId)
         {
             _customerRepository.DeleteCustomer(customerId);
 
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateCustomer(Customer customerToUpdate)
+        [HttpPut("update/{customerId}")]
+        public ActionResult UpdateCustomer(int customerId, Customer customerToUpdate)
         {
+            if (customerId != customerToUpdate.CustomerId)
+            {
+                return BadRequest(new { error = "Please enter valid customerId" });
+            }
+
             var customer = _customerRepository.UpdateCustomer(customerToUpdate);
 
             var updatedCustomer = _customerRepository.GetSingleCustomer(customer.CustomerId);
