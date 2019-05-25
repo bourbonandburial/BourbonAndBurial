@@ -17,7 +17,7 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var newProductType = db.QueryFirstOrDefault<ProductType>(@"
-                    Insert into ProductType (category) 
+                    Insert into ProductTypes (category) 
                     Output inserted.*
                     Values(@category)",
                     new { Category });
@@ -35,7 +35,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("Update ProductType " +
+                var rowsAffected = db.Execute("Update ProductTypes " +
                     "Set category = @category " +
                     "where productTypeId = @productTypeId ", productTypeToUpdate);
 
@@ -49,7 +49,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("delete from productType where ProductTypeId = @ProductTypeId", new { ProductTypeId });
+                var rowsAffected = db.Execute("delete from productTypes where ProductTypeId = @ProductTypeId", new { ProductTypeId });
 
                 if (rowsAffected != 1)
                 {
@@ -62,7 +62,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var ProductTypes = db.Query<ProductType>("Select * from ProductType").ToList();
+                var ProductTypes = db.Query<ProductType>("Select * from ProductTypes").ToList();
 
                 return ProductTypes;
             }

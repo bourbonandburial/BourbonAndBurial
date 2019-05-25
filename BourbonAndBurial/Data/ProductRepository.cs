@@ -17,7 +17,7 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var newProduct = db.QueryFirstOrDefault<Product>(@"
-                    Insert into Product (productTypeId,price,productName,productDescription,quantity) 
+                    Insert into Products (productTypeId,price,productName,productDescription,quantity) 
                     Output inserted.*
                     Values(@productTypeId,@price,@productName,@productDescription,@quantity)",
                     new { ProductTypeId, Price, ProductName, ProductDescription, Quantity }); // setting up the parameters required - property needs to match the values above
@@ -35,7 +35,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("Update Product " +
+                var rowsAffected = db.Execute("Update Products " +
                     "Set quantity = @quantity " +
                     "where productId = @productId", productToUpdate);
 
@@ -49,7 +49,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var rowsAffected = db.Execute("Delete from Product where ProductId = @ProductId", new { ProductId });
+                var rowsAffected = db.Execute("Delete from Products where ProductId = @ProductId", new { ProductId });
 
                 if (rowsAffected != 1)
                 {
@@ -62,7 +62,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var Products = db.Query<Product>("Select * from Product").ToList();
+                var Products = db.Query<Product>("Select * from Products").ToList();
 
                 return Products;
             }
