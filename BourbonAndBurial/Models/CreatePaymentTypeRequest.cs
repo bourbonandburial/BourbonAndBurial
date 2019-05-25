@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace BourbonAndBurial.Models
 {
-    public class PaymentType
+    public class CreatePaymentTypeRequest
     {
-        public int PaymentTypeId { get; set; }
         public string PaymentName { get; set; }
-        public long AcctNumber { get; set; }
+        public Int64 AcctNumber { get; set; }
         public int CustomerId { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BourbonAndBurial.Data;
+using BourbonAndBurial.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,11 @@ namespace BourbonAndBurial.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        readonly PaymentRepository _paymentRepository;
+        readonly PaymentTypeRepository _paymentRepository;
 
         public PaymentsController()
         {
-            _paymentRepository = new PaymentRepository();
+            _paymentRepository = new PaymentTypeRepository();
         }
 
         [HttpGet]
@@ -25,6 +26,17 @@ namespace BourbonAndBurial.Controllers
             var allPayments = _paymentRepository.GetAll();
 
             return Ok(allPayments);
+        }
+
+        [HttpPost]
+        public ActionResult AddNewCustomer(CreatePaymentTypeRequest createRequest)
+        {
+            var newPaymentType = _paymentRepository.AddPayment(
+                createRequest.PaymentName,
+                createRequest.AcctNumber,
+                createRequest.CustomerId);
+
+            return Created($"api/payments/{newPaymentType.PaymentTypeId}", newPaymentType);
         }
     }
 }
