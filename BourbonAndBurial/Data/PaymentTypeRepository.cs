@@ -12,6 +12,18 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server = localhost; Database = BourbonAndBurial; Trusted_Connection = True;";
 
+        public IEnumerable<PaymentType> GetAllActive()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM PaymentTypes WHERE isactive = 1";
+
+                var payments = db.Query<PaymentType>(getQuery).ToList();
+
+                return payments;
+            }
+        }
+
         public IEnumerable<PaymentType> GetAll()
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -74,15 +86,17 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var delete = "DELETE FROM PaymentTypes WHERE PaymentTypeId = @paymentTypeId";
+                var terminate = @"UPDATE paymentTypes
+                                    SET isActive = 0
+                                    WHERE paymentTypeId = @paymentTypeId";
 
-                var parameter = new { PaymentTypeId = id };
+                var parameter = new { paymentTypeId = id };
 
-                var rowsAffected = db.Execute(delete, parameter);
+                var rowsAffected = db.Execute(terminate, parameter);
 
                 if (rowsAffected != 1)
                 {
-                    throw new Exception("Payment type was not deleted");
+                    throw new Exception("Customer was not deleted");
                 }
             }
         }

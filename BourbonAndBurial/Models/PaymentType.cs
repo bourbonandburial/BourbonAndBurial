@@ -11,5 +11,6 @@ namespace BourbonAndBurial.Models
         public string PaymentName { get; set; }
         public long AcctNumber { get; set; }
         public int CustomerId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -9,23 +9,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BourbonAndBurial.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/payments")]
     [ApiController]
-    public class PaymentsController : ControllerBase
+    public class PaymentTypeController : ControllerBase
     {
         readonly PaymentTypeRepository _paymentRepository;
 
-        public PaymentsController()
+        public PaymentTypeController()
         {
             _paymentRepository = new PaymentTypeRepository();
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult GetAllPayments()
         {
             var allPayments = _paymentRepository.GetAll();
 
             return Ok(allPayments);
+        }
+
+        [HttpGet]
+        public ActionResult GetAllActivePayments()
+        {
+            var activePayments = _paymentRepository.GetAllActive();
+
+            return Ok(activePayments);
         }
 
         [HttpGet("{id}")]
@@ -47,8 +55,8 @@ namespace BourbonAndBurial.Controllers
             return Created($"api/payments/{newPaymentType.PaymentTypeId}", newPaymentType);
         }
 
-        [HttpDelete("{paymentTypeId}")]
-        public ActionResult DeletePaymentType(int paymentTypeId)
+        [HttpPut("{paymentTypeId}")]
+        public ActionResult UpdateIsActive(int paymentTypeId)
         {
             _paymentRepository.DeletePaymentType(paymentTypeId);
 
