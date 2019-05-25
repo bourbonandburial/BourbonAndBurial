@@ -28,6 +28,14 @@ namespace BourbonAndBurial.Controllers
             return Ok(allPayments);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult GetSinglePaymentType(int id)
+        {
+            var singlePaymentType = _paymentRepository.GetSinglePaymentType(id);
+
+            return Ok(singlePaymentType);
+        }
+
         [HttpPost]
         public ActionResult AddNewPaymentType(CreatePaymentTypeRequest createRequest)
         {
@@ -47,6 +55,15 @@ namespace BourbonAndBurial.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        public ActionResult UpdatePaymentType(PaymentType paymentToUpdate)
+        {
+            var paymentType = _paymentRepository.UpdatePaymentType(paymentToUpdate);
+
+            var updatedPaymentType = _paymentRepository.GetSinglePaymentType(paymentToUpdate.PaymentTypeId);
+
+            return Ok(updatedPaymentType);
+        }
 
     }
 }

@@ -56,6 +56,20 @@ namespace BourbonAndBurial.Data
             throw new Exception("Payment type was not created");
         }
 
+        public IEnumerable<PaymentType> GetSinglePaymentType(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM PaymentTypes WHERE PaymentTypeId = @paymentTypeId";
+
+                var parameter = new { PaymentTypeId = id };
+
+                var singlePayment = db.Query<PaymentType>(getQuery, parameter).ToList();
+
+                return singlePayment;
+            }
+        }
+
         public void DeletePaymentType(int id)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -73,5 +87,24 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public PaymentType UpdatePaymentType(PaymentType paymentTypeToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updateQuery = @"
+                    UPDATE PaymentTypes
+                        SET paymentName = @paymentName,
+	                        acctNumber = @acctNumber,
+                            customerId = @customerId
+                        WHERE paymentTypeId = @paymentTypeId";
+
+                var rowsAffected = db.Execute(updateQuery, paymentTypeToUpdate);
+
+                if (rowsAffected == 1)
+                    return paymentTypeToUpdate;
+
+            }
+            throw new Exception("Payment type was not updated");
+        }
     }
 }
