@@ -46,5 +46,14 @@ namespace BourbonAndBurial.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+
+        public ActionResult GetAllProductTypes()
+        {
+            var productTypes = _productTypeRepository.GetAll();
+
+            return Ok(productTypes);
+        }
     }
 }
