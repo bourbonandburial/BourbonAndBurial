@@ -11,7 +11,7 @@ namespace BourbonAndBurial.Models
             public int PaymentTypeId { get; set; }
             public DateTime OrderDate { get; set; }
 
-            public List<Product> Product { get; set; }
+           // public List<Product> Product { get; set; }
 
     }
 }

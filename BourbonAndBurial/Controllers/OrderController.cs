@@ -63,5 +63,15 @@ namespace BourbonAndBurial.Controllers
             return Ok(orders);
         }
 
+        [HttpPut]
+
+        public ActionResult UpdateOrder(Order order)
+        {
+            var updatedOrder = _orderRepository.UpdateOrder(order);
+
+            return Ok(updatedOrder);
+        }
+
+
     }
 }

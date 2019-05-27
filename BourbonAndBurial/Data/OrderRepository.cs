@@ -89,6 +89,20 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public int UpdateOrder(Order productToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Update [Orders] " +
+                    "Set paymentTypeId = @paymentTypeId" +
+                    "where orderId = @orderId", productToUpdate);
+
+                if (rowsAffected == 1)
+                    return productToUpdate.PaymentTypeId;
+            }
+            throw new Exception("Didn't update product");
+        }
+
         public void DeleteOrder(int OrderId)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -101,6 +115,8 @@ namespace BourbonAndBurial.Data
                 }
             }
         }
+
+
 
     }
 }
