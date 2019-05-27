@@ -89,16 +89,16 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public int UpdateOrder(Order productToUpdate)
+        public int UpdateOrder(Order paymentTypeToUpdate)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 var rowsAffected = db.Execute("Update [Orders] " +
                     "Set paymentTypeId = @paymentTypeId" +
-                    "where orderId = @orderId", productToUpdate);
+                    "where orderId = @orderId", paymentTypeToUpdate);
 
                 if (rowsAffected == 1)
-                    return productToUpdate.PaymentTypeId;
+                    return paymentTypeToUpdate.PaymentTypeId;
             }
             throw new Exception("Didn't update product");
         }
