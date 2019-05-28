@@ -28,8 +28,39 @@ namespace BourbonAndBurial.Data
                 var parameters = new
                 {
                     CustomerId = customerId,
-                    PaymentTypeId = paymentTypeId,
+                    PaymentTypeId = paymentTypeId
 
+                };
+
+                var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
+
+                if (newTarget != null)
+                {
+                    return newTarget;
+                }
+
+                throw new Exception("Could not create target");
+            }
+        }
+
+        public CreateOrderRequest AddOrderProduct(int productId, int orderId)
+        {
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+              
+                var insertQuery = @"
+                        INSERT INTO [dbo].[OrderProducts]
+                                    ([ProductId]
+                                     ,[OrderId])
+                             VALUES
+                                   (3,
+                                    1)";
+
+                var parameters = new
+                {
+                    ProductId = productId,
+                    OrderId = orderId,
                 };
 
                 var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
@@ -47,11 +78,41 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var targets = db.Query<CreateOrderRequest>("select * from [Orders]").ToList();
+                var orders = db.Query<CreateOrderRequest>("select * from [Orders]").ToList();
 
-                return targets;
+
+                return orders;
             }
         }
+
+        public int UpdateOrder(Order paymentTypeToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Update [Orders] " +
+                    "Set paymentTypeId = @paymentTypeId" +
+                    "where orderId = @orderId", paymentTypeToUpdate);
+
+                if (rowsAffected == 1)
+                    return paymentTypeToUpdate.PaymentTypeId;
+            }
+            throw new Exception("Didn't update product");
+        }
+
+        public void DeleteOrder(int OrderId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Delete from [Orders] where OrderId = @OrderId", new { OrderId });
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Didn't do right");
+                }
+            }
+        }
+
+
 
     }
 }

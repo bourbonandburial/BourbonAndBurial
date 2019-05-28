@@ -33,12 +33,45 @@ namespace BourbonAndBurial.Controllers
             return Created($"/api/order/{newOrder.OrderId}", newOrder);
         }
 
+        //[HttpPost("products/ordered")]
+        //public ActionResult AddOrderProduct(CreateOrderRequest createRequest)
+        //{
+        //    var repository = new OrderRepository();
+
+        //    var newOrder = repository.AddOrderProduct(
+        //        createRequest.ProductId,
+        //        createRequest.OrderId
+        //        );
+
+        //    return Created($"/api/order/{newOrder.OrderId}", newOrder);
+        //}
+
+
+        [HttpDelete("{OrderId}")]
+
+        public ActionResult DeleteOrder(int OrderId)
+        {
+            _orderRepository.DeleteOrder(OrderId);
+
+            return Ok();
+        }
+
         [HttpGet]
         public ActionResult GetAll()
         {
             var orders = _orderRepository.GetAll();
             return Ok(orders);
         }
+
+        [HttpPut]
+
+        public ActionResult UpdateOrder(Order order)
+        {
+            var updatedOrder = _orderRepository.UpdateOrder(order);
+
+            return Ok(updatedOrder);
+        }
+
 
     }
 }
