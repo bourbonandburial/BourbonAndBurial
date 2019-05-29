@@ -10,8 +10,6 @@ namespace BourbonAndBurial.Models
             public int CustomerId { get; set; }
             public int PaymentTypeId { get; set; }
             public DateTime OrderDate { get; set; }
-
-           // public List<Product> Product { get; set; }
-
+            public IEnumerable<OrderProduct> Products { get; set; }
     }
 }
