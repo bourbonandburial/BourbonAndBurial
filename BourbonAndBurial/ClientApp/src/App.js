@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import {
+  BrowserRouter, Redirect, Switch
+} from 'react-router-dom';
+
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
     const routeChecker = props => (authed === false
@@ -46,20 +49,20 @@ class App extends React.Component {
     return (
         <div className="App">
             <BrowserRouter>
-                <div>
-                    <Navbar
+                <div authed={this.state.authed}>
+                    {/* <Navbar
                         authed={this.state.authed}
                         runAway={this.runAway}
-                    />
+                    /> */}
                     <div className="container">
                         <div className="row">
                             <Switch>
                                 <Route path="/" exact component={Home} />
-                                <PrivateRoute
+                                {/* <PrivateRoute
                                     path="/fetchData"
                                     authed={this.state.authed}
                                     component={FetchData}
-                                />
+                                /> */}
                             </Switch>
                         </div>
                     </div>
@@ -69,3 +72,5 @@ class App extends React.Component {
     );
     }
 }
+
+export default App;
