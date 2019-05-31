@@ -1,0 +1,13 @@
+.Auth {
+  display: flex;
+  justify-content: center;
+  .btn {
+    margin: 2rem auto 1rem auto;
+    width: 15rem;
+    padding: 0;
+    border: none;
+    img {
+      width: 100%;
+    }
+  }
+}
