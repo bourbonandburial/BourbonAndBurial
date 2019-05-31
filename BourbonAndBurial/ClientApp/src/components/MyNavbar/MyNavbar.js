@@ -9,9 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom';
 import './MyNavbar.scss';
-
 
 class MyNavbar extends React.Component {
   static propTypes = {
@@ -34,23 +32,23 @@ class MyNavbar extends React.Component {
     const buildNavbar = () => {
       if (isAuthed) {
         return (
-        <Nav className="ml-auto" navbar>
-          <NavItem className="nav-item">
-            <NavLink onClick={logoutClickEvent}>Logout</NavLink>
-          </NavItem>
-        </Nav>
+          <Nav className='ml-auto' navbar>
+            <NavItem>
+              <NavLink onClick={logoutClickEvent}>Logout</NavLink>
+            </NavItem>
+          </Nav>
         );
       }
-      return <Nav className="ml-auto" navbar />;
+      return <Nav className='ml-auto' navbar />;
     };
 
     return (
-      <div className="my-navbar mb-5">
-       <Navbar color="dark" dark expand="md" className="fixed-top">
-          <NavbarBrand href="/">Bourbon and Burial</NavbarBrand>
+      <div className="my-navbar">
+        <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">Bourbon & Burial</NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} />
           <Collapse isOpen={this.state.isOpen} navbar>
-           {buildNavbar()}
+            {buildNavbar()}
           </Collapse>
         </Navbar>
       </div>

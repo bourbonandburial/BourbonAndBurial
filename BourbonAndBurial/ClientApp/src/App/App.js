@@ -33,25 +33,25 @@ class App extends React.Component {
     }
   
     componentDidMount() {
-      connection();
-      this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.setState({
-            authed: true,
-            pendingUser: false,
-          });
-        } else {
-          this.setState({
-            authed: false,
-            pendingUser: false,
-          });
-        }
-      });
-    }
-  
-    componentWillUnmount() {
-      this.removeListener();
-    }
+        connection();
+        this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            this.setState({
+              authed: true,
+              pendingUser: false,
+            });
+          } else {
+            this.setState({
+              authed: false,
+              pendingUser: false,
+            });
+          }
+        });
+      }
+    
+      componentWillUnmount() {
+        this.removeListener();
+      }
   
     isAuthenticated = () => {
       this.setState({ authed: true });
