@@ -1,10 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import apiKeys from '../apiKeys';
+import constants from '../constants';
 
 const firebaseApp = () => {
   if (!firebase.apps.length) {
-    firebase.initializeApp(apiKeys.firebaseConfig);
+    firebase.initializeApp(constants.firebaseConfig);
   }
 };
 

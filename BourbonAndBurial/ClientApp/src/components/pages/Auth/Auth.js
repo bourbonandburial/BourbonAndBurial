@@ -7,7 +7,7 @@ import googleButton from './images/googlebutton.png';
 class Auth extends React.Component {
   authenticateUser = (e) => {
     e.preventDefault();
-    authRequests.authenticate().then(() => {
+    authRequests.loginUser().then(() => {
       this.props.history.push('/home');
     }).catch(err => console.error('error in auth', err));
   }

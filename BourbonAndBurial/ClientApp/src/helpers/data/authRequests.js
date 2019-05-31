@@ -1,21 +1,42 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase';
+import axios from 'axios';
 
-const authenticate = () => {
+axios.interceptors.request.use(function (request) {
+  const token = sessionStorage.getItem('token');
+
+  if (token != null) {
+    request.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return request;
+}, function (err) {
+  return Promise.reject(err);
+});
+
+axios.interceptors.response.use(response => {
+  return response;
+}, errorResponse => {
+  console.error("Blew up")
+});
+
+const registerUser = (user) => {
+  return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+};
+
+const loginUser = (user) => {
   const provider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(provider).then(cred => {
     cred.user.getIdToken()
-      .then(token => sessionStorage.setItem('token', token));
+    .then(token => sessionStorage.setItem('token', token));
   });
 };
 
-
-const logoutUser = () => firebase.auth().signOut();
-
-const getCurrentUid = () => firebase.auth().currentUser.uid;
-
-export default {
-  authenticate,
-  logoutUser,
-  getCurrentUid,
+const logoutUser = () => {
+  return firebase.auth().signOut();
 };
+
+const getUid = () => {
+  return firebase.auth().currentUser.uid;
+};
+
+export default { getUid, loginUser, logoutUser, registerUser };
