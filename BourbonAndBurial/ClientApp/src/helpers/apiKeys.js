@@ -1,12 +1,12 @@
 const apiKeys = {
   firebaseConfig: {
-    apiKey: "AIzaSyBP_qMaNkmvTD7oyV_r2t8tIuxtIrXtfq4",
-    authDomain: "bourbonandburial1.firebaseapp.com",
-    databaseURL: "https://bourbonandburial1.firebaseio.com",
-    projectId: "bourbonandburial1",
-    storageBucket: "bourbonandburial1.appspot.com",
-    messagingSenderId: "631697030593",
-    appId: "1:631697030593:web:919645aba9785b07"
+    apiKey: "AIzaSyAHhJNf5edyxRbrci9u9rcjN7YV6xoWxgc",
+    authDomain: "bourbonandburial-59892.firebaseapp.com",
+    databaseURL: "https://bourbonandburial-59892.firebaseio.com",
+    projectId: "bourbonandburial-59892",
+    storageBucket: "bourbonandburial-59892.appspot.com",
+    messagingSenderId: "275098358048",
+    appId: "1:275098358048:web:fceb628d0e4f1552"
   }
 };
 

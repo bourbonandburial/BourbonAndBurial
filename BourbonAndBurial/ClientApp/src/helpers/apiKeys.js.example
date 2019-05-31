@@ -6,6 +6,7 @@ const apiKeys = {
     projectId: '',
     storageBucket: '',
     messagingSenderId: '',
+    appId: '',
   }
 };
 
