@@ -43,47 +43,36 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public CreateOrderRequest AddOrderProduct(int productId, int orderId)
-        {
+        //public CreateOrderRequest AddOrderProduct(int productId, int orderId)
+        //{
 
-            using (var db = new SqlConnection(ConnectionString))
-            {
-              
-                var insertQuery = @"
-                        INSERT INTO [dbo].[OrderProducts]
-                                    ([ProductId]
-                                     ,[OrderId])
-                             VALUES
-                                   (3,
-                                    1)";
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
 
-                var parameters = new
-                {
-                    ProductId = productId,
-                    OrderId = orderId,
-                };
+        //        var insertQuery = @"
+        //                INSERT INTO [dbo].[OrderProducts]
+        //                            ([ProductId]
+        //                             ,[OrderId])
+        //                     VALUES
+        //                           (3,
+        //                            1)";
 
-                var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
+        //        var parameters = new
+        //        {
+        //            ProductId = productId,
+        //            OrderId = orderId,
+        //        };
 
-                if (newTarget != null)
-                {
-                    return newTarget;
-                }
+        //        var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
 
-                throw new Exception("Could not create target");
-            }
-        }
+        //        if (newTarget != null)
+        //        {
+        //            return newTarget;
+        //        }
 
-        public IEnumerable<CreateOrderRequest> GetAll()
-        {
-            using (var db = new SqlConnection(ConnectionString))
-            {
-                var orders = db.Query<CreateOrderRequest>("select * from [Orders]").ToList();
-
-
-                return orders;
-            }
-        }
+        //        throw new Exception("Could not create target");
+        //    }
+        //}
 
         public int UpdateOrder(Order paymentTypeToUpdate)
         {
@@ -109,6 +98,17 @@ namespace BourbonAndBurial.Data
                 {
                     throw new Exception("Didn't do right");
                 }
+            }
+        }
+
+
+        public IEnumerable<Order> GetAll()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var Orders = db.Query<Order>("Select * from Orders").ToList();
+
+                return Orders;
             }
         }
 
