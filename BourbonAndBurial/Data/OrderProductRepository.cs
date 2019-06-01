@@ -22,7 +22,6 @@ namespace BourbonAndBurial.Data
             }
         }
 
-
         public static OrderProduct AddOrderProduct(int productId, int orderId)
         {
 
@@ -44,10 +43,23 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        
+        public void DeleteOrderProduct(int orderProductId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var rowsAffected = db.Execute("Delete from orderProducts where orderProductId = @orderProductId", new { orderProductId });
+
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Didn't do right");
+                }
+            }
+        }
+
+
         /// This method below is from the fish store repo. Should not actually get anything because we are not adding products this way at the moment. 
         /// However, it does work and could be used as an alternative 
-        
+
         //public IEnumerable<Order> GetAll(int CustomerId)
         //{
         //    using (var db = new SqlConnection(ConnectionString))
