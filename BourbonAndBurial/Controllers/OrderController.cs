@@ -56,13 +56,6 @@ namespace BourbonAndBurial.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public ActionResult GetAll()
-        {
-            var orders = _orderRepository.GetAll();
-            return Ok(orders);
-        }
-
         [HttpPut]
 
         public ActionResult UpdateOrder(Order order)
@@ -71,7 +64,5 @@ namespace BourbonAndBurial.Controllers
 
             return Ok(updatedOrder);
         }
-
-
     }
 }

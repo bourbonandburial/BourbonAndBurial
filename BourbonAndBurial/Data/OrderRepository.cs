@@ -48,7 +48,7 @@ namespace BourbonAndBurial.Data
 
             using (var db = new SqlConnection(ConnectionString))
             {
-              
+
                 var insertQuery = @"
                         INSERT INTO [dbo].[OrderProducts]
                                     ([ProductId]
@@ -73,34 +73,6 @@ namespace BourbonAndBurial.Data
                 throw new Exception("Could not create target");
             }
         }
-
-        public IEnumerable<Order> GetAll(int CustomerId)
-        {
-            using (var db = new SqlConnection(ConnectionString))
-                {
-                        db.Open();
-                        var orders = db.Query<Order>(@"Select * from Orders where customerId = @customerId", new { CustomerId });
-
-                        var orderProducts = db.Query<OrderProduct>(@"
-                        Select Products.ProductId ProductId,
-                            Products.ProductName ProductName,
-                            Quantity,
-                            Price,
-                            OrderId
-                        from OrderProducts
-                            join Products 
-                                on Products.ProductId = OrderProducts.ProductId
-                        where OrderId = @OrderIds",
-                            new { orderIds = orders.Select(x => x.CustomerId) });
-
-                        foreach (var order in orders)
-                        {
-                            order.Products = orderProducts.Where(op => op.OrderId == order.CustomerId);
-                        }
-
-                        return orders;
-                    }
-                }
 
         public int UpdateOrder(Order paymentTypeToUpdate)
         {
