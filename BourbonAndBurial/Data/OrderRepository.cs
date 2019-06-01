@@ -102,6 +102,17 @@ namespace BourbonAndBurial.Data
         }
 
 
+        public IEnumerable<Order> GetAll()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var Orders = db.Query<Order>("Select * from Orders").ToList();
+
+                return Orders;
+            }
+        }
+
+
 
     }
 }

@@ -20,6 +20,13 @@ namespace BourbonAndBurial.Controllers
             _orderRepository = new OrderRepository();
         }
 
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var orders = _orderRepository.GetAll();
+            return Ok(orders);
+        }
+
         [HttpPost]
         public ActionResult AddOrder(CreateOrderRequest createRequest)
         {

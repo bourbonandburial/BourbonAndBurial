@@ -31,7 +31,7 @@ namespace BourbonAndBurial.Data
                 var newOrderProduct = db.QueryFirstOrDefault<OrderProduct>(@"
                         INSERT INTO OrderProducts(ProductId, OrderId)
                         Output Inserted.*
-                        Values(@orderId, @productId)",
+                        Values(@productId, @orderId)",
                         new {orderId, productId});
 
                 if (newOrderProduct != null)
