@@ -68,6 +68,14 @@ class App extends React.Component {
       this.setState({ authed: false });
     };
 
+    const loginClickEvent = (e) => {
+      e.preventDefault();
+      authRequests.loginUser().then(() => {
+        
+        this.props.history.push('/home');
+      }).catch(err => console.error('error in auth', err));
+    }
+
     if (pendingUser) {
       return null;
     }
@@ -76,7 +84,7 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
+            <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} loginClickEvent={loginClickEvent} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />

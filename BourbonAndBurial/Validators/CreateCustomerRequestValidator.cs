@@ -10,9 +10,8 @@ namespace BourbonAndBurial.Validators
     {
         public bool Validate(CreateCustomerRequest requestToValidate)
         {
-            return !(string.IsNullOrEmpty(requestToValidate.FirstName)
-                   || string.IsNullOrEmpty(requestToValidate.LastName)
-                   || string.IsNullOrEmpty(requestToValidate.Username));
+            return !(string.IsNullOrEmpty(requestToValidate.DisplayName)
+                   || string.IsNullOrEmpty(requestToValidate.Email));
         }
     }
 }

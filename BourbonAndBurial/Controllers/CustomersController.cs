@@ -44,13 +44,11 @@ namespace BourbonAndBurial.Controllers
         {
             if (!_validator.Validate(createRequest))
             {
-                return BadRequest(new { error = "Customers must have first name, last name, username, and firebaseId" });
+                return BadRequest(new { error = "Customers must have display name, email, and firebaseId" });
             }
             var newCustomer = _customerRepository.AddCustomer(
-                createRequest.FirstName,
-                createRequest.LastName,
-                createRequest.CompanyName,
-                createRequest.Username,
+                createRequest.DisplayName,
+                createRequest.Email,
                 createRequest.FirebaseId
                 );
 

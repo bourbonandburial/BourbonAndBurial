@@ -38,7 +38,7 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public Customer AddCustomer(string firstName, string lastName, string companyName, string username, int firebaseId)
+        public Customer AddCustomer(string displayName, string email, int firebaseId)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -46,25 +46,19 @@ namespace BourbonAndBurial.Data
 
                 var insertQuery = @"
                     INSERT INTO customers
-                               ([FirstName]
-                               ,[LastName]
-                               ,[CompanyName]
-                               ,[Username]
+                               ([DisplayName]
+                               ,[Email]
                                ,[FirebaseId])
                     OUTPUT inserted.*
                          VALUES
-                               (@firstName
-                               ,@lastName
-                               ,@companyName
-                               ,@username
+                               (@displayName
+                               ,@email
                                ,@firebaseId)";
 
                 var parameters = new
                 {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    CompanyName = companyName,
-                    Username = username,
+                    DisplayName = displayName,
+                    Email = email,
                     FirebaseId = firebaseId,
                 };
 
@@ -102,10 +96,8 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var updateQuery = @"UPDATE customers
-                                    SET firstName = @firstName,
-                                        lastName = @lastName,
-                                        companyName = @companyName,
-                                        username = @username
+                                    SET displayName = @displayName,
+                                        email = @email
                                     WHERE customerId = @customerId";
 
                 var rowsAffected = db.Execute(updateQuery, customerToUpdate);

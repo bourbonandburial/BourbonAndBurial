@@ -19,11 +19,7 @@ axios.interceptors.response.use(response => {
   console.error("Blew up")
 });
 
-const registerUser = (user) => {
-  return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-};
-
-const loginUser = (user) => {
+const loginUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(provider).then(cred => {
     cred.user.getIdToken()
@@ -39,4 +35,12 @@ const getUid = () => {
   return firebase.auth().currentUser.uid;
 };
 
-export default { getUid, loginUser, logoutUser, registerUser };
+const getDisplayName = () => {
+  return firebase.auth().currentUser.displayName;
+};
+
+const getEmail = () => {
+  return firebase.auth().currentUser.email;
+};
+
+export default { getUid, loginUser, logoutUser, getDisplayName, getEmail };

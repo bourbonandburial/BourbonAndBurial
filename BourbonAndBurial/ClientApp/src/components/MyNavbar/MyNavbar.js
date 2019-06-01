@@ -15,6 +15,7 @@ class MyNavbar extends React.Component {
   static propTypes = {
     isAuthed: PropTypes.bool,
     logoutClickEvent: PropTypes.func,
+    loginClickEvent: PropTypes.func
   }
 
   state = {
@@ -28,7 +29,7 @@ class MyNavbar extends React.Component {
   }
 
   render() {
-    const { isAuthed, logoutClickEvent } = this.props;
+    const { isAuthed, logoutClickEvent, loginClickEvent } = this.props;
     const buildNavbar = () => {
       if (isAuthed) {
         return (
@@ -39,7 +40,13 @@ class MyNavbar extends React.Component {
           </Nav>
         );
       }
-      return <Nav className='ml-auto' navbar />;
+      return (
+        <Nav className='ml-auto' navbar>
+          <NavItem>
+            <NavLink onClick={loginClickEvent}>Login</NavLink>
+          </NavItem>
+        </Nav>
+      );
     };
 
     return (
