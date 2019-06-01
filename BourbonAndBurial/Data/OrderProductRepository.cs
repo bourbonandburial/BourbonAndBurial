@@ -39,5 +39,27 @@ namespace BourbonAndBurial.Data
                 return orders;
             }
         }
+
+
+        public static OrderProduct AddOrderProduct(int productId, int orderId)
+        {
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+
+                var newOrderProduct = db.QueryFirstOrDefault<OrderProduct>(@"
+                        INSERT INTO OrderProducts(ProductId, OrderId)
+                        Output Inserted.*
+                        Values(@orderId, @productId)",
+                        new {orderId, productId});
+
+                if (newOrderProduct != null)
+                {
+                    return newOrderProduct;
+                }
+
+                throw new Exception("Could not create OrderProduct");
+            }
+        }
     }
 }

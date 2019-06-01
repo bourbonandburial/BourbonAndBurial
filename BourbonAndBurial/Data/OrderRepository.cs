@@ -43,36 +43,36 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public CreateOrderRequest AddOrderProduct(int productId, int orderId)
-        {
+        //public CreateOrderRequest AddOrderProduct(int productId, int orderId)
+        //{
 
-            using (var db = new SqlConnection(ConnectionString))
-            {
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
 
-                var insertQuery = @"
-                        INSERT INTO [dbo].[OrderProducts]
-                                    ([ProductId]
-                                     ,[OrderId])
-                             VALUES
-                                   (3,
-                                    1)";
+        //        var insertQuery = @"
+        //                INSERT INTO [dbo].[OrderProducts]
+        //                            ([ProductId]
+        //                             ,[OrderId])
+        //                     VALUES
+        //                           (3,
+        //                            1)";
 
-                var parameters = new
-                {
-                    ProductId = productId,
-                    OrderId = orderId,
-                };
+        //        var parameters = new
+        //        {
+        //            ProductId = productId,
+        //            OrderId = orderId,
+        //        };
 
-                var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
+        //        var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
 
-                if (newTarget != null)
-                {
-                    return newTarget;
-                }
+        //        if (newTarget != null)
+        //        {
+        //            return newTarget;
+        //        }
 
-                throw new Exception("Could not create target");
-            }
-        }
+        //        throw new Exception("Could not create target");
+        //    }
+        //}
 
         public int UpdateOrder(Order paymentTypeToUpdate)
         {
