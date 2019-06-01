@@ -20,9 +20,9 @@ namespace BourbonAndBurial.Controllers
             _orderProductRepository = new OrderProductRepository();
         }
         [HttpGet]
-        public ActionResult GetAll(int CustomerId)
+        public ActionResult GetAll()
         {
-            var orders = _orderProductRepository.GetAll(CustomerId);
+            var orders = _orderProductRepository.GetAll();
             return Ok(orders);
         }
 

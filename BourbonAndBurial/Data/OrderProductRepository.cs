@@ -12,35 +12,15 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
 
-        public IEnumerable<Order> GetAll(int CustomerId)
+        public IEnumerable<OrderProduct> GetAll()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                db.Open();
-                var orders = db.Query<Order>(@"Select * from Orders where customerId = @customerId", new { CustomerId });
+                var orderProducts = db.Query<OrderProduct>("Select * from OrderProducts").ToList();
 
-                var orderProducts = db.Query<OrderProduct>(@"
-                        Select Products.ProductId ProductId,
-                            Products.ProductName ProductName,
-                            Quantity,
-                            Price,
-                            OrderId
-                        from OrderProducts
-                            join Products 
-                                on Products.ProductId = OrderProducts.ProductId
-                        where OrderId = @OrderIds",
-                    new { orderIds = orders.Select(x => x.CustomerId) });
-
-                foreach (var order in orders)
-                {
-                    order.Products = orderProducts.Where(op => op.OrderId == order.CustomerId);
-                }
-
-                return orders;
+                return orderProducts;
             }
         }
-
-       /// ADD SIMPLE GET CALL
 
 
         public static OrderProduct AddOrderProduct(int productId, int orderId)
@@ -63,5 +43,37 @@ namespace BourbonAndBurial.Data
                 throw new Exception("Could not create OrderProduct");
             }
         }
+
+        
+        /// This method below is from the fish store repo. Should not actually get anything because we are not adding products this way at the moment. 
+        /// However, it does work and could be used as an alternative 
+        
+        //public IEnumerable<Order> GetAll(int CustomerId)
+        //{
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        db.Open();
+        //        var orders = db.Query<Order>(@"Select * from Orders where customerId = @customerId", new { CustomerId });
+
+        //        var orderProducts = db.Query<OrderProduct>(@"
+        //                Select Products.ProductId ProductId,
+        //                    Products.ProductName ProductName,
+        //                    Quantity,
+        //                    Price,
+        //                    OrderId
+        //                from OrderProducts
+        //                    join Products 
+        //                        on Products.ProductId = OrderProducts.ProductId
+        //                where OrderId = @OrderIds",
+        //            new { orderIds = orders.Select(x => x.CustomerId) });
+
+        //        foreach (var order in orders)
+        //        {
+        //            order.Products = orderProducts.Where(op => op.OrderId == order.CustomerId);
+        //        }
+
+        //        return orders;
+        //    }
+        //}
     }
 }
