@@ -40,6 +40,8 @@ namespace BourbonAndBurial.Data
             }
         }
 
+       /// ADD SIMPLE GET CALL
+
 
         public static OrderProduct AddOrderProduct(int productId, int orderId)
         {
