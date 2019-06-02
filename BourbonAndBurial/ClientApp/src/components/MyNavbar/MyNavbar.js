@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import Auth from '../../components/pages/Auth/Auth';
 import './MyNavbar.scss';
 
 class MyNavbar extends React.Component {
@@ -29,27 +30,29 @@ class MyNavbar extends React.Component {
 
   render() {
     const { isAuthed, logoutClickEvent } = this.props;
-    const buildNavbar = () => {
+   
       if (isAuthed) {
         return (
-          <Nav className='ml-auto' navbar>
-            <NavItem>
-              <NavLink onClick={logoutClickEvent}>Logout</NavLink>
-            </NavItem>
-          </Nav>
+          <Navbar color="link" dark expand="md">
+            <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
+            <NavbarToggler onClick={e => this.toggle(e)} />
+              
+            <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
+          </Navbar>
         );
       }
-      return <Nav className='ml-auto' navbar />;
-    };
+    
 
     return (
+
       <div className="my-navbar">
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">Bourbon & Burial</NavbarBrand>
+        <Navbar color="link" dark expand="md">
+          <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          {/* <Collapse isOpen={this.state.isOpen} navbar>
             {buildNavbar()}
-          </Collapse>
+          </Collapse> */}
+              <Auth />
         </Navbar>
       </div>
     );
