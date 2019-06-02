@@ -25,6 +25,9 @@ class Auth extends React.Component {
     const customers = this.state.customers;
     const uid = authRequests.getCurrentUid();
     const currentCustomer = customers.filter(customer => customer.firebaseId === uid);
+    console.log(customers);
+    console.log(uid);
+    console.log(currentCustomer);
     if (currentCustomer.length !== 0) {
       this.props.history.push('/home');
     } else {
@@ -33,6 +36,7 @@ class Auth extends React.Component {
       newCustomer.email = authRequests.getEmail();
       newCustomer.firebaseId = authRequests.getUid();
       this.setState({ newCustomer: defaultCustomer });
+      this.addCustomer();
     }
   }
 
@@ -52,6 +56,7 @@ class Auth extends React.Component {
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.loginUser().then(() => {
+      this.customerValidation();
       this.props.history.push('/home');
     }).catch(err => console.error('error in auth', err));
   }

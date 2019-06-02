@@ -19,11 +19,15 @@ axios.interceptors.response.use(response => {
   console.error("Blew up")
 });
 
+const getCurrentUserJwt = () => firebase
+  .auth()
+  .currentUser.getIdToken()
+  .then(token => sessionStorage.setItem('token', token));
+
 const loginUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider).then(cred => {
-    cred.user.getIdToken()
-    .then(token => sessionStorage.setItem('token', token));
+  return firebase.auth().signInWithPopup(provider).then(() => {
+    getCurrentUserJwt();
   });
 };
 
@@ -43,4 +47,4 @@ const getEmail = () => {
   return firebase.auth().currentUser.email;
 };
 
-export default { getUid, loginUser, logoutUser, getDisplayName, getEmail };
+export default { getUid, getCurrentUserJwt, loginUser, logoutUser, getDisplayName, getEmail };

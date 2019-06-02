@@ -43,6 +43,7 @@ class App extends React.Component {
           authed: true,
           pendingUser: false,
         });
+        authRequests.getCurrentUserJwt();
       } else {
         this.setState({
           authed: false,
@@ -71,7 +72,6 @@ class App extends React.Component {
     const loginClickEvent = (e) => {
       e.preventDefault();
       authRequests.loginUser().then(() => {
-        
         this.props.history.push('/home');
       }).catch(err => console.error('error in auth', err));
     }
