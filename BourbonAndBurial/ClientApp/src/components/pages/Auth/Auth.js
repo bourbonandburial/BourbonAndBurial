@@ -1,6 +1,15 @@
 import React from 'react';
 import './Auth.scss';
 import authRequests from '../../../helpers/data/authRequests';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 
 import googleButton from './images/googlebutton.png';
 
@@ -16,9 +25,10 @@ class Auth extends React.Component {
   render() {
     return (
       <div className='Auth'>
-        <button className='btn btn-outline-light' onClick={this.authenticateUser}>
+              <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
+        {/* <button className='btn btn-outline-light' onClick={this.authenticateUser}>
           <img src={googleButton} alt="google login button" />
-        </button>
+        </button> */}
       </div>
     );
   }
