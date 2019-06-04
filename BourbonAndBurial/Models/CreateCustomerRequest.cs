@@ -9,7 +9,7 @@ namespace BourbonAndBurial.Models
     {
         public string DisplayName { get; set; }
         public string Email { get; set; }
-        public int FirebaseId { get; set; }
+        public string FirebaseId { get; set; }
         public bool IsActive { get; set; }
     }
 }

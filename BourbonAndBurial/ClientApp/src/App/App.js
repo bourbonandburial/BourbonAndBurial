@@ -10,7 +10,7 @@ import {
 
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
-
+import customerRequests from '../helpers/data/customerRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
@@ -33,10 +33,13 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 class App extends React.Component {
   state = {
     authed: false,
+    pendingUser: true,
+    customers: [],
   }
 
   componentDidMount() {
     connection();
+
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -51,10 +54,19 @@ class App extends React.Component {
         });
       }
     });
+
+    this.getCustomers();
   }
 
   componentWillUnmount() {
     this.removeListener();
+  }
+
+  getCustomers = () => {
+    customerRequests.getAllCustomers().then(results => {
+      const data = results.data;
+      this.setState({ customers: data });
+    });
   }
 
   isAuthenticated = () => {
@@ -62,19 +74,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, pendingUser } = this.state;
+    const { authed, pendingUser, customers } = this.state;
 
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({ authed: false });
     };
-
-    const loginClickEvent = (e) => {
-      e.preventDefault();
-      authRequests.loginUser().then(() => {
-        this.props.history.push('/home');
-      }).catch(err => console.error('error in auth', err));
-    }
 
     if (pendingUser) {
       return null;
@@ -84,9 +89,10 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} loginClickEvent={loginClickEvent} />
+            <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
-              <PublicRoute path='/auth' component={Auth} authed={authed} />
+              <PublicRoute path='/auth' component={(props) => <Auth customers={customers} getCustomers={this.getCustomers} {...props} />} authed={authed} />
+              {/* <PublicRoute path='/auth' component={Auth} authed={authed} /> */}
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>

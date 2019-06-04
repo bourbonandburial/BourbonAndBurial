@@ -38,7 +38,7 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public Customer AddCustomer(string displayName, string email, int firebaseId)
+        public Customer AddCustomer(string displayName, string email, string firebaseId)
         {
             using (var db = new SqlConnection(ConnectionString))
             {

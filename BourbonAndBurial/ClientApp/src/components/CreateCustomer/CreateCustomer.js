@@ -12,26 +12,29 @@ const defaultCustomer = {
 
 class CreateCustomer extends React.Component {
   state = {
-    customers : [],
-    currentCustomer : [],
-    newCustomer : defaultCustomer
+    customers: [],
+    currentCustomer: [],
+    newCustomer: defaultCustomer
   }
 
   customerValidation = () => {
     const customers = this.state.customers;
     const uid = authRequests.getCurrentUid();
-    const currentCustomer = customers.filter(customer => customer.firebaseId === uid);
-    if (currentCustomer.length !== 0){
-        this.props.history.push('/home');
+    const currentCustomer = []
+    if (customers != undefined) {
+      currentCustomer = customers.filter(customer => customer.firebaseId === uid);
+    }
+    if (currentCustomer.length !== 0) {
+      this.props.history.push('/home');
     } else {
-        this.setState({ currentCustomer });
+      this.setState({ currentCustomer });
     }
   }
 
   render() {
     return (
       <div className='Customers'>
-      
+
       </div>
     );
   }
