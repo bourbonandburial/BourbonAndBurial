@@ -69,7 +69,11 @@ class Auth extends React.Component {
   render() {
     return (
       <div className='Auth'>
-        <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
+        {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
+              {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
+            <div className=" grave parallax">             
+              {/* <img className="grave parallax" src="https://github.com/ke4tri/Images/blob/master/graveyard.jpg?raw=true" alt="Drone" width="1500" height="400" /> */}              
+            </div>            
       </div>
     );
   }

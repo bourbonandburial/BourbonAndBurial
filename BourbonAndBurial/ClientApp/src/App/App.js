@@ -12,6 +12,7 @@ import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
+import Auth from '../components/pages/Auth/Auth';
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -79,7 +80,7 @@ class App extends React.Component {
           <React.Fragment>
             <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
-              {/* <PublicRoute path='/auth' component={Auth} authed={authed} /> */}
+              <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>
