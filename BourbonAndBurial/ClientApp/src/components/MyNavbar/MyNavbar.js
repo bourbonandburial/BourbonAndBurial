@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import Auth from '../../components/pages/Auth/Auth';
 import './MyNavbar.scss';
 import customerRequests from '../../helpers/data/customerRequests';
 import authRequests from '../../helpers/data/authRequests';
@@ -43,33 +44,28 @@ class MyNavbar extends React.Component {
   }
 
   render() {
-    const { authed, logoutClickEvent, loginClickEvent } = this.props;
-    const buildNavbar = () => {
-      if (authed) {
-        return (
-          <Nav className='ml-auto' navbar>
-            <NavItem>
-              <NavLink onClick={logoutClickEvent}>Logout</NavLink>
-            </NavItem>
-          </Nav>
-        );
-      }
+    const { isAuthed, logoutClickEvent } = this.props;
+
+    if (isAuthed) {
       return (
-        <Nav className='ml-auto' navbar>
-          <NavItem>
-            <NavLink onClick={loginClickEvent}>Login</NavLink>
-          </NavItem>
-        </Nav>
+        <Navbar color="link" dark expand="md">
+          <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
+          <NavbarToggler onClick={e => this.toggle(e)} />
+
+          <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
+        </Navbar>
       );
-    };
+    }
+
 
     return (
+
       <div className="my-navbar">
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">Bourbon & Burial</NavbarBrand>
+        <Navbar color="link" dark expand="md">
+          <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            {buildNavbar()}
+            <Auth />
           </Collapse>
         </Navbar>
       </div>
