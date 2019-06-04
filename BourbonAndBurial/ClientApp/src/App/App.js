@@ -10,9 +10,8 @@ import {
 
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
-
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-import Auth from '../components/pages/Auth/Auth';
+//import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import './App.scss';
 
