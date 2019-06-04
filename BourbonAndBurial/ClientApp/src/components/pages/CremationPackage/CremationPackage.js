@@ -1,5 +1,5 @@
 import React from 'react';
-import './IndividualPackage.scss';
+import './CremationPackage.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 

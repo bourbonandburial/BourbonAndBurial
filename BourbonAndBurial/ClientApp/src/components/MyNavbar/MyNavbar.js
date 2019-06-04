@@ -1,22 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavItem,
   NavLink,
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Auth from '../../components/pages/Auth/Auth';
+import authRequests from '../../helpers/data/authRequests';
 import './MyNavbar.scss';
+
 
 class MyNavbar extends React.Component {
   static propTypes = {
     isAuthed: PropTypes.bool,
     logoutClickEvent: PropTypes.func,
+  }
+  authenticateUser = (e) => {
+    e.preventDefault();
+    authRequests.loginUser().then(() => {
+      this.props.history.push('/home');
+    }).catch(err => console.error('error in auth', err));
   }
 
   state = {
@@ -35,25 +40,22 @@ class MyNavbar extends React.Component {
       if (isAuthed) {
         return (
           <Navbar color="link" dark expand="md">
+            {/* <Link to="/home" className="packagesBtn btn btn-light">Home</Link> */}
             <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
             <NavbarToggler onClick={e => this.toggle(e)} />
-              <Link to="/packages" className="packagesBtn btn btn-light">Packages</Link>
             <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
           </Navbar>
         );
       }
     
-
     return (
 
       <div className="my-navbar">
         <Navbar color="link" dark expand="md">
           <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} />
-          {/* <Collapse isOpen={this.state.isOpen} navbar>
-            {/* {buildNavbar()} */}
-          {/* </Collapse> */}
-              <Auth />
+              <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
+
         </Navbar>
       </div>
     );
