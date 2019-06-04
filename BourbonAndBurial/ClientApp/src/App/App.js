@@ -64,8 +64,8 @@ class App extends React.Component {
 
   getCustomers = () => {
     customerRequests.getAllCustomers().then(results => {
-      const data = results.data;
-      this.setState({ customers: data });
+      const allCustomers = results.data;
+      this.setState({ customers: allCustomers });
     });
   }
 

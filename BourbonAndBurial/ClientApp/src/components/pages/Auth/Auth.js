@@ -22,7 +22,7 @@ class Auth extends React.Component {
 
   state = {
     // customers: [],
-    currentCustomer: {},
+    // currentCustomer: {},
     newCustomer: defaultCustomer,
   }
 
@@ -40,7 +40,7 @@ class Auth extends React.Component {
   customerValidation = () => {
     // const customers = this.getCustomers();
     // const customers = {...this.state.customers};
-    const customers = [{ ...this.props.customers }];
+    const customers = [ ...this.props.customers ];
     const uid = authRequests.getUid();
     if (customers !== undefined || customers.length !== 0) {
       const currentCustomer = customers.filter(customerObject => customerObject.firebaseId === uid);
