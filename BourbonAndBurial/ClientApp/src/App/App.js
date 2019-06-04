@@ -11,7 +11,7 @@ import {
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-//import Auth from '../components/pages/Auth/Auth';
+import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import './App.scss';
 
@@ -77,7 +77,7 @@ class App extends React.Component {
           <React.Fragment>
             <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
-              {/* <PublicRoute path='/auth' component={Auth} authed={authed} /> */}
+              <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>
