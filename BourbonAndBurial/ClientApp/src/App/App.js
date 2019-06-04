@@ -34,7 +34,6 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
-    customers: [],
   }
 
   componentDidMount() {
@@ -54,18 +53,10 @@ class App extends React.Component {
         });
       }
     });
-    this.getCustomers();
   }
 
   componentWillUnmount() {
     this.removeListener();
-  }
-
-  getCustomers = () => {
-    customerRequests.getAllCustomers().then(results => {
-      const allCustomers = results.data;
-      this.setState({ customers: allCustomers });
-    });
   }
 
   isAuthenticated = () => {
@@ -88,10 +79,9 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
+            <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
-              <PublicRoute path='/auth' component={(props) => <Auth customers={customers} getCustomers={this.getCustomers} {...props} />} authed={authed} />
-              {/* <PublicRoute path='/auth' component={Auth} authed={authed} /> */}
+              <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>

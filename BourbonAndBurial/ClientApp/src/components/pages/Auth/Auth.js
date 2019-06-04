@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Auth.scss';
 import authRequests from '../../../helpers/data/authRequests';
 
@@ -7,7 +6,6 @@ import googleButton from './images/googlebutton.png';
 import customerRequests from '../../../helpers/data/customerRequests';
 
 const defaultCustomer = {
-  // customerId: 0,
   displayName: '',
   email: '',
   firebaseId: '',
@@ -15,27 +13,20 @@ const defaultCustomer = {
 }
 
 class Auth extends React.Component {
-  // static propTypes = {
-  //   customers: PropTypes.array,
-  // }
-
   state = {
     newCustomer: defaultCustomer,
   }
 
   getAllCustomers = () => {
-    customerRequests.getAllCustomers().then(results => {
-      const data = results.data;
-      return data;
-    });
+    customerRequests.getAllCustomers().then((results) => {
+      const customers = results.data;
+      this.customerValidation(customers);
+    }).catch(err => console.error('error in getAllCustomers', err));
   }
 
   // checking to see if user is already in db.
   // if so, go to homepage. if not, add user to db and then go to home
-  customerValidation = () => {
-    const customers = this.getAllCustomers();
-    // const customers = {...this.state.customers};
-    // const customers = [...this.props.customers];
+  customerValidation = (customers) => {
     const uid = authRequests.getUid();
     //if there are no users
     if (customers !== undefined || customers.length !== 0) {
@@ -63,7 +54,7 @@ class Auth extends React.Component {
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.googleAuth().then(() => {
-      this.customerValidation();
+      this.getAllCustomers();
       this.props.history.push('/home');
     }).catch(err => console.error('error in authenticateUser function', err));
   }

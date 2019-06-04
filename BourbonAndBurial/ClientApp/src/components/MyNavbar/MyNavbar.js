@@ -13,7 +13,7 @@ import './MyNavbar.scss';
 
 class MyNavbar extends React.Component {
   static propTypes = {
-    isAuthed: PropTypes.bool,
+    authed: PropTypes.bool,
     logoutClickEvent: PropTypes.func,
     loginClickEvent: PropTypes.func
   }
@@ -29,9 +29,9 @@ class MyNavbar extends React.Component {
   }
 
   render() {
-    const { isAuthed, logoutClickEvent, loginClickEvent } = this.props;
+    const { authed, logoutClickEvent, loginClickEvent } = this.props;
     const buildNavbar = () => {
-      if (isAuthed) {
+      if (authed) {
         return (
           <Nav className='ml-auto' navbar>
             <NavItem>
