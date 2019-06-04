@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import {Link} from 'react-router-dom';
 import Auth from '../../components/pages/Auth/Auth';
 import './MyNavbar.scss';
 
@@ -36,7 +37,8 @@ class MyNavbar extends React.Component {
           <Navbar color="link" dark expand="md">
             <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
             <NavbarToggler onClick={e => this.toggle(e)} />
-              
+            {/* <a className="viewPackages btn btn-light" id="viewPackages" href={'/individualPackage'}>Packages</a> */}
+              <Link to="/individualpackage" className="indyPackage btn btn-light">Packages</Link>
             <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
           </Navbar>
         );
@@ -50,8 +52,8 @@ class MyNavbar extends React.Component {
           <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} />
           {/* <Collapse isOpen={this.state.isOpen} navbar>
-            {buildNavbar()}
-          </Collapse> */}
+            {/* {buildNavbar()} */}
+          {/* </Collapse> */}
               <Auth />
         </Navbar>
       </div>

@@ -14,17 +14,18 @@ import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+import IndividualPackage from '../components/pages/IndividualPackage/IndividualPackage';
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = props => (authed === false
+  let routeChecker = props => (authed === false
     ? (<Component {...props} />)
     : (<Redirect to={{ pathname: '/home', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
 };
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = props => (authed === true
+  let routeChecker = props => (authed === true
     ? (<Component {...props} />)
     : (<Redirect to={{ pathname: '/auth', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
@@ -78,9 +79,10 @@ class App extends React.Component {
           <React.Fragment>
             <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
-              {/* <PublicRoute path='/auth' component={Auth} authed={authed} /> */}
-              <PrivateRoute path='/' exact component={Home} authed={authed} />
+              <PublicRoute path='/auth' component={Auth} authed={authed} />
+              <PrivateRoute path='/individualpackage' component={IndividualPackage} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
+              <PrivateRoute path='/' exact component={Home} authed={authed} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
