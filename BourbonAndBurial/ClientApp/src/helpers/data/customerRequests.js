@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = "api/customers";
+const apiUrl = 'api/customers';
 
 const getAllCustomers = () => axios.get(`${apiUrl}`);
 
