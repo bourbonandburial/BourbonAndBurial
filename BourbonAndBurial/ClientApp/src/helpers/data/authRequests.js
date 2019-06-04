@@ -46,4 +46,8 @@ const getEmail = () => {
   return firebase.auth().currentUser.email;
 };
 
-export default { getUid, getCurrentUserJwt, googleAuth, logoutUser, getDisplayName, getEmail };
+const getCurrentUser = () => {
+  return firebase.auth().currentUser;
+};
+
+export default { getUid, getCurrentUserJwt, googleAuth, logoutUser, getDisplayName, getEmail, getCurrentUser };

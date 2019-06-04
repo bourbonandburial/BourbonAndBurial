@@ -24,13 +24,13 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public IEnumerable<Customer> GetSingleCustomer(int id)
+        public IEnumerable<Customer> GetSingleCustomer(string firebaseId)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var getQuery = "SELECT * FROM customers WHERE customerId = @customerId";
+                var getQuery = "SELECT * FROM customers WHERE firbaseId = @firebaseId";
 
-                var parameter = new { CustomerId = id };
+                var parameter = new { FirebaseId = firebaseId };
 
                 var customers = db.Query<Customer>(getQuery, parameter).ToList();
 

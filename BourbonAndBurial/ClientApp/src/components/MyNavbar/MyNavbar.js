@@ -10,6 +10,8 @@ import {
   NavLink,
 } from 'reactstrap';
 import './MyNavbar.scss';
+import customerRequests from '../../helpers/data/customerRequests';
+import authRequests from '../../helpers/data/authRequests';
 
 class MyNavbar extends React.Component {
   static propTypes = {
@@ -20,11 +22,23 @@ class MyNavbar extends React.Component {
 
   state = {
     isOpen: false,
+    firebaseUser: {},
+    customerObject: {},
   };
 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen,
+    });
+  }
+
+  componentDidMount() {
+    const fbUser = authRequests.getCurrentUser();
+    customerRequests.getSingleCustomer(fbUser.uid).then((currentCustomer) => {
+      this.setState({
+        firebaseUser: fbUser.providerData[0],
+        customerObject: currentCustomer,
+      });
     });
   }
 

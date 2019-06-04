@@ -31,10 +31,10 @@ namespace BourbonAndBurial.Controllers
             return Ok(activeCustomers);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult GetSingleCustomer(int id)
+        [HttpGet("{firebaseId}")]
+        public ActionResult GetSingleCustomer(string firebaseId)
         {
-            var singleCustomer = _customerRepository.GetSingleCustomer(id);
+            var singleCustomer = _customerRepository.GetSingleCustomer(firebaseId);
 
             return Ok(singleCustomer);
         }
@@ -73,7 +73,7 @@ namespace BourbonAndBurial.Controllers
 
             var customer = _customerRepository.UpdateCustomer(customerToUpdate);
 
-            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.CustomerId);
+            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.FirebaseId);
 
             return Ok(updatedCustomer);
         }
