@@ -11,35 +11,35 @@ class PackageCards extends React.Component {
       <div>
         <Row>
         <Col sm="4">
-      <Card body>
+      <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Card title</CardTitle>
+          <CardTitle>Dirt</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Button</Button>
+          <Button>Get Started</Button>
         </CardBody>
       </Card>
       </Col>
       <Col sm="4">
-      <Card body>
+      <Card body outline color="success">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Card title</CardTitle>
+          <CardTitle>Gravel</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Button</Button>
+          <Button>Get Started</Button>
         </CardBody>
       </Card>
       </Col>
       <Col sm="4">
-      <Card body>
+      <Card body inverse color="danger">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Card title</CardTitle>
+          <CardTitle>Diamond</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Button</Button>
+          <Button>Get Started</Button>
         </CardBody>
       </Card>
       </Col>
