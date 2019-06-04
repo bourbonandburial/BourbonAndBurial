@@ -25,8 +25,9 @@ class IndividualPackage extends React.Component {
           return (<SingleProduct
             id={product.productId}
             key={product.productId}
-            name={product.productName}
-            description={product.productDescription}
+            image={product.image}
+            productName={product.productName}
+            productDescription={product.productDescription}
             productTypeId={product.productTypeId}
             price={product.price}
             quantity={product.quantity}
