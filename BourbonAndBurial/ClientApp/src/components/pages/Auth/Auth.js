@@ -1,17 +1,11 @@
 import React from 'react';
 import './Auth.scss';
+import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
   NavLink,
 } from 'reactstrap';
 
-import googleButton from './images/googlebutton.png';
 import customerRequests from '../../../helpers/data/customerRequests';
 
 const defaultCustomer = {
@@ -22,6 +16,10 @@ const defaultCustomer = {
 }
 
 class Auth extends React.Component {
+  static propTypes = {
+    authed: PropTypes.bool,
+  }
+
   state = {
     newCustomer: defaultCustomer,
   }
@@ -64,18 +62,14 @@ class Auth extends React.Component {
     e.preventDefault();
     authRequests.googleAuth().then(() => {
       this.getAllCustomers();
-      this.props.history.push('/home');
+      // this.props.history.push('/home');
     }).catch(err => console.error('error in authenticateUser function', err));
   }
-
 
   render() {
     return (
       <div className='Auth'>
-              <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
-        {/* <button className='btn btn-outline-light' onClick={this.authenticateUser}>
-          <img src={googleButton} alt="google login button" />
-        </button> */}
+        <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
       </div>
     );
   }

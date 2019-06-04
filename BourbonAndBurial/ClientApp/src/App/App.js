@@ -10,9 +10,7 @@ import {
 
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
-import customerRequests from '../helpers/data/customerRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import './App.scss';
 
@@ -64,7 +62,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, pendingUser, customers } = this.state;
+    const { authed, pendingUser } = this.state;
 
     const logoutClickEvent = () => {
       authRequests.logoutUser();
