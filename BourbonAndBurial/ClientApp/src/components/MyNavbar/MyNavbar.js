@@ -37,8 +37,7 @@ class MyNavbar extends React.Component {
           <Navbar color="link" dark expand="md">
             <NavbarBrand className="text-muted" href="/home">Bourbon & Burial</NavbarBrand>
             <NavbarToggler onClick={e => this.toggle(e)} />
-            {/* <a className="viewPackages btn btn-light" id="viewPackages" href={'/individualPackage'}>Packages</a> */}
-              <Link to="/individualpackage" className="indyPackage btn btn-light">Packages</Link>
+              <Link to="/packages" className="packagesBtn btn btn-light">Packages</Link>
             <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
           </Navbar>
         );

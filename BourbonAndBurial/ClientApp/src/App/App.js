@@ -14,8 +14,9 @@ import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
-import IndividualPackage from '../components/pages/IndividualPackage/IndividualPackage';
+import Packages from '../components/pages/Packages/Packages';
 import './App.scss';
+import IndividualPackage from '../components/pages/IndividualPackage/IndividualPackage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
@@ -80,7 +81,8 @@ class App extends React.Component {
             <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
-              <PrivateRoute path='/individualpackage' component={IndividualPackage} authed={authed} />
+              <PrivateRoute path='/packages' component={Packages} authed={authed} />
+              <PrivateRoute path='/individualPackage' component={IndividualPackage} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
             </Switch>

@@ -1,6 +1,5 @@
 import React from 'react';
 import './IndividualPackage.scss';
-import MyNavbar from '../../MyNavbar/MyNavbar';
 
 
 class IndividualPackage extends React.Component {
