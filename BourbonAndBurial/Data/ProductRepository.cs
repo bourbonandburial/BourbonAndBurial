@@ -12,15 +12,15 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server=localhost; Database=BourbonAndBurial; Trusted_Connection=True;";
 
-        public Product AddProduct(int ProductTypeId, decimal Price, string ProductName, string ProductDescription, int Quantity)
+        public Product AddProduct(int ProductTypeId, decimal Price, string ProductName, string ProductDescription, int Quantity, string Image)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 var newProduct = db.QueryFirstOrDefault<Product>(@"
-                    Insert into Products (productTypeId,price,productName,productDescription,quantity) 
+                    Insert into Products (productTypeId,price,productName,productDescription,quantity,image) 
                     Output inserted.*
-                    Values(@productTypeId,@price,@productName,@productDescription,@quantity)",
-                    new { ProductTypeId, Price, ProductName, ProductDescription, Quantity }); // setting up the parameters required - property needs to match the values above
+                    Values(@productTypeId,@price,@productName,@productDescription,@quantity,@image)",
+                    new { ProductTypeId, Price, ProductName, ProductDescription, Quantity, Image }); // setting up the parameters required - property needs to match the values above
 
                 if (newProduct != null)
                 {
