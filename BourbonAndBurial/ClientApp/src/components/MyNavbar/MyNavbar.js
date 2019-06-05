@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom';
 import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
   NavLink,
 } from 'reactstrap';
+import {Link} from 'react-router-dom';
 import Auth from '../../components/pages/Auth/Auth';
 import authRequests from '../../helpers/data/authRequests';
 import './MyNavbar.scss';

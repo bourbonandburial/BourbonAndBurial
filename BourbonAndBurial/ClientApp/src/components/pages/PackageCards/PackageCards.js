@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Col, Row } from 'reactstrap';
 import './PackageCards.scss';
@@ -14,10 +15,10 @@ class PackageCards extends React.Component {
       <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Dirt</CardTitle>
+          <CardTitle>Cremation</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Get Started</Button>
+          <Link to='/CremationPackage' className="cremationPackage"><Button>Get Started</Button></Link>
         </CardBody>
       </Card>
       </Col>
@@ -25,7 +26,7 @@ class PackageCards extends React.Component {
       <Card body outline color="success">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Gravel</CardTitle>
+          <CardTitle>Burial</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button>Get Started</Button>
@@ -36,7 +37,7 @@ class PackageCards extends React.Component {
       <Card body inverse color="danger">
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
         <CardBody>
-          <CardTitle>Diamond</CardTitle>
+          <CardTitle>Mausoleum</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button>Get Started</Button>

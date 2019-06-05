@@ -14,16 +14,17 @@ import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import './App.scss';
+import CremationPackage from '../components/pages/CremationPackage/CremationPackage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = props => (authed === false
+  let routeChecker = props => (authed === false
     ? (<Component {...props} />)
     : (<Redirect to={{ pathname: '/home', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
 };
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = props => (authed === true
+  let routeChecker = props => (authed === true
     ? (<Component {...props} />)
     : (<Redirect to={{ pathname: '/auth', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
@@ -80,6 +81,7 @@ class App extends React.Component {
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
+              <PrivateRoute path='/CremationPackage' component={CremationPackage} authed={authed} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
