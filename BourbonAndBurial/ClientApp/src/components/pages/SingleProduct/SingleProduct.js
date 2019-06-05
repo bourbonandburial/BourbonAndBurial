@@ -11,7 +11,7 @@ class SingleProduct extends React.Component{
         <div className="card">
           <div className="row">
             <div className="col-md-4 rounded">
-              <img src={this.props.image} alt="" className="img w-100 h-100" id="img">{this.props.image}</img>
+              <img src={this.props.image} alt="" className="img w-100 h-100" id="img"/>
             </div>
             <div className="col-md-8 p-3">
               <div className="details card-block px-3">
