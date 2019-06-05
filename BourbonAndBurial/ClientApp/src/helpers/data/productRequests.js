@@ -15,7 +15,6 @@ const getAllProducts = () => new Promise((resolve, reject) => {
 
 const deleteProduct = productId => axios.delete(`${apiUrl}/${productId}`);
 
-
 export default {
   getAllProducts,
   deleteProduct

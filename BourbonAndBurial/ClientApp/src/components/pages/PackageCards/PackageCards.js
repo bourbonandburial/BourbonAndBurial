@@ -5,7 +5,7 @@ import { Card, CardImg, CardText, CardBody,
 import './PackageCards.scss';
 
 class PackageCards extends React.Component {
-  // displayName = Home.name
+  
 
   render() {
     return (
@@ -16,8 +16,8 @@ class PackageCards extends React.Component {
         <CardImg top width="50px" src="https://github.com/ke4tri/Images/blob/master/cremation-video.png?raw=true" alt="Card image cap" />
         <CardBody>
           <CardTitle>Cremation</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+          <CardSubtitle> $300</CardSubtitle>
+          <CardText>A HOT combination of the perfect selections to set your next cremation on FIRE!</CardText>
           <Link to='/CremationPackage' className="cremationPackage"><Button>Get Started</Button></Link>
         </CardBody>
       </Card>

@@ -24,9 +24,7 @@ class SingleProduct extends React.Component{
             <div className="col-md-8 p-3">
               <div className="details card-block px-3">
                 <h4 className="card-title" id="name">{this.props.productName}</h4>
-                <p className="card-text" id="description">{this.props.productDescription}</p>
-                {/* <p className="card-text" id="productId"><b>Product Id: {this.props.productId}</b></p> */}
-                {/* <p className="card-text" id="productTypeId"><b>Product Type Id: {this.props.productTypeId}</b></p> */}
+                <p className="card-text" id="description">{this.props.productDescription}</p>                {/* <p className="card-text" id="productTypeId"><b>Product Type Id: {this.props.productTypeId}</b></p> */}
                 <p className="card-text" id="price"><b>Price: ${this.props.price}</b></p>
                 <p className="card-text" id="quantity"><b>Quantity: {this.props.quantity}</b></p>
                 <p className="card-text" id={this.props.id}></p>
