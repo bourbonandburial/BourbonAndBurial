@@ -3,7 +3,6 @@ import './CremationPackage.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 
-
 class IndividualPackage extends React.Component {
     state = {
         products : []
