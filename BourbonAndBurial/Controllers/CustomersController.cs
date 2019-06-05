@@ -31,10 +31,10 @@ namespace BourbonAndBurial.Controllers
             return Ok(activeCustomers);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult GetSingleCustomer(int id)
+        [HttpGet("{firebaseId}")]
+        public ActionResult GetSingleCustomer(string firebaseId)
         {
-            var singleCustomer = _customerRepository.GetSingleCustomer(id);
+            var singleCustomer = _customerRepository.GetSingleCustomer(firebaseId);
 
             return Ok(singleCustomer);
         }
@@ -44,13 +44,11 @@ namespace BourbonAndBurial.Controllers
         {
             if (!_validator.Validate(createRequest))
             {
-                return BadRequest(new { error = "Customers must have first name, last name, username, and firebaseId" });
+                return BadRequest(new { error = "Customers must have display name, email, and firebaseId" });
             }
             var newCustomer = _customerRepository.AddCustomer(
-                createRequest.FirstName,
-                createRequest.LastName,
-                createRequest.CompanyName,
-                createRequest.Username,
+                createRequest.DisplayName,
+                createRequest.Email,
                 createRequest.FirebaseId
                 );
 
@@ -75,7 +73,7 @@ namespace BourbonAndBurial.Controllers
 
             var customer = _customerRepository.UpdateCustomer(customerToUpdate);
 
-            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.CustomerId);
+            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.FirebaseId);
 
             return Ok(updatedCustomer);
         }
