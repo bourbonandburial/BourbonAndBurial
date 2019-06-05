@@ -13,7 +13,7 @@ class PackageCards extends React.Component {
         <Row>
         <Col sm="4">
       <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
-        <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
+        <CardImg top width="50px" src="https://github.com/ke4tri/Images/blob/master/cremation-video.png?raw=true" alt="Card image cap" />
         <CardBody>
           <CardTitle>Cremation</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
@@ -35,7 +35,7 @@ class PackageCards extends React.Component {
       </Col>
       <Col sm="4">
       <Card body inverse color="danger">
-        <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/BudCasket.jpg?raw=true" alt="Card image cap" />
+        <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/tansen-tomb-gwalior-things-to-do.jpg?raw=true" alt="Card image cap" />
         <CardBody>
           <CardTitle>Mausoleum</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
