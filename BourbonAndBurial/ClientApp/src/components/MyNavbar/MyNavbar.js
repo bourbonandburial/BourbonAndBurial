@@ -83,7 +83,7 @@ class MyNavbar extends React.Component {
         <Nav className="ml-auto" navbar>
           <NavItem>
             {/* <Link to={ValidCustomer}>Login</Link> */}
-            <ValidCustomer customers={customers} getCustomers={this.getCustomers}/>
+            <ValidCustomer customers={customers} getCustomers={this.getCustomers} />
           </NavItem>
         </Nav>
       );

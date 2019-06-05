@@ -24,7 +24,7 @@ namespace BourbonAndBurial.Controllers
 
         public ActionResult<int> AddProduct(CreateProductRequest createRequest)
         {
-            var newProduct = _productRepository.AddProduct(createRequest.ProductTypeId, createRequest.Price, createRequest.ProductName, createRequest.ProductDescription, createRequest.Quantity);
+            var newProduct = _productRepository.AddProduct(createRequest.ProductTypeId, createRequest.Price, createRequest.ProductName, createRequest.ProductDescription, createRequest.Quantity, createRequest.Image);
 
             return Created($"api/product/{newProduct.ProductId}", newProduct);
         }
