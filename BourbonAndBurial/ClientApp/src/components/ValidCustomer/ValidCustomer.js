@@ -23,9 +23,6 @@ class ValidCustomer extends React.Component {
     firebaseUser: {},
   }
 
-
-
-
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.googleAuth().then(() => {
@@ -69,7 +66,6 @@ class ValidCustomer extends React.Component {
     customerRequests.createCustomer(newCustomer).then(() => {
     }).catch(err => console.error('error in adding customer', err));
   }
-
 
   render() {
     return (

@@ -10,10 +10,8 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
-import authRequests from '../../helpers/data/authRequests';
 import customerRequests from '../../helpers/data/customerRequests';
 import ValidCustomer from '../ValidCustomer/ValidCustomer';
-import Auth from '../../components/pages/Auth/Auth';
 import './MyNavbar.scss';
 
 
@@ -29,13 +27,6 @@ class MyNavbar extends React.Component {
     firebaseUser: {},
     customerObject: {},
   };
-
-  // authenticateUser = (e) => {
-  //   e.preventDefault();
-  //   authRequests.googleAuth().then(() => {
-  //     this.props.history.push('/home');
-  //   }).catch(err => console.error('error in auth', err));
-  // }
 
   toggle() {
     this.setState({
