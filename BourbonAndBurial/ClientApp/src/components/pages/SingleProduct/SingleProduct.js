@@ -28,7 +28,11 @@ class SingleProduct extends React.Component{
                 <p className="card-text" id="price"><b>Price: ${this.props.price}</b></p>
                 <p className="card-text" id="quantity"><b>Quantity: {this.props.quantity}</b></p>
                 <p className="card-text" id={this.props.id}></p>
+<<<<<<< HEAD
                 <button className="deleteButton btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>Remove</button>
+=======
+                <button className="deleteButton btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>X</button>
+>>>>>>> master
               </div>
             </div>
           </div>
