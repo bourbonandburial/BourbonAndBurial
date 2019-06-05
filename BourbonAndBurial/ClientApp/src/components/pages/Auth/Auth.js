@@ -18,22 +18,26 @@ const defaultCustomer = {
 class Auth extends React.Component {
   static propTypes = {
     authed: PropTypes.bool,
+    logoutClickEven: PropTypes.func,
   }
 
   state = {
     newCustomer: defaultCustomer,
+    customers: [],
   }
 
-  getAllCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const customers = results.data;
-      this.customerValidation(customers);
-    }).catch(err => console.error('error in getAllCustomers', err));
-  }
+  // componentDidUpdate() {
+  //   customerRequests.getAllCustomers().then((results) => {
+  //     const data = results.data;
+  //     // this.customerValidation(customers);
+  //     this.setState({customers: data});
+  //   }).catch(err => console.error('error in getAllCustomers', err));
+  // }
 
   // checking to see if user is already in db.
   // if so, go to homepage. if not, add user to db and then go to home
-  customerValidation = (customers) => {
+  customerValidation = () => {
+    const customers = {...this.state.customers};
     const uid = authRequests.getUid();
     //if there are no users
     if (customers !== undefined || customers.length !== 0) {
@@ -58,22 +62,25 @@ class Auth extends React.Component {
     }).catch(err => console.error('error in adding customer', err));
   }
 
+  // authenticateUser = (e) => {
+  //   e.preventDefault();
+  //   authRequests.googleAuth().then(() => {
+  //     this.getAllCustomers();
+  //   }).catch(err => console.error('error in authenticateUser function', err));
+  // }
+
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.googleAuth().then(() => {
-      this.getAllCustomers();
-      // this.props.history.push('/home');
+      this.customerValidation();
     }).catch(err => console.error('error in authenticateUser function', err));
   }
 
   render() {
     return (
       <div className='Auth'>
-        {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
-              {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
-            <div className=" grave parallax">             
-              {/* <img className="grave parallax" src="https://github.com/ke4tri/Images/blob/master/graveyard.jpg?raw=true" alt="Drone" width="1500" height="400" /> */}              
-            </div>            
+          {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
+          <div className="grave parallax"></div>
       </div>
     );
   }

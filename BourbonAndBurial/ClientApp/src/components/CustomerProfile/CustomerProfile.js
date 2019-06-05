@@ -3,21 +3,22 @@ import { NavLink } from 'reactstrap';
 import authRequests from '../../helpers/data/authRequests';
 import customerRequests from '../../helpers/data/customerRequests'
 
-const defaultCustomer = {
-  customerId: 0,
-  displayName: '',
-  email: '',
-  firebaseId: '',
-  isActive: true,
-}
-
 class CustomerProfile extends React.Component {
-  state = {
-    currentCustomer: [],
-    newCustomer: defaultCustomer,
-    firebaseUser: {},
-    customerObject: {},
-  }
+  // state = {
+  //   currentCustomer: [],
+  //   newCustomer: defaultCustomer,
+  //   firebaseUser: {},
+  //   customerObject: {},
+  // }
+
+  // getCustomers() {
+  //   customerRequests.getAllCustomers().then((results) => {
+  //     // const data = results.data;
+  //     const customers = results.data;
+  //     this.customerValidation(customers);
+  //     // this.setState({ customers: data });
+  //   }).catch(err => console.error('error in getAllCustomers', err));
+  // }
 
   // customerValidation = () => {
   //   const customers = this.state.customers;
@@ -33,17 +34,23 @@ class CustomerProfile extends React.Component {
   //   }
   // }
 
-  componentDidMount() {
-    // getting customer info from firebase
-    const fbUser = authRequests.getCurrentUser();
-    customerRequests.getSingleCustomer(fbUser.uid).then((currentCustomer) => {
-      console.log(currentCustomer);
-      this.setState({
-        customerObject: currentCustomer,
-        firebaseUser: fbUser.providerData[0],
-      });
-    });
-  }
+    // authenticateUser = (e) => {
+  //   e.preventDefault();
+  //   authRequests.googleAuth().then(() => {
+  //     this.getAllCustomers();
+  //   }).catch(err => console.error('error in authenticateUser function', err));
+  // }
+
+  // componentDidMount(){
+  //   const fUser = authRequests.getCurrentUser();
+  //   customerRequests.getSingleCustomer(fUser.uid).then((currentCustomer) => {
+  //     console.log(currentCustomer);
+  //     this.setState({
+  //       customerObject: currentCustomer,
+  //       firebaseUser: fUser.providerData[0],
+  //     });
+  //   });
+  // }
 
   render() {
     const { customerObject } = this.state;
