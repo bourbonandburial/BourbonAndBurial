@@ -1,16 +1,17 @@
 import React from 'react';
 import './SingleProduct.scss';
 import productRequests from '../../../helpers/data/productRequests'
-import CremationPackage from '../CremationPackage/CremationPackage';
+import CremationPackage from '../CremationPackage/CremationPackage'
 
 class SingleProduct extends React.Component{
 
-  deleteProduct = () => {
-    productRequests.deleteProduct()
-    .then((data) => {
-      this.setState({ products: data });
-    }).catch(err => console.error('error getting products', err));
-  }
+    deleteProduct = () => {
+        productRequests.deleteProduct(this.props.productId)
+          .then(() => {
+            this.props.displayProducts();
+          })
+          .catch(err => console.error('error with single delete', err));
+      };
     
     render(){
         return(
@@ -29,10 +30,7 @@ class SingleProduct extends React.Component{
                 <p className="card-text" id="price"><b>Price: ${this.props.price}</b></p>
                 <p className="card-text" id="quantity"><b>Quantity: {this.props.quantity}</b></p>
                 <p className="card-text" id={this.props.id}></p>
-                <button type="button" class="btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>Danger</button>
-
-               {/* <button className="addButton btn btn-danger" onClick={() => this.props.addBooks(this.props.id)}>Add</button> */}
-                {/* <button className="addButton btn btn-danger" onClick={() => this.props.addBooks(this.props.id)}>Add</button> */}
+                <button className="deleteButton btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>Remove</button>
               </div>
             </div>
           </div>
@@ -43,3 +41,4 @@ class SingleProduct extends React.Component{
 }
 
 export default SingleProduct;
+
