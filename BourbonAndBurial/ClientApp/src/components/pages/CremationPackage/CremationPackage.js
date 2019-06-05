@@ -23,7 +23,7 @@ class IndividualPackage extends React.Component {
     render() {
         const productBuilder = this.state.products.map((product) => {
           return (<SingleProduct
-            id={product.productId}
+            productId={product.productId}
             key={product.productId}
             image={product.image}
             productName={product.productName}
@@ -31,6 +31,7 @@ class IndividualPackage extends React.Component {
             productTypeId={product.productTypeId}
             price={product.price}
             quantity={product.quantity}
+            displayProducts={this.displayProducts}
           />);
         });
         return (
