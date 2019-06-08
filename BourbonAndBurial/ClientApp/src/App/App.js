@@ -16,6 +16,7 @@ import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import './App.scss';
 import CremationPackage from '../components/pages/CremationPackage/CremationPackage';
+import BurialPackage from '../components/pages/BurialPackage/BurialPackage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
@@ -96,6 +97,7 @@ class App extends React.Component {
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
               <PrivateRoute path='/CremationPackage' component={CremationPackage} authed={authed} />
+              <PrivateRoute path='/BurialPackage' component={BurialPackage} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>
           </React.Fragment>

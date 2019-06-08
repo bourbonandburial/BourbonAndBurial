@@ -1,15 +1,15 @@
 import React from 'react';
-import './CremationPackage.scss';
+import './BurialPackage.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 
-class CremationPackage extends React.Component {
+class BurialPackage extends React.Component {
     state = {
         products : []
     }
 
     displayProducts = () => {
-        productRequests.getAllCremationProducts()
+        productRequests.getAllBurialProducts()
         .then((data) => {
             this.setState({ products: data });
         }).catch(err => console.error('error getting products', err));
@@ -43,4 +43,4 @@ class CremationPackage extends React.Component {
       }
 }
 
-export default CremationPackage;
+export default BurialPackage;
