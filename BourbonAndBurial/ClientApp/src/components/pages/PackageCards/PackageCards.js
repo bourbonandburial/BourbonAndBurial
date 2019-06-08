@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Col, Row } from 'reactstrap';
+import PackageOne from '../PackageOne/PackageOne';
 import './PackageCards.scss';
 
 class PackageCards extends React.Component {
@@ -12,7 +13,8 @@ class PackageCards extends React.Component {
       <div>
         <Row>
         <Col sm="4">
-      <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
+          <PackageOne />
+      {/* <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
         <CardImg top width="50px" src="https://github.com/ke4tri/Images/blob/master/cremation-video.png?raw=true" alt="Card image cap" />
         <CardBody>
           <Card className="text-center">
@@ -27,7 +29,7 @@ class PackageCards extends React.Component {
            <Link to='/CremationPackage' className="cremationPackage"><Button>Get Started</Button></Link>
           </Card>
         </CardBody>
-      </Card>
+      </Card> */}
       </Col>
       <Col sm="4">
       <Card body outline color="success">
