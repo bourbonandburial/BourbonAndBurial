@@ -36,7 +36,7 @@ class PackageThree extends React.Component {
             <CardText className="text-muted">Pork tenderloin Dinner (serves 200)</CardText>
             <CardText className="text-muted">Dirt Pudding Cups</CardText>
             <CardText className="text-muted">Butler/Server Included</CardText>
-           <Link to='/BurialPackage' className="burialPackage"><Button>Get Started</Button></Link>
+           <Link to='/MausoleumPackage' className="mausoleumPackage"><Button>Get Started</Button></Link>
           </Card>
         </CardBody>
       </Card> 

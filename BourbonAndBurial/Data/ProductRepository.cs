@@ -73,7 +73,7 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var Products = db.Query<Product>("select * from Products" +
-                                " where Price < 35" +
+                                " where Price between 2 and 35" +
                                 " or productName = 'Smores Kit'").ToList();
 
                 return Products;
@@ -90,6 +90,20 @@ namespace BourbonAndBurial.Data
                             or productName = 'Clear Plastic Tumblers'
                             or productName = 'Cohiba Cigars'
                             or productName = 'Engraved Glass'").ToList();
+
+                return Products;
+            }
+        }
+
+        public IEnumerable<Product> GetAllMausoleumProducts()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var Products = db.Query<Product>(@"Select * from Products
+                            Where Price > 40
+                            or ProductName = 'Butler/Server'
+                            or ProductName = 'Engraved Glass'
+                            or ProductName = 'Unlimited Glassware'").ToList();
 
                 return Products;
             }
