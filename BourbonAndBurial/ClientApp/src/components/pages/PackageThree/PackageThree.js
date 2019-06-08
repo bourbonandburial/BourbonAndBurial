@@ -8,7 +8,7 @@ class PackageThree extends React.Component {
 
   render() {
     return (
-     <Card body inverse color="danger">
+     <Card body >
         <CardImg top width="100px" src="https://github.com/ke4tri/Images/blob/master/tansen-tomb-gwalior-things-to-do.jpg?raw=true" alt="Card image cap" />
         <CardBody>
         <Card className="text-center">

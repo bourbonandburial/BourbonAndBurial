@@ -14,7 +14,7 @@ class SingleProduct extends React.Component{
     
     render(){
         return(
-      <div className="container py-3">
+      <div className="container py-2">
         <div className="card">
           <div className="row">
             <div className="col-md-4 rounded">
