@@ -24,6 +24,17 @@ const getAllCremationProducts = () => new Promise((resolve, reject) => {
     });
 });
 
+const getAllMausoleumProducts = () => new Promise((resolve, reject) => {
+  axios.get(`${apiUrl}/mausoleum`)
+    .then((result) => {
+      const productObject = result.data;
+      resolve(productObject);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const getAllBurialProducts = () => new Promise((resolve, reject) => {
   axios.get(`${apiUrl}/burial`)
     .then((result) => {
@@ -41,5 +52,6 @@ export default {
   getAllProducts,
   getAllCremationProducts,
   getAllBurialProducts,
+  getAllMausoleumProducts,
   deleteProduct
 };
