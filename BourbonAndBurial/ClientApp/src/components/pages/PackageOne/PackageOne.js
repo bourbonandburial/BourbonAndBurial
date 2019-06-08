@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, Col, Row } from 'reactstrap';
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
 import './PackageOne.scss';
-//import PackageCards from '../PackageCards/PackageCards'
 
 class PackageOne extends React.Component {
-  // displayName = Home.name
 
   render() {
     return (
