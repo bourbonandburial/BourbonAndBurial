@@ -9,7 +9,7 @@ class IndividualPackage extends React.Component {
     }
 
     displayProducts = () => {
-        productRequests.getAllProducts()
+        productRequests.getAllCremationProducts()
         .then((data) => {
             this.setState({ products: data });
         }).catch(err => console.error('error getting products', err));

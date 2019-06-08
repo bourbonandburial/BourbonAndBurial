@@ -67,5 +67,17 @@ namespace BourbonAndBurial.Data
                 return Products;
             }
         }
+
+        public IEnumerable<Product> GetAllCremationProducts()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var Products = db.Query<Product>("select * from Products" +
+                                " where Price < 35" +
+                                " or productTypeId = 3").ToList();
+
+                return Products;
+            }
+        }
     }
 }
