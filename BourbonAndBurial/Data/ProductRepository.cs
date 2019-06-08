@@ -74,7 +74,7 @@ namespace BourbonAndBurial.Data
             {
                 var Products = db.Query<Product>("select * from Products" +
                                 " where Price < 35" +
-                                " or productTypeId = 3").ToList();
+                                " or productName = 'Smores Kit'").ToList();
 
                 return Products;
             }
