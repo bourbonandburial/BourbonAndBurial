@@ -1,7 +1,6 @@
 import React from 'react';
 import './SingleProduct.scss';
 import productRequests from '../../../helpers/data/productRequests'
-import CremationPackage from '../CremationPackage/CremationPackage'
 
 class SingleProduct extends React.Component{
 
