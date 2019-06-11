@@ -59,16 +59,16 @@ class MyNavbar extends React.Component {
             </NavItem>
           </Nav>
         );
-        {/* <div className="my-navbar">
-              <Navbar color="light" light expand="md">
-                <NavbarBrand href="/home">Bourbon & Burial</NavbarBrand>
-                <NavbarToggler onClick={e => this.toggle(e)} />
-                <Collapse isOpen={this.state.isOpen} navbar>
-                   <CustomerProfile />
-                  <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
-                </Collapse>k
-              </Navbar>            
-            </div> */}
+        //  <div className="my-navbar">
+        //       <Navbar color="light" light expand="md">
+        //         <NavbarBrand href="/home">Bourbon & Burial</NavbarBrand>
+        //         <NavbarToggler onClick={e => this.toggle(e)} />
+        //         <Collapse isOpen={this.state.isOpen} navbar>
+        //            <CustomerProfile />
+        //           <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
+        //         </Collapse>k
+        //       </Navbar>            
+        //     </div> 
       }
       return (
         <Nav className="ml-auto" navbar>
@@ -87,7 +87,7 @@ class MyNavbar extends React.Component {
           <NavbarToggler onClick={e => this.toggle(e)} />
           <Collapse isOpen={this.state.isOpen} navbar>
             {buildNavbar()}
-            {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
+             {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>  */}
           </Collapse>
         </Navbar>
       </div>

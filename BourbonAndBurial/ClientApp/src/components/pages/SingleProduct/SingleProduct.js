@@ -14,10 +14,10 @@ class SingleProduct extends React.Component{
     
     render(){
         return(
-      <div className="container py-2">
+      <div className="container py-1">
         <div className="card">
           <div className="row">
-            <div className="col-md-4 rounded">
+            <div className="col-md-3 rounded">
               <img src={this.props.image} alt="" className="img w-100 h-70" id="img"/>
             </div>
             <div className="col-md-8 p-3">

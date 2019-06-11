@@ -73,5 +73,14 @@ namespace BourbonAndBurial.Controllers
 
             return Ok(products);
         }
+
+        [HttpGet("Mausoleum")]
+
+        public ActionResult GetAllMausoleumProducts()
+        {
+            var products = _productRepository.GetAllMausoleumProducts();
+
+            return Ok(products);
+        }
     }
 }
