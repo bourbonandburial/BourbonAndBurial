@@ -38,13 +38,13 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
-    customers: [],
+    // customers: [],
   }
 
   componentDidMount() {
     connection();
 
-    this.getCustomers();
+    // this.getCustomers();
 
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -70,12 +70,12 @@ class App extends React.Component {
     this.setState({ authed: true });
   }
 
-  getCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const data = results.data;
-      this.setState({ customers: data });
-    }).catch(err => console.error('error in getAllCustomers', err));
-  }
+  // getCustomers = () => {
+  //   customerRequests.getAllCustomers().then((results) => {
+  //     const data = results.data;
+  //     this.setState({ customers: data });
+  //   }).catch(err => console.error('error in getAllCustomers', err));
+  // }
 
   render() {
     const { authed, pendingUser, customers } = this.state;

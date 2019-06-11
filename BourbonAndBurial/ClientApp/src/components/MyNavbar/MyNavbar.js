@@ -61,7 +61,7 @@ class MyNavbar extends React.Component {
       return (
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <ValidCustomer customers={customers} getCustomers={this.getCustomers} />
+            {/* <ValidCustomer customers={customers} getCustomers={this.getCustomers} /> */}
           </NavItem>
         </Nav>
       );
