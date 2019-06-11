@@ -10,8 +10,8 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
-import customerRequests from '../../helpers/data/customerRequests';
-import ValidCustomer from '../ValidCustomer/ValidCustomer';
+// import customerRequests from '../../helpers/data/customerRequests';
+// import ValidCustomer from '../ValidCustomer/ValidCustomer';
 import './MyNavbar.scss';
 
 
@@ -35,18 +35,18 @@ class MyNavbar extends React.Component {
   }
 
   componentWillMount() {
-    this.getCustomers();
+    // this.getCustomers();
   }
 
-  getCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const data = results.data;
-      this.setState({ customers: data });
-    }).catch(err => console.error('error in getAllCustomers', err));
-  }
+  // getCustomers = () => {
+  //   customerRequests.getAllCustomers().then((results) => {
+  //     const data = results.data;
+  //     this.setState({ customers: data });
+  //   }).catch(err => console.error('error in getAllCustomers', err));
+  // }
 
   render() {
-    const { customers } = this.state;
+    // const { customers } = this.state;
     const { authed, logoutClickEvent } = this.props;
 
     const buildNavbar = () => {
@@ -74,7 +74,7 @@ class MyNavbar extends React.Component {
         <Nav className="ml-auto" navbar>
           <NavItem>
             {/* <Link to={ValidCustomer}>Login</Link> */}
-            <ValidCustomer customers={customers} getCustomers={this.getCustomers} />
+            {/* <ValidCustomer customers={customers} getCustomers={this.getCustomers} /> */}
           </NavItem>
         </Nav>
       );
