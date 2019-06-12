@@ -23,7 +23,6 @@ class MyNavbar extends React.Component {
     isOpen: false,
     customers: [],
     firebaseUser: {},
-    customerObject: {},
   };
 
   toggle() {
