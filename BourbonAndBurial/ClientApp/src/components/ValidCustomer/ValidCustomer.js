@@ -34,7 +34,7 @@ class ValidCustomer extends React.Component {
   // checking to see if user is already in db.
   // if so, go to homepage. if not, add user to db and then go to home
   customerValidation = () => {
-    const customers = [{ ...this.props.customers }];
+    const { customers } = this.props;
     const firebaseUser = { ...this.state.firebaseUser };
     //if there are no users
     if (customers !== undefined || customers.length !== 0) {
@@ -48,15 +48,15 @@ class ValidCustomer extends React.Component {
   getCustomerInfoFromFb = () => {
     const fireUser = authRequests.getCurrentUser();
     this.setState({
-      firebaseUser: fireUser.providerData[0],
+      firebaseUser: fireUser
     });
   }
 
   createNewCustomer = () => {
     const { firebaseUser } = this.state;
     const newCustomer = { ...this.state.newCustomer };
-    newCustomer.displayName = firebaseUser.displayName;
-    newCustomer.email = firebaseUser.email;
+    newCustomer.displayName = firebaseUser.providerData[0].displayName;
+    newCustomer.email = firebaseUser.providerData[0].email;
     newCustomer.firebaseId = firebaseUser.uid;
     this.setState({ newCustomer: defaultCustomer });
     this.addCustomer(newCustomer);

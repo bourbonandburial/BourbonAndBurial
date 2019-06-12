@@ -25,7 +25,6 @@ class MyNavbar extends React.Component {
     isOpen: false,
     customers: [],
     firebaseUser: {},
-    customerObject: {},
   };
 
   toggle() {
@@ -54,26 +53,14 @@ class MyNavbar extends React.Component {
         return (
           <Nav className="ml-auto" navbar>
             <NavItem>
-              {/* <CustomerProfile /> */}
               <NavLink onClick={logoutClickEvent}>Logout</NavLink>
             </NavItem>
           </Nav>
         );
-        {/* <div className="my-navbar">
-              <Navbar color="light" light expand="md">
-                <NavbarBrand href="/home">Bourbon & Burial</NavbarBrand>
-                <NavbarToggler onClick={e => this.toggle(e)} />
-                <Collapse isOpen={this.state.isOpen} navbar>
-                   <CustomerProfile />
-                  <NavLink className="text-muted" onClick={logoutClickEvent}>Logout</NavLink>
-                </Collapse>k
-              </Navbar>            
-            </div> */}
       }
       return (
         <Nav className="ml-auto" navbar>
           <NavItem>
-            {/* <Link to={ValidCustomer}>Login</Link> */}
             <ValidCustomer customers={customers} getCustomers={this.getCustomers} />
           </NavItem>
         </Nav>
