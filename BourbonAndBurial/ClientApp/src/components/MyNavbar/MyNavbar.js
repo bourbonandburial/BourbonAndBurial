@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RRNavLink, Link } from 'react-router-dom';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import {
   Navbar,
   NavbarToggler,
@@ -10,8 +10,6 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
-import customerRequests from '../../helpers/data/customerRequests';
-import ValidCustomer from '../ValidCustomer/ValidCustomer';
 import './MyNavbar.scss';
 
 
@@ -34,18 +32,9 @@ class MyNavbar extends React.Component {
   }
 
   componentWillMount() {
-    this.getCustomers();
-  }
-
-  getCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const data = results.data;
-      this.setState({ customers: data });
-    }).catch(err => console.error('error in getAllCustomers', err));
   }
 
   render() {
-    const { customers } = this.state;
     const { authed, logoutClickEvent } = this.props;
 
     const buildNavbar = () => {
@@ -56,14 +45,10 @@ class MyNavbar extends React.Component {
               <NavLink onClick={logoutClickEvent}>Logout</NavLink>
             </NavItem>
           </Nav>
-        );
+        );      
       }
       return (
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            {/* <ValidCustomer customers={customers} getCustomers={this.getCustomers} /> */}
-          </NavItem>
-        </Nav>
+        <Nav className="ml-auto" navbar />
       );
     };
 
@@ -74,7 +59,6 @@ class MyNavbar extends React.Component {
           <NavbarToggler onClick={e => this.toggle(e)} />
           <Collapse isOpen={this.state.isOpen} navbar>
             {buildNavbar()}
-            {/* <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink> */}
           </Collapse>
         </Navbar>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GoogleLoginButton } from "react-social-login-buttons";
 import customerRequests from '../../../helpers/data/customerRequests';
 import authRequests from '../../../helpers/data/authRequests';
 
@@ -33,7 +32,6 @@ class Auth extends React.Component {
   }
 
   authenticateUser = () => {
-    // e.preventDefault();
     authRequests.googleAuth().then(() => {
       this.getCustomerInfoFromFb();
       this.customerValidation();
@@ -54,7 +52,7 @@ class Auth extends React.Component {
     //if there are no users
     if (customers !== undefined || customers.length !== 0) {
       const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
-      if (currentCustomer.length === 0) {
+      if (currentCustomer === undefined) {
         this.createNewCustomer();
       }
     }
@@ -82,8 +80,13 @@ class Auth extends React.Component {
   render() {
     return (
       <div className='Auth'>
-        <GoogleLoginButton className="google-btn" onClick={this.authenticateUser} />
-        <div className="grave parallax"></div>
+        <div className="loginBoarder">
+          <div className="text-center">
+            <p className="loginText text-center"></p>
+            <div className="loginText2 btn" onClick={this.authenticateUser}><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div>
+            <div className="grave parallax"></div>
+          </div>
+        </div>
       </div>
     );
   }
