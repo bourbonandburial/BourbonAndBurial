@@ -2,19 +2,19 @@ body {
   background-color: antiquewhite;
 }
 
-.grave {
-  border-radius: 1%;
+.Auth {
+  width: 100%;
 }
 
 .parallax {
   /* The image used */
-  background-image: url("https://github.com/ke4tri/Images/blob/master/FriendsDrinkin.jpg?raw=true");
+  background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
 
-  /* Set a specific height */
-  min-height: 500px; 
+  /* Set a specific height of the homepage image */
+  min-height: 750px; 
 
   /* Create the parallax scrolling effect */
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

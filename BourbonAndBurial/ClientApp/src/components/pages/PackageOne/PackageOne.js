@@ -8,7 +8,7 @@ class PackageOne extends React.Component {
 
   render() {
     return (
-      <Card body body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} outline color="success">
+      <Card body outline color="success">
       <CardImg top width="50px" src="https://github.com/ke4tri/Images/blob/master/cremation-video.png?raw=true" alt="Card image cap" />
       <CardBody>
         <Card className="text-center">
