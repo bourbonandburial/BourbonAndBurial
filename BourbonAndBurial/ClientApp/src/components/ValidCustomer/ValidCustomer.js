@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import authRequests from '../../helpers/data/authRequests';
 import customerRequests from '../../helpers/data/customerRequests'
 import { NavLink } from 'reactstrap';
+import './ValidCustomer.scss';
 
 const defaultCustomer = {
   displayName: '',
@@ -69,8 +70,18 @@ class ValidCustomer extends React.Component {
 
   render() {
     return (
-      <div className='ValidCustomer' >
-        <NavLink className="text-muted" onClick={this.authenticateUser}>Login</NavLink>
+      <div className='validCustomer' >
+        
+        <div className="loginBoarder">
+          <div className="text-center">
+            <p className="loginText text-center">
+              </p>
+              <p>
+              </p>
+            <NavLink className=" loginText2 btn" onClick={this.authenticateUser}><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" /></NavLink>
+          </div>
+        </div>
+       
       </div>
     );
   }

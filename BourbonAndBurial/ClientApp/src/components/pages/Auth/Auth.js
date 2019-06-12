@@ -44,8 +44,7 @@ class Auth extends React.Component {
       <div className='Auth'>
           <div className="grave parallax"></div>
           {/* <button type="button" class="btn btn-primary">Primary</button> */}
-          <ValidCustomer customers={customers} getCustomers={this.getCustomers} />
-
+          <ValidCustomer calssName="validCust" customers={customers} getCustomers={this.getCustomers} />
       </div>
     );
   }
