@@ -2,6 +2,7 @@ import React from 'react';
 import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
+import ShoppingCart from '../ShoppingCart/ShoppingCart'
 
 class ALaCarte extends React.Component {
     state = {
@@ -37,8 +38,7 @@ class ALaCarte extends React.Component {
           <div class="Products">
             <h1 class="la-text text-center">Add Additional Items</h1>
             <div class="builder">{productBuilder}</div>
-            <div class="productArea">
-            </div>
+            <div class="productArea"><ShoppingCart /></div>
           </div>
         );
       }
