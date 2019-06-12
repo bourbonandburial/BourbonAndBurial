@@ -1,32 +1,27 @@
 import React from 'react';
-import ValidCustomer from '../../ValidCustomer/ValidCustomer';
+import PropTypes from 'prop-types';
 import customerRequests from '../../../helpers/data/customerRequests';
+import authRequests from '../../../helpers/data/authRequests';
 
 import './Auth.scss';
-import PropTypes from 'prop-types';
+
+const defaultCustomer = {
+  displayName: '',
+  email: '',
+  firebaseId: '',
+  isActive: true,
+}
 
 class Auth extends React.Component {
+  state = {
+    newCustomer: defaultCustomer,
+    firebaseUser: {},
+    customers: [],
+  }
+
   static propTypes = {
     authed: PropTypes.bool,
     logoutClickEven: PropTypes.func,
-  }
-
-  state = {
-    isOpen: false,
-    customers: [],
-    firebaseUser: {},
-    customerObject: {},
-  };
-
-  
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  }
-
-  componentWillMount() {
-    this.getCustomers();
   }
 
   getCustomers = () => {
@@ -36,15 +31,62 @@ class Auth extends React.Component {
     }).catch(err => console.error('error in getAllCustomers', err));
   }
 
-  render() {
-    const { customers } = this.state;
-    const { authed, logoutClickEvent } = this.props;
+  authenticateUser = () => {
+    authRequests.googleAuth().then(() => {
+      this.getCustomerInfoFromFb();
+      this.customerValidation();
+    }).catch(err => console.error('error in authenticateUser function', err));
+  }
 
+  getCustomerInfoFromFb = () => {
+    const fireUser = authRequests.getCurrentUser();
+    this.setState({
+      firebaseUser: fireUser
+    });
+  }
+
+  // checking to see if user is already in db.
+  // if so, go to homepage. if not, add user to db and then go to home
+  customerValidation = () => {
+    const { customers, firebaseUser } = this.state;
+    //if there are no users
+    if (customers !== undefined || customers.length !== 0) {
+      const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
+      if (currentCustomer === undefined) {
+        this.createNewCustomer();
+      }
+    }
+  }
+
+  createNewCustomer = () => {
+    const { firebaseUser } = this.state;
+    const newCustomer = { ...this.state.newCustomer };
+    newCustomer.displayName = firebaseUser.providerData[0].displayName;
+    newCustomer.email = firebaseUser.providerData[0].email;
+    newCustomer.firebaseId = firebaseUser.uid;
+    this.setState({ newCustomer: defaultCustomer });
+    this.addCustomer(newCustomer);
+  }
+
+  addCustomer = (newCustomer) => {
+    customerRequests.createCustomer(newCustomer).then(() => {
+    }).catch(err => console.error('error in adding customer', err));
+  }
+
+  componentDidMount() {
+    this.getCustomers();
+  }
+
+  render() {
     return (
       <div className='Auth'>
-          <div className="grave parallax"></div>
-          {/* <button type="button" class="btn btn-primary">Primary</button> */}
-          <ValidCustomer calssName="validCust" customers={customers} getCustomers={this.getCustomers} />
+        <div className="loginBoarder">
+          <div className="text-center">
+            <p className="loginText text-center"></p>
+            <div className="loginText2 btn" onClick={this.authenticateUser}><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div>
+            <div className="grave parallax"></div>
+          </div>
+        </div>
       </div>
     );
   }

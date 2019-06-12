@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RRNavLink, Link } from 'react-router-dom';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import {
   Navbar,
   NavbarToggler,
@@ -45,10 +45,11 @@ class MyNavbar extends React.Component {
               <NavLink onClick={logoutClickEvent}>Logout</NavLink>
             </NavItem>
           </Nav>
-        );
-       
+        );      
       }
- 
+      return (
+        <Nav className="ml-auto" navbar />
+      );
     };
 
     return (
