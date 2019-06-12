@@ -34,7 +34,7 @@ class CremationPackage extends React.Component {
           />);
         });
         return (
-          <div className="Products">
+          <div className="Products p-2">
             <div className="builder">{productBuilder}</div>
             <div className="productArea">
             </div>
