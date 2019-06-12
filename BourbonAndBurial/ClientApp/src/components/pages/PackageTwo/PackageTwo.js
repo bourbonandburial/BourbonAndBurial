@@ -22,7 +22,7 @@ class PackageTwo extends React.Component {
             <CardText className="text-muted">Tray Charcuteri 50ppl QTY : 2 Bottles</CardText>
             <CardText className="text-muted">Clear Plastic Cups QTY : 250</CardText>
             <CardText className="text-muted">EnGRAVED glass QTY : 1 Glass</CardText>
-           <Link to='/BurialPackage' className="burialPackage"><Button>Get Started</Button></Link>
+           <Link to='/ALaCarte' className="ALaCarte"><Button>Get Started</Button></Link>
           </Card>
         </CardBody>
       </Card>

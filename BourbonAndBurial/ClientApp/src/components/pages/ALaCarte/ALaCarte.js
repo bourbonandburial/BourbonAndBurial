@@ -1,15 +1,15 @@
 import React from 'react';
-import './BurialPackage.scss';
+import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 
-class BurialPackage extends React.Component {
+class ALaCarte extends React.Component {
     state = {
         products : []
     }
 
     displayProducts = () => {
-        productRequests.getAllBurialProducts()
+        productRequests.getAllProducts()
         .then((data) => {
             this.setState({ products: data });
         }).catch(err => console.error('error getting products', err));
@@ -34,13 +34,14 @@ class BurialPackage extends React.Component {
           />);
         });
         return (
-          <div className="Products">
-            <div className="builder">{productBuilder}</div>
-            <div className="productArea">
+          <div class="Products">
+            <h1 class="la-text text-center">Add Additional Items</h1>
+            <div class="builder">{productBuilder}</div>
+            <div class="productArea">
             </div>
           </div>
         );
       }
 }
 
-export default BurialPackage;
+export default ALaCarte;
