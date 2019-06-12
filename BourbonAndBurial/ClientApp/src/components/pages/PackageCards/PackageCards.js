@@ -13,7 +13,11 @@ class PackageCards extends React.Component {
   render() {
     return (
       <div>
-        <Row>
+        <div>
+          <PackageOne />
+        </div>
+
+        {/* <Row>
         <Col sm="4">
           <PackageOne />
       </Col>
@@ -23,7 +27,7 @@ class PackageCards extends React.Component {
       <Col sm="4">
         <PackageThree />
       </Col>
-      </Row>
+      </Row> */}
     </div>
     );
   }
