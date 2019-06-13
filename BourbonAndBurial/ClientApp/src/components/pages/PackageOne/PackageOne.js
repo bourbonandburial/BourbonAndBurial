@@ -1,22 +1,17 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { Card, CardImg, CardText, CardBody,
-//   CardTitle, CardSubtitle, Button } from 'reactstrap';
-
 import './PackageOne.scss';
 
 class PackageOne extends React.Component {
 
   render() {
     return (
-      
-      <div class="container">
-      <div class="row justify-content-around">
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab  item">
-          <div class="folded-corner service_tab_1">
-            <div class="text">
-              <i class="fa fa-fire fa-5x fa-icon-image mb-3"></i>
-                <p class="item-title">
+      <div className="container">
+      <div className="row justify-content-around">
+        <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab  item">
+          <div className="folded-corner service_tab_1">
+            <div className="text">
+              <i className="fa fa-fire fa-5x fa-icon-image mb-3"></i>
+                <p className="item-title">
                     <h3>CREMATION</h3>
                   </p>
               <p>
@@ -25,11 +20,11 @@ class PackageOne extends React.Component {
             </div>
           </div>
           </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
-          <div class="folded-corner service_tab_1">
-            <div class="text">
-              <i class="fa fa-recycle fa-5x fa-icon-image mb-3" ></i>
-                <p class="item-title">
+        <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
+          <div className="folded-corner service_tab_1">
+            <div className="text">
+              <i className="fa fa-recycle fa-5x fa-icon-image mb-3" ></i>
+                <p className="item-title">
                   <h3> BURIAL</h3>
                 </p>
                 <p>
@@ -38,11 +33,11 @@ class PackageOne extends React.Component {
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
-          <div class="folded-corner service_tab_1">
-            <div class="text">
-              <i class="fa fa-hospital-o fa-5x fa-icon-image mb-3"></i>
-                <p class="item-title">
+        <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
+          <div className="folded-corner service_tab_1">
+            <div className="text">
+              <i className="fa fa-hospital-o fa-5x fa-icon-image mb-3"></i>
+                <p className="item-title">
                   <h3> MAUSOLEUM</h3>
                 </p>
               <p>
@@ -51,23 +46,8 @@ class PackageOne extends React.Component {
             </div>
           </div>
         </div>
-       
-        
       </div>
     </div>
-    
-  
-    //  <div>
-    //   <div className="card" >
-    //    <img className="card-img-top" src="https://github.com/ke4tri/Images/blob/master/cremation-video.png?raw=true" alt="Card image"/>
-    //       <div className="card-img-overlay">
-    //         <h4 className="card-title">Cremation</h4>
-    //         <p className="card-text">Price : $300</p>
-    //         <a href="#" className="btn btn-primary">See Profile</a>
-    //       </div>
-    //     </div>
-    //   </div>
-    
     );
   }
 }
