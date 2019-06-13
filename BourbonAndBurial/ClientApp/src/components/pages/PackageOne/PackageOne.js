@@ -11,14 +11,14 @@ class PackageOne extends React.Component {
     return (
       
       <div class="container">
-      <div class="col">
-      <ul>
+      <div class="row justify-content-around">
+      
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab  item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-image fa-5x fa-icon-image"></i>
+              <i class="fa fa-fire fa-5x fa-icon-image"></i>
                 <p class="item-title">
-                    <h3> Designing</h3>
+                    <h3>CREMATION</h3>
                   </p>
               <p>
                 This is an amazing set of animated accordions based completely on CSS. They come oriented both vertically and horizontally in order to fit properly in your project. In order to see the slides, 
@@ -29,9 +29,9 @@ class PackageOne extends React.Component {
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-lightbulb-o fa-5x fa-icon-image" ></i>
+              <i class="fa fa-recycle fa-5x fa-icon-image" ></i>
                 <p class="item-title">
-                  <h3> Developing</h3>
+                  <h3> BURIAL</h3>
                 </p>
                 <p>
                   This is an amazing set of animated accordions based completely on CSS. They come oriented both vertically and horizontally in order to fit properly in your project. In order to see the slides, 
@@ -42,9 +42,9 @@ class PackageOne extends React.Component {
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-truck fa-5x fa-icon-image"></i>
+              <i class="fa fa-hospital-o fa-5x fa-icon-image"></i>
                 <p class="item-title">
-                  <h3> Marketing</h3>
+                  <h3> MAUSOLEUM</h3>
                 </p>
               <p>
                 This is an amazing set of animated accordions based completely on CSS. They come oriented both vertically and horizontally in order to fit properly in your project. In order to see the slides, 
@@ -53,7 +53,7 @@ class PackageOne extends React.Component {
           </div>
         </div>
        
-         </ul>
+        
       </div>
     </div>
     
