@@ -17,12 +17,13 @@ class SingleProduct extends React.Component{
 
       <div class="padding-div">
       <div class="card cardWidth">
-        <img class="card-img-top" src={this.props.image} alt="Card image" />
+        <img class="card-img-top border" src={this.props.image} alt="Card image" />
         <div class="card-body p-2">
           <h4 class="card-title">{this.props.productName}</h4>
           <p class="card-text">{this.props.productDescription}</p>
-          <p class="card-text"><b>{this.props.price}</b></p>
-          <button className="deleteButton btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>X</button>
+          <p class="card-text"><b>${this.props.price}</b></p>
+          {/* <button className="deleteButton btn btn-danger" onClick={() => this.deleteProduct(this.props.productId)}>X</button> */}
+          <button className="deleteButton btn btn-primary" onClick={() => this.deleteProduct(this.props.productId)}>Add To Cart</button>
         </div>
       </div>
       </div>

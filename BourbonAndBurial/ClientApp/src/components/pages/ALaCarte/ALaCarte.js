@@ -35,10 +35,12 @@ class ALaCarte extends React.Component {
           />);
         });
         return (
-          <div class="Products">
+          <div>
             <h1 class="la-text text-center">Add Additional Items</h1>
+          <div class="Products d-flex flex-row">
             <div class="builder">{productBuilder}</div>
             <div class="productArea"><ShoppingCart /></div>
+          </div>
           </div>
         );
       }
