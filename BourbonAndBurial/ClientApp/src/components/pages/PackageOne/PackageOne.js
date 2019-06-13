@@ -12,11 +12,10 @@ class PackageOne extends React.Component {
       
       <div class="container">
       <div class="row justify-content-around">
-      
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab  item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-fire fa-5x fa-icon-image"></i>
+              <i class="fa fa-fire fa-5x fa-icon-image mb-3"></i>
                 <p class="item-title">
                     <h3>CREMATION</h3>
                   </p>
@@ -29,7 +28,7 @@ class PackageOne extends React.Component {
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-recycle fa-5x fa-icon-image" ></i>
+              <i class="fa fa-recycle fa-5x fa-icon-image mb-3" ></i>
                 <p class="item-title">
                   <h3> BURIAL</h3>
                 </p>
@@ -42,7 +41,7 @@ class PackageOne extends React.Component {
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 Services-tab item">
           <div class="folded-corner service_tab_1">
             <div class="text">
-              <i class="fa fa-hospital-o fa-5x fa-icon-image"></i>
+              <i class="fa fa-hospital-o fa-5x fa-icon-image mb-3"></i>
                 <p class="item-title">
                   <h3> MAUSOLEUM</h3>
                 </p>

@@ -44,10 +44,10 @@ body {
    color: #999; 
    background: transparent;
    transition: all ease .5s;
-   border: 1px solid rgba(31,181,172,.9);
+   border: 1px solid rgba(255,255,255,.9);
  }
  .folded-corner:hover{
-   background-color: rgba(31,181,172,.9);
+   background-color: rgba(255,255,255,.9);
  }
  
  /*
@@ -85,7 +85,7 @@ body {
  
  
  .fa-icon-image{
-   color: rgba(31,181,172,.9);
+   color: rgba(168, 0, 0, 0.86);
    display: inline-block;
      font-style: normal;
      font-variant: normal;
