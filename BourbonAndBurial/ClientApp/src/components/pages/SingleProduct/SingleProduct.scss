@@ -1,11 +1,21 @@
-#img {
-
-  max-width: 200px;
-  min-width: 80px;
-  max-height: auto;
-  margin-left: 40%;
-  align-content: center;
+.padding-div{
+  padding: 30px;
+  margin: 30px;
 }
+
+.card-img-top {
+  width: 100%;
+  height: 18vw;
+  object-fit: cover;
+}
+
+//below was an incoming change
+.cardWidth{
+  height: 500px;
+  width: 250px;
+}
+
+
 
 
 

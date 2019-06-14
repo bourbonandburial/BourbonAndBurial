@@ -10,13 +10,11 @@ import {
 
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
-import customerRequests from '../helpers/data/customerRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import './App.scss';
-
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
@@ -36,13 +34,10 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
-    customers: [],
   }
 
   componentDidMount() {
     connection();
-
-    this.getCustomers();
 
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -68,15 +63,8 @@ class App extends React.Component {
     this.setState({ authed: true });
   }
 
-  getCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const data = results.data;
-      this.setState({ customers: data });
-    }).catch(err => console.error('error in getAllCustomers', err));
-  }
-
   render() {
-    const { authed, pendingUser, customers } = this.state;
+    const { authed, pendingUser } = this.state;
 
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -91,7 +79,7 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} customers={customers} />
+            <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
