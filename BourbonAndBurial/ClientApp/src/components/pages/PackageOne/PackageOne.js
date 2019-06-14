@@ -20,7 +20,7 @@ class PackageOne extends React.Component {
           <CardText className="text-muted">Red Cups QTY : 5 Bottles</CardText>
           <CardText className="text-muted">Smores kit (Serves 50 ppl) QTY : 5 Bottles</CardText>
           <CardText className="text-muted">EnGRAVED glass QTY : 1 Glass</CardText>
-         <Link to='/CremationPackage' className="cremationPackage"><Button>Get Started</Button></Link>
+         <Link to='/ALaCarte' className="ALaCarte"><Button>Get Started</Button></Link>
         </Card>
       </CardBody>
     </Card>

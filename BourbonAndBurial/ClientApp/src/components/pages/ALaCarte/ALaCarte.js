@@ -1,15 +1,16 @@
 import React from 'react';
-import './CremationPackage.scss';
+import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
+import ShoppingCart from '../ShoppingCart/ShoppingCart'
 
-class CremationPackage extends React.Component {
+class ALaCarte extends React.Component {
     state = {
         products : []
     }
 
     displayProducts = () => {
-        productRequests.getAllCremationProducts()
+        productRequests.getAllProducts()
         .then((data) => {
             this.setState({ products: data });
         }).catch(err => console.error('error getting products', err));
@@ -34,13 +35,15 @@ class CremationPackage extends React.Component {
           />);
         });
         return (
-          <div className="Products">
+          <div>
+            <h1 className="la-text text-center">Add Additional Items</h1>
+          <div className="Products d-flex flex-row">
             <div className="builder">{productBuilder}</div>
-            <div className="productArea">
-            </div>
+            <div className="productArea"><ShoppingCart /></div>
+          </div>
           </div>
         );
       }
 }
 
-export default CremationPackage;
+export default ALaCarte;
