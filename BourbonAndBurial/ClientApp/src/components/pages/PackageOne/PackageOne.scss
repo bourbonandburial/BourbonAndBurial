@@ -8,6 +8,23 @@ body {
   opacity: .9;
   z-index: 1;
  }
+
+.packCards {
+   height: 600px !important;
+}
+
+.priceTag1 {
+  margin-top: 90px !important;
+}
+
+.priceTag2 {
+  margin-top: 90px !important;
+}
+
+.priceTag3 {
+  margin-top: 40px !important;
+}
+
  
  h3 {
   //  color: rgba(31,181,172,.9);
@@ -15,7 +32,8 @@ body {
  }
  .text{
   //  color: rgba(31,181,172,.9);
-  color: rgba(255, 255, 255, 1);
+  // color: rgba(255, 255, 255, 1);
+  color: rgb(0, 0, 0);
    text-align: center;
  }
  
@@ -25,6 +43,7 @@ body {
  }
  .Services-tab{
    margin-top:20px;
+   
  }
  
  /*
