@@ -3,8 +3,6 @@
     width: 15rem;
     margin: 5px auto 5px auto !important;
   }
-  // width: 100%;
-  // position: absolute;
   z-index: 2;
   left: 5%;
   top: 80%;
@@ -12,10 +10,6 @@
     margin-top: 0;
     margin-bottom: 0;
   }
-  // width: 500px;
-  // height: 500px;
-  // border: solid 2px black;
-  // background: rgba(0, 0, 0, 0.10);
 }
 
 .loginBoarder{
@@ -39,11 +33,12 @@
   z-index: 3 !important;
 
   /* Set a specific height of the homepage image */
-  min-height: 830px; 
-
-  /* Create the parallax scrolling effect */
-  // background-attachment: scroll;
-  background-position: center;
-  background-repeat: no-repeat;
+  // width: 100px !important;
+   min-height: 770px; 
+  // max-height: 800px;
+  // background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+ 
+  
 }

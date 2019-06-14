@@ -19,14 +19,11 @@ class PackageOne extends React.Component {
                 With five bottles of Jack Daniels Tennessee Fire, cups, smores kit that service 50 people and 
                 one enGRAVED glass of the partings name. 
                 This is a HOT combination of the perfect selections to set your next cremation on FIRE! 
-                
               </p>
               <p className="item-title priceTag1 mt-7">
                   <h3> Price : $300</h3>
               </p>
-              <div className="icon1" >
-              {/* <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button> */}
-             
+              <div className="icon1" >             
               <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
                </div>
             </div>
@@ -40,18 +37,16 @@ class PackageOne extends React.Component {
                   <h3> BURIAL</h3>
                 </p>
                 <p>
-                With four bottles of our premium bourbons, box of Chohiloas, Charcuteria 
-                tray (servces 50ppl), clear plastic cups and one Engraved glass.
-                Lay to rest your worries!! We have you covered, and we don't mean with dirt!    
+                With four bottles of our premium bourbons, a box of Chohiloas, Charcuterie 
+                tray (serves 50ppl), clear plastic cups and one Engraved glass.
+                Lay to rest your worries!! We have you covered, and we don't mean with dirt! 
               </p>
               <p className="item-title priceTag2 mt-2">
                   <h3> Price : $1000</h3>
                 </p>
               <div className="icon2">
               <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
-
               </div>
-             
             </div>
           </div>
         </div>
@@ -63,9 +58,8 @@ class PackageOne extends React.Component {
                   <h3> MAUSOLEUM</h3>
                 </p>
               <p>
-                Fifteen bottles of our topshelf best blends, five enGRAVED glasses of the deads name
-                , Arturo Fuente box, H. Upman, three Charcuterie Boards, 6 Shrimp coctails, pork tenderloin dinner
-                serving 200ppl. Don't forget about the Dirt Pudding Cups!
+              Fifteen bottles of our top-shelf best blends, five enGRAVED glasses of the deads name
+                , Arturo Fuente box, H. Lipman, three Charcuterie Boards, 6 Shrimp cocktails, pork tenderloin dinner serving 200ppl. Don't forget about the Dirt Pudding Cups!
               Keep the party above ground and afloat with our all-inclusive Mausoleum option! 
               </p>
               <p className="item-title priceTag3 mt-2">
@@ -73,8 +67,6 @@ class PackageOne extends React.Component {
                 </p>
               <div className="icon3">
               <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
-
-              {/* <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button> */}
               </div>
             </div>
           </div>
