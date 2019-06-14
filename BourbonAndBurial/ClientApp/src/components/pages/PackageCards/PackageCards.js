@@ -16,18 +16,6 @@ class PackageCards extends React.Component {
         <div>
           <PackageOne />
         </div>
-
-        {/* <Row>
-        <Col sm="4">
-          <PackageOne />
-      </Col>
-      <Col sm="4">
-        <PackageTwo />
-      </Col>
-      <Col sm="4">
-        <PackageThree />
-      </Col>
-      </Row> */}
     </div>
     );
   }

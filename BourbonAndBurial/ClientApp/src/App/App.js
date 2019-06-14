@@ -14,10 +14,8 @@ import customerRequests from '../helpers/data/customerRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
+import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import './App.scss';
-import CremationPackage from '../components/pages/CremationPackage/CremationPackage';
-import BurialPackage from '../components/pages/BurialPackage/BurialPackage';
-import MausoleumPackage from '../components/pages/MausoleumPackage/MausoleumPackage';
 
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -98,9 +96,7 @@ class App extends React.Component {
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
-              <PrivateRoute path='/CremationPackage' component={CremationPackage} authed={authed} />
-              <PrivateRoute path='/BurialPackage' component={BurialPackage} authed={authed} />
-              <PrivateRoute path='/MausoleumPackage' component={MausoleumPackage} authed={authed} />
+              <PrivateRoute path='/ALaCarte' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>
           </React.Fragment>

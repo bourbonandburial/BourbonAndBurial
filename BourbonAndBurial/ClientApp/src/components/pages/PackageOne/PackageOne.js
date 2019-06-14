@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './PackageOne.scss';
 
 class PackageOne extends React.Component {
@@ -24,8 +25,10 @@ class PackageOne extends React.Component {
                   <h3> Price : $300</h3>
               </p>
               <div className="icon1" >
-              <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
-              </div>
+              {/* <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button> */}
+             
+              <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
+               </div>
             </div>
           </div>
           </div>
@@ -45,7 +48,8 @@ class PackageOne extends React.Component {
                   <h3> Price : $1000</h3>
                 </p>
               <div className="icon2">
-              <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+              <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
+
               </div>
              
             </div>
@@ -68,7 +72,9 @@ class PackageOne extends React.Component {
                   <h3> Price : $2999</h3>
                 </p>
               <div className="icon3">
-              <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+              <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
+
+              {/* <button type="button" className="btn"> <i class="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button> */}
               </div>
             </div>
           </div>
