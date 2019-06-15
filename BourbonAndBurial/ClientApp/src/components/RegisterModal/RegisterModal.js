@@ -4,8 +4,6 @@ import {
   Button,
   Col,
   Form,
-  FormGroup,
-  Input,
   Label,
   Modal,
   ModalBody,
@@ -13,6 +11,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 
 const defaultCustomer = {
   displayName: '',
@@ -87,6 +86,7 @@ class RegisterModal extends React.Component {
 
   formSubmit = (e) => {
     e.preventDefault();
+    console.log('hi');
     const { onSubmit, firebaseUser } = this.props;
     console.log(firebaseUser);
     const newCustomer = { ...this.state.newCustomer };
@@ -104,8 +104,8 @@ class RegisterModal extends React.Component {
 
     // const isPhoneNumberNull = () => {
     //   if (firebaseUser.phoneNumber === null) {
-    //     return <Input
-    //       className="form-input"
+    //     return <AvInput
+    //       className="form-control"
     //       type="text"
     //       name="phone"
     //       id="phoneNumber"
@@ -114,8 +114,8 @@ class RegisterModal extends React.Component {
     //       value={newCustomer.phoneNumber}
     //     />
     //   } else {
-    //     return <Input
-    //       className="form-input"
+    //     return <AvInput
+    //       className="form-control"
     //       type="text"
     //       name="phone"
     //       id="phoneNumber"
@@ -138,122 +138,135 @@ class RegisterModal extends React.Component {
         >
           <ModalHeader toggle={e => this.toggle(e)}>Customer Registration</ModalHeader>
           <ModalBody>
-            <Form>
+            <AvForm onSubmit={this.formSubmit}>
               <Row form>
                 <Col md>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="fullName">Full Name</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="fullName"
                       id="fullName"
                       placeholder={firebaseUser.displayName}
                       onChange={this.fullNameChange}
                       value={newCustomer.displayName}
+                      required
                     />
-                  </FormGroup>
+                  </AvGroup>
+                  <AvFeedback>Please enter valid input.</AvFeedback>
                 </Col>
               </Row>
               <Row form>
                 <Col md={6}>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="email">Email Address</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="email"
                       name="email"
                       id="customerEmail"
                       placeholder={firebaseUser.email}
                       onChange={this.emailChange}
                       value={newCustomer.email}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
                 <Col md={6}>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="phone">Phone Number</Label>
                     {/* {isPhoneNumberNull()} */}
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="phone"
                       id="phoneNumber"
                       placeholder="123-456-7890"
                       onChange={this.phoneNumberChange}
                       value={newCustomer.phoneNumber}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="address1">Address 1</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="address1"
                       id="address1"
                       placeholder="123 Broadway"
                       onChange={this.address1Change}
                       value={newCustomer.address1}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="address2">Address 2</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="address2"
                       id="address2"
                       placeholder="apt, unit, etc"
                       onChange={this.address2Change}
                       value={newCustomer.address2}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md={5}>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="city">City</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="city"
                       id="city"
                       placeholder="Nashville"
                       onChange={this.cityChange}
                       value={newCustomer.city}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md={2}>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="state">State</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
                       type="text"
                       name="state"
                       id="state"
                       placeholder="TN"
                       onChange={this.stateChange}
                       value={newCustomer.state}
+                      required
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+
+                  </AvGroup>
                 </Col>
                 <Col md={5}>
-                  <FormGroup>
+                  <AvGroup>
                     <Label for="zipcode">Zipcode</Label>
-                    <Input
-                      className="form-input"
+                    <AvInput
+                      required
                       type="text"
                       name="zipcode"
                       id="zipcode"
@@ -261,18 +274,20 @@ class RegisterModal extends React.Component {
                       onChange={this.zipcodeChange}
                       value={newCustomer.zipcode}
                     />
-                  </FormGroup>
+                    <AvFeedback>Please enter valid input.</AvFeedback>
+                  </AvGroup>
                 </Col>
               </Row>
-            </Form>
+            </AvForm>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.formSubmit}>
+            {/* <Button color="primary" onClick={this.formSubmit}> */}
+            <Button color="primary">
               Submit
-            </Button>{' '}
-            <Button color="secondary" onClick={e => this.toggle(e)}>
-              Cancel
             </Button>
+            {/* <Button color="secondary" onClick={e => this.toggle(e)}>
+              Cancel
+            </Button> */}
           </ModalFooter>
         </Modal>
       </div>

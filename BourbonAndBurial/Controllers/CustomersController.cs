@@ -42,7 +42,7 @@ namespace BourbonAndBurial.Controllers
         [HttpPost]
         public ActionResult AddNewCustomer(CreateCustomerRequest newCustomerObject)
         {
-            if (!_validator.Validate(newCustomerObject))
+            if (_validator.Validate(newCustomerObject))
             {
                 return BadRequest(new { error = "Customer validation failed" });
             }
