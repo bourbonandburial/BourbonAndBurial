@@ -28,7 +28,7 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var getQuery = "SELECT * FROM customers WHERE firbaseId = @firebaseId";
+                var getQuery = "SELECT * FROM customers WHERE firebaseId = @firebaseId";
 
                 var parameter = new { FirebaseId = firebaseId };
 

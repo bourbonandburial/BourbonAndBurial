@@ -28,43 +28,44 @@ class Home extends React.Component {
     });
 
     this.getCustomers();
-
-    console.log(currentCustomer.uid);
-    console.log(customerRequests.getSingleCustomer(currentCustomer.uid));
-
-    customerRequests.getSingleCustomer(currentCustomer.uid)
-      .then()
-      .catch((error) => {
-        console.error('Error getting single customer', error);
-      });
   }
-  // componentDidMount() {
-  //   this.customerValidation();
+  // console.log(currentCustomer.uid);
+  // console.log(customerRequests.getSingleCustomer(currentCustomer.uid));
+
+  // customerRequests.getSingleCustomer(currentCustomer.uid)
+  //   .then()
+  //   .catch((error) => {
+  //     console.error('Error getting single customer', error);
+  //   });
   // }
+  componentDidMount() {
+    this.customerValidation();
+  }
 
   getCustomers = () => {
     customerRequests.getAllCustomers().then((results) => {
       const data = results.data;
+      console.log(data);
       this.setState({ customers: data });
     }).catch(err => console.error('error in getAllCustomers', err));
   }
 
   // checking to see if user is already in db.
   // if so, go to homepage. if not, add user to db and then go to home
-  // customerValidation = () => {
-  //   const { customers, firebaseUser } = this.state;
-  //     //if there are no users
-  //     const isUserInFirebase = customerRequests.getSingleCustomer(firebaseUser.uid);
-  //   console.log(isUserInFirebase);
-  //   if (customers !== undefined || customers.length !== 0) {
-  //     const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
-  //     console.log(currentCustomer);
-  //     if (currentCustomer === undefined) {
-  //       this.showModal();
-  //       //this.createNewCustomer();
-  //     }
-  //   }
-  // }
+  customerValidation = () => {
+    const { customers, firebaseUser } = this.state;
+    //if there are no users
+    // const isUserInFirebase = customerRequests.getSingleCustomer(firebaseUser.uid);
+    // console.log(isUserInFirebase);
+    if (customers !== undefined || customers.length !== 0) {
+      const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
+      console.log('valid', currentCustomer);
+      if (currentCustomer === undefined) {
+        this.showModal();
+        //this.createNewCustomer();
+      }
+    }
+  }
 
   showModal = (e) => {
     this.setState({
