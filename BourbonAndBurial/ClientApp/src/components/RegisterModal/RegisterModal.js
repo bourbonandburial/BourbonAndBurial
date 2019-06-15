@@ -17,15 +17,23 @@ import {
 const defaultCustomer = {
   displayName: '',
   email: '',
+  phoneNumber: '',
   firebaseId: '',
+  address1: '',
+  address2: '',
+  city: '',
+  state: '',
+  zipcode: '',
+  photo: '',
   isActive: true,
 }
 
 class RegisterModal extends React.Component {
   static propTypes = {
     closeModalEvent: PropTypes.func,
+    firebaseUser: PropTypes.object,
   }
-  
+
   state = {
     modal: false,
     newCustomer: defaultCustomer,
@@ -52,24 +60,72 @@ class RegisterModal extends React.Component {
     });
   }
 
-  formFieldStringState = (name, event) => {
-    event.preventDefault();
+  formFieldStringState = (name, e) => {
+    e.preventDefault();
     const tempCustomer = { ...this.state.newCustomer };
-    tempCustomer[name] = event.target.value;
+    tempCustomer[name] = e.target.value;
     this.setState({
       newCustomer: tempCustomer,
     });
   };
 
-  firstNameChange = event => this.formFieldStringState('firstName', event);
+  fullNameChange = e => this.formFieldStringState('displayName', e);
 
-  lastNameChange = event => this.formFieldStringState('lastName', event);
+  emailChange = e => this.formFieldStringState('email', e);
 
-  emailChange = event => this.formFieldStringState('email', event);
+  address1Change = e => this.formFieldStringState('address1', e);
+
+  address2Change = e => this.formFieldStringState('address2', e);
+
+  cityChange = e => this.formFieldStringState('city', e);
+
+  stateChange = e => this.formFieldStringState('state', e);
+
+  zipcodeChange = e => this.formFieldStringState('zipcode', e);
+
+  phoneNumberChange = e => this.formFieldStringState('phoneNumber', e);
+
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { onSubmit, firebaseUser } = this.props;
+    console.log(firebaseUser);
+    const newCustomer = { ...this.state.newCustomer };
+    newCustomer.firebaseId = firebaseUser.uid;
+    newCustomer.photo = firebaseUser.photoURL;
+    onSubmit(newCustomer);
+    this.setState({
+      newCustomer: defaultCustomer,
+    });
+  };
 
   render() {
-    const {newCustomer} = this.state;
-    const {firebaseUser} = this.props;
+    const { newCustomer } = this.state;
+    const { firebaseUser } = this.props;
+
+    // const isPhoneNumberNull = () => {
+    //   if (firebaseUser.phoneNumber === null) {
+    //     return <Input
+    //       className="form-input"
+    //       type="text"
+    //       name="phone"
+    //       id="phoneNumber"
+    //       placeholder="123-456-7890"
+    //       onChange={this.phoneNumberChange}
+    //       value={newCustomer.phoneNumber}
+    //     />
+    //   } else {
+    //     return <Input
+    //       className="form-input"
+    //       type="text"
+    //       name="phone"
+    //       id="phoneNumber"
+    //       placeholder={firebaseUser.phoneNumber}
+    //       onChange={this.phoneNumberChange}
+    //       value={newCustomer.phoneNumber}
+    //     />
+    //   }
+    // }
+
     return (
       <div className="RegisterModal">
         <Modal
@@ -84,37 +140,23 @@ class RegisterModal extends React.Component {
           <ModalBody>
             <Form>
               <Row form>
-                <Col md={6}>
+                <Col md>
                   <FormGroup>
-                    <Label for="firstName">First Name</Label>
+                    <Label for="fullName">Full Name</Label>
                     <Input
                       className="form-input"
                       type="text"
-                      name="firstName"
-                      id="firstName"
-                      placeholder="John"
-                      onChange={this.firstNameChange}
-                      value={newCustomer.firstName}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="lastName">Last Name</Label>
-                    <Input
-                      className="form-input"
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      placeholder="Smith"
-                      onChange={this.lastNameChange}
-                      value={newCustomer.lastName}
+                      name="fullName"
+                      id="fullName"
+                      placeholder={firebaseUser.displayName}
+                      onChange={this.fullNameChange}
+                      value={newCustomer.displayName}
                     />
                   </FormGroup>
                 </Col>
               </Row>
               <Row form>
-                <Col md={10}>
+                <Col md={6}>
                   <FormGroup>
                     <Label for="email">Email Address</Label>
                     <Input
@@ -124,7 +166,100 @@ class RegisterModal extends React.Component {
                       id="customerEmail"
                       placeholder={firebaseUser.email}
                       onChange={this.emailChange}
-                      value={newCustomer.Email}
+                      value={newCustomer.email}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="phone">Phone Number</Label>
+                    {/* {isPhoneNumberNull()} */}
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="phone"
+                      id="phoneNumber"
+                      placeholder="123-456-7890"
+                      onChange={this.phoneNumberChange}
+                      value={newCustomer.phoneNumber}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md>
+                  <FormGroup>
+                    <Label for="address1">Address 1</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="address1"
+                      id="address1"
+                      placeholder="123 Broadway"
+                      onChange={this.address1Change}
+                      value={newCustomer.address1}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md>
+                  <FormGroup>
+                    <Label for="address2">Address 2</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="address2"
+                      id="address2"
+                      placeholder="apt, unit, etc"
+                      onChange={this.address2Change}
+                      value={newCustomer.address2}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md={5}>
+                  <FormGroup>
+                    <Label for="city">City</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="city"
+                      id="city"
+                      placeholder="Nashville"
+                      onChange={this.cityChange}
+                      value={newCustomer.city}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md={2}>
+                  <FormGroup>
+                    <Label for="state">State</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="state"
+                      id="state"
+                      placeholder="TN"
+                      onChange={this.stateChange}
+                      value={newCustomer.state}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={5}>
+                  <FormGroup>
+                    <Label for="zipcode">Zipcode</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="zipcode"
+                      id="zipcode"
+                      placeholder="37204"
+                      onChange={this.zipcodeChange}
+                      value={newCustomer.zipcode}
                     />
                   </FormGroup>
                 </Col>

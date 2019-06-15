@@ -88,8 +88,8 @@ class Home extends React.Component {
   // }
 
   customerFormSubmitEvent = (newCustomer) => {
-    // const { isEditing, userEditId } = this.state;
-    customerRequests.createCustomer(newCustomer);
+    customerRequests.createCustomer(newCustomer).then(() => {
+    }).catch(err => console.error('error in adding customer', err));
     this.setState({
       showModal: false,
     });
@@ -99,7 +99,7 @@ class Home extends React.Component {
     const { showModal, firebaseUser } = this.state;
 
     return (
-      <div className="home">
+      <div className="home" >
         <PackageCards />
         <RegisterModal
           showModal={showModal}

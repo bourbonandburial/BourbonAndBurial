@@ -38,7 +38,7 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public Customer AddCustomer(string displayName, string email, string firebaseId)
+        public Customer AddCustomer(CreateCustomerRequest newCustomerObject)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -48,18 +48,42 @@ namespace BourbonAndBurial.Data
                     INSERT INTO customers
                                ([DisplayName]
                                ,[Email]
-                               ,[FirebaseId])
+                               ,[FirebaseId]
+                               ,[IsActive]
+                               ,[Address1]
+                               ,[Address2]
+                               ,[City]
+                               ,[State]
+                               ,[Zipcode]
+                               ,[Photo]
+                               ,[PhoneNumber])
                     OUTPUT inserted.*
                          VALUES
-                               (@displayName
-                               ,@email
-                               ,@firebaseId)";
+                               (@DisplayName
+                               ,@Email
+                               ,@FirebaseId
+                               ,@IsActive
+                               ,@Address1
+                               ,@Address2
+                               ,@City
+                               ,@State
+                               ,@Zipcode
+                               ,@Photo
+                               ,@PhoneNumber)";
 
                 var parameters = new
                 {
-                    DisplayName = displayName,
-                    Email = email,
-                    FirebaseId = firebaseId,
+                    DisplayName = newCustomerObject.DisplayName,
+                    Email = newCustomerObject.Email,
+                    FirebaseId = newCustomerObject.FirebaseId,
+                    IsActive = newCustomerObject.IsActive,
+                    Address1 = newCustomerObject.Address1,
+                    Address2 = newCustomerObject.Address2,
+                    City = newCustomerObject.City,
+                    State = newCustomerObject.State,
+                    Zipcode = newCustomerObject.Zipcode,
+                    Photo = newCustomerObject.Photo,
+                    PhoneNumber = newCustomerObject.PhoneNumber
                 };
 
                 var newCustomer = db.QueryFirstOrDefault<Customer>(insertQuery, parameters);
