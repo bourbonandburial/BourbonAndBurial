@@ -24,6 +24,9 @@ const getSingleCustomer = firebaseId => new Promise((resolve, reject) => {
     });
 });
 
+// const getSingleCustomer = firebaseId => axios.get(`${apiUrl}/${firebaseId}`);
+
+
 const createCustomer = customerObject => axios.post(`${apiUrl}`, (customerObject));
 
 export default {
