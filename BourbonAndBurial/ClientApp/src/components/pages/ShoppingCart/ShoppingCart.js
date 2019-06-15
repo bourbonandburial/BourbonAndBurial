@@ -1,6 +1,5 @@
 import React from 'react';
 import './ShoppingCart.scss';
-import productRequests from '../../../helpers/data/productRequests'
 
 class ShoppingCart extends React.Component{
 

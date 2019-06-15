@@ -13,8 +13,8 @@ import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
+import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import './App.scss';
-import ALaCarte from '../components/pages/ALaCarte/ALaCarte'
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false

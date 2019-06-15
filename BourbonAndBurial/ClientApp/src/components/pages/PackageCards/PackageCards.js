@@ -1,8 +1,8 @@
 import React from 'react';
-import { Col, Row } from 'reactstrap';
+//import { Col, Row } from 'reactstrap';
 import PackageOne from '../PackageOne/PackageOne';
-import PackageTwo from '../PackageTwo/PackageTwo';
-import PackageThree from '../PackageThree/PackageThree'
+//import PackageTwo from '../PackageTwo/PackageTwo';
+//import PackageThree from '../PackageThree/PackageThree'
 import './PackageCards.scss';
 
 class PackageCards extends React.Component {
@@ -11,17 +11,9 @@ class PackageCards extends React.Component {
   render() {
     return (
       <div>
-        <Row>
-        <Col sm="4">
+        <div>
           <PackageOne />
-      </Col>
-      <Col sm="4">
-        <PackageTwo />
-      </Col>
-      <Col sm="4">
-        <PackageThree />
-      </Col>
-      </Row>
+        </div>
     </div>
     );
   }
