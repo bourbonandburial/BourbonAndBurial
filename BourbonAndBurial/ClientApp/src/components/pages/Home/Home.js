@@ -23,11 +23,15 @@ class Home extends React.Component {
 
   componentWillMount() {
     const currentCustomer = authRequests.getCurrentUser();
+    console.log(currentCustomer);
+
     this.setState({
       firebaseUser: currentCustomer
     });
 
     this.getCustomers();
+
+    this.customerValidation();
   }
   // console.log(currentCustomer.uid);
   // console.log(customerRequests.getSingleCustomer(currentCustomer.uid));
@@ -38,14 +42,16 @@ class Home extends React.Component {
   //     console.error('Error getting single customer', error);
   //   });
   // }
-  componentDidMount() {
-    this.customerValidation();
-  }
+  // componentDidMount() {
+  //   this.getCustomers();
+
+  //   this.customerValidation();
+  // }
 
   getCustomers = () => {
     customerRequests.getAllCustomers().then((results) => {
       const data = results.data;
-      console.log(data);
+      console.log('customers', data);
       this.setState({ customers: data });
     }).catch(err => console.error('error in getAllCustomers', err));
   }
@@ -55,8 +61,6 @@ class Home extends React.Component {
   customerValidation = () => {
     const { customers, firebaseUser } = this.state;
     //if there are no users
-    // const isUserInFirebase = customerRequests.getSingleCustomer(firebaseUser.uid);
-    // console.log(isUserInFirebase);
     if (customers !== undefined || customers.length !== 0) {
       const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
       console.log('valid', currentCustomer);
