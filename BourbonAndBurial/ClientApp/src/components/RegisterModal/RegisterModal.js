@@ -205,7 +205,6 @@ class RegisterModal extends React.Component {
                       required
                     />
                     <AvFeedback>Please enter valid input.</AvFeedback>
-
                   </AvGroup>
                 </Col>
               </Row>
