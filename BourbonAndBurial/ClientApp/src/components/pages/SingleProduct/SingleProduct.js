@@ -14,18 +14,24 @@ class SingleProduct extends React.Component{
     
     render(){
         return(
-
-      <div className="padding-div">
-      <div className="card cardWidth">
-        <img className="card-img-top border" src={this.props.image} alt="Card image" />
-        <div className="card-body p-2">
-          <h4 className="card-title">{this.props.productName}</h4>
-          <p className="card-text">{this.props.productDescription}</p>
-          <p className="card-text"><b>${this.props.price}</b></p>
-          <button className="deleteButton btn btn-primary" onClick={() => this.deleteProduct(this.props.productId)}>Add To Cart</button>
-        </div>
-      </div>
-      </div>
+          <div className="col-sm-4 Services-tab item " onClick={() => this.deleteProduct(this.props.productId)}>
+          <div className="singlePackCards folded-corner service_tab_1">
+            <div className="text mb-6">
+            <img className="card-img-top border" src={this.props.image} alt="Card image" />               
+             <div className="item-title">
+                    <h3 className="mt-2">{this.props.productName}</h3>
+                  </div>
+              <p>
+              {this.props.productDescription} 
+              </p>
+              <div className="item-title singlePriceTag1 mt-2">
+                  <h3>${this.props.price}</h3>
+              </div>
+              <div className="icon1" >             
+               </div>
+            </div>
+          </div>
+          </div>
         );
     }
 }
