@@ -14,18 +14,18 @@ class SingleProduct extends React.Component{
     
     render(){
         return(
-          <div className="col-sm-4 Services-tab item " onClick={() => this.deleteProduct(this.props.productId)}>
+          <div className="col-sm-2 Services-tab item " onClick={() => this.deleteProduct(this.props.productId)}>
           <div className="singlePackCards folded-corner service_tab_1">
             <div className="text mb-6">
             <img className="card-img-top border" src={this.props.image} alt="Card image" />               
              <div className="item-title">
-                    <h3 className="mt-2">{this.props.productName}</h3>
+                    <h4 className="mt-2">{this.props.productName}</h4>
                   </div>
               <p>
               {this.props.productDescription} 
               </p>
               <div className="item-title singlePriceTag1 mt-2">
-                  <h3>${this.props.price}</h3>
+                  <h4>${this.props.price}</h4>
               </div>
               <div className="icon1" >             
                </div>
