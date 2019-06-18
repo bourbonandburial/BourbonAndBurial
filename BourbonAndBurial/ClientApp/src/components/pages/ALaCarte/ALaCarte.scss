@@ -8,6 +8,12 @@
 }
 
 .productArea{
-    width: 5%;
+    display: flex;
+    flex-wrap: wrap;
     border: 0 solid black !important;
+}
+
+.packageArea {
+    display: flex;
+    flex-wrap: wrap;
 }

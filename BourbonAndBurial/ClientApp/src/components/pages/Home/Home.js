@@ -38,10 +38,10 @@ componentDidMount = () => {
   this.displayPackageThreeProducts();
 }
 
-setSelectedPackage(packageId) {
-  this.setState({selectedPackage: packageId});
-  this.props.history.push('/ALaCarte');
-}
+// setSelectedPackage(packageId) {
+//   this.setState({selectedPackage: packageId});
+//   this.props.history.push('/ALaCarte');
+// }
 
   render() {
     return (

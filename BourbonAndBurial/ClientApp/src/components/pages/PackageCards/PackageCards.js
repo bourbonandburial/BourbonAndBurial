@@ -4,9 +4,9 @@ import './PackageCards.scss';
 import productRequests from '../../../helpers/data/productRequests'
 
 class PackageCards extends React.Component{
-state = {
-  selectedPackage: []
-}
+// state = {
+//   selectedPackage: []
+// }
   render() {
     return (
       <div className="container">
@@ -27,7 +27,7 @@ state = {
                   <h3> Price : $300</h3>
               </div>
               <div className="icon1" >             
-              <button type="button" packageId = "packageOneBtn" className="btn" onClick={this.props.setSelectedPackage}> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+              <button type="button" packageId = "packageOneBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
                </div>
             </div>
           </div>
