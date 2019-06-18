@@ -13,15 +13,21 @@ const defaultCustomer = {
 }
 
 class Auth extends React.Component {
-  // state = {
-  //   newCustomer: defaultCustomer,
-  //   firebaseUser: {},
-  //   customers: [],
-  // }
+  state = {
+    // newCustomer: defaultCustomer,
+    // firebaseUser: {},
+    // customers: [],
+    modal: false,
+  }
 
   static propTypes = {
     authed: PropTypes.bool,
     logoutClickEvent: PropTypes.func,
+  }
+
+  toggleModal = () => {
+    const { modal } = this.state;
+    this.setState({ modal: !modal });
   }
 
   // getCustomers = () => {
@@ -86,7 +92,7 @@ class Auth extends React.Component {
           <div className="text-center">
             <p className="loginText text-center"></p>
             {/* <div className="loginText2 btn" onClick={this.authenticateUser}><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div> */}
-            <div onClick={this.authenticateUser} className="loginText2 btn"><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div>
+            <div onClick={this.authenticateUser} logoutClickEvent={this.props.logoutClickEvent} className="loginText2 btn"><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div>
             <div className="grave parallax"></div>
           </div>
         </div>

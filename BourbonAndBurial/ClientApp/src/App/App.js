@@ -83,7 +83,7 @@ class App extends React.Component {
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
-              <PrivateRoute path='/home' component={Home} authed={authed} />
+              <PrivateRoute path='/home' component={Home} authed={authed} logoutClickEvent={logoutClickEvent} />
               <PrivateRoute path='/ALaCarte' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>

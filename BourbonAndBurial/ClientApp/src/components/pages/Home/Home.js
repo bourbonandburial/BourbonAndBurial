@@ -1,19 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Home.scss';
 import PackageCards from '../PackageCards/PackageCards';
 import customerRequests from '../../../helpers/data/customerRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import RegisterModal from '../../RegisterModal/RegisterModal';
 
-
-// const defaultCustomer = {
-//   displayName: '',
-//   email: '',
-//   firebaseId: '',
-//   isActive: true,
-// }
-
 class Home extends React.Component {
+  static propTypes = {
+    logoutClickEvent: PropTypes.func,
+    authed: PropTypes.bool,
+  }
+
   state = {
     firebaseUser: {},
     customers: [],
@@ -78,7 +76,7 @@ class Home extends React.Component {
     const { showModal, firebaseUser } = this.state;
 
     return (
-      <div className="home" >
+      <div className="home">
         <PackageCards />
         <RegisterModal
           showModal={showModal}

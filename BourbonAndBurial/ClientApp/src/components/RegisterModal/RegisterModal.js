@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink as RRNavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Col,
   Form,
+  FormGroup,
+  Input,
   Label,
   Modal,
   ModalBody,
@@ -11,7 +15,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
-import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import './RegisterModal.scss';
 
 const defaultCustomer = {
   displayName: '',
@@ -29,8 +33,10 @@ const defaultCustomer = {
 
 class RegisterModal extends React.Component {
   static propTypes = {
+    logoutClickEvent: PropTypes.func,
     closeModalEvent: PropTypes.func,
     firebaseUser: PropTypes.object,
+    closeModal: PropTypes.func,
   }
 
   state = {
@@ -100,25 +106,25 @@ class RegisterModal extends React.Component {
 
   render() {
     const { newCustomer } = this.state;
-    const { firebaseUser } = this.props;
+    const { firebaseUser, authed } = this.props;
 
     // const isPhoneNumberNull = () => {
     //   if (firebaseUser.phoneNumber === null) {
     //     return <AvInput
-    //       className="form-control"
-    //       type="text"
-    //       name="phone"
-    //       id="phoneNumber"
-    //       placeholder="123-456-7890"
+    //       className='form-control'
+    //       type='text'
+    //       name='phone'
+    //       id='phoneNumber'
+    //       placeholder='123-456-7890'
     //       onChange={this.phoneNumberChange}
     //       value={newCustomer.phoneNumber}
     //     />
     //   } else {
     //     return <AvInput
-    //       className="form-control"
-    //       type="text"
-    //       name="phone"
-    //       id="phoneNumber"
+    //       className='form-control'
+    //       type='text'
+    //       name='phone'
+    //       id='phoneNumber'
     //       placeholder={firebaseUser.phoneNumber}
     //       onChange={this.phoneNumberChange}
     //       value={newCustomer.phoneNumber}
@@ -127,167 +133,158 @@ class RegisterModal extends React.Component {
     // }
 
     return (
-      <div className="RegisterModal">
+      <div className='RegisterModal'>
         <Modal
-          className="form-modal"
+          className='form-modal'
           isOpen={this.state.modal}
           toggle={e => this.toggle(e)}
-          onClosed={e => this.modalClosed(e)}
           centered
-          size="lg"
+          size='lg'
+          backdrop='static'
         >
-          <ModalHeader toggle={e => this.toggle(e)}>Customer Registration</ModalHeader>
+          <ModalHeader>Customer Registration</ModalHeader>
           <ModalBody>
-            <AvForm onSubmit={this.formSubmit}>
+            <Form onSubmit={this.formSubmit}>
               <Row form>
                 <Col md>
-                  <AvGroup>
-                    <Label for="fullName">Full Name</Label>
-                    <AvInput
-                      type="text"
-                      name="fullName"
-                      id="fullName"
+                  <FormGroup>
+                    <Label for='fullName' size='sm' className='modal-label'>Full Name</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='fullName'
+                      id='fullName'
                       placeholder={firebaseUser.displayName}
                       onChange={this.fullNameChange}
                       value={newCustomer.displayName}
                       required
                     />
-                  </AvGroup>
-                  <AvFeedback>Please enter valid input.</AvFeedback>
+                  </FormGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md={6}>
-                  <AvGroup>
-                    <Label for="email">Email Address</Label>
-                    <AvInput
-                      type="email"
-                      name="email"
-                      id="customerEmail"
+                  <FormGroup>
+                    <Label for='email' size='sm' className='modal-label'>Email Address</Label>
+                    <Input
+                      className='cool-border'
+                      type='email'
+                      name='email'
+                      id='customerEmail'
                       placeholder={firebaseUser.email}
                       onChange={this.emailChange}
                       value={newCustomer.email}
                       required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
                 <Col md={6}>
-                  <AvGroup>
-                    <Label for="phone">Phone Number</Label>
+                  <FormGroup>
+                    <Label for='phone' size='sm' className='modal-label'>Phone Number</Label>
                     {/* {isPhoneNumberNull()} */}
-                    <AvInput
-                      type="text"
-                      name="phone"
-                      id="phoneNumber"
-                      placeholder="123-456-7890"
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='phone'
+                      id='phoneNumber'
+                      placeholder='123-456-7890'
                       onChange={this.phoneNumberChange}
                       value={newCustomer.phoneNumber}
                       required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md>
-                  <AvGroup>
-                    <Label for="address1">Address 1</Label>
-                    <AvInput
-                      type="text"
-                      name="address1"
-                      id="address1"
-                      placeholder="123 Broadway"
+                  <FormGroup>
+                    <Label for='address1' size='sm' className='modal-label'>Address 1</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='address1'
+                      id='address1'
+                      placeholder='123 Broadway'
                       onChange={this.address1Change}
                       value={newCustomer.address1}
                       required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md>
-                  <AvGroup>
-                    <Label for="address2">Address 2</Label>
-                    <AvInput
-                      type="text"
-                      name="address2"
-                      id="address2"
-                      placeholder="apt, unit, etc"
+                  <FormGroup>
+                    <Label for='address2' size='sm' className='modal-label'>Address 2</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='address2'
+                      id='address2'
+                      placeholder='apt, unit, etc'
                       onChange={this.address2Change}
                       value={newCustomer.address2}
-                      required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
               </Row>
               <Row form>
                 <Col md={5}>
-                  <AvGroup>
-                    <Label for="city">City</Label>
-                    <AvInput
-                      type="text"
-                      name="city"
-                      id="city"
-                      placeholder="Nashville"
+                  <FormGroup>
+                    <Label for='city' size='sm' className='modal-label'>City</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='city'
+                      id='city'
+                      placeholder='Nashville'
                       onChange={this.cityChange}
                       value={newCustomer.city}
                       required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
-              </Row>
-              <Row form>
                 <Col md={2}>
-                  <AvGroup>
-                    <Label for="state">State</Label>
-                    <AvInput
-                      type="text"
-                      name="state"
-                      id="state"
-                      placeholder="TN"
+                  <FormGroup>
+                    <Label for='state' size='sm' className='modal-label'>State</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='state'
+                      id='state'
+                      placeholder='TN'
                       onChange={this.stateChange}
                       value={newCustomer.state}
                       required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
                 <Col md={5}>
-                  <AvGroup>
-                    <Label for="zipcode">Zipcode</Label>
-                    <AvInput
-                      required
-                      type="text"
-                      name="zipcode"
-                      id="zipcode"
-                      placeholder="37204"
+                  <FormGroup>
+                    <Label for='zipcode' size='sm' className='modal-label'>Zipcode</Label>
+                    <Input
+                      className='cool-border'
+                      type='text'
+                      name='zipcode'
+                      id='zipcode'
+                      placeholder='37204'
                       onChange={this.zipcodeChange}
                       value={newCustomer.zipcode}
+                      required
                     />
-                    <AvFeedback>Please enter valid input.</AvFeedback>
-                  </AvGroup>
+                  </FormGroup>
                 </Col>
               </Row>
-            </AvForm>
+              <ModalFooter>
+                <Button color='primary'>
+                  Submit
+                </Button>
+                <Button className='btn btn-secondary'>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Form>
           </ModalBody>
-          <ModalFooter>
-            {/* <Button color="primary" onClick={this.formSubmit}> */}
-            <Button color="primary">
-              Submit
-            </Button>
-            {/* <Button color="secondary" onClick={e => this.toggle(e)}>
-              Cancel
-            </Button> */}
-          </ModalFooter>
         </Modal>
       </div>
     );
