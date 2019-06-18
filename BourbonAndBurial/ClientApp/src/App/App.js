@@ -14,6 +14,7 @@ import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
+import productRequests from '../helpers/data/productRequests';
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -35,6 +36,13 @@ class App extends React.Component {
     authed: false,
     pendingUser: true,
   }
+
+  displayPackageOneProducts = () => {
+    productRequests.getAllCremationProducts()
+    .then((data) => {
+        this.setState({ packageOne: data });
+    }).catch(err => console.error('error getting products', err));
+}
 
   componentDidMount() {
     connection();
@@ -84,8 +92,7 @@ class App extends React.Component {
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
-              <PrivateRoute path='/ALaCarte' component={ALaCarte} authed={authed} />
-              <PrivateRoute path='/home' component={Home} authed={authed} />
+              <PrivateRoute path='/ALaCarte' component={ALaCarte} authed={authed} selectedPackage={this.state.selectedPackage} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>

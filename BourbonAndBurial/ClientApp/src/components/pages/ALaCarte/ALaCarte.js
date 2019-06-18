@@ -3,6 +3,7 @@ import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
+import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 class ALaCarte extends React.Component {
     state = {
@@ -36,6 +37,7 @@ class ALaCarte extends React.Component {
         });
         return (
           <div className="container d-flex">
+            <div><PackageDisplay /></div>
             <div className="row justify-content-around mt-5">
               <div className="row">{productBuilder}</div>
             </div>
