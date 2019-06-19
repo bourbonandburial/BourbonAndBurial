@@ -12,21 +12,21 @@ class Home extends React.Component {
   }
 
   displayPackageOneProducts = () => {
-    productRequests.getAllCremationProducts()
+    productRequests.getPackageProducts('cremation')
     .then((data) => {
         this.setState({ packageOne: data });
     }).catch(err => console.error('error getting products', err));
 }
 
 displayPackageTwoProducts = () => {
-  productRequests.getAllBurialProducts()
+  productRequests.getPackageProducts('burial')
   .then((data) => {
       this.setState({ packageTwo: data });
   }).catch(err => console.error('error getting products', err));
 }
 
 displayPackageThreeProducts = () => {
-  productRequests.getAllMausoleumProducts()
+  productRequests.getPackageProducts('mausoleum')
   .then((data) => {
       this.setState({ packageThree: data });
   }).catch(err => console.error('error getting products', err));

@@ -4,9 +4,7 @@ import './PackageCards.scss';
 import productRequests from '../../../helpers/data/productRequests'
 
 class PackageCards extends React.Component{
-// state = {
-//   selectedPackage: []
-// }
+
   render() {
     return (
       <div className="container">
@@ -26,8 +24,12 @@ class PackageCards extends React.Component{
               <div className="item-title priceTag1 mt-7">
                   <h3> Price : $300</h3>
               </div>
-              <div className="icon1" >             
-              <button type="button" packageId = "packageOneBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+              <div className="icon1" >
+              <Link
+                to="/ALaCarte/cremation"
+              >             
+                <button type="button" packageId="packageOneBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+               </Link>
                </div>
             </div>
           </div>
@@ -48,9 +50,11 @@ class PackageCards extends React.Component{
                   <h3> Price : $1000</h3>
                 </div>
               <div className="icon2">
+                <Link to='/ALaCarte/burial'>
                   <button type="button" id="packageTwoBtn" className="btn"> 
                     <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i>
                   </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -71,7 +75,7 @@ class PackageCards extends React.Component{
                   <h3> Price : $2999</h3>
                 </div>
               <div className="icon3">
-              <button type="button" id="packageThreeBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+              <Link to='/ALaCarte/mausoleum'><button type="button" id="packageThreeBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
               </div>
             </div>
           </div>

@@ -37,7 +37,10 @@ class ALaCarte extends React.Component {
         });
         return (
           <div className="container">
-            <div className="packageArea d-flex justify-content-around"><PackageDisplay /></div>
+            <div className="packageArea d-flex justify-content-around">
+              <PackageDisplay package={this.props.match.params.package}
+              />
+              </div>
             <div>
             <div className=" d-flex row justify-content-around mt-5">
               <h3>Add Additional Items</h3>

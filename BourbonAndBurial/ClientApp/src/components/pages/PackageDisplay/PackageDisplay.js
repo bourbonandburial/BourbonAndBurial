@@ -10,15 +10,15 @@ state = {
     products: []
 }
 
-    displayPackageOneProducts = () => {
-        productRequests.getAllCremationProducts()
+    displayProducts = () => {
+        productRequests.getPackageProducts(this.props.package)
         .then((data) => {
             this.setState({ products: data });
         }).catch(err => console.error('error getting products', err));
     }
 
     componentDidMount = () => {
-        this.displayPackageOneProducts();
+        this.displayProducts();
     }
 
 
