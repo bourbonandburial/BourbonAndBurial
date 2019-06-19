@@ -28,7 +28,7 @@ class PackageCards extends React.Component{
               <Link
                 to="/ALaCarte/cremation"
               >             
-                <button type="button" packageId="packageOneBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+                <button type="button" id="packageOneBtn" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
                </Link>
                </div>
             </div>

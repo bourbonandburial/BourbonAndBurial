@@ -8,7 +8,6 @@ class Home extends React.Component {
     packageOne: [],
     packageTwo: [],
     packageThree: [],
-    selectedPackage: []
   }
 
   displayPackageOneProducts = () => {
@@ -38,19 +37,10 @@ componentDidMount = () => {
   this.displayPackageThreeProducts();
 }
 
-// setSelectedPackage(packageId) {
-//   this.setState({selectedPackage: packageId});
-//   this.props.history.push('/ALaCarte');
-// }
-
   render() {
     return (
       <div className="home">
         <PackageCards 
-        packageOne={this.state.packageOne}
-        packageTwo={this.state.packageTwo}
-        packageThree={this.state.packageThree}
-        setSelectedPackage={this.setSelectedPackage}
         />
       </div>
     );

@@ -37,13 +37,6 @@ class App extends React.Component {
     pendingUser: true,
   }
 
-  displayPackageOneProducts = () => {
-    productRequests.getAllCremationProducts()
-    .then((data) => {
-        this.setState({ packageOne: data });
-    }).catch(err => console.error('error getting products', err));
-}
-
   componentDidMount() {
     connection();
 
@@ -92,7 +85,7 @@ class App extends React.Component {
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
-              <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} selectedPackage={this.state.selectedPackage} />
+              <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
