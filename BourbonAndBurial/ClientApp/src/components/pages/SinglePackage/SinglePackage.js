@@ -6,13 +6,12 @@ class SinglePackage extends React.Component{
     
     render(){
         return(
-          <div className="singlePackage">
-            <div className="text">
-             <div className="item-title">
-             {/* <img className="zcard-img-top border" src={this.props.image} alt="Card image" />  */}
-                    <h5 className="xxx">{this.props.productName}</h5>
-                  </div>
-              <h6> x {this.props.quantity} </h6>
+          <div className="list-group d-flex justify-content-end">
+            <div className="packagesRender">
+              <li class="alaWrappingDiv list-group-item align-items-center">
+              {this.props.productName}
+              <span class="badge badge-primary badge-pill">{this.props.quantity} </span>
+              </li>
             </div>
           </div>
         );

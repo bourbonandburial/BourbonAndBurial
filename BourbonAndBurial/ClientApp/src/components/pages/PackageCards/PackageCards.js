@@ -22,7 +22,7 @@ class PackageCards extends React.Component{
                 one enGRAVED glass of the partings name. 
                 This is a HOT combination of the perfect selections to set your next cremation on FIRE! 
               </p>
-              <div className="item-title priceTag1 mt-7">
+              <div className="item-title priceTag1 mt-1">
                   <h3> Price : $300</h3>
               </div>
               <div className="icon1" >
