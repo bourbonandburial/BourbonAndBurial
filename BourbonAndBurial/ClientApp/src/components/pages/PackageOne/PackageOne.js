@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './PackageOne.scss';
 
 class PackageOne extends React.Component {
+  static propTypes = {
+    setSelectedPackage:PropTypes.func
+ }
+
 
   render() {
     return (
@@ -24,7 +30,8 @@ class PackageOne extends React.Component {
                   <h3> Price : $300</h3>
               </div>
               <div className="icon1" >             
-              <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
+              {/* <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link> */}
+              <button type="button" id="packageOneBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
                </div>
             </div>
           </div>
@@ -45,11 +52,13 @@ class PackageOne extends React.Component {
                   <h3> Price : $1000</h3>
                 </div>
               <div className="icon2">
-                <Link to='/ALaCarte' className="ALaCarte">
+              <button type="button" id="packageTwoBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+
+                {/* <Link to='/ALaCarte' className="ALaCarte">
                   <button type="button" className="btn"> 
                     <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i>
                   </button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -70,7 +79,9 @@ class PackageOne extends React.Component {
                   <h3> Price : $2999</h3>
                 </div>
               <div className="icon3">
-              <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link>
+              {/* <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link> */}
+              <button type="button" id="packageThreeBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
+
               </div>
             </div>
           </div>
