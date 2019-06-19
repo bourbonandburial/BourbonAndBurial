@@ -96,6 +96,7 @@ class RegisterModal extends React.Component {
     const newCustomer = { ...this.state.newCustomer };
     newCustomer.firebaseId = firebaseUser.uid;
     newCustomer.photo = firebaseUser.photoURL;
+    newCustomer.email = firebaseUser.email;
     onSubmit(newCustomer);
     this.setState({
       newCustomer: defaultCustomer,
@@ -170,10 +171,8 @@ class RegisterModal extends React.Component {
                       type='email'
                       name='email'
                       id='customerEmail'
-                      placeholder={firebaseUser.email}
-                      onChange={this.emailChange}
-                      value={newCustomer.email}
-                      required
+                      value={firebaseUser.email}
+                      readOnly
                     />
                   </FormGroup>
                 </Col>

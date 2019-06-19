@@ -49,9 +49,9 @@ class Home extends React.Component {
       const customerFromDb = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
       if (customerFromDb === undefined) {
         this.showModal();
-        this.setState({ isRegistered: false});
+        this.setState({ isRegistered: false });
       } else {
-        this.setState({ isRegistered: true});
+        this.setState({ isRegistered: true });
       }
     }
   }
@@ -73,35 +73,29 @@ class Home extends React.Component {
     }).catch(err => console.error('error in adding customer', err));
     this.setState({
       showModal: false,
-      isRegistered: true, 
+      isRegistered: true,
     });
   }
 
   render() {
     const { showModal, firebaseUser, isRegistered } = this.state;
 
-    if (isRegistered) {
+    if (!isRegistered) {
       return (
         <div className="home">
-        <RegisterModal
-          showModal={showModal}
-          onSubmit={this.customerFormSubmitEvent}
-          closeModalEvent={this.closeModalEvent}
-          firebaseUser={firebaseUser}
-          logoutClickEvent={this.props.logoutClickEvent}
-        />
-      </div>
-      );      
+          <RegisterModal
+            showModal={showModal}
+            onSubmit={this.customerFormSubmitEvent}
+            closeModalEvent={this.closeModalEvent}
+            firebaseUser={firebaseUser}
+            logoutClickEvent={this.props.logoutClickEvent}
+          />
+        </div>
+      );
     }
     return (
       <div className="home">
-        <RegisterModal
-          showModal={showModal}
-          onSubmit={this.customerFormSubmitEvent}
-          closeModalEvent={this.closeModalEvent}
-          firebaseUser={firebaseUser}
-          logoutClickEvent={this.props.logoutClickEvent}
-        />
+        <PackageCards />
       </div>
     );
   }
