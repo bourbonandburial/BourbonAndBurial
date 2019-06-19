@@ -1,9 +1,7 @@
 import React from 'react';
 import './PackageDisplay.scss';
-import ALaCarte from '../ALaCarte/ALaCarte';
 import productRequests from '../../../helpers/data/productRequests'
 import SinglePackage from '../SinglePackage/SinglePackage'
-import SingleProduct from '../SingleProduct/SingleProduct'
 
 class PackageDisplay extends React.Component{
 state = {
