@@ -7,14 +7,14 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
-import productRequests from '../helpers/data/productRequests';
+import CustomerProfile from '../components/pages/CustomerProfile/CustomerProfile';
+
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -86,6 +86,7 @@ class App extends React.Component {
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
+              <PrivateRoute path='/customers/:id' component={CustomerProfile} authed={authed} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
