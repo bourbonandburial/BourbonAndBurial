@@ -13,11 +13,6 @@ class Auth extends React.Component {
     logoutClickEvent: PropTypes.func,
   }
 
-  toggleModal = () => {
-    const { modal } = this.state;
-    this.setState({ modal: !modal });
-  }
-
   authenticateUser = () => {
     authRequests.googleAuth().then(() => {
     }).catch(err => console.error('error in authenticateUser function', err));
