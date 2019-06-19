@@ -10,7 +10,7 @@ class SinglePackage extends React.Component{
             <div className="text">
              <div className="item-title">
              <img className="zcard-img-top border" src={this.props.image} alt="Card image" /> 
-                    <h4 className="xxx">{this.props.productName}</h4>
+                    <h5 className="xxx">{this.props.productName}</h5>
                   </div>
               <p> X {this.props.quantity} </p>
             </div>
