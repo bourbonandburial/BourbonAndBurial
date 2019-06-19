@@ -16,12 +16,13 @@ class Home extends React.Component {
     firebaseUser: {},
     customers: [],
     showModal: false,
+    isRegistered: false,
   }
 
   componentWillMount() {
-    const currentCustomer = authRequests.getCurrentUser();
+    const customerFromFb = authRequests.getCurrentUser();
     this.setState({
-      firebaseUser: currentCustomer
+      firebaseUser: customerFromFb
     });
 
     this.getCustomers();
@@ -45,14 +46,17 @@ class Home extends React.Component {
     //   .catch(err => console.error('error in getting single customer', err));
     // console.log(customerInFirebase);
     if (customers !== undefined || customers.length !== 0) {
-      const currentCustomer = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
-      if (currentCustomer === undefined) {
+      const customerFromDb = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
+      if (customerFromDb === undefined) {
         this.showModal();
+        this.setState({ isRegistered: false});
+      } else {
+        this.setState({ isRegistered: true});
       }
     }
   }
 
-  showModal = (e) => {
+  showModal = () => {
     this.setState({
       showModal: true,
     });
@@ -63,26 +67,40 @@ class Home extends React.Component {
       showModal: false,
     });
   };
-  
+
   customerFormSubmitEvent = (newCustomer) => {
     customerRequests.createCustomer(newCustomer).then(() => {
     }).catch(err => console.error('error in adding customer', err));
     this.setState({
       showModal: false,
+      isRegistered: true, 
     });
   }
 
   render() {
-    const { showModal, firebaseUser } = this.state;
+    const { showModal, firebaseUser, isRegistered } = this.state;
 
-    return (
-      <div className="home">
-        <PackageCards />
+    if (isRegistered) {
+      return (
+        <div className="home">
         <RegisterModal
           showModal={showModal}
           onSubmit={this.customerFormSubmitEvent}
           closeModalEvent={this.closeModalEvent}
           firebaseUser={firebaseUser}
+          logoutClickEvent={this.props.logoutClickEvent}
+        />
+      </div>
+      );      
+    }
+    return (
+      <div className="home">
+        <RegisterModal
+          showModal={showModal}
+          onSubmit={this.customerFormSubmitEvent}
+          closeModalEvent={this.closeModalEvent}
+          firebaseUser={firebaseUser}
+          logoutClickEvent={this.props.logoutClickEvent}
         />
       </div>
     );

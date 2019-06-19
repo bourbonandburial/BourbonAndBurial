@@ -18,14 +18,14 @@ import ALaCarte from '../components/pages/ALaCarte/ALaCarte'
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
-    ? (<Component {...props} />)
+    ? (<Component {...props} {...rest} />)
     : (<Redirect to={{ pathname: '/home', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
 };
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === true
-    ? (<Component {...props} />)
+    ? (<Component {...props} {...rest} />)
     : (<Redirect to={{ pathname: '/auth', state: { from: props.location } }} />));
   return <Route {...rest} render={props => routeChecker(props)} />;
 };
@@ -63,13 +63,16 @@ class App extends React.Component {
     this.setState({ authed: true });
   }
 
+  logoutClickEvent = (e) => {
+    e.preventDefault();
+    authRequests.logoutUser();
+    this.setState({ authed: false });
+  };
+
   render() {
     const { authed, pendingUser } = this.state;
 
-    const logoutClickEvent = () => {
-      authRequests.logoutUser();
-      this.setState({ authed: false });
-    };
+
 
     if (pendingUser) {
       return null;
@@ -79,11 +82,11 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} />
+            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
-              <PrivateRoute path='/home' component={Home} authed={authed} logoutClickEvent={logoutClickEvent} />
+              <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/home' component={Home} authed={authed} />
             </Switch>

@@ -12,3 +12,53 @@
   border-bottom: 1px solid #ced4da;
   border-radius: 0;
 }
+
+.submit-btn {
+  border-color: ghostwhite;
+  background-color: maroon;
+  color: ghostwhite;
+}
+
+.cancel-btn {
+  background-color: maroon;
+  border-color: ghostwhite;
+  color: ghostwhite;
+}
+
+.cancel-btn:hover {
+  background-color: ghostwhite;
+  color: maroon;
+}
+
+.submit-btn:hover {
+  background-color: ghostwhite;
+  color: maroon;
+}
+
+.form-control:focus{
+  border-color: ghostwhite;
+}
+
+
+.modal-content {
+  color: ghostwhite;
+  background-color: maroon;
+  border-color: maroon;
+}
+
+// .modal-backdrop {
+//     /* The image used */
+//     background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+
+//     /* Set a specific height of the homepage image */
+//     min-height: 750px;
+//     height: 100vh;
+//     opacity: 1 !important;
+  
+//     /* Create the parallax scrolling effect */
+//     margin-top: 0px;
+//     background-attachment: scroll;
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// }

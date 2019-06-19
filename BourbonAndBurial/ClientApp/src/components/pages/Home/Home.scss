@@ -1,3 +1,19 @@
 .home {
   color:black;
+    /* The image used */
+    background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+
+    /* Set a specific height of the homepage image */
+    min-height: 750px;
+    height: 100vh;
+    width: 100vw;
+    left: 5%;
+    opacity: 1 !important;
+  
+    /* Create the parallax scrolling effect */
+    margin-top: 0px;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

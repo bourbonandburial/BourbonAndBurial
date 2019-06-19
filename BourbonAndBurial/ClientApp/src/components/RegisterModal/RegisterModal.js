@@ -92,9 +92,7 @@ class RegisterModal extends React.Component {
 
   formSubmit = (e) => {
     e.preventDefault();
-    console.log('hi');
     const { onSubmit, firebaseUser } = this.props;
-    console.log(firebaseUser);
     const newCustomer = { ...this.state.newCustomer };
     newCustomer.firebaseId = firebaseUser.uid;
     newCustomer.photo = firebaseUser.photoURL;
@@ -106,7 +104,7 @@ class RegisterModal extends React.Component {
 
   render() {
     const { newCustomer } = this.state;
-    const { firebaseUser, authed } = this.props;
+    const { firebaseUser } = this.props;
 
     // const isPhoneNumberNull = () => {
     //   if (firebaseUser.phoneNumber === null) {
@@ -141,6 +139,7 @@ class RegisterModal extends React.Component {
           centered
           size='lg'
           backdrop='static'
+          id='register-modal'
         >
           <ModalHeader>Customer Registration</ModalHeader>
           <ModalBody>
@@ -276,10 +275,10 @@ class RegisterModal extends React.Component {
                 </Col>
               </Row>
               <ModalFooter>
-                <Button color='primary'>
+                <Button className='btn submit-btn'>
                   Submit
                 </Button>
-                <Button className='btn btn-secondary'>
+                <Button className='btn cancel-btn' onClick={this.props.logoutClickEvent}>
                   Cancel
                 </Button>
               </ModalFooter>
