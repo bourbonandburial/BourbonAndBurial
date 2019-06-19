@@ -1,22 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Home.scss';
 import PackageCards from '../PackageCards/PackageCards';
+import RegisterModal from '../../RegisterModal/RegisterModal';
+import productRequests from '../../../helpers/data/productRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import authRequests from '../../../helpers/data/authRequests';
-import RegisterModal from '../../RegisterModal/RegisterModal';
+import './Home.scss';
 
 class Home extends React.Component {
-  static propTypes = {
-    logoutClickEvent: PropTypes.func,
-    authed: PropTypes.bool,
-  }
-
   state = {
+    packageOne: [],
+    packageTwo: [],
+    packageThree: [],
     firebaseUser: {},
     customers: [],
     showModal: false,
     isRegistered: false,
+  }
+
+  static propTypes = {
+    logoutClickEvent: PropTypes.func,
+    authed: PropTypes.bool,
   }
 
   componentWillMount() {
@@ -75,6 +79,33 @@ class Home extends React.Component {
       showModal: false,
       isRegistered: true,
     });
+  }
+
+  displayPackageOneProducts = () => {
+    productRequests.getPackageProducts('cremation')
+      .then((data) => {
+        this.setState({ packageOne: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  displayPackageTwoProducts = () => {
+    productRequests.getPackageProducts('burial')
+      .then((data) => {
+        this.setState({ packageTwo: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  displayPackageThreeProducts = () => {
+    productRequests.getPackageProducts('mausoleum')
+      .then((data) => {
+        this.setState({ packageThree: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  componentDidMount = () => {
+    this.displayPackageOneProducts();
+    this.displayPackageTwoProducts();
+    this.displayPackageThreeProducts();
   }
 
   render() {

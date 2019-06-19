@@ -3,6 +3,7 @@ import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
+import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 class ALaCarte extends React.Component {
     state = {
@@ -35,13 +36,20 @@ class ALaCarte extends React.Component {
           />);
         });
         return (
-          <div>
-            <h1 className="la-text text-center">Add Additional Items</h1>
-          <div className="Products d-flex flex-row">
-            <div className="builder">{productBuilder}</div>
+          <div className="container">
+            <div className="packageArea d-flex justify-content-around">
+              <PackageDisplay package={this.props.match.params.package}
+              />
+              </div>
+            <div>
+            <div className=" d-flex row justify-content-around mt-5">
+              <h3>Add Additional Items</h3>
+              <div className="row">{productBuilder}</div>
             <div className="productArea"><ShoppingCart /></div>
+            </div>
+            </div>
           </div>
-          </div>
+         
         );
       }
 }

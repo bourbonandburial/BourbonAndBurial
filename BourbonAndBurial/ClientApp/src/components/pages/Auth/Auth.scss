@@ -3,8 +3,6 @@
     width: 15rem;
     margin: 5px auto 5px auto !important;
   }
-  // width: 100%;
-  // position: absolute;
   z-index: 2;
   left: 5%;
   top: 80%;
@@ -12,10 +10,6 @@
     margin-top: 0;
     margin-bottom: 0;
   }
-  // width: 500px;
-  // height: 500px;
-  // border: solid 2px black;
-  // background: rgba(0, 0, 0, 0.10);
 }
 
 .loginBoarder{
@@ -35,16 +29,23 @@
 
 .parallax {
   /* The image used */
-  background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+  background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true") !important;
+  z-index: 3 !important;
 
   /* Set a specific height of the homepage image */
-  min-height: 750px;
-  height: 93.5vh;
-
-  /* Create the parallax scrolling effect */
-  margin-top: 0px;
-  background-attachment: scroll;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // width: 100px !important;
+   min-height: 770px; 
+   height:93.5vh;
+  // max-height: 800px;
+  // background-position: center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+   
+     /* Create the parallax scrolling effect */
+     margin-top: 0px;
+    //  background-attachment: scroll;
+    //  background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+  
 }
