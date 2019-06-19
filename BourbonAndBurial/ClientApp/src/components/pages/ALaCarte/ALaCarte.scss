@@ -8,10 +8,16 @@
 }
 
 .productArea{
-    width: 5%;
+    display: flex;
+    flex-wrap: wrap;
     border: 0 solid black !important;
 }
 
 .textSizeAla {
     font-size: 40px;
 }
+
+// .packageArea {
+//     display: flex;
+//     flex-wrap: wrap;
+// }
