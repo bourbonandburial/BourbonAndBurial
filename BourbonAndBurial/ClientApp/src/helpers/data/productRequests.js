@@ -13,30 +13,8 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     });
 });
 
-const getAllCremationProducts = () => new Promise((resolve, reject) => {
-  axios.get(`${apiUrl}/cremation`)
-    .then((result) => {
-      const productObject = result.data;
-      resolve(productObject);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
-
-const getAllMausoleumProducts = () => new Promise((resolve, reject) => {
-  axios.get(`${apiUrl}/mausoleum`)
-    .then((result) => {
-      const productObject = result.data;
-      resolve(productObject);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
-
-const getAllBurialProducts = () => new Promise((resolve, reject) => {
-  axios.get(`${apiUrl}/burial`)
+const getPackageProducts = (pkg) => new Promise((resolve, reject) => {
+  axios.get(`${apiUrl}/${pkg}`)
     .then((result) => {
       const productObject = result.data;
       resolve(productObject);
@@ -50,8 +28,6 @@ const deleteProduct = productId => axios.delete(`${apiUrl}/${productId}`);
 
 export default {
   getAllProducts,
-  getAllCremationProducts,
-  getAllBurialProducts,
-  getAllMausoleumProducts,
+  getPackageProducts,
   deleteProduct
 };
