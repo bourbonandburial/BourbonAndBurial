@@ -1,6 +1,5 @@
 import React from 'react';
 import './SinglePackage.scss';
-import productRequests from '../../../helpers/data/productRequests'
 
 class SinglePackage extends React.Component{
     
@@ -9,7 +8,7 @@ class SinglePackage extends React.Component{
           <div className="singlePackage">
             <div className="text">
              <div className="item-title">
-             <img className="zcard-img-top border" src={this.props.image} alt="Card image" /> 
+             <img className="zcard-img-top border" src={this.props.image} alt="Card-img" /> 
                     <h5 className="xxx">{this.props.productName}</h5>
                   </div>
               <p> X {this.props.quantity} </p>

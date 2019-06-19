@@ -14,7 +14,6 @@ import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import CustomerProfile from '../components/pages/CustomerProfile/CustomerProfile';
-
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -64,13 +63,16 @@ class App extends React.Component {
     this.setState({ authed: true });
   }
 
+  logoutClickEvent = (e) => {
+    e.preventDefault();
+    authRequests.logoutUser();
+    this.setState({ authed: false });
+  };
+
   render() {
     const { authed, pendingUser } = this.state;
 
-    const logoutClickEvent = () => {
-      authRequests.logoutUser();
-      this.setState({ authed: false });
-    };
+
 
     if (pendingUser) {
       return null;
@@ -80,11 +82,11 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar authed={authed} logoutClickEvent={logoutClickEvent} />
+            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
-              <PrivateRoute path='/home' component={Home} authed={authed} />
+              <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/customers/:id' component={CustomerProfile} authed={authed} />
             </Switch>

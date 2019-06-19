@@ -40,19 +40,15 @@ namespace BourbonAndBurial.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewCustomer(CreateCustomerRequest createRequest)
+        public ActionResult AddNewCustomer(CreateCustomerRequest newCustomerObject)
         {
-            if (!_validator.Validate(createRequest))
+            if (_validator.Validate(newCustomerObject))
             {
-                return BadRequest(new { error = "Customers must have display name, email, and firebaseId" });
+                return BadRequest(new { error = "Customer validation failed" });
             }
-            var newCustomer = _customerRepository.AddCustomer(
-                createRequest.DisplayName,
-                createRequest.Email,
-                createRequest.FirebaseId
-                );
+            var newCustomer = _customerRepository.AddCustomer(newCustomerObject);
 
-            return Created($"api/customers/{newCustomer.CustomerId}", newCustomer);
+            return Ok(newCustomer);
         }
 
         [HttpPut("{customerId}")]
