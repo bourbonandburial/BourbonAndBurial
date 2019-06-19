@@ -4,7 +4,7 @@
 }
 
 .singlePackCards {
-  height: 600px !important;
+  height: 550px !important;
 }
 
 .singlePriceTag1 {
@@ -26,7 +26,7 @@ h4 {
 }
 .Services-tab{
   margin-top:20px;
-  
+  min-width: 200px !important;
 }
 
 /*
@@ -69,7 +69,6 @@ h4 {
   background-color: #D00003;
   border-width: 0 50px 50px 0;
   border-color: #eee #000;
-  
 }
 
 .service_tab_1{
