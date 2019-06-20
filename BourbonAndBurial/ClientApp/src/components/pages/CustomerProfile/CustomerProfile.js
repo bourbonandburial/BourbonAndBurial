@@ -50,6 +50,30 @@ class CustomerProfile extends React.Component {
               </div>
             </div>
           </div>
+          <table className="table table-striped table-hover table-light mt-5">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Order Date</th>
+                <th>Items</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Net Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Jun 15, 2017</td>
+                <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"></img></a></td>
+                <td>London</td>
+                <td><span className="status text-success">&bull;</span> Delivered</td>
+                <td>$254</td>
+                <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     );
