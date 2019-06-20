@@ -1,0 +1,33 @@
+.CustomerProfile {
+  .card-img-top {
+    position: absolute;
+    top: -50px;
+    left: 52%;
+    margin-left: -50px;
+    width: 80px !important;
+    height: 80px;
+  }
+  
+  .card {
+    margin-top: 60px;
+    padding-top: 30px;
+    width: 28rem;
+  }
+
+  .card-position {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    i {
+      color: #212529;
+    }
+  }
+
+  .btn {
+    padding: 0rem 1rem;
+  }
+}

@@ -94,7 +94,7 @@ class App extends React.Component {
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
-              <PrivateRoute path='/customers/:firebaseId' component={CustomerProfile} authed={authed} currentCustomer={currentCustomer} />
+              <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} currentCustomer={currentCustomer} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
