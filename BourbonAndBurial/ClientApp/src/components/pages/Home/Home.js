@@ -23,15 +23,6 @@ class Home extends React.Component {
     authed: PropTypes.bool,
   }
 
-  componentWillMount() {
-    const customerFromFb = authRequests.getCurrentUser();
-    this.setState({
-      firebaseUser: customerFromFb
-    });
-
-    this.getCustomers();
-  }
-
   getCustomers = () => {
     customerRequests.getAllCustomers().then((data) => {
       this.setState({ customers: data });
@@ -93,6 +84,15 @@ class Home extends React.Component {
       .then((data) => {
         this.setState({ packageThree: data });
       }).catch(err => console.error('error getting products', err));
+  }
+
+  componentWillMount() {
+    const customerFromFb = authRequests.getCurrentUser();
+    this.setState({
+      firebaseUser: customerFromFb
+    });
+
+    this.getCustomers();
   }
 
   componentDidMount = () => {

@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import connection from '../helpers/data/connection';
 import authRequests from '../helpers/data/authRequests';
+import customerRequests from '../helpers/data/customerRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
@@ -34,6 +35,7 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
+    currentCustomer: {},
   }
 
   componentDidMount() {
@@ -46,6 +48,12 @@ class App extends React.Component {
           pendingUser: false,
         });
         authRequests.getCurrentUserJwt();
+        const customerFbId = authRequests.getCurrentUser().uid;
+        customerRequests.getSingleCustomer(customerFbId).then((customerObject) => {
+          this.setState({
+            currentCustomer: customerObject
+          });
+        });
       } else {
         this.setState({
           authed: false,
@@ -70,9 +78,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { authed, pendingUser } = this.state;
-
-
+    const { authed, pendingUser, currentCustomer } = this.state;
 
     if (pendingUser) {
       return null;
@@ -82,13 +88,13 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} />
+            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} currentCustomer={currentCustomer} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
-              <PrivateRoute path='/customers/:id' component={CustomerProfile} authed={authed} />
+              <PrivateRoute path='/customers/:firebaseId' component={CustomerProfile} authed={authed} currentCustomer={currentCustomer} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>

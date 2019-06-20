@@ -12,15 +12,14 @@ const getAllCustomers = () => new Promise((resolve, reject) => {
 });
 
 const getSingleCustomer = firebaseId => new Promise((resolve, reject) => {
-  axios.get(`${apiUrl}/${firebaseId}`)
-    .then((result) => {
-      resolve(result.data);
-    })
+  axios.get(`${apiUrl}/${firebaseId}`).then((result) => {
+    const customerObject = result.data;
+    resolve(customerObject[0]);
+  })
     .catch((error) => {
       reject(error);
     });
 });
-
 
 const createCustomer = customerObject => axios.post(`${apiUrl}`, (customerObject));
 
