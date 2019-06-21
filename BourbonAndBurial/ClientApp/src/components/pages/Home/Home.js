@@ -53,6 +53,7 @@ class Home extends React.Component {
   showModal = () => {
     this.setState({
       showModal: true,
+      // isRegistered: false,
     });
   };
 
@@ -96,20 +97,28 @@ class Home extends React.Component {
   }
 
   componentDidMount = () => {
+    // const customerFromFb = authRequests.getCurrentUser();
+    // this.setState({
+    //   firebaseUser: customerFromFb
+    // });
+
+    // this.getCustomers();
     this.displayPackageOneProducts();
     this.displayPackageTwoProducts();
     this.displayPackageThreeProducts();
   }
 
   render() {
-    const { firebaseUser, isRegistered } = this.state;
-    const { logoutClickEvent } = this.props;
+    const { showModal, firebaseUser, isRegistered } = this.state;
+    const { logoutClickEvent} = this.props;
 
     if (!isRegistered) {
       return (
         <div className="home">
           <RegisterModal
+            showModal={showModal}
             onSubmit={this.customerFormSubmitEvent}
+            closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
             logoutClickEvent={logoutClickEvent}
           />
@@ -123,5 +132,6 @@ class Home extends React.Component {
     );
   }
 }
+
 
 export default Home;

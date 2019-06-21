@@ -35,7 +35,7 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
-    currentCustomer: {},
+    customerObject: {},
   }
 
   componentDidMount() {
@@ -46,14 +46,10 @@ class App extends React.Component {
         this.setState({
           authed: true,
           pendingUser: false,
+          // customerName: customerFromFb.displayName,
         });
+        this.getCurrentCustomer();
         authRequests.getCurrentUserJwt();
-        const customerFbId = authRequests.getCurrentUser().uid;
-        customerRequests.getSingleCustomer(customerFbId).then((customerObject) => {
-          this.setState({
-            currentCustomer: customerObject
-          });
-        });
       } else {
         this.setState({
           authed: false,
@@ -77,8 +73,25 @@ class App extends React.Component {
     this.setState({ authed: false });
   };
 
+  getCurrentCustomer = () => {
+    const customerFromFb = authRequests.getCurrentUser();
+    const customerFbId = customerFromFb.uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      if (customer === undefined) {
+        this.setState({
+          customerObject: customerFromFb,
+        })
+      } else {
+        this.setState({
+          customerObject: customer,
+        });
+      }
+    });
+  }
+
+
   render() {
-    const { authed, pendingUser, currentCustomer } = this.state;
+    const { authed, pendingUser, customerObject } = this.state;
 
     if (pendingUser) {
       return null;
@@ -88,13 +101,13 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} currentCustomer={currentCustomer} />
+            <MyNavbar authed={authed} logoutClickEvent={this.logoutClickEvent} customerObject={customerObject} />
             <Switch>
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
-              <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} currentCustomer={currentCustomer} />
+              <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} customerObject={customerObject} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>

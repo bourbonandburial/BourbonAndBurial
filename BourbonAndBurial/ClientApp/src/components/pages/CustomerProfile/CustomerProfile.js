@@ -7,24 +7,30 @@ import './CustomerProfile.scss';
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
+    customerObject: {},
   }
 
-  static propTypes = {
-    currentCustomer: PropTypes.object,
-  }
-
-  // componentDidMount() {
-  //   const customerFromFb = authRequests.getCurrentUser();
+  // static propTypes = {
+  //   customerOject: PropTypes.object,
   // }
 
+  componentDidMount() {
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      this.setState({
+        customerObject: customer,
+      });
+    });
+  }
+
   render() {
-    const { currentCustomer } = this.props;
+    const { customerObject } = this.state;
 
     const displayAddress = () => {
-      if (currentCustomer.address2 === null) {
-        return `${currentCustomer.address1}, ${currentCustomer.city}, ${currentCustomer.state} ${currentCustomer.zipcode}`;
+      if (customerObject.address2 === null) {
+        return `${customerObject.address1}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       } else {
-        return `${currentCustomer.address1}, ${currentCustomer.address2}, ${currentCustomer.city}, ${currentCustomer.state} ${currentCustomer.zipcode}`;
+        return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
 
     }
@@ -33,14 +39,14 @@ class CustomerProfile extends React.Component {
         <div className="row text-center">
           <div className="col-lg-4">
             <div className="card">
-              <img className="card-img-top img-circle rounded-circle" src={currentCustomer.photo} alt="profile-pic"></img>
+              <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
               <div className="card-block">
-                <h4 className="card-title mt-2">{currentCustomer.displayName}</h4>
+                <h4 className="card-title mt-2">{customerObject.displayName}</h4>
                 <p className="card-position">
                   <i className="material-icons">place</i>{displayAddress()}
                 </p>
                 <p className="card-position">
-                  <i className="material-icons">phone</i>{currentCustomer.phoneNumber}
+                  <i className="material-icons">phone</i>{customerObject.phoneNumber}
                 </p>
                 <div className="card-footer">
                   <button type="button" className="btn btn-link profile-edit"><i className="material-icons">edit</i></button>

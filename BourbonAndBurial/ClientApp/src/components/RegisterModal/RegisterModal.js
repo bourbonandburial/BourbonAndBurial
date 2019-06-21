@@ -32,11 +32,13 @@ const defaultCustomer = {
 class RegisterModal extends React.Component {
   static propTypes = {
     logoutClickEvent: PropTypes.func,
+    closeModalEvent: PropTypes.func,
     firebaseUser: PropTypes.object,
+    closeModal: PropTypes.func,
   }
 
   state = {
-    modal: false,
+    modal: true,
     newCustomer: defaultCustomer,
   };
 

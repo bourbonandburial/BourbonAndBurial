@@ -17,7 +17,7 @@ class MyNavbar extends React.Component {
   static propTypes = {
     authed: PropTypes.bool,
     logoutClickEvent: PropTypes.func,
-    currentCustomer: PropTypes.object,
+    customerObject: PropTypes.object,
   }
 
   state = {
@@ -36,7 +36,7 @@ class MyNavbar extends React.Component {
   }
 
   render() {
-    const { authed, logoutClickEvent, currentCustomer } = this.props;
+    const { authed, logoutClickEvent, customerObject } = this.props;
 
     const buildNavbar = () => {
       if (authed) {
@@ -47,7 +47,7 @@ class MyNavbar extends React.Component {
                 tag={RRNavLink}
                 to='/profile'
               >
-                {currentCustomer.displayName}
+                {customerObject.displayName}
               </NavLink>
             </NavItem>
             <NavItem>
