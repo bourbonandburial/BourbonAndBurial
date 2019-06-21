@@ -36,7 +36,8 @@ class ALaCarte extends React.Component {
           />);
         });
         return (
-          <div className="container">
+          <div className="home parallax">
+          <div className="container ">
             <div className="row">
               <div className="textSizeAla col-md-15 text-center">
                "Ala Carte"
@@ -44,15 +45,20 @@ class ALaCarte extends React.Component {
                 <PackageDisplay package={this.props.match.params.package} />
                 </ul>
               </div>
+            
               <div className="col-md-8">
                 <div className="row justify-content-around mt-5">
                   <div className="row">{productBuilder}</div>
                 </div>
               </div>
+             
+
               <div className="col col-lg-4">
                 <div className="cart textSizeAla text-center"><ShoppingCart /></div>
               </div>
+
             </div>
+          </div>
           </div>
         );
       }

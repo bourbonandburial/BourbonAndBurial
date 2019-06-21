@@ -2,7 +2,7 @@ import React from 'react';
 import './SingleProduct.scss';
 import productRequests from '../../../helpers/data/productRequests'
 
-class SingleProduct extends React.Component{
+class SingleProduct extends React.Component {
 
     deleteProduct = () => {
         productRequests.deleteProduct(this.props.productId)
@@ -31,9 +31,10 @@ class SingleProduct extends React.Component{
                </div>
             </div>
           </div>
-          </div>
-        );
-    }
+        </div>
+     
+    );
+  }
 }
 
 export default SingleProduct;

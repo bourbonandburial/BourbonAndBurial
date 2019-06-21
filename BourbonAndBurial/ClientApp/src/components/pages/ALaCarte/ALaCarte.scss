@@ -21,7 +21,17 @@
     position: sticky;
     top:0;
 }
-// .packageArea {
-//     display: flex;
-//     flex-wrap: wrap;
+
+// .container {
+//     z-index: 3;
 // }
+
+
+  .parallax {
+    background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+    background-attachment: fixed;
+    background-repeat: none;
+    background-size: 100%;
+    overflow: scroll;
+  }
+
