@@ -82,5 +82,14 @@ namespace BourbonAndBurial.Controllers
 
             return Ok(products);
         }
+
+        [HttpGet("{productId}")]
+
+        public ActionResult GetSingleProduct(int ProductId)
+        {
+            var product = _productRepository.GetSingleProduct(ProductId);
+
+            return Ok(product);
+        }
     }
 }

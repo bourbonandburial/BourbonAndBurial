@@ -108,5 +108,19 @@ namespace BourbonAndBurial.Data
                 return Products;
             }
         }
+
+        public IEnumerable<Product> GetSingleProduct(int ProductId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM products WHERE productId = @productId";
+
+                var parameter = new { ProductId = ProductId };
+
+                var product = db.Query<Product>(getQuery, parameter).ToList();
+
+                return product;
+            }
+        }
     }
 }
