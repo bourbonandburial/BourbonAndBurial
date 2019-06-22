@@ -11,8 +11,8 @@
     margin-top: 80px;
     padding-top: 30px;
     width: 27rem;
-    display: flex;
-    justify-content: center;
+    background-color: maroon;
+
   }
 
   .card-img-top {
@@ -23,17 +23,26 @@
     width: 80px !important;
     height: 80px;
   }
+  
+  .card-title {
+    color: ghostwhite;
+  }
 
   .card-position {
     display: flex;
     justify-content: center;
+    color: ghostwhite;
+    i {
+      color: ghostwhite;
+    }
   }
 
   .card-footer {
     display: flex;
     justify-content: space-between;
+    background-color: ghostwhite !important;
     i {
-      color: #212529;
+      color: maroon;
     }
   }
 
@@ -41,5 +50,22 @@
     padding: 0rem 1rem;
   }
 
+  thead {
+    tr {
+      background-color: maroon;
+      color: ghostwhite;
+    }
+
+  }
+  tbody {
+    td {
+      i {
+        color: #212529;
+      }
+      img {
+        color: #212529;
+      }
+    }
+  }
 
 }
