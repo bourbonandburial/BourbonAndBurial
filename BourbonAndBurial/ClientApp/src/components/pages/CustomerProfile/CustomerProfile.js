@@ -62,7 +62,7 @@ class CustomerProfile extends React.Component {
                 <tr>
                   <th>Order #</th>
                   <th>Order Date</th>
-                  <th>Items</th>
+                  <th>Base Package</th>
                   <th>Location</th>
                   <th>Status</th>
                   <th>Net Amount</th>
