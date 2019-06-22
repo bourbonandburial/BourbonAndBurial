@@ -23,18 +23,8 @@ class Home extends React.Component {
     authed: PropTypes.bool,
   }
 
-  componentWillMount() {
-    const customerFromFb = authRequests.getCurrentUser();
-    this.setState({
-      firebaseUser: customerFromFb
-    });
-
-    this.getCustomers();
-  }
-
   getCustomers = () => {
-    customerRequests.getAllCustomers().then((results) => {
-      const data = results.data;
+    customerRequests.getAllCustomers().then((data) => {
       this.setState({ customers: data });
       this.customerValidation();
     }).catch(err => console.error('error in getAllCustomers', err));
@@ -63,12 +53,7 @@ class Home extends React.Component {
   showModal = () => {
     this.setState({
       showModal: true,
-    });
-  };
-
-  closeModalEvent = () => {
-    this.setState({
-      showModal: false,
+      // isRegistered: false,
     });
   };
 
@@ -102,7 +87,22 @@ class Home extends React.Component {
       }).catch(err => console.error('error getting products', err));
   }
 
+  componentWillMount() {
+    const customerFromFb = authRequests.getCurrentUser();
+    this.setState({
+      firebaseUser: customerFromFb
+    });
+
+    this.getCustomers();
+  }
+
   componentDidMount = () => {
+    // const customerFromFb = authRequests.getCurrentUser();
+    // this.setState({
+    //   firebaseUser: customerFromFb
+    // });
+
+    // this.getCustomers();
     this.displayPackageOneProducts();
     this.displayPackageTwoProducts();
     this.displayPackageThreeProducts();
@@ -110,6 +110,7 @@ class Home extends React.Component {
 
   render() {
     const { showModal, firebaseUser, isRegistered } = this.state;
+    const { logoutClickEvent} = this.props;
 
     if (!isRegistered) {
       return (
@@ -119,7 +120,7 @@ class Home extends React.Component {
             onSubmit={this.customerFormSubmitEvent}
             closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
-            logoutClickEvent={this.props.logoutClickEvent}
+            logoutClickEvent={logoutClickEvent}
           />
         </div>
       );
@@ -131,5 +132,6 @@ class Home extends React.Component {
     );
   }
 }
+
 
 export default Home;

@@ -1,0 +1,71 @@
+.CustomerProfile {
+
+  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity1.png?raw=true");
+  min-height: 770px; 
+  height: 93vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 0px;
+  
+  .card {
+    margin-top: 80px;
+    padding-top: 30px;
+    width: 27rem;
+    background-color: maroon;
+
+  }
+
+  .card-img-top {
+    position: absolute;
+    top: -50px;
+    left: 52%;
+    margin-left: -50px;
+    width: 80px !important;
+    height: 80px;
+  }
+  
+  .card-title {
+    color: ghostwhite;
+  }
+
+  .card-position {
+    display: flex;
+    justify-content: center;
+    color: ghostwhite;
+    i {
+      color: ghostwhite;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: ghostwhite !important;
+    i {
+      color: maroon;
+    }
+  }
+
+  .btn {
+    padding: 0rem 1rem;
+  }
+
+  thead {
+    tr {
+      background-color: maroon;
+      color: ghostwhite;
+    }
+
+  }
+  tbody {
+    td {
+      i {
+        color: #212529;
+      }
+      img {
+        color: #212529;
+      }
+    }
+  }
+
+}

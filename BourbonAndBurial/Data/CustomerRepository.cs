@@ -32,9 +32,9 @@ namespace BourbonAndBurial.Data
 
                 var parameter = new { FirebaseId = firebaseId };
 
-                var customers = db.Query<Customer>(getQuery, parameter).ToList();
+                var customer = db.Query<Customer>(getQuery, parameter).ToList();
 
-                return customers;
+                return customer;
             }
         }
 

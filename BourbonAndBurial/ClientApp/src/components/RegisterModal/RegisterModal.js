@@ -38,28 +38,13 @@ class RegisterModal extends React.Component {
   }
 
   state = {
-    modal: false,
+    modal: true,
     newCustomer: defaultCustomer,
   };
 
   toggle() {
     this.setState({
       modal: !this.state,
-    });
-  }
-
-  modalClosed() {
-    const { closeModalEvent } = this.props;
-    closeModalEvent();
-    this.setState({
-      newCustomer: defaultCustomer,
-    });
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      modal: props.showModal,
-      firebaseUser: props.firebaseUser,
     });
   }
 
