@@ -73,28 +73,28 @@ class CustomerProfile extends React.Component {
                 <tr>
                   <td>13214</td>
                   <td>Jun 15, 2017</td>
-                  <td><a href="#"><img src="/examples/images/avatar/1.jpg" className="avatar" alt="Avatar"></img></a></td>
+                  <td>Cremation</td>
                   <td>London</td>
                   <td><span className="status text-success">&bull;</span> Delivered</td>
-                  <td>$254</td>
+                  <td>$300</td>
                   <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13215</td>
                   <td>Jun 22, 2019</td>
-                  <td><a href="#"><img src="/examples/images/avatar/1.jpg" className="avatar" alt="Avatar"></img></a></td>
+                  <td>Mausoleum</td>
                   <td>Murfreesboro</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$900</td>
+                  <td>$3123</td>
                   <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13216</td>
                   <td>Jun 18, 2019</td>
-                  <td><a href="#"><img src="/examples/images/avatar/1.jpg" className="avatar" alt="Avatar"></img></a></td>
+                  <td>Burial</td>
                   <td>Nashville</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$263</td>
+                  <td>$1728</td>
                   <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
               </tbody>
