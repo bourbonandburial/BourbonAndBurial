@@ -72,7 +72,7 @@ class CustomerProfile extends React.Component {
               <tr>
                 <td>1</td>
                 <td>Jun 15, 2017</td>
-                <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"></img></a></td>
+                <td><a href="#"><img src="/examples/images/avatar/1.jpg" className="avatar" alt="Avatar"></img></a></td>
                 <td>London</td>
                 <td><span className="status text-success">&bull;</span> Delivered</td>
                 <td>$254</td>
