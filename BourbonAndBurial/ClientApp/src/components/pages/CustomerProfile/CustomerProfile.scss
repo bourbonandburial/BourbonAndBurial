@@ -1,4 +1,20 @@
 .CustomerProfile {
+
+  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity1.png?raw=true");
+  min-height: 770px; 
+  height: 93vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 0px;
+  
+  .card {
+    margin-top: 80px;
+    padding-top: 30px;
+    width: 27rem;
+    display: flex;
+    justify-content: center;
+  }
+
   .card-img-top {
     position: absolute;
     top: -50px;
@@ -6,12 +22,6 @@
     margin-left: -50px;
     width: 80px !important;
     height: 80px;
-  }
-  
-  .card {
-    margin-top: 80px;
-    padding-top: 30px;
-    width: 27rem;
   }
 
   .card-position {
@@ -30,4 +40,6 @@
   .btn {
     padding: 0rem 1rem;
   }
+
+
 }
