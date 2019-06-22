@@ -1,7 +1,9 @@
 body {
  // background:#000000 !important;
-  background: gray ;
-  opacity: .9;
+ background: transparent ;
+ //background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+
+  opacity: 4;
   z-index: 1;
  }
 
@@ -14,7 +16,7 @@ body {
 }
 
 .priceTag2 {
-  margin-top: 90px !important;
+  margin-top: 115px !important;
 }
 
 .priceTag3 {
@@ -111,3 +113,14 @@ body {
      transition: all 1s cubic-bezier(.99,.82,.11,1.41);
  }
  
+//  .home {
+//   color:black;
+//     /* The image used */
+//    // background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
+
+//     min-height: 770px; 
+//     height: 100vh;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     margin-top: 0px;
+// }

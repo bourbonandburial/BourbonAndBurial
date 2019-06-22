@@ -26,7 +26,7 @@ class Auth extends React.Component {
           <div className="text-center">
             <p className="loginText text-center"></p>
             <div onClick={this.authenticateUser} className="loginText2 btn"><img src="https://github.com/ke4tri/Images/blob/master/GetStartedButton.png?raw=true" alt="bourbon-img" /></div>
-            <div className="grave parallax"></div>
+            <div className="grave homeImage"></div>
           </div>
         </div>
       </div>

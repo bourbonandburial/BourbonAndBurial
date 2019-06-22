@@ -5,7 +5,7 @@ class ShoppingCart extends React.Component{
 
     render() {
         return (
-            <div className="area">This is a shopping cart</div>
+            <div className="area"><p>Shopping Cart</p></div>
         );
       }
     }
