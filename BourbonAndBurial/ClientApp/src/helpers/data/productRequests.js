@@ -26,8 +26,21 @@ const getPackageProducts = (pkg) => new Promise((resolve, reject) => {
 
 const deleteProduct = productId => axios.delete(`${apiUrl}/${productId}`);
 
+const getSingleProduct = productId => new Promise((resolve, reject) => {
+  axios
+    .get(`${apiUrl}/${productId}`)
+    .then((results) => {
+      const productFiilteredById = results.data;
+      resolve(productFiilteredById);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
 export default {
   getAllProducts,
   getPackageProducts,
-  deleteProduct
+  deleteProduct,
+  getSingleProduct
 };
