@@ -9,8 +9,6 @@
 
 .productArea{
     display: flex;
-    flex-wrap: wrap;
-    border: 0 solid black !important;
 }
 
 .textSizeAla {
@@ -22,16 +20,13 @@
     top:0;
 }
 
-// .container {
-//     z-index: 3;
-// }
-
-
-  .parallax {
-    background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage1.png?raw=true");
-    background-attachment: fixed;
-    background-repeat: none;
-    background-size: 100%;
-    overflow: scroll;
-  }
+.parallax {
+  
+ background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
+  background-attachment: fixed;
+  background-repeat: none;
+  background-size: 100%;
+  overflow: scroll;
+  
+}
 
