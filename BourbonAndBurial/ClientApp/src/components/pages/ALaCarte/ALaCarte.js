@@ -36,20 +36,30 @@ class ALaCarte extends React.Component {
           />);
         });
         return (
-          <div className="container">
-            <div className="packageArea d-flex justify-content-around">
-              <PackageDisplay package={this.props.match.params.package}
-              />
+          <div className="home parallax">
+          <div className="container ">
+            <div className="row">
+              <div className="textSizeAla col-md-15 text-center">
+               "Ala Carte"
+                <ul>
+                <PackageDisplay package={this.props.match.params.package} />
+                </ul>
               </div>
-            <div>
-            <div className=" d-flex row justify-content-around mt-5">
-              <h3>Add Additional Items</h3>
-              <div className="row">{productBuilder}</div>
-            <div className="productArea"><ShoppingCart /></div>
-            </div>
+            
+              <div className="col-md-8">
+                <div className="row justify-content-around mt-5">
+                  <div className="row">{productBuilder}</div>
+                </div>
+              </div>
+             
+
+              <div className="col col-lg-4">
+                <div className="cart textSizeAla text-center"><ShoppingCart /></div>
+              </div>
+
             </div>
           </div>
-         
+          </div>
         );
       }
 }

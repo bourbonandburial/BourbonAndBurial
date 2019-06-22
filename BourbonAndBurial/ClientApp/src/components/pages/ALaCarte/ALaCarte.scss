@@ -9,11 +9,24 @@
 
 .productArea{
     display: flex;
-    flex-wrap: wrap;
-    border: 0 solid black !important;
 }
 
-.packageArea {
-    display: flex;
-    flex-wrap: wrap;
+.textSizeAla {
+    font-size: 40px;
 }
+
+.cart {
+    position: sticky;
+    top:0;
+}
+
+.parallax {
+  
+ background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
+  background-attachment: fixed;
+  background-repeat: none;
+  background-size: 100%;
+  overflow: scroll;
+  
+}
+

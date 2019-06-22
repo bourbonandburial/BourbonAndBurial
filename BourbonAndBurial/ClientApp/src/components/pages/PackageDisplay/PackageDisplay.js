@@ -35,8 +35,8 @@ state = {
           });
           return(
             <div>
-                <div className="idk d-flex justify-content-center"><h3 className="review mt-3">Review Your Selected Package</h3> </div>
-                <div className="builder d-flex"> {productBuilder}</div>
+                <div className="idk d-flex justify-content-around"><h3 className="review mt-3">Review Your Selected Package</h3> </div>
+                <div className="builder d-flex justify-content-center"> {productBuilder}</div>
             </div>
         );
       }
