@@ -79,22 +79,30 @@ class ALaCarte extends React.Component {
                 <ul>
                 <PackageDisplay package={this.props.match.params.package} />
               </ul>
-              <SearchField 
-              placeholder='Search by Brand Name'
-              onChange={this.onChange}
-              className='w-100'
-              />
             </div>
-
+            <div>
+            <SearchField 
+                placeholder='Search by Brand Name'
+                onChange={this.onChange}
+                />
+            </div>
             <div className="col-md-8">
               <div className="row justify-content-around mt-5">
-                <div className="row"> {singleFilteredProduct} {productBuilder}</div>
+                <div className="row"> 
+                {singleFilteredProduct}
+                </div>
               </div>
             </div>
 
-
             <div className="col col-lg-4">
               <div className="cart textSizeAla text-center"><ShoppingCart /></div>
+            </div>
+
+            <div className="col-md-8">
+              <div className="row justify-content-around">
+                <div className="row"> 
+                {productBuilder}</div>
+              </div>
             </div>
 
           </div>
