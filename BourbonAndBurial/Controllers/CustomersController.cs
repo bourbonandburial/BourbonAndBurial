@@ -24,9 +24,17 @@ namespace BourbonAndBurial.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetActiveCustomers()
+        public ActionResult GetAllCustomers()
         {
             var activeCustomers = _customerRepository.GetAll();
+
+            return Ok(activeCustomers);
+        }
+
+        [HttpGet("active")]
+        public ActionResult GetActiveCustomers()
+        {
+            var activeCustomers = _customerRepository.GetAllActive();
 
             return Ok(activeCustomers);
         }
@@ -51,18 +59,18 @@ namespace BourbonAndBurial.Controllers
             return Ok(newCustomer);
         }
 
-        [HttpPut("{customerId}")]
-        public ActionResult UpdateIsActive(int customerId)
+        [HttpDelete("{firebaseId}")]
+        public ActionResult UpdateIsActive(string firebaseId)
         {
-            _customerRepository.DeleteCustomer(customerId);
+            _customerRepository.DeleteCustomer(firebaseId);
 
             return Ok();
         }
 
-        [HttpPut("update/{customerId}")]
-        public ActionResult UpdateCustomer(int customerId, Customer customerToUpdate)
+        [HttpPut("{firebaseId}/update")]
+        public ActionResult UpdateCustomer(string firebaseId, Customer customerToUpdate)
         {
-            if (customerId != customerToUpdate.CustomerId)
+            if (firebaseId != customerToUpdate.FirebaseId)
             {
                 return BadRequest(new { error = "Please enter valid customerId" });
             }

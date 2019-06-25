@@ -16,6 +16,18 @@ namespace BourbonAndBurial.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
+                var getQuery = "SELECT * FROM customers";
+
+                var customers = db.Query<Customer>(getQuery).ToList();
+
+                return customers;
+            }
+        }
+
+        public IEnumerable<Customer> GetAllActive()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
                 var getQuery = "SELECT * FROM customers WHERE isactive = 1";
 
                 var customers = db.Query<Customer>(getQuery).ToList();
@@ -96,15 +108,15 @@ namespace BourbonAndBurial.Data
             throw new Exception("Customer was not created");
         }
 
-        public void DeleteCustomer(int id)
+        public void DeleteCustomer(string id)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 var terminate = @"UPDATE customers
                                     SET isActive = 0
-                                    WHERE customerId = @customerId";
+                                    WHERE firebaseId = @firebaseId";
 
-                var parameter = new { CustomerId = id };
+                var parameter = new { FirebaseId = id };
 
                 var rowsAffected = db.Execute(terminate, parameter);
 
@@ -120,9 +132,18 @@ namespace BourbonAndBurial.Data
             using (var db = new SqlConnection(ConnectionString))
             {
                 var updateQuery = @"UPDATE customers
-                                    SET displayName = @displayName,
-                                        email = @email
-                                    WHERE customerId = @customerId";
+                                    SET                                
+                                        [DisplayName] = @displayName,
+                                        [Email] = @email,
+                                        [IsActive] = @isActive,
+                                        [Address1] = @address1,
+                                        [Address2] = @address2,
+                                        [City] = @city,
+                                        [State] = @state,
+                                        [Zipcode] = @zipcode,
+                                        [Photo] = @photo,
+                                        [PhoneNumber] = @phoneNumber
+                                    WHERE firebaseId = @firebaseId";
 
                 var rowsAffected = db.Execute(updateQuery, customerToUpdate);
 
