@@ -68,18 +68,17 @@ namespace BourbonAndBurial.Controllers
         }
 
         [HttpPut("{firebaseId}/update")]
-        public ActionResult UpdateCustomer(string firebaseId, Customer customerToUpdate)
+        public ActionResult UpdateCustomer(Customer customerToUpdate)
         {
-            if (firebaseId != customerToUpdate.FirebaseId)
-            {
-                return BadRequest(new { error = "Please enter valid customerId" });
-            }
+            //if (firebaseId != customerToUpdate.FirebaseId)
+            //{
+            //    return BadRequest(new { error = "Please enter valid customerId" });
+            //}
 
             var customer = _customerRepository.UpdateCustomer(customerToUpdate);
 
-            var updatedCustomer = _customerRepository.GetSingleCustomer(customer.FirebaseId);
-
-            return Ok(updatedCustomer);
+            //returns null
+            return Ok(customer);
         }
     }
 }

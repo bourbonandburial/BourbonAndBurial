@@ -30,20 +30,6 @@ const defaultCustomer = {
   isActive: true,
 }
 
-const originalCustomer = {
-  displayName: '',
-  email: '',
-  phoneNumber: '',
-  firebaseId: '',
-  address1: '',
-  address2: '',
-  city: '',
-  state: '',
-  zipcode: '',
-  photo: '',
-  isActive: true,
-}
-
 class RegisterModal extends React.Component {
   static propTypes = {
     logoutClickEvent: PropTypes.func,
@@ -58,7 +44,7 @@ class RegisterModal extends React.Component {
   state = {
     modal: true,
     newCustomer: defaultCustomer,
-    customerToUpdate: originalCustomer,
+    customerToUpdate: defaultCustomer,
   };
 
   toggle() {
@@ -69,11 +55,20 @@ class RegisterModal extends React.Component {
 
   formFieldStringState = (name, e) => {
     e.preventDefault();
-    const tempCustomer = { ...this.state.newCustomer };
-    tempCustomer[name] = e.target.value;
-    this.setState({
-      newCustomer: tempCustomer,
-    });
+    const {currentCustomer} = this.props;
+    if (currentCustomer !== null && currentCustomer.isActive === false) {
+      const tempCustomer = { ...this.state.customerToUpdate };
+      tempCustomer[name] = e.target.value;
+        this.setState({
+          customerToUpdate: tempCustomer,
+        });
+    } else {
+      const tempCustomer = { ...this.state.newCustomer };
+      tempCustomer[name] = e.target.value;
+        this.setState({
+          newCustomer: tempCustomer,
+        });
+    }
   };
 
   fullNameChange = e => this.formFieldStringState('displayName', e);
@@ -106,12 +101,10 @@ class RegisterModal extends React.Component {
   formIsActiveSubmit = (e) => {
     e.preventDefault();
     const { isActiveSubmit, firebaseUser } = this.props;
-    // const customerFromDb = customerRequests.getSingleCustomer(firebaseUser.uid);
     const customerToUpdate = { ...this.state.customerToUpdate };
     customerToUpdate.firebaseId = firebaseUser.uid;
     customerToUpdate.photo = firebaseUser.photoURL;
     customerToUpdate.email = firebaseUser.email;
-    console.log(customerToUpdate);
     isActiveSubmit(customerToUpdate);
     this.setState({
       customerToUpdate: defaultCustomer,

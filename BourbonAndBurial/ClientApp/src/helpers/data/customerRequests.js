@@ -33,7 +33,7 @@ const deleteCustomer = firebaseId => new Promise((resolve, reject) => {
 });
 
 const updatedCustomer = customerToUpdate => new Promise((resolve, reject) => {
-  axios.put(`${apiUrl}/${customerToUpdate.firebaseId}/update`).then((result) => {
+  axios.put(`${apiUrl}/${customerToUpdate.firebaseId}/update`, customerToUpdate).then((result) => {
     resolve(result.data);
   })
   .catch((error) => {

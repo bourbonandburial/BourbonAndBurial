@@ -39,7 +39,6 @@ class Home extends React.Component {
     // const customerInFirebase = customerRequests.getSingleCustomer(firebaseUser.uid)
     //   .then()
     //   .catch(err => console.error('error in getting single customer', err));
-    // console.log(customerInFirebase);
     if (customers !== undefined || customers.length !== 0) {
       const customerFromDb = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
       if (customerFromDb === undefined) {
@@ -53,7 +52,7 @@ class Home extends React.Component {
         });
       } else {
         this.setState({
-          isRegistered: false,
+          isRegistered: true,
           currentCustomer: customerFromDb
         });
       }

@@ -40,8 +40,8 @@ class CustomerProfile extends React.Component {
       } else {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
-
     }
+    
     return (
       <div className='CustomerProfile'>
         <div className="container">
