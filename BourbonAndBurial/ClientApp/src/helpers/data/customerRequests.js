@@ -23,8 +23,28 @@ const getSingleCustomer = firebaseId => new Promise((resolve, reject) => {
 
 const createCustomer = customerObject => axios.post(`${apiUrl}`, (customerObject));
 
+const deleteCustomer = firebaseId => new Promise((resolve, reject) => {
+  axios.delete(`${apiUrl}/${firebaseId}`).then((result) => {
+      resolve(result.data);
+    })
+    .catch((error) => {
+      reject(error)
+    });
+});
+
+const updatedCustomer = customerToUpdate => new Promise((resolve, reject) => {
+  axios.put(`${apiUrl}/${customerToUpdate.firebaseId}/update`).then((result) => {
+    resolve(result.data);
+  })
+  .catch((error) => {
+    reject(error);
+  })
+})
+
 export default {
   getAllCustomers,
   getSingleCustomer,
-  createCustomer
+  createCustomer,
+  deleteCustomer,
+  updatedCustomer
 }

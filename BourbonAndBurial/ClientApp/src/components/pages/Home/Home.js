@@ -16,6 +16,7 @@ class Home extends React.Component {
     customers: [],
     showModal: false,
     isRegistered: false,
+    currentCustomer: {},
   }
 
   static propTypes = {
@@ -44,8 +45,17 @@ class Home extends React.Component {
       if (customerFromDb === undefined) {
         this.showModal();
         this.setState({ isRegistered: false });
+      } else if (customerFromDb.isActive === false) {
+        this.showModal();
+        this.setState({
+          isRegistered: false,
+          currentCustomer: customerFromDb
+        });
       } else {
-        this.setState({ isRegistered: true });
+        this.setState({
+          isRegistered: false,
+          currentCustomer: customerFromDb
+        });
       }
     }
   }
@@ -63,6 +73,15 @@ class Home extends React.Component {
     this.setState({
       showModal: false,
       isRegistered: true,
+    });
+  }
+
+  isActiveSubmitEvent = (updatedCustomer) => {
+    customerRequests.updatedCustomer(updatedCustomer).then(() => {
+      this.setState({
+        showModal: false,
+        isRegistered: true,
+      });
     });
   }
 
@@ -109,8 +128,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { showModal, firebaseUser, isRegistered } = this.state;
-    const { logoutClickEvent} = this.props;
+    const { showModal, firebaseUser, isRegistered, currentCustomer } = this.state;
+    const { logoutClickEvent } = this.props;
 
     if (!isRegistered) {
       return (
@@ -121,6 +140,8 @@ class Home extends React.Component {
             closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
             logoutClickEvent={logoutClickEvent}
+            isActiveSubmit={this.isActiveSubmitEvent}
+            currentCustomer={currentCustomer}
           />
         </div>
       );
