@@ -7,7 +7,8 @@ import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 class ALaCarte extends React.Component {
   state = {
-    products: []
+    products: [],
+    shoppingCart: []
   }
 
   displayProducts = () => {
@@ -16,6 +17,22 @@ class ALaCarte extends React.Component {
         this.setState({ products: data });
       }).catch(err => console.error('error getting products', err));
   }
+
+  shoppinCartDisplay = () => {
+   // setState({ products: data });
+   console.log("This is setting State");
+  }
+
+  selectedProduct = (productId) => {
+    productRequests.getSingleProduct(productId).then((results) => {
+      console.log(results);
+      let newShoppingCart = this.state.shoppingCart; 
+      newShoppingCart.push(results);
+      this.setState({shoppingCart: newShoppingCart});
+    })
+      .catch(err => console.error('error with single delete', err));
+  };
+
 
   componentDidMount = () => {
     this.displayProducts();
@@ -33,7 +50,7 @@ class ALaCarte extends React.Component {
           productTypeId={product.productTypeId}
           price={product.price}
           quantity={product.quantity}
-          displayProducts={this.displayProducts}
+          selectedProduct={this.selectedProduct}
         />
       );
     });
@@ -56,7 +73,11 @@ class ALaCarte extends React.Component {
 
 
             <div className="col col-lg-4">
-              <div className="cart textSizeAla text-center"><ShoppingCart /></div>
+              <div className="cart textSizeAla text-center">
+                <ShoppingCart
+                 shoppinCart={this.state.shoppinCart}
+                 
+               /></div>
             </div>
 
           </div>

@@ -109,7 +109,7 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public IEnumerable<Product> GetSingleProduct(int ProductId)
+        public Product GetSingleProduct(int ProductId)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -117,7 +117,7 @@ namespace BourbonAndBurial.Data
 
                 var parameter = new { ProductId = ProductId };
 
-                var product = db.Query<Product>(getQuery, parameter).ToList();
+                var product = db.Query<Product>(getQuery, parameter).SingleOrDefault();
 
                 return product;
             }
