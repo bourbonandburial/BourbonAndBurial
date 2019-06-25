@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchField from 'react-search-field';
 import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
@@ -7,7 +8,8 @@ import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 class ALaCarte extends React.Component {
   state = {
-    products: []
+    products: [],
+    filteredProducts: [],
   }
 
   displayProducts = () => {
@@ -21,7 +23,25 @@ class ALaCarte extends React.Component {
     this.displayProducts();
   }
 
+  onChange = (value, event) => {
+    const {products} = this.state;
+    const filteredProducts = [];
+    event.preventDefault();
+    if (!value) {
+      this.setState({ filteredProducts: products });
+    } else {
+      products.forEach((product) => {
+        if (product.productName.toLowerCase().includes(value.toLowerCase())){
+          filteredProducts.push(product);
+        }
+        this.setState({ filteredProducts });
+      });
+    }
+  }
+
   render() {
+    const {filteredProducts} = this.state;
+
     const productBuilder = this.state.products.map((product) => {
       return (
         <SingleProduct
@@ -37,12 +57,29 @@ class ALaCarte extends React.Component {
         />
       );
     });
+
+      const singleFilteredProduct = filteredProducts.map(product => (
+        <SingleProduct
+          productId={product.productId}
+          key={product.productId}
+          image={product.image}
+          productName={product.productName}
+          productDescription={product.productDescription}
+          productTypeId={product.productTypeId}
+          price={product.price}
+          quantity={product.quantity}
+          />
+      ));
+      
     return (
       <div className="home parallax">
+        <SearchField 
+        placeholder='Search item'
+        onChange={this.onChange}
+        />
         <div className="container ">
           <div className="row">
             <div className="textSizeAla col-md-15 text-center">
-              "Ala Carte"
                 <ul>
                 <PackageDisplay package={this.props.match.params.package} />
               </ul>
@@ -50,7 +87,7 @@ class ALaCarte extends React.Component {
 
             <div className="col-md-8">
               <div className="row justify-content-around mt-5">
-                <div className="row">{productBuilder}</div>
+                <div className="row"> {singleFilteredProduct} {productBuilder}</div>
               </div>
             </div>
 
