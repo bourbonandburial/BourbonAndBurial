@@ -31,7 +31,7 @@ class ALaCarte extends React.Component {
       this.setState({ filteredProducts: products });
     } else {
       products.forEach((product) => {
-        if (product.productName.toLowerCase().includes(value.toLowerCase())){
+        if (product.productName.toLowerCase().includes(value.toLowerCase())|| (product.productDescription.toLowerCase().includes(value.toLowerCase()))){
           filteredProducts.push(product);
         }
         this.setState({ filteredProducts });
@@ -82,7 +82,7 @@ class ALaCarte extends React.Component {
             </div>
             <div>
             <SearchField 
-                placeholder='Search by Brand Name'
+                placeholder='Search by Brand Name or Description'
                 onChange={this.onChange}
                 />
             </div>
