@@ -73,16 +73,17 @@ class ALaCarte extends React.Component {
       
     return (
       <div className="home parallax">
-        <SearchField 
-        placeholder='Search item'
-        onChange={this.onChange}
-        />
         <div className="container ">
           <div className="row">
             <div className="textSizeAla col-md-15 text-center">
                 <ul>
                 <PackageDisplay package={this.props.match.params.package} />
               </ul>
+              <SearchField 
+              placeholder='Search by Brand Name'
+              onChange={this.onChange}
+              className='w-100'
+              />
             </div>
 
             <div className="col-md-8">
