@@ -16,6 +16,7 @@ import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import CustomerProfile from '../components/pages/CustomerProfile/CustomerProfile';
 import './App.scss';
+import OrderDetailsPage from '../components/pages/OrderDetailsPage/OrderDetailsPage';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
@@ -108,6 +109,7 @@ class App extends React.Component {
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} logoutClickEvent={this.logoutClickEvent} />
+              <PrivateRoute path='/profile/:order' component={OrderDetailsPage} authed={authed} logoutClickEvent={this.logoutClickEvent} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>

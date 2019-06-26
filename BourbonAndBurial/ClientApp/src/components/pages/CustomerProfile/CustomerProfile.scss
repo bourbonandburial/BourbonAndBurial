@@ -2,9 +2,10 @@
 
   background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity1.png?raw=true");
   min-height: 770px; 
-  height: 93vh;
+  height: auto;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   margin-top: 0px;
   
   .card {

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
+import orderRequests from '../../../helpers/data/orderRequests'
+import SingleOrder from '../SingleOrder/SingleOrder'
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
     customerObject: {},
+    orders: []
   }
 
   static propTypes = {
@@ -22,7 +25,15 @@ class CustomerProfile extends React.Component {
       .catch(err => console.error('error setting isActive to false on customer', err));
   }
 
+  displayOrders = () => {
+    orderRequests.getAllOrders()
+      .then((data) => {
+        this.setState({ orders: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
   componentDidMount() {
+    this.displayOrders();
     const customerFbId = authRequests.getCurrentUser().uid;
     customerRequests.getSingleCustomer(customerFbId).then((customer) => {
       this.setState({
@@ -41,6 +52,17 @@ class CustomerProfile extends React.Component {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
     }
+
+    const orderBuilder = this.state.orders.map((order) => {
+      return (
+      <SingleOrder
+        orderId={order.orderId}
+        key={order.orderId}
+        customerId = {order.customerId}
+        paymentTypeId={order.paymentTypeId}
+        orderDate = {order.orderDate}
+      />);
+    });
     
     return (
       <div className='CustomerProfile'>
@@ -65,54 +87,27 @@ class CustomerProfile extends React.Component {
                 </div>
               </div>
             </div>
+            <div>
             <table className="table table-striped table-hover table-light mt-5">
-              <thead>
-                <tr>
-                  <th>Order #</th>
-                  <th>Order Date</th>
-                  <th>Base Package</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Net Amount</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>13214</td>
-                  <td>Jun 15, 2017</td>
-                  <td>Cremation</td>
-                  <td>London</td>
-                  <td><span className="status text-success">&bull;</span> Delivered</td>
-                  <td>$300</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13215</td>
-                  <td>Jun 22, 2019</td>
-                  <td>Mausoleum</td>
-                  <td>Murfreesboro</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$3123</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13216</td>
-                  <td>Jun 18, 2019</td>
-                  <td>Burial</td>
-                  <td>Nashville</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$1728</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-              </tbody>
-            </table>
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Customer #</th>
+                      <th>Order Date</th>
+                      <th>Base Package</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Net Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+              </table>
+              {orderBuilder}
+            </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    )
+  }};
 
 export default CustomerProfile;
-
