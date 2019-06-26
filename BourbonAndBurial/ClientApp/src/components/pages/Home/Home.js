@@ -127,7 +127,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { showModal, firebaseUser, isRegistered, currentCustomer } = this.state;
+    const { showModal, firebaseUser, isRegistered, currentCustomer, isEditing } = this.state;
     const { logoutClickEvent } = this.props;
 
     if (!isRegistered) {

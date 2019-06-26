@@ -2,24 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
+import RegisterModal from '../../RegisterModal/RegisterModal';
 import './CustomerProfile.scss';
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
     customerObject: {},
+    customerToEdit: {},
+    isEditing: false,
+    showModal: false,
   }
 
   static propTypes = {
     logoutClickEvent: PropTypes.func,
-  }
-
-  deleteCustomer = (firebaseId) => {
-    customerRequests.deleteCustomer(firebaseId)
-      .then(() => {
-        authRequests.logoutUser();
-      })
-      .catch(err => console.error('error setting isActive to false on customer', err));
   }
 
   componentDidMount() {
@@ -31,8 +27,48 @@ class CustomerProfile extends React.Component {
     });
   }
 
+  showModal = () => {
+    this.setState({
+      showModal: true,
+      // isRegistered: false,
+    });
+  };
+
+  deleteCustomer = (firebaseId) => {
+    customerRequests.deleteCustomer(firebaseId)
+      .then(() => {
+        authRequests.logoutUser();
+      })
+      .catch(err => console.error('error setting isActive to false on customer', err));
+  }
+
+  editFormCustomer = () => {
+    const customerFbId = this.state.customerObject.firebaseId;
+    customerRequests.getSingleCustomer(customerFbId)
+      .then((currentCustomer) => {
+        const tempCustomer = currentCustomer;
+        this.setState({
+          isEditing: true,
+          customerToEdit: tempCustomer,
+        });
+        this.showModal();
+      })
+      .catch(error => console.error(error));
+  };
+
+  editFormSubmitEvent = (updatedCustomer) => {
+    customerRequests.updatedCustomer(updatedCustomer).then(() => {
+
+      this.setState({
+        showModal: false,
+        isEditing: false,
+        customerToEdit: {},
+      });
+    }).catch(err => console.error('error in adding customer', err));
+  }
+
   render() {
-    const { customerObject } = this.state;
+    const { customerObject, isEditing, showModal } = this.state;
 
     const displayAddress = () => {
       if (customerObject.address2 === null) {
@@ -41,9 +77,14 @@ class CustomerProfile extends React.Component {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
     }
-    
+
     return (
       <div className='CustomerProfile'>
+        <RegisterModal
+          showModal={showModal}
+          currentCustomer={customerObject}
+          isEditing={isEditing}
+        />
         <div className="container">
           <div className="row text-center">
             <div className="col-lg-4 mx-auto">
@@ -58,7 +99,7 @@ class CustomerProfile extends React.Component {
                     <i className="material-icons">phone</i>{customerObject.phoneNumber}
                   </p>
                   <div className="card-footer">
-                    <button type="button" className="btn btn-link profile-edit"><i className="material-icons">edit</i></button>
+                    <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
                     <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
                     <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
