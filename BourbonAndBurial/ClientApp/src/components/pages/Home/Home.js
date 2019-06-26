@@ -34,11 +34,7 @@ class Home extends React.Component {
   // if so, go to homepage. if not, add user to db and then go to home
   customerValidation = () => {
     const { customers, firebaseUser } = this.state;
-    //if there are no users
-    // const customerInFirebase = customerRequests.getSingleCustomer(firebaseUser.uid)
-    //   .then()
-    //   .catch(err => console.error('error in getting single customer', err));
-    // console.log(customerInFirebase);
+
     if (customers !== undefined || customers.length !== 0) {
       const customerFromDb = customers.find(customerObject => customerObject.firebaseId === firebaseUser.uid);
       if (customerFromDb === undefined) {
@@ -53,7 +49,6 @@ class Home extends React.Component {
   showModal = () => {
     this.setState({
       showModal: true,
-      // isRegistered: false,
     });
   };
 
@@ -97,12 +92,6 @@ class Home extends React.Component {
   }
 
   componentDidMount = () => {
-    // const customerFromFb = authRequests.getCurrentUser();
-    // this.setState({
-    //   firebaseUser: customerFromFb
-    // });
-
-    // this.getCustomers();
     this.displayPackageOneProducts();
     this.displayPackageTwoProducts();
     this.displayPackageThreeProducts();

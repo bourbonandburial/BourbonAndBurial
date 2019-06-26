@@ -5,8 +5,7 @@ import SinglePackage from '../SinglePackage/SinglePackage'
 
 class PackageDisplay extends React.Component{
 state = {
-    products: [],
-    shoppingCart: []
+    products: []
 
 }
 
@@ -33,7 +32,7 @@ state = {
               productTypeId={product.productTypeId}
               quantity={product.quantity}
               displayProducts={this.displayProducts}
-              shoppingCart={this.state.shoppingCart}
+              
             />);
           });
           return(

@@ -7,12 +7,20 @@
     margin-top: 20px;
 }
 
-.productArea{
-    display: flex;
+.area {
+  justify-content: center !important;
 }
 
 .textSizeAla {
     font-size: 40px;
+    width: 500px;
+    border: 7px solid black;
+    padding-bottom: 20%;
+}
+
+.textAla{
+  
+  font-size: 40px;
 }
 
 .cart {
@@ -21,12 +29,13 @@
 }
 
 .parallax {
-  
- background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
+  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
   background-attachment: fixed;
   background-repeat: none;
-//   background-size: 100%;
-height: 93vh;
+  height: 93vh;
   overflow-y: scroll;
 }
 
+.shoppingCartDiv{
+  
+}

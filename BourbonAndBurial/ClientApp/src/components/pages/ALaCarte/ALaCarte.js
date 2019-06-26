@@ -54,35 +54,44 @@ class ALaCarte extends React.Component {
         />
       );
     });
+
+    const shoppingCartBuilder = this.state.shoppingCart.map((shoppingCart) => {
+      return (
+        <ShoppingCart
+          image={shoppingCart.image}
+          discription={shoppingCart.productDescription}
+          quantity={shoppingCart.quantity}
+          shoppinCartState={this.state.shoppingCart}
+        />
+      );
+    });
+
     return (
       <div className="home parallax">
-        <div className="container ">
-          <div className="row">
-            <div className="textSizeAla col-md-15 text-center">
-              "Ala Carte"
-                <ul>
-                <PackageDisplay package={this.props.match.params.package} />
-              </ul>
+      <div className="container ">
+         <div className="row">
+            <div className="textAla col-md-15 ">
+              
+               <ul>
+                  <PackageDisplay package={this.props.match.params.package} />
+               </ul>
             </div>
-
             <div className="col-md-8">
-              <div className="row justify-content-around mt-5">
-                <div className="row">{productBuilder}</div>
-              </div>
+               <div className="row justify-content-around mt-5">
+                  <div className="row">{productBuilder}</div>
+               </div>
             </div>
-
-
-            <div className="col col-lg-4">
-              <div className="cart textSizeAla text-center">
-                <ShoppingCart
-                 shoppinCart={this.state.shoppinCart}
-                 
-               /></div>
+            <div className="col shoppingCartDiv col-lg-4">
+               <div className="cart  textSizeAla">
+                  <div className="area ">
+                     <p>Shopping Cart</p>
+                  </div>
+                  {shoppingCartBuilder}
+               </div>
             </div>
-
-          </div>
-        </div>
+         </div>
       </div>
+   </div>
     );
   }
 }
