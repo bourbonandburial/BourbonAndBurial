@@ -13,7 +13,7 @@ const getAllOrders = () => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleOrder = orderId => new Promise((resolve, reject) => {
+const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
   axios
     .get(`${apiUrl}/${orderId}`)
     .then((results) => {

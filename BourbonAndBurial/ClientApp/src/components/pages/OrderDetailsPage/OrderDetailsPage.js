@@ -8,20 +8,28 @@ state = {
     orders: []
 }
 
-    displaySingleOrder = () => {
-        orderRequests.getSingleOrder(this.props.order)
-        .then((data) => {
-            this.setState({ orders: data });
-        }).catch(err => console.error('error getting products', err));
-    }
+    // displaySingleOrder = (orderId) => {
+    //     orderRequests.getSingleOrder(orderId)
+    //     .then((data) => {
+    //         this.setState({ orders: data });
+    //         console.log(orderId)
+    //     }).catch(err => console.error('error getting products', err));
+    // }
 
     componentDidMount = () => {
-        this.displaySingleOrder();
-    }
+        // this.displaySingleOrder();
+        const orderId = this.props.match.params.orderId;
+        orderRequests.getSingleOrder(orderId)
+        .then((data) => {
+            this.setState({ orders: data })
+            console.log(orderId)
+        }).catch(err => console.error('error getting single order', err))
+     }
 
 
     render() {
-        const orderBuilder = this.state.orders.map((order) => {
+        let orders = this.state.orders;
+        const orderBuilder = orders.map((order) => {
             return (
             <SingleOrder
               orderId={order.orderId}

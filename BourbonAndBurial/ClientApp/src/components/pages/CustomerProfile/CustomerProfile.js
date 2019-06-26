@@ -5,6 +5,7 @@ import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
 import orderRequests from '../../../helpers/data/orderRequests'
 import SingleOrder from '../SingleOrder/SingleOrder'
+import OrderDetailsPage from '../OrderDetailsPage/OrderDetailsPage'
 
 class CustomerProfile extends React.Component {
   state = {
@@ -31,6 +32,14 @@ class CustomerProfile extends React.Component {
         this.setState({ orders: data });
       }).catch(err => console.error('error getting products', err));
   }
+
+  displaySingleOrder = (orderId) => {
+    orderRequests.getSingleOrder(orderId)
+    .then((data) => {
+        this.setState({ orders: data });
+        console.log(orderId)
+    }).catch(err => console.error('error getting products', err));
+}
 
   componentDidMount() {
     this.displayOrders();
@@ -61,6 +70,7 @@ class CustomerProfile extends React.Component {
         customerId = {order.customerId}
         paymentTypeId={order.paymentTypeId}
         orderDate = {order.orderDate}
+        displaySingleOrder = {this.displaySingleOrder}
       />);
     });
     
