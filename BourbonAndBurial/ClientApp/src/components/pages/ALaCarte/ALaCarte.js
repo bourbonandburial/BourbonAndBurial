@@ -30,8 +30,19 @@ class ALaCarte extends React.Component {
       newShoppingCart.push(results);
       this.setState({shoppingCart: newShoppingCart});
     })
-      .catch(err => console.error('error with single delete', err));
+      .catch(err => console.error('error with add to cart', err));
   };
+ 
+  removeFromCart(productId, state) {
+    let newArray = state;
+    newArray.forEach(function(element) {
+      console.log(element);
+      console.log(state);
+    });
+    console.log("This is productID" + productId);
+   
+    };
+
 
 
   componentDidMount = () => {
@@ -58,10 +69,12 @@ class ALaCarte extends React.Component {
     const shoppingCartBuilder = this.state.shoppingCart.map((shoppingCart) => {
       return (
         <ShoppingCart
+          productId={shoppingCart.productId}
           image={shoppingCart.image}
           discription={shoppingCart.productDescription}
           quantity={shoppingCart.quantity}
-          shoppinCartState={this.state.shoppingCart}
+          shoppingCartState={this.state.shoppingCart}
+          removeFromCart={this.removeFromCart}
         />
       );
     });

@@ -12,7 +12,7 @@ class ShoppingCart extends React.Component{
                    <p className="card-text1">{this.props.discription} Qty : {this.props.quantity}</p>
                 </div>
                 <div>
-                <div onClick={this.authenticateUser} className="btn">X</div>
+                <div onClick={() => this.props.removeFromCart(this.props.productId, this.props.shoppingCartState)} className="btn">X</div>
                 </div>
             </div>
         );
