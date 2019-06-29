@@ -139,8 +139,8 @@ class Home extends React.Component {
             closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
             logoutClickEvent={logoutClickEvent}
-            isActiveSubmit={this.isActiveSubmitEvent}
-            currentCustomer={currentCustomer}
+            // isActiveSubmit={this.isActiveSubmitEvent}
+            // currentCustomer={currentCustomer}
           />
         </div>
       );

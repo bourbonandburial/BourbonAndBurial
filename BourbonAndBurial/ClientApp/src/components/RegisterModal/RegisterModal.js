@@ -38,8 +38,7 @@ class RegisterModal extends React.Component {
     closeModal: PropTypes.func,
     isActiveSubmit: PropTypes.func,
     onSubmit: PropTypes.func,
-    currentCustomer: PropTypes.object,
-    isEditing: PropTypes.bool,
+    currentCustomer: PropTypes.object
   }
 
   state = {
@@ -114,7 +113,7 @@ class RegisterModal extends React.Component {
 
   render() {
     const { newCustomer, customerToUpdate } = this.state;
-    const { firebaseUser, logoutClickEvent, currentCustomer, isEditing } = this.props;
+    const { firebaseUser, logoutClickEvent, currentCustomer } = this.props;
 
     // const isPhoneNumberNull = () => {
     //   if (firebaseUser.phoneNumber === null) {
@@ -139,156 +138,7 @@ class RegisterModal extends React.Component {
     //     />
     //   }
     // }
-    if (!isEditing) {
-      return (
-        <div className='RegisterModal'>
-          <Modal
-            className='form-modal'
-            isOpen={this.state.modal}
-            toggle={e => this.toggle(e)}
-            centered
-            size='lg'
-            backdrop='static'
-            id='register-modal'
-          >
-            <ModalHeader>Edit Customer</ModalHeader>
-            <ModalBody>
-              <Form onSubmit={this.formIsActiveSubmit}>
-                <Row form>
-                  <Col md>
-                    <FormGroup>
-                      <Label for='fullName' size='sm' className='modal-label'>Full Name</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='fullName'
-                        id='fullName'
-                        onChange={this.fullNameChange}
-                        value={currentCustomer.displayName}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row form>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for='email' size='sm' className='modal-label'>Email Address</Label>
-                      <Input
-                        className='cool-border'
-                        type='email'
-                        name='email'
-                        id='customerEmail'
-                        value={currentCustomer.email}
-                        readOnly
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for='phone' size='sm' className='modal-label'>Phone Number</Label>
-                      {/* {isPhoneNumberNull()} */}
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='phone'
-                        id='phoneNumber'
-                        onChange={this.phoneNumberChange}
-                        value={currentCustomer.phoneNumber}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row form>
-                  <Col md>
-                    <FormGroup>
-                      <Label for='address1' size='sm' className='modal-label'>Address 1</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='address1'
-                        id='address1'
-                        onChange={this.address1Change}
-                        value={currentCustomer.address1}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row form>
-                  <Col md>
-                    <FormGroup>
-                      <Label for='address2' size='sm' className='modal-label'>Address 2</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='address2'
-                        id='address2'
-                        onChange={this.address2Change}
-                        value={currentCustomer.address2}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row form>
-                  <Col md={5}>
-                    <FormGroup>
-                      <Label for='city' size='sm' className='modal-label'>City</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='city'
-                        id='city'
-                        onChange={this.cityChange}
-                        value={currentCustomer.city}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={2}>
-                    <FormGroup>
-                      <Label for='state' size='sm' className='modal-label'>State</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='state'
-                        id='state'
-                        onChange={this.stateChange}
-                        value={currentCustomer.state}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={5}>
-                    <FormGroup>
-                      <Label for='zipcode' size='sm' className='modal-label'>Zipcode</Label>
-                      <Input
-                        className='cool-border'
-                        type='text'
-                        name='zipcode'
-                        id='zipcode'
-                        onChange={this.zipcodeChange}
-                        value={currentCustomer.zipcode}
-                        required
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <ModalFooter>
-                  <Button className='btn submit-btn'>
-                    Submit
-                  </Button>
-                  <Button className='btn cancel-btn'onClick={e => this.toggle(e)}>
-                    Cancel
-                  </Button>
-                </ModalFooter>
-              </Form>
-            </ModalBody>
-          </Modal>
-        </div>
-      );
-    }
+
     if (currentCustomer !== null && currentCustomer.isActive === false) {
       return (
         <div className='RegisterModal'>

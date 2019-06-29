@@ -4,6 +4,7 @@ import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import RegisterModal from '../../RegisterModal/RegisterModal';
 import './CustomerProfile.scss';
+import EditModal from '../../EditModal/EditModal';
 
 class CustomerProfile extends React.Component {
   state = {
@@ -27,10 +28,23 @@ class CustomerProfile extends React.Component {
     });
   }
 
+  // componentWillUnmount() {
+  //   this.setState({
+  //     isEditing: false,
+  //   });
+  // }
+
   showModal = () => {
     this.setState({
       showModal: true,
-      // isRegistered: false,
+    });
+  };
+
+  modalCloseEvent = () => {
+    this.setState({
+      isEditing: false,
+      showModal: false,
+      customerToEdit: {},
     });
   };
 
@@ -51,6 +65,7 @@ class CustomerProfile extends React.Component {
           isEditing: true,
           customerToEdit: tempCustomer,
         });
+        // this.props.history.push(`${customerFbId}/update`);
         this.showModal();
       })
       .catch(error => console.error(error));
@@ -58,7 +73,6 @@ class CustomerProfile extends React.Component {
 
   editFormSubmitEvent = (updatedCustomer) => {
     customerRequests.updatedCustomer(updatedCustomer).then(() => {
-
       this.setState({
         showModal: false,
         isEditing: false,
@@ -78,13 +92,37 @@ class CustomerProfile extends React.Component {
       }
     }
 
+    // const editFormCustomer = () => {
+    //   const customerFbId = this.state.customerObject.firebaseId;
+    //   customerRequests.getSingleCustomer(customerFbId)
+    //     .then((currentCustomer) => {
+    //       const tempCustomer = currentCustomer;
+    //       this.setState({
+    //         isEditing: true,
+    //         customerToEdit: tempCustomer,
+    //       });
+    //       // this.props.history.push(`${customerFbId}/update`);
+    //       this.showModal();
+    //     })
+    //     .catch(error => console.error(error));
+    // };
+
+    // const displayEditFormModal = () => {
+    //   if (!isEditing) {
+    //     return (
+    //       <EditModal
+    //         showModal={showModal}
+    //         currentCustomer={customerObject}
+    //         isEditing={isEditing}
+    //         editFormSubmitEvent={this.editFormSubmitEvent}
+    //         modalCloseEvent={this.modalCloseEvent}
+    //       />
+    //     )
+    //   }
+    // }
+
     return (
       <div className='CustomerProfile'>
-        <RegisterModal
-          showModal={showModal}
-          currentCustomer={customerObject}
-          isEditing={isEditing}
-        />
         <div className="container">
           <div className="row text-center">
             <div className="col-lg-4 mx-auto">
@@ -150,6 +188,13 @@ class CustomerProfile extends React.Component {
             </table>
           </div>
         </div>
+        <EditModal
+          showModal={showModal}
+          currentCustomer={customerObject}
+          isEditing={isEditing}
+          editFormSubmitEvent={this.editFormSubmitEvent}
+          modalCloseEvent={this.modalCloseEvent}
+        />
       </div>
     );
   }
