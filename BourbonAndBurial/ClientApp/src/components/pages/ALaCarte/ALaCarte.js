@@ -33,15 +33,21 @@ class ALaCarte extends React.Component {
   removeFromCart = (productId, state) => {
 
     let newArray = state;
-    state.forEach(function(element) {
-        if (productId === element.productId) {
-            let productIdIndex = newArray.indexOf(element);
-            newArray.splice(productIdIndex, 1);
-          
-        }
-      
+    
+    for(let i = 0; i < state.length; i++){
+      if (productId === state[i].productId){
+        let productIdIndex = i;
+        newArray.splice(productIdIndex, 1);
+        break;
+      }
+    }
 
-    });
+    // state.forEach(function(element) {
+    //     if (productId === element.productId) {
+    //         let productIdIndex = newArray.indexOf(element);
+    //         newArray.splice(productIdIndex, 1);
+    //     }
+    //});
     this.setState({
       shoppingCart: newArray
   });
