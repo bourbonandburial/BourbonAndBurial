@@ -37,11 +37,13 @@ class EditModal extends React.Component {
     currentCustomer: PropTypes.object,
     isEditing: PropTypes.bool,
     modalCloseEvent: PropTypes.func,
+    editFormSubmitEvent: PropTypes.func,
   }
 
   state = {
     modal: false,
-    customerToUpdate: defaultCustomer,
+    // customerToUpdate: defaultCustomer,
+    customerToUpdate: {},
   };
 
   toggle() {
@@ -50,23 +52,33 @@ class EditModal extends React.Component {
     });
   }
 
+  // formFieldStringState = (name, e) => {
+  //   e.preventDefault();
+  //   const { currentCustomer } = this.props;
+  //   if (currentCustomer !== null && currentCustomer.isActive === false) {
+  //     const tempCustomer = { ...this.state.customerToUpdate };
+  //     tempCustomer[name] = e.target.value;
+  //     this.setState({
+  //       customerToUpdate: tempCustomer,
+  //     });
+  //   } else {
+  //     const tempCustomer = { ...this.state.newCustomer };
+  //     tempCustomer[name] = e.target.value;
+  //     this.setState({
+  //       newCustomer: tempCustomer,
+  //     });
+  //   }
+  // };
+
   formFieldStringState = (name, e) => {
     e.preventDefault();
-    const { currentCustomer } = this.props;
-    if (currentCustomer !== null && currentCustomer.isActive === false) {
       const tempCustomer = { ...this.state.customerToUpdate };
       tempCustomer[name] = e.target.value;
       this.setState({
         customerToUpdate: tempCustomer,
       });
-    } else {
-      const tempCustomer = { ...this.state.newCustomer };
-      tempCustomer[name] = e.target.value;
-      this.setState({
-        newCustomer: tempCustomer,
-      });
-    }
   };
+
 
   fullNameChange = e => this.formFieldStringState('displayName', e);
 
@@ -95,14 +107,14 @@ class EditModal extends React.Component {
   //   });
   // };
 
-  formIsActiveSubmit = (e) => {
+  formSubmitEdit = (e) => {
     e.preventDefault();
-    const { isActiveSubmit, firebaseUser } = this.props;
+    const { editFormSubmitEvent, currentCustomer } = this.props;
     const customerToUpdate = { ...this.state.customerToUpdate };
-    customerToUpdate.firebaseId = firebaseUser.uid;
-    customerToUpdate.photo = firebaseUser.photoURL;
-    customerToUpdate.email = firebaseUser.email;
-    isActiveSubmit(customerToUpdate);
+    customerToUpdate.firebaseId = currentCustomer.firebaseId;
+    customerToUpdate.photo = currentCustomer.photo;
+    customerToUpdate.email = currentCustomer.email;
+    editFormSubmitEvent(customerToUpdate);
     this.setState({
       customerToUpdate: defaultCustomer,
     });
@@ -112,7 +124,7 @@ class EditModal extends React.Component {
     if (props.isEditing) {
       this.setState({
         isEditing: true,
-        // customerToUpdate: props.customerToUpdate,
+        customerToUpdate: props.currentCustomer
       });
     }
     this.setState({
@@ -161,7 +173,7 @@ class EditModal extends React.Component {
         >
           <ModalHeader>Edit Customer</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.formIsActiveSubmit}>
+            <Form onSubmit={this.formSubmitEdit}>
               <Row form>
                 <Col md>
                   <FormGroup>
