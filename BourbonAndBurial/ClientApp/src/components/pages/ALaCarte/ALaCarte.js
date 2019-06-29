@@ -6,6 +6,7 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart'
 import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 class ALaCarte extends React.Component {
+  
   state = {
     products: [],
     shoppingCart: []
@@ -18,11 +19,6 @@ class ALaCarte extends React.Component {
       }).catch(err => console.error('error getting products', err));
   }
 
-  shoppinCartDisplay = () => {
-   // setState({ products: data });
-   console.log("This is setting State");
-  }
-
   selectedProduct = (productId) => {
     productRequests.getSingleProduct(productId).then((results) => {
       console.log(results);
@@ -33,17 +29,24 @@ class ALaCarte extends React.Component {
       .catch(err => console.error('error with add to cart', err));
   };
  
-  removeFromCart(productId, state) {
-    let newArray = state;
-    newArray.forEach(function(element) {
-      console.log(element);
-      console.log(state);
-    });
-    console.log("This is productID" + productId);
    
-    };
+  removeFromCart = (productId, state) => {
 
+    let newArray = state;
+    state.forEach(function(element) {
+        if (productId === element.productId) {
+            let productIdIndex = newArray.indexOf(element);
+            newArray.splice(productIdIndex, 1);
+          
+        }
+      
 
+    });
+    this.setState({
+      shoppingCart: newArray
+  });
+
+};
 
   componentDidMount = () => {
     this.displayProducts();
