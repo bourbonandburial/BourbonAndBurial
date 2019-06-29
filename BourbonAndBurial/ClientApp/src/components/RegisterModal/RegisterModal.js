@@ -163,9 +163,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='fullName'
                         id='fullName'
-                        placeholder={currentCustomer.displayName}
                         onChange={this.fullNameChange}
-                        value={customerToUpdate.displayName}
+                        value={currentCustomer.displayName}
                         required
                       />
                     </FormGroup>
@@ -194,9 +193,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='phone'
                         id='phoneNumber'
-                        placeholder={currentCustomer.phoneNumber}
                         onChange={this.phoneNumberChange}
-                        value={customerToUpdate.phoneNumber}
+                        value={currentCustomer.phoneNumber}
                         required
                       />
                     </FormGroup>
@@ -211,9 +209,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='address1'
                         id='address1'
-                        placeholder={currentCustomer.address1}
                         onChange={this.address1Change}
-                        value={customerToUpdate.address1}
+                        value={currentCustomer.address1}
                         required
                       />
                     </FormGroup>
@@ -228,9 +225,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='address2'
                         id='address2'
-                        placeholder={currentCustomer.address2}
                         onChange={this.address2Change}
-                        value={customerToUpdate.address2}
+                        value={currentCustomer.address2}
                       />
                     </FormGroup>
                   </Col>
@@ -244,9 +240,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='city'
                         id='city'
-                        placeholder={currentCustomer.city}
                         onChange={this.cityChange}
-                        value={customerToUpdate.city}
+                        value={currentCustomer.city}
                         required
                       />
                     </FormGroup>
@@ -259,9 +254,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='state'
                         id='state'
-                        placeholder={currentCustomer.state}
                         onChange={this.stateChange}
-                        value={customerToUpdate.state}
+                        value={currentCustomer.state}
                         required
                       />
                     </FormGroup>
@@ -274,9 +268,8 @@ class RegisterModal extends React.Component {
                         type='text'
                         name='zipcode'
                         id='zipcode'
-                        placeholder={currentCustomer.zipcode}
                         onChange={this.zipcodeChange}
-                        value={customerToUpdate.zipcode}
+                        value={currentCustomer.zipcode}
                         required
                       />
                     </FormGroup>
@@ -286,7 +279,7 @@ class RegisterModal extends React.Component {
                   <Button className='btn submit-btn'>
                     Submit
                   </Button>
-                  <Button className='btn cancel-btn' onClick={logoutClickEvent}>
+                  <Button className='btn cancel-btn'onClick={e => this.toggle(e)}>
                     Cancel
                   </Button>
                 </ModalFooter>
