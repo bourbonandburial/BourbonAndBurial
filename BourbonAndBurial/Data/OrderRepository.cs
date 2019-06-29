@@ -126,6 +126,20 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public IEnumerable<Order> GetCustomerOrders(int CustomerId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM orders WHERE customerId = @customerId";
+
+                var parameter = new { customerId = CustomerId };
+
+                var order = db.Query<Order>(getQuery, parameter).ToList();
+
+                return order;
+            }
+        }
+
 
 
     }

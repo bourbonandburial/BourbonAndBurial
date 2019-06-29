@@ -26,8 +26,8 @@ class CustomerProfile extends React.Component {
       .catch(err => console.error('error setting isActive to false on customer', err));
   }
 
-  displayOrders = () => {
-    orderRequests.getAllOrders()
+  displayCustomerOrders = (customerId) => {
+    orderRequests.getCustomerOrders(customerId)
       .then((data) => {
         this.setState({ orders: data });
       }).catch(err => console.error('error getting products', err));
@@ -42,12 +42,12 @@ class CustomerProfile extends React.Component {
 }
 
   componentDidMount() {
-    this.displayOrders();
     const customerFbId = authRequests.getCurrentUser().uid;
     customerRequests.getSingleCustomer(customerFbId).then((customer) => {
       this.setState({
         customerObject: customer,
-      });
+      })
+        this.displayCustomerOrders(customer.customerId);
     });
   }
 

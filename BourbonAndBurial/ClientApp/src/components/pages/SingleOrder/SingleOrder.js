@@ -1,7 +1,5 @@
 import React from 'react';
 import './SingleOrder.scss';
-import { Link } from 'react-router-dom'
-import OrderDetailsPage from '../OrderDetailsPage/OrderDetailsPage'
 
 class SingleOrder extends React.Component{
     
@@ -25,8 +23,6 @@ class SingleOrder extends React.Component{
                       <td>London</td>
                       <td><span className="status text-success">&bull;</span> Delivered</td>
                       <td>$300</td>
-                      {/* <Link
-                        to="/profile/:orderId"> */}
                       <td><a onClick={goToOrderPage} className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td> 
                     </tr>
                   </tbody>

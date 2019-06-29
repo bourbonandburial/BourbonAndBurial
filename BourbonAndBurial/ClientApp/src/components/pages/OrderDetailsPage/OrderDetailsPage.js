@@ -2,27 +2,19 @@ import React from 'react';
 import './OrderDetailsPage.scss';
 import orderRequests from '../../../helpers/data/orderRequests'
 import SingleOrder from '../SingleOrder/SingleOrder'
+import SingleDetailedOrder from '../SingleDetailedOrder/SingleDetailedOrder'
 
 class OrderDetailsPage extends React.Component{
 state = {
     orders: []
 }
 
-    // displaySingleOrder = (orderId) => {
-    //     orderRequests.getSingleOrder(orderId)
-    //     .then((data) => {
-    //         this.setState({ orders: data });
-    //         console.log(orderId)
-    //     }).catch(err => console.error('error getting products', err));
-    // }
-
     componentDidMount = () => {
-        // this.displaySingleOrder();
         const orderId = this.props.match.params.orderId;
         orderRequests.getSingleOrder(orderId)
         .then((data) => {
+          console.log(orderId)
             this.setState({ orders: data })
-            console.log(orderId)
         }).catch(err => console.error('error getting single order', err))
      }
 
@@ -31,7 +23,7 @@ state = {
         let orders = this.state.orders;
         const orderBuilder = orders.map((order) => {
             return (
-            <SingleOrder
+            <SingleDetailedOrder
               orderId={order.orderId}
               key={order.orderId}
               customerId = {order.customerId}

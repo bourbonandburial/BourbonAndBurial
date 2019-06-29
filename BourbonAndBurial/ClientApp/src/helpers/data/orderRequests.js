@@ -13,6 +13,16 @@ const getAllOrders = () => new Promise((resolve, reject) => {
     });
 });
 
+const getCustomerOrders = customerId => new Promise((resolve, reject) => {
+  axios.get(`${apiUrl}/customer/${customerId}`)
+    .then((result) => {
+      resolve(result.data);
+    }).catch((error) => {
+      reject(error);
+    });
+});
+
+
 const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
   axios
     .get(`${apiUrl}/${orderId}`)
@@ -30,5 +40,6 @@ const deleteOrder = orderId => axios.delete(`${apiUrl}/${orderId}`);
 export default {
   getAllOrders,
   getSingleOrder,
-  deleteOrder
+  deleteOrder,
+  getCustomerOrders
 };
