@@ -10,9 +10,17 @@ class CustomerProfile extends React.Component {
     customerObject: {},
   }
 
-  // static propTypes = {
-  //   customerOject: PropTypes.object,
-  // }
+  static propTypes = {
+    logoutClickEvent: PropTypes.func,
+  }
+
+  deleteCustomer = (firebaseId) => {
+    customerRequests.deleteCustomer(firebaseId)
+      .then(() => {
+        authRequests.logoutUser();
+      })
+      .catch(err => console.error('error setting isActive to false on customer', err));
+  }
 
   componentDidMount() {
     const customerFbId = authRequests.getCurrentUser().uid;
@@ -32,8 +40,8 @@ class CustomerProfile extends React.Component {
       } else {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
-
     }
+    
     return (
       <div className='CustomerProfile'>
         <div className="container">
@@ -52,7 +60,7 @@ class CustomerProfile extends React.Component {
                   <div className="card-footer">
                     <button type="button" className="btn btn-link profile-edit"><i className="material-icons">edit</i></button>
                     <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
-                    <button type="button" className="btn btn-link profile-delete"><i className="material-icons">delete</i></button>
+                    <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
                 </div>
               </div>

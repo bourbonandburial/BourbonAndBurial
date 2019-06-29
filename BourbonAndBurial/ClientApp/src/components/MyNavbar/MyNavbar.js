@@ -32,9 +32,6 @@ class MyNavbar extends React.Component {
     });
   }
 
-  componentWillMount() {
-  }
-
   render() {
     const { authed, logoutClickEvent, customerObject } = this.props;
 
