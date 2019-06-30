@@ -24,6 +24,9 @@ class SingleDetailedOrder extends React.Component{
               <div class="detailedOrderCard__info">
                 <span class="detailedOrderCard__category"> Order #{this.props.orderId}</span>
                 <div>
+                <span class="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>
+                </div>
+                <div>
                 <span class="detailedOrderCard__category"> Date: {this.props.orderDate}</span>
                 </div>
                 <h3 class="detailedOrderCard__title">Cremation Package</h3>
