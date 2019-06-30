@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
-import RegisterModal from '../../RegisterModal/RegisterModal';
 import './CustomerProfile.scss';
 import EditModal from '../../EditModal/EditModal';
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
-    customerObject: {},
     customerToEdit: {},
     isEditing: false,
     showModal: false,
@@ -17,6 +15,8 @@ class CustomerProfile extends React.Component {
 
   static propTypes = {
     logoutClickEvent: PropTypes.func,
+    updateCustomer: PropTypes.func,
+    customerObject: PropTypes.object,
   }
 
   componentDidMount() {
@@ -27,12 +27,6 @@ class CustomerProfile extends React.Component {
       });
     });
   }
-
-  // componentWillUnmount() {
-  //   this.setState({
-  //     isEditing: false,
-  //   });
-  // }
 
   showModal = () => {
     this.setState({
@@ -65,14 +59,15 @@ class CustomerProfile extends React.Component {
           isEditing: true,
           customerToEdit: tempCustomer,
         });
-        // this.props.history.push(`${customerFbId}/update`);
         this.showModal();
       })
       .catch(error => console.error(error));
   };
 
   editFormSubmitEvent = (updatedCustomer) => {
+    const { updateCustomer } = this.props;
     customerRequests.updatedCustomer(updatedCustomer).then(() => {
+      updateCustomer();
       this.setState({
         showModal: false,
         isEditing: false,
@@ -82,7 +77,8 @@ class CustomerProfile extends React.Component {
   }
 
   render() {
-    const { customerObject, isEditing, showModal } = this.state;
+    const { isEditing, showModal } = this.state;
+    const { customerObject } = this.props;
 
     const displayAddress = () => {
       if (customerObject.address2 === null) {
@@ -91,35 +87,6 @@ class CustomerProfile extends React.Component {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
     }
-
-    // const editFormCustomer = () => {
-    //   const customerFbId = this.state.customerObject.firebaseId;
-    //   customerRequests.getSingleCustomer(customerFbId)
-    //     .then((currentCustomer) => {
-    //       const tempCustomer = currentCustomer;
-    //       this.setState({
-    //         isEditing: true,
-    //         customerToEdit: tempCustomer,
-    //       });
-    //       // this.props.history.push(`${customerFbId}/update`);
-    //       this.showModal();
-    //     })
-    //     .catch(error => console.error(error));
-    // };
-
-    // const displayEditFormModal = () => {
-    //   if (!isEditing) {
-    //     return (
-    //       <EditModal
-    //         showModal={showModal}
-    //         currentCustomer={customerObject}
-    //         isEditing={isEditing}
-    //         editFormSubmitEvent={this.editFormSubmitEvent}
-    //         modalCloseEvent={this.modalCloseEvent}
-    //       />
-    //     )
-    //   }
-    // }
 
     return (
       <div className='CustomerProfile'>
@@ -164,7 +131,7 @@ class CustomerProfile extends React.Component {
                   <td>London</td>
                   <td><span className="status text-success">&bull;</span> Delivered</td>
                   <td>$300</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13215</td>
@@ -173,7 +140,7 @@ class CustomerProfile extends React.Component {
                   <td>Murfreesboro</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
                   <td>$3123</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13216</td>
@@ -182,7 +149,7 @@ class CustomerProfile extends React.Component {
                   <td>Nashville</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
                   <td>$1728</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
               </tbody>
             </table>

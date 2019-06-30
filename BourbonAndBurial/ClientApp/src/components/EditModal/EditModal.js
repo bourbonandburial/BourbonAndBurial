@@ -14,7 +14,6 @@ import {
   Row,
 } from 'reactstrap';
 import './EditModal.scss';
-import customerRequests from '../../helpers/data/customerRequests';
 
 const defaultCustomer = {
   displayName: '',
@@ -32,8 +31,6 @@ const defaultCustomer = {
 
 class EditModal extends React.Component {
   static propTypes = {
-    // closeModalEvent: PropTypes.func,
-    // closeModal: PropTypes.func,
     currentCustomer: PropTypes.object,
     isEditing: PropTypes.bool,
     modalCloseEvent: PropTypes.func,
@@ -42,7 +39,6 @@ class EditModal extends React.Component {
 
   state = {
     modal: false,
-    // customerToUpdate: defaultCustomer,
     customerToUpdate: {},
   };
 
@@ -52,31 +48,13 @@ class EditModal extends React.Component {
     });
   }
 
-  // formFieldStringState = (name, e) => {
-  //   e.preventDefault();
-  //   const { currentCustomer } = this.props;
-  //   if (currentCustomer !== null && currentCustomer.isActive === false) {
-  //     const tempCustomer = { ...this.state.customerToUpdate };
-  //     tempCustomer[name] = e.target.value;
-  //     this.setState({
-  //       customerToUpdate: tempCustomer,
-  //     });
-  //   } else {
-  //     const tempCustomer = { ...this.state.newCustomer };
-  //     tempCustomer[name] = e.target.value;
-  //     this.setState({
-  //       newCustomer: tempCustomer,
-  //     });
-  //   }
-  // };
-
   formFieldStringState = (name, e) => {
     e.preventDefault();
-      const tempCustomer = { ...this.state.customerToUpdate };
-      tempCustomer[name] = e.target.value;
-      this.setState({
-        customerToUpdate: tempCustomer,
-      });
+    const tempCustomer = { ...this.state.customerToUpdate };
+    tempCustomer[name] = e.target.value;
+    this.setState({
+      customerToUpdate: tempCustomer,
+    });
   };
 
 
@@ -93,19 +71,6 @@ class EditModal extends React.Component {
   zipcodeChange = e => this.formFieldStringState('zipcode', e);
 
   phoneNumberChange = e => this.formFieldStringState('phoneNumber', e);
-
-  // formSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { onSubmit, firebaseUser } = this.props;
-  //   const newCustomer = { ...this.state.newCustomer };
-  //   newCustomer.firebaseId = firebaseUser.uid;
-  //   newCustomer.photo = firebaseUser.photoURL;
-  //   newCustomer.email = firebaseUser.email;
-  //   onSubmit(newCustomer);
-  //   this.setState({
-  //     newCustomer: defaultCustomer,
-  //   });
-  // };
 
   formSubmitEdit = (e) => {
     e.preventDefault();
@@ -134,8 +99,8 @@ class EditModal extends React.Component {
   }
 
   render() {
-    const { newCustomer, customerToUpdate } = this.state;
-    const { firebaseUser, logoutClickEvent, currentCustomer, isEditing, modalCloseEvent } = this.props;
+    const { customerToUpdate } = this.state;
+    const { modalCloseEvent } = this.props;
 
     // const isPhoneNumberNull = () => {
     //   if (firebaseUser.phoneNumber === null) {
@@ -184,7 +149,6 @@ class EditModal extends React.Component {
                       name='fullName'
                       id='fullName'
                       onChange={this.fullNameChange}
-                      // value={currentCustomer.displayName}
                       value={customerToUpdate.displayName}
                       required
                     />
@@ -200,7 +164,6 @@ class EditModal extends React.Component {
                       type='email'
                       name='email'
                       id='customerEmail'
-                      // value={currentCustomer.email}
                       value={customerToUpdate.email}
                       readOnly
                     />
@@ -216,7 +179,6 @@ class EditModal extends React.Component {
                       name='phone'
                       id='phoneNumber'
                       onChange={this.phoneNumberChange}
-                      // value={currentCustomer.phoneNumber}
                       value={customerToUpdate.phoneNumber}
                       required
                     />
@@ -233,7 +195,6 @@ class EditModal extends React.Component {
                       name='address1'
                       id='address1'
                       onChange={this.address1Change}
-                      // value={currentCustomer.address1}
                       value={customerToUpdate.address1}
                       required
                     />
@@ -250,7 +211,6 @@ class EditModal extends React.Component {
                       name='address2'
                       id='address2'
                       onChange={this.address2Change}
-                      // value={currentCustomer.address2}
                       value={customerToUpdate.address2}
                     />
                   </FormGroup>
@@ -266,7 +226,6 @@ class EditModal extends React.Component {
                       name='city'
                       id='city'
                       onChange={this.cityChange}
-                      // value={currentCustomer.city}
                       value={customerToUpdate.city}
                       required
                     />
@@ -281,7 +240,6 @@ class EditModal extends React.Component {
                       name='state'
                       id='state'
                       onChange={this.stateChange}
-                      // value={currentCustomer.state}
                       value={customerToUpdate.state}
                       required
                     />
@@ -296,7 +254,6 @@ class EditModal extends React.Component {
                       name='zipcode'
                       id='zipcode'
                       onChange={this.zipcodeChange}
-                      // value={currentCustomer.zipcode}
                       value={customerToUpdate.zipcode}
                       required
                     />
