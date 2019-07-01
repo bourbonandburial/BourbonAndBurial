@@ -3,23 +3,20 @@ import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
+import EditModal from '../../EditModal/EditModal';
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
-    customerObject: {},
+    customerToEdit: {},
+    isEditing: false,
+    showModal: false,
   }
 
   static propTypes = {
     logoutClickEvent: PropTypes.func,
-  }
-
-  deleteCustomer = (firebaseId) => {
-    customerRequests.deleteCustomer(firebaseId)
-      .then(() => {
-        authRequests.logoutUser();
-      })
-      .catch(err => console.error('error setting isActive to false on customer', err));
+    updateCustomer: PropTypes.func,
+    customerObject: PropTypes.object,
   }
 
   componentDidMount() {
@@ -31,8 +28,57 @@ class CustomerProfile extends React.Component {
     });
   }
 
+  showModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  modalCloseEvent = () => {
+    this.setState({
+      isEditing: false,
+      showModal: false,
+      customerToEdit: {},
+    });
+  };
+
+  deleteCustomer = (firebaseId) => {
+    customerRequests.deleteCustomer(firebaseId)
+      .then(() => {
+        authRequests.logoutUser();
+      })
+      .catch(err => console.error('error setting isActive to false on customer', err));
+  }
+
+  editFormCustomer = () => {
+    const customerFbId = this.state.customerObject.firebaseId;
+    customerRequests.getSingleCustomer(customerFbId)
+      .then((currentCustomer) => {
+        const tempCustomer = currentCustomer;
+        this.setState({
+          isEditing: true,
+          customerToEdit: tempCustomer,
+        });
+        this.showModal();
+      })
+      .catch(error => console.error(error));
+  };
+
+  editFormSubmitEvent = (updatedCustomer) => {
+    const { updateCustomer } = this.props;
+    customerRequests.updatedCustomer(updatedCustomer).then(() => {
+      updateCustomer();
+      this.setState({
+        showModal: false,
+        isEditing: false,
+        customerToEdit: {},
+      });
+    }).catch(err => console.error('error in adding customer', err));
+  }
+
   render() {
-    const { customerObject } = this.state;
+    const { isEditing, showModal } = this.state;
+    const { customerObject } = this.props;
 
     const displayAddress = () => {
       if (customerObject.address2 === null) {
@@ -41,7 +87,7 @@ class CustomerProfile extends React.Component {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       }
     }
-    
+
     return (
       <div className='CustomerProfile'>
         <div className="container">
@@ -58,7 +104,7 @@ class CustomerProfile extends React.Component {
                     <i className="material-icons">phone</i>{customerObject.phoneNumber}
                   </p>
                   <div className="card-footer">
-                    <button type="button" className="btn btn-link profile-edit"><i className="material-icons">edit</i></button>
+                    <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
                     <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
                     <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
@@ -85,7 +131,7 @@ class CustomerProfile extends React.Component {
                   <td>London</td>
                   <td><span className="status text-success">&bull;</span> Delivered</td>
                   <td>$300</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13215</td>
@@ -94,7 +140,7 @@ class CustomerProfile extends React.Component {
                   <td>Murfreesboro</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
                   <td>$3123</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
                 <tr>
                   <td>13216</td>
@@ -103,12 +149,19 @@ class CustomerProfile extends React.Component {
                   <td>Nashville</td>
                   <td><span className="status text-warning">&bull;</span> Pending</td>
                   <td>$1728</td>
-                  <td><a href="#" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
+                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+        <EditModal
+          showModal={showModal}
+          currentCustomer={customerObject}
+          isEditing={isEditing}
+          editFormSubmitEvent={this.editFormSubmitEvent}
+          modalCloseEvent={this.modalCloseEvent}
+        />
       </div>
     );
   }
