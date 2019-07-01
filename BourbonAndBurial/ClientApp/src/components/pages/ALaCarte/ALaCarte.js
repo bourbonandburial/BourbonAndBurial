@@ -123,9 +123,10 @@ class ALaCarte extends React.Component {
     ));
 
     return (
-      <div className="home parallax">
+      <div className="parallax">
       <div className="container ">
          <div className="row">
+
             <div className="textAla col-md-15 ">
                <ul>
                   <PackageDisplay package={this.props.match.params.package} />
@@ -133,10 +134,21 @@ class ALaCarte extends React.Component {
             </div>
 
             <SearchField 
+            className=" searchField "
                 placeholder='Search by Brand Name or Description'
                 onChange={this.onChange}
                 />
             </div>
+
+            <div className="cart shoppingCartDiv ">
+               <div className=" textSizeAla col-sm-11">
+                  <div className="area ">
+                     <p>Shopping Cart</p>
+                  </div>
+                  {shoppingCartBuilder}
+               </div>
+            </div>
+            
             <div className="col-md-8">
               <div className="row justify-content-around mt-5">
                 <div className="row"> 
@@ -153,17 +165,8 @@ class ALaCarte extends React.Component {
                </div>
             </div>
 
-            <div className="col shoppingCartDiv col-lg-4">
-               <div className="cart  textSizeAla">
-                  <div className="area ">
-                     <p>Shopping Cart</p>
-                  </div>
-                  {shoppingCartBuilder}
-               </div>
-            </div>
          </div>
       </div>
-  
     );
   }
 }
