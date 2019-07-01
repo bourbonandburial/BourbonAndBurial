@@ -138,7 +138,7 @@ class RegisterModal extends React.Component {
     //   }
     // }
 
-    if (currentCustomer !== null && currentCustomer.isActive === false) {
+    if (currentCustomer !== undefined && currentCustomer.isActive === false) {
       return (
         <div className='RegisterModal'>
           <Modal
