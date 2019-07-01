@@ -116,7 +116,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { showModal, firebaseUser, isRegistered, currentCustomer } = this.state;
+    const { showModal, firebaseUser, isRegistered } = this.state;
     const { logoutClickEvent } = this.props;
 
     if (!isRegistered) {
@@ -128,8 +128,6 @@ class Home extends React.Component {
             closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
             logoutClickEvent={logoutClickEvent}
-            isActiveSubmit={this.isActiveSubmitEvent}
-            currentCustomer={currentCustomer}
           />
         </div>
       );
@@ -141,6 +139,5 @@ class Home extends React.Component {
     );
   }
 }
-
 
 export default Home;

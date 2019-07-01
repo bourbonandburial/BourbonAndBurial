@@ -14,7 +14,6 @@ import {
   Row,
 } from 'reactstrap';
 import './RegisterModal.scss';
-import customerRequests from '../../helpers/data/customerRequests';
 
 const defaultCustomer = {
   displayName: '',
@@ -139,7 +138,7 @@ class RegisterModal extends React.Component {
     //   }
     // }
 
-    if (currentCustomer !== null && currentCustomer.isActive === false) {
+    if (currentCustomer !== undefined && currentCustomer.isActive === false) {
       return (
         <div className='RegisterModal'>
           <Modal
