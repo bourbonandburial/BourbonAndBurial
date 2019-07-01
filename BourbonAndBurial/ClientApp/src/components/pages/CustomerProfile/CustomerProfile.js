@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
@@ -105,7 +106,9 @@ class CustomerProfile extends React.Component {
                   </p>
                   <div className="card-footer">
                     <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
-                    <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
+                    <Link to='/payment'>
+                      <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
+                    </Link>
                     <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
                 </div>
