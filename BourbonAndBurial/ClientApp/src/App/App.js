@@ -15,6 +15,7 @@ import Home from '../components/pages/Home/Home';
 import Auth from '../components/pages/Auth/Auth';
 import ALaCarte from '../components/pages/ALaCarte/ALaCarte';
 import CustomerProfile from '../components/pages/CustomerProfile/CustomerProfile';
+import Payment from '../components/pages/Payment/Payment';
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -46,7 +47,6 @@ class App extends React.Component {
         this.setState({
           authed: true,
           pendingUser: false,
-          // customerName: customerFromFb.displayName,
         });
         this.getCurrentCustomer();
         authRequests.getCurrentUserJwt();
@@ -108,6 +108,7 @@ class App extends React.Component {
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
               <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} logoutClickEvent={this.logoutClickEvent} customerObject={customerObject} updateCustomer={this.getCurrentCustomer} />
+              <PrivateRoute path='/payment' component={Payment} authed={authed} customerObject={customerObject} updateCustomer={this.getCurrentCustomer} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
