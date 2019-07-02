@@ -24,7 +24,6 @@ class ALaCarte extends React.Component {
 
   selectedProduct = (productId) => {
     productRequests.getSingleProduct(productId).then((results) => {
-      console.log(results);
       let newShoppingCart = this.state.shoppingCart; 
       newShoppingCart.push(results);
       this.setState({shoppingCart: newShoppingCart});
@@ -54,7 +53,6 @@ class ALaCarte extends React.Component {
     this.setState({
       shoppingCart: newArray
   });
-
 };
 
   componentDidMount = () => {
@@ -95,10 +93,11 @@ class ALaCarte extends React.Component {
         />
       );
     });
-
-    const shoppingCartBuilder = this.state.shoppingCart.map((shoppingCart) => {
+    
+    const shoppingCartBuilder = this.state.shoppingCart.map((shoppingCart, i) => {
       return (
         <ShoppingCart
+          key={i}
           productId={shoppingCart.productId}
           price={shoppingCart.price}
           image={shoppingCart.image}
