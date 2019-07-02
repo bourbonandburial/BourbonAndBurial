@@ -9,7 +9,6 @@ class PackageOne extends React.Component {
     setSelectedPackage:PropTypes.func
  }
 
-
   render() {
     return (
       <div className="container">
@@ -30,7 +29,6 @@ class PackageOne extends React.Component {
                   <h3> Price : $300</h3>
               </div>
               <div className="icon1" >             
-              {/* <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link> */}
               <button type="button" id="packageOneBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
                </div>
             </div>
@@ -53,12 +51,6 @@ class PackageOne extends React.Component {
                 </div>
               <div className="icon2">
               <button type="button" id="packageTwoBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
-
-                {/* <Link to='/ALaCarte' className="ALaCarte">
-                  <button type="button" className="btn"> 
-                    <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i>
-                  </button>
-                </Link> */}
               </div>
             </div>
           </div>
@@ -79,9 +71,7 @@ class PackageOne extends React.Component {
                   <h3> Price : $2999</h3>
                 </div>
               <div className="icon3">
-              {/* <Link to='/ALaCarte' className="ALaCarte"><button type="button" className="btn"> <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button></Link> */}
               <button type="button" id="packageThreeBtn" className="btn" onClick={this.props.setSelectedPackage} > <i className="fa fa-barcode fa-5x mt-1" aria-hidden="true"></i></button>
-
               </div>
             </div>
           </div>

@@ -30,21 +30,10 @@
 .homeImage {
   background-image: url("https://github.com/ke4tri/Images/blob/master/LandingPage3.png?raw=true") !important;
   z-index: 3 !important;
-
-  /* Set a specific height of the homepage image */
-  // width: 100px !important;
-   min-height: 770px; 
-   height:93.5vh;
-  // max-height: 800px;
-  // background-position: center;
-  // background-size: cover;
-  // background-repeat: no-repeat;
-   
-     /* Create the parallax scrolling effect */
-     margin-top: 0px;
-    //  background-attachment: scroll;
-    //  background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;
+  min-height: 770px; 
+  height:93.5vh;
+  margin-top: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
   
 }
