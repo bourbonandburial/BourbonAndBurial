@@ -16,6 +16,11 @@
     justify-content: center;
 }
 
+.card {
+  margin-top: 30px;
+  max-height: 400px;
+}
+
 .detailedOrderCard--1 .detailedOrderCard__img, .detailedOrderCard--1 .detailedOrderCard__img--hover {
     background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
 }

@@ -13,8 +13,7 @@ class SingleOrder extends React.Component{
           };
 
         return(
-                <table className="table table-striped table-hover table-light mt-5">
-                  <tbody>
+                // <table className="table table-striped table-hover table-light">
                     <tr>
                       <td>{this.props.orderId}</td>
                       <td>{this.props.customerId}</td>
@@ -25,8 +24,7 @@ class SingleOrder extends React.Component{
                       <td>$300</td>
                       <td><a onClick={goToOrderPage} className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td> 
                     </tr>
-                  </tbody>
-                </table>
+                // </table>
         );
     }
 }

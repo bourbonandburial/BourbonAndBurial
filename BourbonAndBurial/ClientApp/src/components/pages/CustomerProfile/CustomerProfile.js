@@ -122,7 +122,7 @@ class CustomerProfile extends React.Component {
       <div className='CustomerProfile'>
         <div className="container">
           <div className="row text-center">
-            <div className="col-lg-4 mx-auto">
+            <div className="col-lg-3 mx-auto">
               <div className="card">
               <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>                
               <div className="card-block">
@@ -155,8 +155,8 @@ class CustomerProfile extends React.Component {
                       <th>Action</th>
                     </tr>
                   </thead>
+                  <tbody>{orderBuilder}</tbody>
               </table>
-              {orderBuilder}
             </div>
           </div>
         </div>
