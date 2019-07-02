@@ -11,7 +11,6 @@ import EditModal from '../../EditModal/EditModal';
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
-    customerObject: {},
     orders: [],
     customerToEdit: {},
     isEditing: false,
@@ -22,15 +21,6 @@ class CustomerProfile extends React.Component {
     logoutClickEvent: PropTypes.func,
     updateCustomer: PropTypes.func,
     customerObject: PropTypes.object,
-  }
-
-  componentDidMount() {
-    const customerFbId = authRequests.getCurrentUser().uid;
-    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
-      this.setState({
-        customerObject: customer,
-      });
-    });
   }
 
   showModal = () => {
@@ -62,6 +52,7 @@ class CustomerProfile extends React.Component {
       }).catch(err => console.error('error getting products', err));
   }
 
+
   displaySingleOrder = (orderId) => {
     orderRequests.getSingleOrder(orderId)
     .then((data) => {
@@ -70,16 +61,8 @@ class CustomerProfile extends React.Component {
     }).catch(err => console.error('error getting products', err));
 }
 
-  componentDidMount() {
-    const customerFbId = authRequests.getCurrentUser().uid;
-    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
-      this.setState({
-        customerObject: customer,
-      })
-        this.displayCustomerOrders(customer.customerId);
-    });
   editFormCustomer = () => {
-    const customerFbId = this.state.customerObject.firebaseId;
+    const customerFbId = this.props.customerObject.firebaseId;
     customerRequests.getSingleCustomer(customerFbId)
       .then((currentCustomer) => {
         const tempCustomer = currentCustomer;
@@ -102,6 +85,13 @@ class CustomerProfile extends React.Component {
         customerToEdit: {},
       });
     }).catch(err => console.error('error in adding customer', err));
+  }
+  
+  componentDidMount() {
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      this.displayCustomerOrders(customer.customerId);
+    });  
   }
 
   render() {
@@ -127,6 +117,7 @@ class CustomerProfile extends React.Component {
         displaySingleOrder = {this.displaySingleOrder}
       />);
     });
+  
     
     return (
       <div className='CustomerProfile'>
@@ -134,8 +125,8 @@ class CustomerProfile extends React.Component {
           <div className="row text-center">
             <div className="col-lg-4 mx-auto">
               <div className="card">
-                <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
-                <div className="card-block">
+              <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>                
+              <div className="card-block">
                   <h4 className="card-title mt-2">{customerObject.displayName}</h4>
                   <p className="card-position">
                     <i className="material-icons">place</i>{displayAddress()}
@@ -178,9 +169,9 @@ class CustomerProfile extends React.Component {
           modalCloseEvent={this.modalCloseEvent}
         />
       </div>
-    )
+    );
   };
 }
-}
+
 
 export default CustomerProfile;

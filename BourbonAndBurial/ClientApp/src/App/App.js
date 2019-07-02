@@ -108,7 +108,7 @@ class App extends React.Component {
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} />
               <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
-              <PrivateRoute path='/profile/' component={CustomerProfile} authed={authed} logoutClickEvent={this.logoutClickEvent} />
+              <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} logoutClickEvent={this.logoutClickEvent} customerObject={customerObject} updateCustomer={this.getCurrentCustomer} />
               <PrivateRoute path='/:orderId' component={OrderDetailsPage} authed={authed} logoutClickEvent={this.logoutClickEvent} />
             </Switch>
           </React.Fragment>
