@@ -52,7 +52,6 @@ class CustomerProfile extends React.Component {
       }).catch(err => console.error('error getting products', err));
   }
 
-
   displaySingleOrder = (orderId) => {
     orderRequests.getSingleOrder(orderId)
     .then((data) => {
