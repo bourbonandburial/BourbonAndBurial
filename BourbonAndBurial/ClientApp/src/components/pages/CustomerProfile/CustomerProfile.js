@@ -20,15 +20,6 @@ class CustomerProfile extends React.Component {
     customerObject: PropTypes.object,
   }
 
-  componentDidMount() {
-    const customerFbId = authRequests.getCurrentUser().uid;
-    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
-      this.setState({
-        customerObject: customer,
-      });
-    });
-  }
-
   showModal = () => {
     this.setState({
       showModal: true,
@@ -52,7 +43,7 @@ class CustomerProfile extends React.Component {
   }
 
   editFormCustomer = () => {
-    const customerFbId = this.state.customerObject.firebaseId;
+    const customerFbId = this.props.customerObject.firebaseId;
     customerRequests.getSingleCustomer(customerFbId)
       .then((currentCustomer) => {
         const tempCustomer = currentCustomer;
