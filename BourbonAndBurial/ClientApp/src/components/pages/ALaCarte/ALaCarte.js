@@ -12,6 +12,7 @@ class ALaCarte extends React.Component {
     products: [],
     shoppingCart: [],
     filteredProducts: [],
+    total: []
   }
 
   displayProducts = () => {
@@ -99,6 +100,7 @@ class ALaCarte extends React.Component {
       return (
         <ShoppingCart
           productId={shoppingCart.productId}
+          price={shoppingCart.price}
           image={shoppingCart.image}
           discription={shoppingCart.productDescription}
           quantity={shoppingCart.quantity}
@@ -124,49 +126,40 @@ class ALaCarte extends React.Component {
 
     return (
       <div className="parallax">
-      <div className="container ">
-         <div className="row">
-
-            <div className="textAla col-md-15 ">
+      <div className="container">
+         <div className="">
+            <div className="textAla col-lg-11 ">
                <ul>
                   <PackageDisplay package={this.props.match.params.package} />
                </ul>
             </div>
-
+            <div className="searchCart">
             <SearchField 
-            className=" searchField "
-                placeholder='Search by Brand Name or Description'
-                onChange={this.onChange}
-                />
+               className=" searchField col-sm-6 searchCart mx-auto"
+               placeholder='Search by Brand Name or Description'
+               onChange={this.onChange}
+               />
+               <div className="cart ">
+            <div className=" textSizeAla ">
+               <div className="area ">
+                  <p>Shopping Cart</p>
+               </div>
+               {shoppingCartBuilder}
             </div>
-
-            <div className="col-md-8">
-               <div className="row justify-content-around mt-5">
-                  <div className="row">
+            </div>
+         
+         </div>
+         <div className=" productDiv col-sm-8">
+            <div className="row justify-content-around mt-5">
+               <div className="row">
                   {singleFilteredProduct}
                   {productBuilder}
-                  </div>
                </div>
             </div>
-
-            <div className="cart ">
-               <div className=" textSizeAla col-sm-11">
-                  <div className="area ">
-                     <p>Shopping Cart</p>
-                  </div>
-                  {shoppingCartBuilder}
-               </div>
-            </div>
-
-            {/* <div className="col-md-8">
-              <div className="row justify-content-around">
-                <div className="row"> 
-                {singleFilteredProduct}
-                </div>
-              </div>
-            </div> */}
          </div>
       </div>
+   </div>
+   </div>
     );
   }
 }

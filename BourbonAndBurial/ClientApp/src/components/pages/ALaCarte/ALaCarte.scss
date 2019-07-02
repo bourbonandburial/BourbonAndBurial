@@ -18,22 +18,20 @@
     padding-bottom: 20%;
 }
 
+.searchCart{
+  position:sticky !important;
+
+  margin-left: 600px !important;
+}
+
 .textAla{
-  
   font-size: 40px;
 }
 
-.searchField {
-
-}
 .cart {
-    // margin-left: 65%;
-    
-    position: sticky !important;
-   position: absolute !important;
-   top: 100px !important;
-    right: 20px !important;
-   // top:0 !important;
+    position: sticky;
+
+ 
 }
 
 .parallax {
@@ -49,3 +47,6 @@
   width: 300px;
 }
 
+.productDiv{
+  margin-top: -300px !important;
+}
