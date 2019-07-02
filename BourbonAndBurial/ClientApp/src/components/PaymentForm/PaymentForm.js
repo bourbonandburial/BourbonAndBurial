@@ -7,66 +7,153 @@ import {
   Input,
   Label,
   Row,
+  Button,
 } from 'reactstrap';
 import './PaymentForm.scss';
 
-class Payment extends React.Component {
+const defaultPayment = {
+  paymentName: '',
+  cardName: '',
+  acctNumber: '',
+  expDate: '',
+  CVV: '',
+  customerId: 0,
+  isActive: true,
+}
+
+class PaymentForm extends React.Component {
   static propTypes = {
     customerObject: PropTypes.object,
+    onSubmit: PropTypes.func,
   }
 
+  state = {
+    newPayment: defaultPayment,
+  }
+
+  formFieldStringState = (name, e) => {
+    e.preventDefault();
+    const tempPayment = { ...this.state.newPayment };
+    tempPayment[name] = e.target.value;
+    this.setState({ newPayment: tempPayment });
+  }
+
+  formFieldNumberState = (name, e) => {
+    const tempPayment = { ...this.state.newPayment };
+    tempPayment[name] = e.target.value * 1;
+    this.setState({ newPayment: tempPayment });
+  }
+
+  formFieldDateState = (name, e) => {
+    const tempPayment = { ...this.state.newPayment };
+    tempPayment[name] = e.target.value;
+    this.setState({ newPayment: tempPayment });
+    // tempPayment[name] = e.target.value.substring(0, 2) + "/" + e.target.value.substring(2, 4);
+    // this.setState({ newPayment: tempPayment });
+    // const dateTest = e.target.value.substring(0, 2) + "/" + e.target.value.substring(2, 4);
+    // console.log(dateTest);
+  }
+
+  cardNameChange = e => this.formFieldStringState('cardName', e);
+  paymentNameChange = e => this.formFieldStringState('paymentName', e);
+  cardNumberChange = e => this.formFieldNumberState('acctNumber', e);
+  expDateChange = e => this.formFieldDateState('expDate', e);
+  cvvChange = e => this.formFieldNumberState('CVV', e);
+
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { customerObject, onSubmit } = this.props;
+    const newPayment = { ...this.state.newPayment };
+    newPayment.customerId = customerObject.customerId;
+    onSubmit(newPayment);
+    this.setState({
+      newPayment: defaultPayment,
+    });
+  };
+
   render() {
-    const { customerObject } = this.props;
+    const { newPayment } = this.state;
 
     return (
-      <div className='Payment'>
-        <Form >
+      <div className='PaymentForm'>
+        <Form className='container' onSubmit={this.formSubmit}>
           <Row form>
             <Col md>
               <FormGroup>
-                <Label for='fullName' size='sm' className='modal-label'>Full Name</Label>
+                <Label for='cardName' size='sm' className='modal-label'>Card Name</Label>
                 <Input
                   className='cool-border'
                   type='text'
-                  name='fullName'
-                  id='fullName'
-                  onChange={this.fullNameChange}
-                  value={customerObject.displayName}
+                  name='cardName'
+                  placeholder="Maggie's Visa"
+                  id='cardName'
+                  onChange={this.cardNameChange}
+                  value={newPayment.cardName}
                   required
                 />
               </FormGroup>
             </Col>
           </Row>
           <Row form>
-            <Col md={6}>
+            <Col md={2}>
               <FormGroup>
-                <Label for='email' size='sm' className='modal-label'>Email Address</Label>
-                <Input
-                  className='cool-border'
-                  type='email'
-                  name='email'
-                  id='customerEmail'
-                  value={customerObject.email}
-                  readOnly
-                />
+                <Label for='paymentName' size='sm' className='modal-label'>Payment Type</Label>
+                <Input type='select' id='paymentName' className='cool-border' name='paymentName' value={newPayment.paymentName} onChange={this.paymentNameChange}>
+                  <option>Visa</option>
+                  <option>MasterCard</option>
+                  <option>American Express</option>
+                  <option>Discover</option>
+                </Input>
               </FormGroup>
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for='phone' size='sm' className='modal-label'>Phone Number</Label>
+                <Label for='acctNumber' size='sm' className='modal-label'>Card Number</Label>
                 <Input
                   className='cool-border'
                   type='text'
-                  name='phone'
-                  id='phoneNumber'
-                  onChange={this.phoneNumberChange}
-                  value={customerObject.phoneNumber}
+                  name='acctNumber'
+                  id='acctNumber'
+                  placeholder='1234123412341234'
+                  onChange={this.cardNumberChange}
+                  value={newPayment.acctNumber}
+                  required
+                />
+              </FormGroup>
+            </Col>
+            <Col md={2}>
+              <FormGroup>
+                <Label for='expDate' size='sm' className='modal-label'>Exp Date</Label>
+                <Input
+                  className='cool-border'
+                  name='expDate'
+                  id='expDate'
+                  // type='text'
+                  // placeholder='MM/YY'
+                  type="date"
+                  onChange={this.expDateChange}
+                  value={newPayment.expDate}
+                  required
+                />
+              </FormGroup>
+            </Col>
+            <Col md={2}>
+              <FormGroup>
+                <Label for='CVV' size='sm' className='modal-label'>CVV</Label>
+                <Input
+                  className='cool-border'
+                  type='text'
+                  name='CVV'
+                  id='CVV'
+                  placeholder='123'
+                  onChange={this.cvvChange}
+                  value={newPayment.CVV}
                   required
                 />
               </FormGroup>
             </Col>
           </Row>
-          <Row form>
+          {/* <Row form>
             <Col md>
               <FormGroup>
                 <Label for='address1' size='sm' className='modal-label'>Address 1</Label>
@@ -140,11 +227,12 @@ class Payment extends React.Component {
                 />
               </FormGroup>
             </Col>
-          </Row>
+          </Row> */}
+          <Button color="secondary">Add Payment</Button>
         </Form>
       </div>
     )
   }
 }
 
-export default Payment;
+export default PaymentForm;

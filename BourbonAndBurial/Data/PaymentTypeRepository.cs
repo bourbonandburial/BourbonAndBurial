@@ -36,26 +36,38 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public PaymentType AddPayment(string paymentName, long acctNumber, int customerId)
+        public PaymentType AddPayment(CreatePaymentTypeRequest newPaymentObject)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
                     INSERT INTO PaymentTypes
                                ([PaymentName],
+                               [CardName],
                                [AcctNumber],
-                               [CustomerId])
+                               [ExpDate],
+                               [CVV],
+                               [CustomerId],
+                               [IsActive])
                     OUTPUT inserted.*
                          VALUES
                                (@paymentName,
+                               @cardName,
                                @acctNumber,
-                               @customerId)";
+                               @expDate,
+                               @cvv,
+                               @customerId,
+                               @isActive)";
 
                 var parameters = new
                 {
-                    PaymentName = paymentName,
-                    AcctNumber = acctNumber,
-                    CustomerId = customerId
+                    PaymentName = newPaymentObject.PaymentName,
+                    CardName = newPaymentObject.CardName,
+                    AcctNumber = newPaymentObject.AcctNumber,
+                    ExpDate = newPaymentObject.ExpDate,
+                    CVV = newPaymentObject.CVV,
+                    CustomerId = newPaymentObject.CustomerId,
+                    IsActive = newPaymentObject.IsActive,
                 };
 
                 var newPaymentType = db.QueryFirstOrDefault<PaymentType>(insertQuery, parameters);
@@ -79,6 +91,20 @@ namespace BourbonAndBurial.Data
                 var singlePayment = db.Query<PaymentType>(getQuery, parameter).ToList();
 
                 return singlePayment;
+            }
+        }
+
+        public IEnumerable<PaymentType> GetCustomerActivePayments(int customerId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = "SELECT * FROM PaymentTypes WHERE CustomerId = @customerId AND IsActive = 1";
+
+                var parameter = new { CustomerId = customerId };
+
+                var customerPayments = db.Query<PaymentType>(getQuery, parameter).ToList();
+
+                return customerPayments;
             }
         }
 

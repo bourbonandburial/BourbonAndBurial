@@ -9,8 +9,11 @@ namespace BourbonAndBurial.Models
     {
         public int PaymentTypeId { get; set; }
         public string PaymentName { get; set; }
+        public string CardName { get; set; }
         public long AcctNumber { get; set; }
+        public DateTime ExpDate { get; set; }
         public int CustomerId { get; set; }
+        public string CVV { get; set; }
         public bool IsActive { get; set; }
     }
 }

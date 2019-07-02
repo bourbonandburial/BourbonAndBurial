@@ -1,0 +1,14 @@
+.PaymentForm {  
+  .form-control:focus{
+    border-color: ghostwhite;
+  }
+  .btn {
+    border-color: maroon;
+    background-color: maroon;
+    color: ghostwhite;
+  }
+  .btn:hover {
+    background-color: ghostwhite;
+    color: maroon;
+  }
+}
