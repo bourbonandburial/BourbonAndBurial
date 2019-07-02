@@ -9,7 +9,7 @@ class ShoppingCart extends React.Component{
             <div className="shoppingCartCard">
             <img className="card-img-top1" src={this.props.image} alt="Card image cap"/>
                 <div className="card-discription">
-                   <p className="card-text1">{this.props.discription} Qty : {this.props.quantity}</p>
+                   <p className="card-text1">{this.props.discription} Qty : 1</p>
                 </div>
                 <div>
                 <div onClick={() => this.props.removeFromCart(this.props.productId, this.props.shoppingCartState)} className="btn">X</div>

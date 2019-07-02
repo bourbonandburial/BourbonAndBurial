@@ -140,7 +140,16 @@ class ALaCarte extends React.Component {
                 />
             </div>
 
-            <div className="cart shoppingCartDiv ">
+            <div className="col-md-8">
+               <div className="row justify-content-around mt-5">
+                  <div className="row justify-content-between">
+                  {singleFilteredProduct}
+                  {productBuilder}
+                  </div>
+               </div>
+            </div>
+
+            <div className="cart ">
                <div className=" textSizeAla col-sm-11">
                   <div className="area ">
                      <p>Shopping Cart</p>
@@ -148,23 +157,14 @@ class ALaCarte extends React.Component {
                   {shoppingCartBuilder}
                </div>
             </div>
-            
-            <div className="col-md-8">
-              <div className="row justify-content-around mt-5">
+
+            {/* <div className="col-md-8">
+              <div className="row justify-content-around">
                 <div className="row"> 
                 {singleFilteredProduct}
                 </div>
               </div>
-            </div>
-
-            <div className="col-md-8">
-               <div className="row justify-content-around mt-5">
-                  <div className="row">
-                  {productBuilder}
-                  </div>
-               </div>
-            </div>
-
+            </div> */}
          </div>
       </div>
     );
