@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 import PaymentForm from '../../PaymentForm/PaymentForm';
 import paymentRequests from '../../../helpers/data/paymentRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
@@ -47,7 +48,7 @@ class Payment extends React.Component {
         <tr key={i}>
           <td>{payment.cardName}</td>
           <td>{payment.paymentName}</td>
-          <td>{payment.expDate}</td>
+          <td><Moment format="MM/YY">{payment.expDate}</Moment></td>
           {/* <td>{payment.isActive}</td> */}
           <td><i className="material-icons">&#xE5C8;</i></td>
         </tr>

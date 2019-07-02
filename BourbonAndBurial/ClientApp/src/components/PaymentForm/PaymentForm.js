@@ -77,9 +77,9 @@ class PaymentForm extends React.Component {
     return (
       <div className='PaymentForm'>
         <Form className='container' onSubmit={this.formSubmit}>
-        <Row>
-          <h4 className='form-title'>New Payment</h4>
-        </Row>
+          <Row>
+            <h4 className='form-title'>New Payment</h4>
+          </Row>
           <Row form>
             <Col md>
               <FormGroup>

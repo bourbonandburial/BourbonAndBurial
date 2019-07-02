@@ -5,14 +5,18 @@
   height: 93vh;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   margin-top: 0px;
+  
+  .text-center{
+    margin-right: 165px;
+  }
   
   .card {
     margin-top: 80px;
     padding-top: 30px;
     width: 27rem;
     background-color: maroon;
-
   }
 
   .card-img-top {
@@ -51,6 +55,10 @@
 
   .btn {
     padding: 0rem 1rem;
+  }
+
+  table{
+    margin-left: 17%;
   }
 
   thead {

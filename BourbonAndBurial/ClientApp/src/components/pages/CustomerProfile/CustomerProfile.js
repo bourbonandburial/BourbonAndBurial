@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
+import orderRequests from '../../../helpers/data/orderRequests'
+import SingleOrder from '../SingleOrder/SingleOrder'
+import OrderDetailsPage from '../OrderDetailsPage/OrderDetailsPage'
 import EditModal from '../../EditModal/EditModal';
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
+    orders: [],
     customerToEdit: {},
     isEditing: false,
     showModal: false,
@@ -42,6 +46,21 @@ class CustomerProfile extends React.Component {
       .catch(err => console.error('error setting isActive to false on customer', err));
   }
 
+  displayCustomerOrders = (customerId) => {
+    orderRequests.getCustomerOrders(customerId)
+      .then((data) => {
+        this.setState({ orders: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  displaySingleOrder = (orderId) => {
+    orderRequests.getSingleOrder(orderId)
+      .then((data) => {
+        this.setState({ orders: data });
+        console.log(orderId)
+      }).catch(err => console.error('error getting products', err));
+  }
+
   editFormCustomer = () => {
     const customerFbId = this.props.customerObject.firebaseId;
     customerRequests.getSingleCustomer(customerFbId)
@@ -68,6 +87,13 @@ class CustomerProfile extends React.Component {
     }).catch(err => console.error('error in adding customer', err));
   }
 
+  componentDidMount() {
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      this.displayCustomerOrders(customer.customerId);
+    });
+  }
+
   render() {
     const { isEditing, showModal } = this.state;
     const { customerObject } = this.props;
@@ -80,11 +106,24 @@ class CustomerProfile extends React.Component {
       }
     }
 
+    const orderBuilder = this.state.orders.map((order) => {
+      return (
+        <SingleOrder
+          orderId={order.orderId}
+          key={order.orderId}
+          customerId={order.customerId}
+          paymentTypeId={order.paymentTypeId}
+          orderDate={order.orderDate}
+          displaySingleOrder={this.displaySingleOrder}
+        />);
+    });
+
+
     return (
       <div className='CustomerProfile'>
-        <div className="container">
+        <div className="container mx-auto">
           <div className="row text-center">
-            <div className="col-lg-4 mx-auto">
+            <div className="col-lg-3 mx-auto">
               <div className="card">
                 <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
                 <div className="card-block">
@@ -97,7 +136,7 @@ class CustomerProfile extends React.Component {
                   </p>
                   <div className="card-footer">
                     <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
-                    <Link to='/payment'>
+                    <Link to='/payments'>
                       <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
                     </Link>
                     <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
@@ -105,10 +144,13 @@ class CustomerProfile extends React.Component {
                 </div>
               </div>
             </div>
-            <table className="table table-striped table-hover table-light mt-5">
+          </div>
+          <div>
+            <table className="table table-striped table-hover table-light mt-5 mx-auto">
               <thead>
                 <tr>
                   <th>Order #</th>
+                  <th>Customer #</th>
                   <th>Order Date</th>
                   <th>Base Package</th>
                   <th>Location</th>
@@ -118,48 +160,22 @@ class CustomerProfile extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>13214</td>
-                  <td>Jun 15, 2017</td>
-                  <td>Cremation</td>
-                  <td>London</td>
-                  <td><span className="status text-success">&bull;</span> Delivered</td>
-                  <td>$300</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13215</td>
-                  <td>Jun 22, 2019</td>
-                  <td>Mausoleum</td>
-                  <td>Murfreesboro</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$3123</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13216</td>
-                  <td>Jun 18, 2019</td>
-                  <td>Burial</td>
-                  <td>Nashville</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$1728</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
+                {orderBuilder}
               </tbody>
             </table>
           </div>
+          <EditModal
+            showModal={showModal}
+            currentCustomer={customerObject}
+            isEditing={isEditing}
+            editFormSubmitEvent={this.editFormSubmitEvent}
+            modalCloseEvent={this.modalCloseEvent}
+          />
         </div>
-        <EditModal
-          showModal={showModal}
-          currentCustomer={customerObject}
-          isEditing={isEditing}
-          editFormSubmitEvent={this.editFormSubmitEvent}
-          modalCloseEvent={this.modalCloseEvent}
-        />
       </div>
     );
-  }
+  };
 }
 
-export default CustomerProfile;
 
+export default CustomerProfile;
