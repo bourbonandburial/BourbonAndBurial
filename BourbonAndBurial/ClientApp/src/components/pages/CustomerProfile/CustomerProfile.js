@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
+import orderRequests from '../../../helpers/data/orderRequests'
+import SingleOrder from '../SingleOrder/SingleOrder'
+import OrderDetailsPage from '../OrderDetailsPage/OrderDetailsPage'
 import EditModal from '../../EditModal/EditModal';
 
 class CustomerProfile extends React.Component {
   state = {
     firebaseUser: {},
+    orders: [],
     customerToEdit: {},
     isEditing: false,
     showModal: false,
@@ -17,15 +21,6 @@ class CustomerProfile extends React.Component {
     logoutClickEvent: PropTypes.func,
     updateCustomer: PropTypes.func,
     customerObject: PropTypes.object,
-  }
-
-  componentDidMount() {
-    const customerFbId = authRequests.getCurrentUser().uid;
-    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
-      this.setState({
-        customerObject: customer,
-      });
-    });
   }
 
   showModal = () => {
@@ -50,8 +45,23 @@ class CustomerProfile extends React.Component {
       .catch(err => console.error('error setting isActive to false on customer', err));
   }
 
+  displayCustomerOrders = (customerId) => {
+    orderRequests.getCustomerOrders(customerId)
+      .then((data) => {
+        this.setState({ orders: data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  displaySingleOrder = (orderId) => {
+    orderRequests.getSingleOrder(orderId)
+    .then((data) => {
+        this.setState({ orders: data });
+        console.log(orderId)
+    }).catch(err => console.error('error getting products', err));
+}
+
   editFormCustomer = () => {
-    const customerFbId = this.state.customerObject.firebaseId;
+    const customerFbId = this.props.customerObject.firebaseId;
     customerRequests.getSingleCustomer(customerFbId)
       .then((currentCustomer) => {
         const tempCustomer = currentCustomer;
@@ -75,6 +85,13 @@ class CustomerProfile extends React.Component {
       });
     }).catch(err => console.error('error in adding customer', err));
   }
+  
+  componentDidMount() {
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      this.displayCustomerOrders(customer.customerId);
+    });  
+  }
 
   render() {
     const { isEditing, showModal } = this.state;
@@ -88,14 +105,27 @@ class CustomerProfile extends React.Component {
       }
     }
 
+    const orderBuilder = this.state.orders.map((order) => {
+      return (
+      <SingleOrder
+        orderId={order.orderId}
+        key={order.orderId}
+        customerId = {order.customerId}
+        paymentTypeId={order.paymentTypeId}
+        orderDate = {order.orderDate}
+        displaySingleOrder = {this.displaySingleOrder}
+      />);
+    });
+  
+    
     return (
       <div className='CustomerProfile'>
         <div className="container">
           <div className="row text-center">
-            <div className="col-lg-4 mx-auto">
+            <div className="col-lg-3 mx-auto">
               <div className="card">
-                <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
-                <div className="card-block">
+              <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>                
+              <div className="card-block">
                   <h4 className="card-title mt-2">{customerObject.displayName}</h4>
                   <p className="card-position">
                     <i className="material-icons">place</i>{displayAddress()}
@@ -111,48 +141,23 @@ class CustomerProfile extends React.Component {
                 </div>
               </div>
             </div>
+            <div>
             <table className="table table-striped table-hover table-light mt-5">
-              <thead>
-                <tr>
-                  <th>Order #</th>
-                  <th>Order Date</th>
-                  <th>Base Package</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Net Amount</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>13214</td>
-                  <td>Jun 15, 2017</td>
-                  <td>Cremation</td>
-                  <td>London</td>
-                  <td><span className="status text-success">&bull;</span> Delivered</td>
-                  <td>$300</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13215</td>
-                  <td>Jun 22, 2019</td>
-                  <td>Mausoleum</td>
-                  <td>Murfreesboro</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$3123</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-                <tr>
-                  <td>13216</td>
-                  <td>Jun 18, 2019</td>
-                  <td>Burial</td>
-                  <td>Nashville</td>
-                  <td><span className="status text-warning">&bull;</span> Pending</td>
-                  <td>$1728</td>
-                  <td><a href="/orders" className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
-                </tr>
-              </tbody>
-            </table>
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Customer #</th>
+                      <th>Order Date</th>
+                      <th>Base Package</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Net Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>{orderBuilder}</tbody>
+              </table>
+            </div>
           </div>
         </div>
         <EditModal
@@ -164,8 +169,8 @@ class CustomerProfile extends React.Component {
         />
       </div>
     );
-  }
+  };
 }
 
-export default CustomerProfile;
 
+export default CustomerProfile;

@@ -27,6 +27,23 @@ namespace BourbonAndBurial.Controllers
             return Ok(orders);
         }
 
+        [HttpGet("{orderId}")]
+
+        public ActionResult GetSingleOrder(int OrderId)
+        {
+            var order = _orderRepository.GetSingleOrder(OrderId);
+
+            return Ok(order);
+        }
+
+        [HttpGet("customer/{customerId}")]
+        public ActionResult GetCustomerOrders(int customerId)
+        {
+            var customerOrders = _orderRepository.GetCustomerOrders(customerId);
+
+            return Ok(customerOrders);
+        }
+
         [HttpPost]
         public ActionResult AddOrder(CreateOrderRequest createRequest)
         {
