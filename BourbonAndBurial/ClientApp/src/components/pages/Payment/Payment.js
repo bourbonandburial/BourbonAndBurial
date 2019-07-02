@@ -34,6 +34,7 @@ class Payment extends React.Component {
   paymentSubmitEvent = (newCustomerPayment) => {
     console.log(newCustomerPayment);
     paymentRequests.createCustomerPayment(newCustomerPayment).then(() => {
+      this.getCustomerPayments(newCustomerPayment.customerId);
     }).catch(err => console.error('error creating payments for customer', err));
   }
 
