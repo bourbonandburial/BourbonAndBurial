@@ -139,8 +139,8 @@ class ALaCarte extends React.Component {
                placeholder='Search by Brand Name or Description'
                onChange={this.onChange}
                />
-               <div className="cart ">
-            <div className=" textSizeAla ">
+               <div className="cart mt-2">
+            <div className=" textSizeAla mr-n2">
                <div className="area ">
                   <p>Shopping Cart</p>
                </div>

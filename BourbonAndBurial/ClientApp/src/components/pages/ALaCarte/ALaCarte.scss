@@ -19,17 +19,18 @@
 }
 
 .searchCart{
-  position:sticky !important;
+  // position:sticky !important;
 
   margin-left: 600px !important;
 }
 
 .textAla{
   font-size: 40px;
+
 }
 
 .cart {
-    position: sticky;
+    max-height: 200px !important;
 
  
 }
