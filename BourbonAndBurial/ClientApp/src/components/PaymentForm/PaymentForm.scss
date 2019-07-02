@@ -1,14 +1,23 @@
-.PaymentForm {  
+.PaymentForm {
+  background-color: maroon;
+  color: ghostwhite;
+  padding: 1.5rem;
+  width: 50rem;  
   .form-control:focus{
     border-color: ghostwhite;
   }
   .btn {
-    border-color: maroon;
+    border-color: ghostwhite;
     background-color: maroon;
     color: ghostwhite;
   }
   .btn:hover {
+    border-color: maroon;
     background-color: ghostwhite;
     color: maroon;
+  }
+
+  .form-title {
+    color:ghostwhite;
   }
 }

@@ -5,4 +5,28 @@
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: 0px;
+
+  thead {
+    tr {
+      background-color: maroon;
+      color: ghostwhite;
+    }
+
+  }
+  tbody {
+    td {
+      i {
+        color: #212529;
+      }
+      img {
+        color: #212529;
+      }
+    }
+  }
+
+  .p-form {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+  }
 }

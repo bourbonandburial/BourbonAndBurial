@@ -19,7 +19,7 @@ class Payment extends React.Component {
     const customerFbId = authRequests.getCurrentUser().uid;
     customerRequests.getSingleCustomer(customerFbId).then((customer) => {
       this.getCustomerPayments(customer.customerId);
-    });  
+    });
   }
 
   getCustomerPayments = (customerId) => {
@@ -39,15 +39,45 @@ class Payment extends React.Component {
 
 
   render() {
+    const { payments } = this.state;
     const { customerObject } = this.props;
+
+    const paymentItems = payments.map((payment, i) => {
+      return (
+        <tr key={i}>
+          <td>{payment.cardName}</td>
+          <td>{payment.paymentName}</td>
+          <td>{payment.expDate}</td>
+          {/* <td>{payment.isActive}</td> */}
+          <td><i className="material-icons">&#xE5C8;</i></td>
+        </tr>
+      );
+    });
 
     return (
       <div className='Payment'>
-        <h2>Payments</h2>
-        <PaymentForm
-          customerObject={customerObject}
-          onSubmit={this.paymentSubmitEvent}
-        />
+        <div className='container pt-5'>
+          <table className="table table-striped table-hover table-light">
+            <thead>
+              <tr>
+                <th>Card Name</th>
+                <th>Card Type</th>
+                <th>Expiration Date</th>
+                {/* <th>Status</th> */}
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paymentItems}
+            </tbody>
+          </table>
+        </div>
+        <div className='container p-form'>
+          <PaymentForm
+            customerObject={customerObject}
+            onSubmit={this.paymentSubmitEvent}
+          />
+        </div>
       </div>
     )
   }

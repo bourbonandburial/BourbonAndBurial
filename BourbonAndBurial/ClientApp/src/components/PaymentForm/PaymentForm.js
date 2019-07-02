@@ -77,6 +77,9 @@ class PaymentForm extends React.Component {
     return (
       <div className='PaymentForm'>
         <Form className='container' onSubmit={this.formSubmit}>
+        <Row>
+          <h4 className='form-title'>New Payment</h4>
+        </Row>
           <Row form>
             <Col md>
               <FormGroup>
@@ -106,7 +109,7 @@ class PaymentForm extends React.Component {
                 </Input>
               </FormGroup>
             </Col>
-            <Col md={6}>
+            <Col md={5}>
               <FormGroup>
                 <Label for='acctNumber' size='sm' className='modal-label'>Card Number</Label>
                 <Input
@@ -121,7 +124,7 @@ class PaymentForm extends React.Component {
                 />
               </FormGroup>
             </Col>
-            <Col md={2}>
+            <Col md={3}>
               <FormGroup>
                 <Label for='expDate' size='sm' className='modal-label'>Exp Date</Label>
                 <Input
