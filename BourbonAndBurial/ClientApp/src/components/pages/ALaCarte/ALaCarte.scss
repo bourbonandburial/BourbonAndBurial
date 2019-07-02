@@ -27,9 +27,13 @@
 
 }
 .cart {
-    margin-left: 65%;
+    // margin-left: 65%;
+    
     position: sticky !important;
-    top:0 !important;
+   position: absolute !important;
+   top: 100px !important;
+    right: 20px !important;
+   // top:0 !important;
 }
 
 .parallax {

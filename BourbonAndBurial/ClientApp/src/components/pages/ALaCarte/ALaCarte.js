@@ -142,7 +142,7 @@ class ALaCarte extends React.Component {
 
             <div className="col-md-8">
                <div className="row justify-content-around mt-5">
-                  <div className="row justify-content-between">
+                  <div className="row">
                   {singleFilteredProduct}
                   {productBuilder}
                   </div>
