@@ -17,7 +17,7 @@ class SingleOrder extends React.Component {
       <tr>
         <td>{this.props.orderId}</td>
         <td>{this.props.customerId}</td>
-        <td><Moment format="YYYY/MM/DD">{this.props.orderDate}</Moment></td>
+        <td><Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></td>
         <td>Cremation</td>
         <td>London</td>
         <td><span className="status text-success">&bull;</span> Delivered</td>
