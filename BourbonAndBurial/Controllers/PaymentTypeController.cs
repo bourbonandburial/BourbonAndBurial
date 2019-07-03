@@ -36,21 +36,26 @@ namespace BourbonAndBurial.Controllers
             return Ok(activePayments);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult GetSinglePaymentType(int id)
-        {
-            var singlePaymentType = _paymentRepository.GetSinglePaymentType(id);
+        //[HttpGet("{id}")]
+        //public ActionResult GetSinglePaymentType(int id)
+        //{
+        //    var singlePaymentType = _paymentRepository.GetSinglePaymentType(id);
 
-            return Ok(singlePaymentType);
+        //    return Ok(singlePaymentType);
+        //}
+
+        [HttpGet("{customerId}")]
+        public ActionResult GetCustomerPayments(int customerId)
+        {
+            var customerPayments = _paymentRepository.GetCustomerActivePayments(customerId);
+
+            return Ok(customerPayments);
         }
 
         [HttpPost]
-        public ActionResult AddNewPaymentType(CreatePaymentTypeRequest createRequest)
+        public ActionResult AddNewPaymentType(CreatePaymentTypeRequest newPaymentObject)
         {
-            var newPaymentType = _paymentRepository.AddPayment(
-                createRequest.PaymentName,
-                createRequest.AcctNumber,
-                createRequest.CustomerId);
+            var newPaymentType = _paymentRepository.AddPayment(newPaymentObject);
 
             return Created($"api/payments/{newPaymentType.PaymentTypeId}", newPaymentType);
         }

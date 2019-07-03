@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import authRequests from '../../../helpers/data/authRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import './CustomerProfile.scss';
@@ -54,11 +55,11 @@ class CustomerProfile extends React.Component {
 
   displaySingleOrder = (orderId) => {
     orderRequests.getSingleOrder(orderId)
-    .then((data) => {
+      .then((data) => {
         this.setState({ orders: data });
         console.log(orderId)
-    }).catch(err => console.error('error getting products', err));
-}
+      }).catch(err => console.error('error getting products', err));
+  }
 
   editFormCustomer = () => {
     const customerFbId = this.props.customerObject.firebaseId;
@@ -85,12 +86,12 @@ class CustomerProfile extends React.Component {
       });
     }).catch(err => console.error('error in adding customer', err));
   }
-  
+
   componentDidMount() {
     const customerFbId = authRequests.getCurrentUser().uid;
     customerRequests.getSingleCustomer(customerFbId).then((customer) => {
       this.displayCustomerOrders(customer.customerId);
-    });  
+    });
   }
 
   render() {
@@ -107,25 +108,25 @@ class CustomerProfile extends React.Component {
 
     const orderBuilder = this.state.orders.map((order) => {
       return (
-      <SingleOrder
-        orderId={order.orderId}
-        key={order.orderId}
-        customerId = {order.customerId}
-        paymentTypeId={order.paymentTypeId}
-        orderDate = {order.orderDate}
-        displaySingleOrder = {this.displaySingleOrder}
-      />);
+        <SingleOrder
+          orderId={order.orderId}
+          key={order.orderId}
+          customerId={order.customerId}
+          paymentTypeId={order.paymentTypeId}
+          orderDate={order.orderDate}
+          displaySingleOrder={this.displaySingleOrder}
+        />);
     });
-  
-    
+
+
     return (
       <div className='CustomerProfile'>
-        <div className="container">
+        <div className="container mx-auto">
           <div className="row text-center">
             <div className="col-lg-3 mx-auto">
               <div className="card">
-              <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>                
-              <div className="card-block">
+                <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
+                <div className="card-block">
                   <h4 className="card-title mt-2">{customerObject.displayName}</h4>
                   <p className="card-position">
                     <i className="material-icons">place</i>{displayAddress()}
@@ -135,38 +136,42 @@ class CustomerProfile extends React.Component {
                   </p>
                   <div className="card-footer">
                     <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
-                    <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
+                    <Link to='/payments'>
+                      <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
+                    </Link>
                     <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-            <table className="table table-striped table-hover table-light mt-5">
-                  <thead>
-                    <tr>
-                      <th>Order #</th>
-                      <th>Customer #</th>
-                      <th>Order Date</th>
-                      <th>Base Package</th>
-                      <th>Location</th>
-                      <th>Status</th>
-                      <th>Net Amount</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>{orderBuilder}</tbody>
-              </table>
-            </div>
           </div>
+          <div>
+            <table className="table table-striped table-hover table-light mt-5 mx-auto">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer #</th>
+                  <th>Order Date</th>
+                  <th>Base Package</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Net Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderBuilder}
+              </tbody>
+            </table>
+          </div>
+          <EditModal
+            showModal={showModal}
+            currentCustomer={customerObject}
+            isEditing={isEditing}
+            editFormSubmitEvent={this.editFormSubmitEvent}
+            modalCloseEvent={this.modalCloseEvent}
+          />
         </div>
-        <EditModal
-          showModal={showModal}
-          currentCustomer={customerObject}
-          isEditing={isEditing}
-          editFormSubmitEvent={this.editFormSubmitEvent}
-          modalCloseEvent={this.modalCloseEvent}
-        />
       </div>
     );
   };

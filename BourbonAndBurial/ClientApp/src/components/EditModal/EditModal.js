@@ -175,7 +175,8 @@ class EditModal extends React.Component {
                     {/* {isPhoneNumberNull()} */}
                     <Input
                       className='cool-border'
-                      type='text'
+                      type="text"
+                      // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                       name='phone'
                       id='phoneNumber'
                       onChange={this.phoneNumberChange}
