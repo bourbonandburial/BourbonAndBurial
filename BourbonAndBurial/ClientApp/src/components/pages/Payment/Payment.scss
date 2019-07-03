@@ -6,6 +6,8 @@
   background-repeat: no-repeat;
   margin-top: 0px;
 
+
+
   thead {
     tr {
       background-color: maroon;
@@ -21,6 +23,17 @@
       img {
         color: #212529;
       }
+    }
+  }
+
+  .action-icons {
+    .btn {
+      padding: 0rem 1rem;
+    }
+    display: flex;
+    justify-content: space-around;
+    i {
+      color: maroon;
     }
   }
 

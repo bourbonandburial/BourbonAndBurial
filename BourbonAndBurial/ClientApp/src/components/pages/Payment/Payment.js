@@ -51,7 +51,11 @@ class Payment extends React.Component {
           <td>{payment.paymentName}</td>
           <td><Moment format="MM/YY">{payment.expDate}</Moment></td>
           {/* <td>{payment.isActive}</td> */}
-          <td><i className="material-icons">&#xE5C8;</i></td>
+          <td className='action-icons'>
+            <button type="button" className="btn btn-link payment-edit"><i className="material-icons">edit</i></button>
+            <button type="button" className="btn btn-link payment-delete"><i className="material-icons">delete</i></button>
+            <button type="button" className="btn btn-link payment-select"><i className="material-icons">forward</i></button>
+          </td>
         </tr>
       );
     });

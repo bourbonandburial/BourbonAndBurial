@@ -102,6 +102,7 @@ class PaymentForm extends React.Component {
               <FormGroup>
                 <Label for='paymentName' size='sm' className='modal-label'>Payment Type</Label>
                 <Input type='select' id='paymentName' className='cool-border' name='paymentName' value={newPayment.paymentName} onChange={this.paymentNameChange}>
+                  <option value="" disabled className="text-hide">-Select-</option>
                   <option value='Visa'>Visa</option>
                   <option value='MasterCard'>MasterCard</option>
                   <option value='American Express'>American Express</option>
