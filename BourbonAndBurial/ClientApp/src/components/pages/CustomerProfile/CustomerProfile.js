@@ -16,6 +16,7 @@ class CustomerProfile extends React.Component {
     customerToEdit: {},
     isEditing: false,
     showModal: false,
+    customer: {}
   }
 
   static propTypes = {
@@ -75,9 +76,9 @@ class CustomerProfile extends React.Component {
       .catch(error => console.error(error));
   };
 
-  editFormSubmitEvent = (updatedCustomer) => {
+  editFormSubmitEvent = (customerToUpdate) => {
     const { updateCustomer } = this.props;
-    customerRequests.updatedCustomer(updatedCustomer).then(() => {
+    customerRequests.updatedCustomer(customerToUpdate).then(() => {
       updateCustomer();
       this.setState({
         showModal: false,
@@ -91,18 +92,27 @@ class CustomerProfile extends React.Component {
     const customerFbId = authRequests.getCurrentUser().uid;
     customerRequests.getSingleCustomer(customerFbId).then((customer) => {
       this.displayCustomerOrders(customer.customerId);
+      this.setState({ customer: customer})
     });
   }
 
   render() {
-    const { isEditing, showModal } = this.state;
+    const { isEditing, showModal, customer } = this.state;
     const { customerObject } = this.props;
 
+    // const displayAddress = () => {
+    //   if (customerObject.address2 === null || customerObject.address2 === '') {
+    //     return `${customerObject.address1}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
+    //   } else {
+    //     return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
+    //   }
+    // }
+
     const displayAddress = () => {
-      if (customerObject.address2 === null) {
-        return `${customerObject.address1}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
+      if (customer.address2 === null || customer.address2 === '') {
+        return `${customer.address1}, ${customer.city}, ${customer.state} ${customer.zipcode}`;
       } else {
-        return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
+        return `${customer.address1}, ${customer.address2}, ${customer.city}, ${customer.state} ${customer.zipcode}`;
       }
     }
 
@@ -119,27 +129,83 @@ class CustomerProfile extends React.Component {
     });
 
 
+    // return (
+    //   <div className='CustomerProfile'>
+    //     <div className="container mx-auto">
+    //       <div className="row text-center">
+    //         <div className="col-lg-3 mx-auto">
+    //           <div className="card">
+    //             <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
+    //             <div className="card-block">
+    //               <h4 className="card-title mt-2">{customerObject.displayName}</h4>
+    //               <p className="card-position">
+    //                 <i className="material-icons">place</i>{displayAddress()}
+    //               </p>
+    //               <p className="card-position">
+    //                 <i className="material-icons">phone</i>{customerObject.phoneNumber}
+    //               </p>
+    //               <div className="card-footer">
+    //                 <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
+    //                 <Link to='/payments'>
+    //                   <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
+    //                 </Link>
+    //                 <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //       <div>
+    //         <table className="table table-striped table-hover table-light mt-5 mx-auto">
+    //           <thead>
+    //             <tr>
+    //               <th>Order #</th>
+    //               <th>Customer #</th>
+    //               <th>Order Date</th>
+    //               <th>Base Package</th>
+    //               <th>Location</th>
+    //               <th>Status</th>
+    //               <th>Net Amount</th>
+    //               <th>Action</th>
+    //             </tr>
+    //           </thead>
+    //           <tbody>
+    //             {orderBuilder}
+    //           </tbody>
+    //         </table>
+    //       </div>
+    //       <EditModal
+    //         showModal={showModal}
+    //         currentCustomer={customerObject}
+    //         isEditing={isEditing}
+    //         editFormSubmitEvent={this.editFormSubmitEvent}
+    //         modalCloseEvent={this.modalCloseEvent}
+    //       />
+    //     </div>
+    //   </div>
+    // );
+
     return (
       <div className='CustomerProfile'>
         <div className="container mx-auto">
           <div className="row text-center">
             <div className="col-lg-3 mx-auto">
               <div className="card">
-                <img className="card-img-top img-circle rounded-circle" src={customerObject.photo} alt="profile-pic"></img>
+                <img className="card-img-top img-circle rounded-circle" src={customer.photo} alt="profile-pic"></img>
                 <div className="card-block">
-                  <h4 className="card-title mt-2">{customerObject.displayName}</h4>
+                  <h4 className="card-title mt-2">{customer.displayName}</h4>
                   <p className="card-position">
                     <i className="material-icons">place</i>{displayAddress()}
                   </p>
                   <p className="card-position">
-                    <i className="material-icons">phone</i>{customerObject.phoneNumber}
+                    <i className="material-icons">phone</i>{customer.phoneNumber}
                   </p>
                   <div className="card-footer">
-                    <button type="button" className="btn btn-link profile-edit" id={customerObject.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
+                    <button type="button" className="btn btn-link profile-edit" id={customer.firebaseId} onClick={this.editFormCustomer}><i className="material-icons">edit</i></button>
                     <Link to='/payments'>
                       <button type="button" className="btn btn-link profile-payment"><i className="material-icons">credit_card</i></button>
                     </Link>
-                    <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customerObject.firebaseId)}><i className="material-icons">delete</i></button>
+                    <button type="button" className="btn btn-link profile-delete" onClick={() => this.deleteCustomer(customer.firebaseId)}><i className="material-icons">delete</i></button>
                   </div>
                 </div>
               </div>
@@ -166,10 +232,11 @@ class CustomerProfile extends React.Component {
           </div>
           <EditModal
             showModal={showModal}
-            currentCustomer={customerObject}
+            // currentCustomer={customerObject}
             isEditing={isEditing}
             editFormSubmitEvent={this.editFormSubmitEvent}
             modalCloseEvent={this.modalCloseEvent}
+            currentCustomer={customer}
           />
         </div>
       </div>
