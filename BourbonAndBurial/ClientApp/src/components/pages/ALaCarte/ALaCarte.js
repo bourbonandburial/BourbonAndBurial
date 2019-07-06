@@ -26,8 +26,11 @@ class ALaCarte extends React.Component {
     productRequests.getSingleProduct(productId).then((results) => {
       console.log(results);
       let newShoppingCart = this.state.shoppingCart; 
+      let productPrice = this.state.total;
       newShoppingCart.push(results);
-      this.setState({shoppingCart: newShoppingCart});
+      productPrice.push(results.price);
+      this.setState({shoppingCart: newShoppingCart})
+      this.setState({total: productPrice})
     })
       .catch(err => console.error('error with add to cart', err));
   };
@@ -36,6 +39,7 @@ class ALaCarte extends React.Component {
   removeFromCart = (productId, state) => {
 
     let newArray = state;
+    // let newTotal = this.state.total;
     
     for(let i = 0; i < state.length; i++){
       if (productId === state[i].productId){
@@ -44,13 +48,6 @@ class ALaCarte extends React.Component {
         break;
       }
     }
-
-    // state.forEach(function(element) {
-    //     if (productId === element.productId) {
-    //         let productIdIndex = newArray.indexOf(element);
-    //         newArray.splice(productIdIndex, 1);
-    //     }
-    //});
     this.setState({
       shoppingCart: newArray
   });
@@ -135,12 +132,12 @@ class ALaCarte extends React.Component {
             </div>
             <div className="searchCart">
             <SearchField 
-               className=" searchField col-sm-6 searchCart mx-auto"
+               className="searchField col-sm-6 searchCart mx-auto"
                placeholder='Search by Brand Name or Description'
                onChange={this.onChange}
                />
                <div className="cart mt-2">
-            <div className=" textSizeAla mr-n2">
+            <div className="textSizeAla">
                <div className="area ">
                   <p>Shopping Cart</p>
                </div>
