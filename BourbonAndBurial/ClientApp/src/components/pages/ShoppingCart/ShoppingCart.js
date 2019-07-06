@@ -22,13 +22,7 @@ class ShoppingCart extends React.Component {
 
     render() {
         const { removeFromCart, shoppingCart, cartItem, itemCount } = this.props;
-        // const itemCount = shoppingCart
-        //     .Select(item => item)
-        //     .GroupBy(item => item.Count());
-        //     .OrderByDescending(item => item.Count())
-        //     .Select(s => new { s.Key, Number = s.Count() });
-        // })
-         
+
         return (
             <div className="shoppingCartCard">
                 <img className="card-img-top1" src={cartItem.image} alt="Card image cap" />
