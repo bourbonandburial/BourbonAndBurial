@@ -22,6 +22,7 @@ class Home extends React.Component {
   static propTypes = {
     logoutClickEvent: PropTypes.func,
     authed: PropTypes.bool,
+    updateCustomer: PropTypes.func,
   }
 
   getCustomers = () => {
@@ -62,20 +63,24 @@ class Home extends React.Component {
   };
 
   customerFormSubmitEvent = (newCustomer) => {
+    const { updateCustomer } = this.props;
     customerRequests.createCustomer(newCustomer).then(() => {
-    }).catch(err => console.error('error in adding customer', err));
-    this.setState({
-      showModal: false,
-      isRegistered: true,
-    });
-  }
-
-  isActiveSubmitEvent = (updatedCustomer) => {
-    customerRequests.updatedCustomer(updatedCustomer).then(() => {
       this.setState({
         showModal: false,
         isRegistered: true,
       });
+      updateCustomer();
+    }).catch(err => console.error('error in adding customer', err));
+  }
+
+  isActiveSubmitEvent = (customerToUpdate) => {
+    const { updateCustomer } = this.props;
+    customerRequests.updatedCustomer(customerToUpdate).then(() => {
+      this.setState({
+        showModal: false,
+        isRegistered: true,
+      });
+      updateCustomer();
     });
   }
 
@@ -116,7 +121,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { showModal, firebaseUser, isRegistered } = this.state;
+    const { showModal, firebaseUser, isRegistered, currentCustomer } = this.state;
     const { logoutClickEvent } = this.props;
 
     if (!isRegistered) {
@@ -128,6 +133,8 @@ class Home extends React.Component {
             closeModalEvent={this.closeModalEvent}
             firebaseUser={firebaseUser}
             logoutClickEvent={logoutClickEvent}
+            currentCustomer={currentCustomer}
+            isActiveSubmit={this.isActiveSubmitEvent}
           />
         </div>
       );

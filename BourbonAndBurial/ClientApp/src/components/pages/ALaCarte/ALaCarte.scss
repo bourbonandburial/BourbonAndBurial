@@ -1,4 +1,9 @@
 .ALaCarte {
+  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
+  background-attachment: fixed;
+  background-repeat: none;
+  height: 93vh;
+  overflow-y: scroll;
   .builder {
     display: flex;
     flex-wrap: wrap;
@@ -37,11 +42,7 @@
   }
 
   .parallax {
-    background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
-    background-attachment: fixed;
-    background-repeat: none;
-    height: 93vh;
-    overflow-y: scroll;
+
   }
 
   .react-search-field {

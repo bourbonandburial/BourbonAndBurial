@@ -124,40 +124,43 @@ class ALaCarte extends React.Component {
     ));
 
     return (
-      <div className="ALaCarte parallax">
-        <div className="container">
-          <div className="">
-            <div className="textAla col-lg-11 ">
-              <ul>
-                <PackageDisplay package={this.props.match.params.package} />
-              </ul>
-            </div>
-            <div className="searchCart">
-              <SearchField
-                className=" searchField col-sm-6 searchCart mx-auto"
-                placeholder='Search by Brand Name or Description'
-                onChange={this.onChange}
-              />
-              <div className="cart mt-2">
-                <div className=" textSizeAla mr-n2">
-                  <div className="area ">
-                    <p>Shopping Cart</p>
-                  </div>
-                  {shoppingCartBuilder}
-                </div>
+      <div className="ALaCarte">
+        <div className="parallax">
+          <div className="container">
+            <div className="">
+              <div className="textAla col-lg-11 ">
+                <ul>
+                  <PackageDisplay package={this.props.match.params.package} />
+                </ul>
               </div>
+              <div className="searchCart">
+                <SearchField
+                  className=" searchField col-sm-6 searchCart mx-auto"
+                  placeholder='Search by Brand Name or Description'
+                  onChange={this.onChange}
+                />
+                <div className="cart mt-2">
+                  <div className=" textSizeAla mr-n2">
+                    <div className="area ">
+                      <p>Shopping Cart</p>
+                    </div>
+                    {shoppingCartBuilder}
+                  </div>
+                </div>
 
-            </div>
-            <div className=" productDiv col-sm-8">
-              <div className="row justify-content-around mt-5">
-                <div className="row">
-                  {singleFilteredProduct}
-                  {productBuilder}
+              </div>
+              <div className=" productDiv col-sm-8">
+                <div className="row justify-content-around mt-5">
+                  <div className="row">
+                    {singleFilteredProduct}
+                    {productBuilder}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     );
   }

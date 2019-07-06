@@ -54,19 +54,19 @@ class RegisterModal extends React.Component {
 
   formFieldStringState = (name, e) => {
     e.preventDefault();
-    const {currentCustomer} = this.props;
+    const { currentCustomer } = this.props;
     if (currentCustomer !== null && currentCustomer.isActive === false) {
       const tempCustomer = { ...this.state.customerToUpdate };
       tempCustomer[name] = e.target.value;
-        this.setState({
-          customerToUpdate: tempCustomer,
-        });
+      this.setState({
+        customerToUpdate: tempCustomer,
+      });
     } else {
       const tempCustomer = { ...this.state.newCustomer };
       tempCustomer[name] = e.target.value;
-        this.setState({
-          newCustomer: tempCustomer,
-        });
+      this.setState({
+        newCustomer: tempCustomer,
+      });
     }
   };
 

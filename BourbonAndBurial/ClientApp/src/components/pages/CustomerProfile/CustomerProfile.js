@@ -16,6 +16,7 @@ class CustomerProfile extends React.Component {
     customerToEdit: {},
     isEditing: false,
     showModal: false,
+    customer: {}
   }
 
   static propTypes = {
@@ -57,7 +58,6 @@ class CustomerProfile extends React.Component {
     orderRequests.getSingleOrder(orderId)
       .then((data) => {
         this.setState({ orders: data });
-        console.log(orderId)
       }).catch(err => console.error('error getting products', err));
   }
 
@@ -75,9 +75,9 @@ class CustomerProfile extends React.Component {
       .catch(error => console.error(error));
   };
 
-  editFormSubmitEvent = (updatedCustomer) => {
+  editFormSubmitEvent = (customerToUpdate) => {
     const { updateCustomer } = this.props;
-    customerRequests.updatedCustomer(updatedCustomer).then(() => {
+    customerRequests.updatedCustomer(customerToUpdate).then(() => {
       updateCustomer();
       this.setState({
         showModal: false,
@@ -96,10 +96,10 @@ class CustomerProfile extends React.Component {
 
   render() {
     const { isEditing, showModal } = this.state;
-    const { customerObject } = this.props;
+    const {customerObject} = this.props;
 
     const displayAddress = () => {
-      if (customerObject.address2 === null) {
+      if (customerObject.address2 === null || customerObject.address2 === '') {
         return `${customerObject.address1}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
       } else {
         return `${customerObject.address1}, ${customerObject.address2}, ${customerObject.city}, ${customerObject.state} ${customerObject.zipcode}`;
@@ -117,7 +117,6 @@ class CustomerProfile extends React.Component {
           displaySingleOrder={this.displaySingleOrder}
         />);
     });
-
 
     return (
       <div className='CustomerProfile'>
@@ -166,16 +165,15 @@ class CustomerProfile extends React.Component {
           </div>
           <EditModal
             showModal={showModal}
-            currentCustomer={customerObject}
             isEditing={isEditing}
             editFormSubmitEvent={this.editFormSubmitEvent}
             modalCloseEvent={this.modalCloseEvent}
+            currentCustomer={customerObject}
           />
         </div>
       </div>
     );
   };
 }
-
 
 export default CustomerProfile;
