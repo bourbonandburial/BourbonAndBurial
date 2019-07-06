@@ -27,7 +27,7 @@ class ShoppingCart extends React.Component {
             <div className="shoppingCartCard">
                 <img className="card-img-top1" src={cartItem.image} alt="Card image cap" />
                 <div className="card-discription">
-                    <p className="card-text1">Quanity: {1}</p>
+                    <p className="card-text1">Quanity: 1</p>
                     <p className="card-text1">{cartItem.price}</p>
                 </div>
                 <div>

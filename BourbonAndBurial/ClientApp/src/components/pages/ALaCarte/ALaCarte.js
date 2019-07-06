@@ -8,7 +8,7 @@ import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
 const defaultPackage = {
   name: '',
-  price: 0.00,
+  price: 0,
 }
 
 class ALaCarte extends React.Component {
@@ -56,15 +56,11 @@ class ALaCarte extends React.Component {
   getPackageType = () => {
     const type = this.props.match.params.package;
     switch (type) {
-      case 'cremation': return this.setState({ packageSelected: {name: 'cremation', price: 300}, total: 300});
-      case 'burial': return this.setState({ packageSelected: {name: 'burial', price: 1000}, total: 1000});
-      case 'mausoleum': return this.setState({ packageSelected: {name: 'mausoleum', price: 2999}, total: 2999});
+      case 'cremation': return this.setState({ packageSelected: { name: 'Cremation', price: 300 }, total: 300 });
+      case 'burial': return this.setState({ packageSelected: { name: 'Burial', price: 1000 }, total: 1000 });
+      case 'mausoleum': return this.setState({ packageSelected: { name: 'Mausoleum', price: 2999 }, total: 2999 });
       default: return this.packageAmount('', 0);
     }
-  }
-
-  componentDidMount = () => {
-    this.displayProducts();
   }
 
   onChange = (value, event) => {
@@ -83,13 +79,12 @@ class ALaCarte extends React.Component {
     }
   }
 
-  submitOrder = e => {
-    e.preventDefault();
-    return console.log(this.state.shoppingCart);
-  }
-
   componentWillMount() {
     this.getPackageType();
+  }
+
+  componentDidMount = () => {
+    this.displayProducts();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -98,21 +93,12 @@ class ALaCarte extends React.Component {
       this.state.shoppingCart.forEach((item) => {
         tempTotal += item.price;
       })
-      this.setState({ total: tempTotal });
+      this.setState({ total: Number(tempTotal).toFixed(2) });
     }
   }
 
   render() {
     const { filteredProducts, shoppingCart, total, packageSelected } = this.state;
-
-    // const itemCount = itemId => {
-    //   if (shoppingCart.find(item => item.productId === itemId)) {
-    //     const itemCount = shoppingCart.filter(item => item.productId === itemId).length;
-    //     return itemCount
-    //   } else {
-    //     return itemCount = 1;
-    //   // }
-    // }
 
     const productBuilder = this.state.products.map((product) => {
       return (
@@ -131,25 +117,14 @@ class ALaCarte extends React.Component {
     });
 
     const shoppingCartBuilder = shoppingCart.map((cartItem, i) => {
-      // console.log(shoppingCart.filter(item => item.productId === cartItem.productId));
-      // if (shoppingCart.filter(item => item.productId === cartItem.productId)) {
-
-      // } else {
       return (
         <ShoppingCart
           key={i}
-          // productId={cartItem.productId}
-          // price={cartItem.price}
-          // image={cartItem.image}
-          // discription={cartItem.productDescription}
-          // quantity={cartItem.quantity}
           shoppingCart={this.state.shoppingCart}
           removeFromCart={this.removeFromCart}
           cartItem={cartItem}
-        // itemCount={itemCount(cartItem.productId)}
         />
       );
-      // }
     });
 
     const singleFilteredProduct = filteredProducts.map(product => (
@@ -190,7 +165,7 @@ class ALaCarte extends React.Component {
                     <h5>Package: {packageSelected.name}</h5>
                     {shoppingCartBuilder}
                     <h5 className='cart-total'>Total: ${total}</h5>
-                    <button type='button' className='btn submit-order-btn' onClick={this.submitOrder}>Complete Order</button>
+                    <button type='button' className='btn submit-order-btn'>Complete Order</button>
                   </div>
                 </div>
 
