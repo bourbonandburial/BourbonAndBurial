@@ -1,0 +1,45 @@
+.Payment {
+  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity1.png?raw=true");
+  min-height: 770px; 
+  height: 93vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 0px;
+
+
+
+  thead {
+    tr {
+      background-color: maroon;
+      color: ghostwhite;
+    }
+
+  }
+  tbody {
+    td {
+      i {
+        color: #212529;
+      }
+      img {
+        color: #212529;
+      }
+    }
+  }
+
+  .action-icons {
+    .btn {
+      padding: 0rem 1rem;
+    }
+    display: flex;
+    justify-content: space-around;
+    i {
+      color: maroon;
+    }
+  }
+
+  .p-form {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+}

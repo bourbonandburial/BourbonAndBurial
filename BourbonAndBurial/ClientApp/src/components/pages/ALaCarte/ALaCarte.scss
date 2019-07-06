@@ -1,53 +1,56 @@
-.builder {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-.la-text{
-    margin-top: 20px;
-}
-
-.area {
-  justify-content: center !important;
-}
-
-.textSizeAla {
-    font-size: 40px;
-    width: 500px;
-    border: 7px solid black;
-    padding-bottom: 20%;
-}
-
-.searchCart{
-  // position:sticky !important;
-
-  margin-left: 600px !important;
-}
-
-.textAla{
-  font-size: 40px;
-
-}
-
-.cart {
-    max-height: 200px !important;
-
- 
-}
-
-.parallax {
+.ALaCarte {
   background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
   background-attachment: fixed;
   background-repeat: none;
   height: 93vh;
   overflow-y: scroll;
-}
+  .builder {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-.react-search-field {
-  margin: 30px 0px -100px 220px;
-  width: 300px;
-}
+  .la-text{
+      margin-top: 20px;
+  }
 
-.productDiv{
-  margin-top: -300px !important;
+  .area {
+    justify-content: center !important;
+  }
+
+  .textSizeAla {
+      font-size: 40px;
+      width: 500px;
+      border: 7px solid black;
+      padding-bottom: 20%;
+  }
+
+  .searchCart{
+    // position:sticky !important;
+
+    margin-left: 600px !important;
+  }
+
+  .textAla{
+    font-size: 40px;
+
+  }
+
+  .cart {
+      max-height: 200px !important;
+
+  
+  }
+
+  .parallax {
+
+  }
+
+  .react-search-field {
+    margin: 30px 0px 20px 220px;
+    width: 300px;
+  }
+
+  .productDiv{
+    margin-top: -300px !important;
+  }
 }
