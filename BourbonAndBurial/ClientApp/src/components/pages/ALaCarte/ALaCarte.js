@@ -7,6 +7,9 @@ import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
 import PackageDisplay from '../PackageDisplay/PackageDisplay'
 import orderRequests from '../../../helpers/data/orderRequests';
+import paymentRequests from '../../../helpers/data/paymentRequests';
+import customerRequests from '../../../helpers/data/customerRequests';
+import authRequests from '../../../helpers/data/authRequests';
 
 const defaultPackage = {
   name: '',
@@ -32,6 +35,7 @@ class ALaCarte extends React.Component {
     total: 0,
     packageSelected: defaultPackage,
     newOrder: defaultOrder,
+    payments: [],
   }
 
   displayProducts = () => {
@@ -76,10 +80,6 @@ class ALaCarte extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    this.displayProducts();
-  }
-
   onChange = (value, event) => {
     const { products } = this.state;
     const filteredProducts = [];
@@ -96,6 +96,14 @@ class ALaCarte extends React.Component {
     }
   }
 
+  formFieldStringState = (name, e) => {
+    const tempOrder = { ...this.state.newOrder };
+    tempOrder[name] = e.target.value;
+    this.setState({ newOrder: tempOrder });
+  }
+
+  paymentChange = e => this.formFieldStringState('paymentTypeId', e);
+
   onSubmit = newOrder => {
     orderRequests.addOrder(newOrder).then((results) => {
       console.log(results.data);
@@ -109,7 +117,7 @@ class ALaCarte extends React.Component {
     const { total } = this.state;
     const newOrder = { ...this.state.newOrder };
     const currentDate = new Date();
-    newOrder.paymentTypeId = 3; // need to figure out how to get paymentTypeId
+    console.log(newOrder.paymentTypeId);
     newOrder.customerId = customerObject.customerId;
     newOrder.orderDate = currentDate;
     newOrder.total = Number(total);
@@ -124,6 +132,17 @@ class ALaCarte extends React.Component {
     this.getPackageType();
   }
 
+  componentDidMount = () => {
+    this.displayProducts();
+
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      paymentRequests.getCustomerPayments(customer.customerId).then((results) => {
+        this.setState({ payments: results });
+      });
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.shoppingCart !== this.state.shoppingCart) {
       let tempTotal = this.state.packageSelected.price;
@@ -135,7 +154,7 @@ class ALaCarte extends React.Component {
   }
 
   render() {
-    const { filteredProducts, shoppingCart, total, packageSelected } = this.state;
+    const { filteredProducts, shoppingCart, total, packageSelected, payments, newOrder } = this.state;
 
     // const itemCount = itemId => {
     //   if (shoppingCart.find(item => item.productId === itemId)) {
@@ -198,6 +217,12 @@ class ALaCarte extends React.Component {
       />
     ));
 
+    const buildPaymentDropdown = payments.map(payment => {
+      return (
+        <option key={payment.paymentTypeId} value={payment.paymentTypeId}>{payment.cardName}</option>
+      );
+    })
+
     return (
       <div className="ALaCarte">
         <div className="parallax">
@@ -222,6 +247,18 @@ class ALaCarte extends React.Component {
                     <h5>Package: {packageSelected.name}</h5>
                     {shoppingCartBuilder}
                     <h5 className='cart-total'>Total: ${total}</h5>
+                    <div className="input-group mb-3">
+                      <select className="custom-select" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
+                        {buildPaymentDropdown}
+                      </select>
+                    </div>
+                    {/* <Input type='select' id='paymentName' className='cool-border' name='paymentName' value={newPayment.paymentName} onChange={this.paymentNameChange}>
+                      <option value="" disabled className="text-hide">-Select-</option>
+                      <option value='Visa'>Visa</option>
+                      <option value='MasterCard'>MasterCard</option>
+                      <option value='American Express'>American Express</option>
+                      <option value='Discover'>Discover</option>
+                    </Input> */}
                     <button type='button' className='btn submit-order-btn' onClick={this.submitOrder}>Complete Order</button>
                   </div>
                 </div>
