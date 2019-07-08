@@ -1,17 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SearchField from 'react-search-field';
 import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
 import PackageDisplay from '../PackageDisplay/PackageDisplay'
+import orderRequests from '../../../helpers/data/orderRequests';
 
 const defaultPackage = {
   name: '',
-  price: 0.00,
+  price: 0,
+}
+
+const defaultOrder = {
+  customerId: 0,
+  paymentTypeId: 0,
+  orderDate: '',
+  total: 0
 }
 
 class ALaCarte extends React.Component {
+  static propTypes = {
+    customerObject: PropTypes.object,
+  }
 
   state = {
     products: [],
@@ -19,6 +31,7 @@ class ALaCarte extends React.Component {
     filteredProducts: [],
     total: 0,
     packageSelected: defaultPackage,
+    newOrder: defaultOrder,
   }
 
   displayProducts = () => {
@@ -56,9 +69,9 @@ class ALaCarte extends React.Component {
   getPackageType = () => {
     const type = this.props.match.params.package;
     switch (type) {
-      case 'cremation': return this.setState({ packageSelected: {name: 'cremation', price: 300}, total: 300});
-      case 'burial': return this.setState({ packageSelected: {name: 'burial', price: 1000}, total: 1000});
-      case 'mausoleum': return this.setState({ packageSelected: {name: 'mausoleum', price: 2999}, total: 2999});
+      case 'cremation': return this.setState({ packageSelected: { name: 'Cremation', price: 300 }, total: 300 });
+      case 'burial': return this.setState({ packageSelected: { name: 'Burial', price: 1000 }, total: 1000 });
+      case 'mausoleum': return this.setState({ packageSelected: { name: 'Mausoleum', price: 2999 }, total: 2999 });
       default: return this.packageAmount('', 0);
     }
   }
@@ -83,10 +96,29 @@ class ALaCarte extends React.Component {
     }
   }
 
+  onSubmit = newOrder => {
+    orderRequests.addOrder(newOrder).then((results) => {
+      console.log(results.data);
+    }).catch(err => console.error(err));
+  }
+
+
   submitOrder = e => {
     e.preventDefault();
-    return console.log(this.state.shoppingCart);
-  }
+    const { customerObject } = this.props;
+    const { total } = this.state;
+    const newOrder = { ...this.state.newOrder };
+    const currentDate = new Date();
+    newOrder.paymentTypeId = 3; // need to figure out how to get paymentTypeId
+    newOrder.customerId = customerObject.customerId;
+    newOrder.orderDate = currentDate;
+    newOrder.total = Number(total);
+    console.log(newOrder);
+    this.onSubmit(newOrder);
+    this.setState({
+      newOrder: defaultOrder,
+    });
+  };
 
   componentWillMount() {
     this.getPackageType();
@@ -98,7 +130,7 @@ class ALaCarte extends React.Component {
       this.state.shoppingCart.forEach((item) => {
         tempTotal += item.price;
       })
-      this.setState({ total: tempTotal });
+      this.setState({ total: Number(tempTotal).toFixed(2) });
     }
   }
 
@@ -193,7 +225,6 @@ class ALaCarte extends React.Component {
                     <button type='button' className='btn submit-order-btn' onClick={this.submitOrder}>Complete Order</button>
                   </div>
                 </div>
-
               </div>
               <div className=" productDiv col-sm-8">
                 <div className="row justify-content-around mt-5">

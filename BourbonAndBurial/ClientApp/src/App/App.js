@@ -107,7 +107,7 @@ class App extends React.Component {
               <PublicRoute path='/auth' component={Auth} authed={authed} />
               <PrivateRoute path='/' exact component={Home} authed={authed} />
               <PrivateRoute path='/home' component={Home} logoutClickEvent={this.logoutClickEvent} authed={authed} updateCustomer={this.getCurrentCustomer} />
-              <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} />
+              <PrivateRoute path='/ALaCarte/:package' component={ALaCarte} authed={authed} customerObject={customerObject} />
               <PrivateRoute path='/profile' component={CustomerProfile} authed={authed} logoutClickEvent={this.logoutClickEvent} customerObject={customerObject} updateCustomer={this.getCurrentCustomer} />
               <PrivateRoute path='/payments' component={Payment} authed={authed} customerObject={customerObject} updateCustomer={this.getCurrentCustomer} />
               <PrivateRoute path='/:orderId' component={OrderDetailsPage} authed={authed} logoutClickEvent={this.logoutClickEvent} />

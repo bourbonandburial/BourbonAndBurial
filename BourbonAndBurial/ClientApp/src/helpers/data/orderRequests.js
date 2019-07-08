@@ -38,7 +38,7 @@ const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
 const deleteOrder = orderId => axios.delete(`${apiUrl}/${orderId}`);
 
 const addOrder = (newOrderObject) => new Promise((resolve, reject) => {
-  axios.post(`${apiUrl}/order`, newOrderObject).then((result) => {
+  axios.post(`${apiUrl}`, newOrderObject).then((result) => {
     resolve(result);
   })
     .catch(error => reject(error));
