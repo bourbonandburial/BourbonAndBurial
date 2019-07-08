@@ -106,27 +106,10 @@ class ALaCarte extends React.Component {
 
   onSubmit = newOrder => {
     orderRequests.addOrder(newOrder).then((results) => {
-      console.log(results.data);
+      console.log(results);
+      // createOrderProducts()
     }).catch(err => console.error(err));
   }
-
-
-  submitOrder = e => {
-    e.preventDefault();
-    const { customerObject } = this.props;
-    const { total } = this.state;
-    const newOrder = { ...this.state.newOrder };
-    const currentDate = new Date();
-    console.log(newOrder.paymentTypeId);
-    newOrder.customerId = customerObject.customerId;
-    newOrder.orderDate = currentDate;
-    newOrder.total = Number(total);
-    console.log(newOrder);
-    this.onSubmit(newOrder);
-    this.setState({
-      newOrder: defaultOrder,
-    });
-  };
 
   componentWillMount() {
     this.getPackageType();
@@ -151,6 +134,21 @@ class ALaCarte extends React.Component {
       })
       this.setState({ total: Number(tempTotal).toFixed(2) });
     }
+  }
+
+  submitOrder = e => {
+    e.preventDefault();
+    const { customerObject } = this.props;
+    const { total } = this.state;
+    const newOrder = { ...this.state.newOrder };
+    const currentDate = new Date();
+    newOrder.customerId = customerObject.customerId;
+    newOrder.orderDate = currentDate;
+    newOrder.total = Number(total);
+    this.onSubmit(newOrder);
+    this.setState({
+      newOrder: defaultOrder,
+    })
   }
 
   render() {
@@ -181,7 +179,7 @@ class ALaCarte extends React.Component {
       );
     });
 
-    const shoppingCartBuilder = shoppingCart.map((cartItem, i) => {
+    const shoppingCartBuilder = this.state.shoppingCart.map((cartItem, i) => {
       // console.log(shoppingCart.filter(item => item.productId === cartItem.productId));
       // if (shoppingCart.filter(item => item.productId === cartItem.productId)) {
 
@@ -189,18 +187,11 @@ class ALaCarte extends React.Component {
       return (
         <ShoppingCart
           key={i}
-          // productId={cartItem.productId}
-          // price={cartItem.price}
-          // image={cartItem.image}
-          // discription={cartItem.productDescription}
-          // quantity={cartItem.quantity}
           shoppingCart={this.state.shoppingCart}
           removeFromCart={this.removeFromCart}
           cartItem={cartItem}
-        // itemCount={itemCount(cartItem.productId)}
         />
       );
-      // }
     });
 
     const singleFilteredProduct = filteredProducts.map(product => (
@@ -252,14 +243,9 @@ class ALaCarte extends React.Component {
                         {buildPaymentDropdown}
                       </select>
                     </div>
-                    {/* <Input type='select' id='paymentName' className='cool-border' name='paymentName' value={newPayment.paymentName} onChange={this.paymentNameChange}>
-                      <option value="" disabled className="text-hide">-Select-</option>
-                      <option value='Visa'>Visa</option>
-                      <option value='MasterCard'>MasterCard</option>
-                      <option value='American Express'>American Express</option>
-                      <option value='Discover'>Discover</option>
-                    </Input> */}
-                    <button type='button' className='btn submit-order-btn' onClick={this.submitOrder}>Complete Order</button>
+                    <div className="d-flex flex-row-reverse">
+                      <button className='btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
+                    </div>
                   </div>
                 </div>
               </div>
