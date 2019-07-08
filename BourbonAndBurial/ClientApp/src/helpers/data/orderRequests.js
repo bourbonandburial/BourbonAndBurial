@@ -37,9 +37,17 @@ const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
 
 const deleteOrder = orderId => axios.delete(`${apiUrl}/${orderId}`);
 
+const addOrder = (newOrderObject) => new Promise((resolve, reject) => {
+  axios.post(`${apiUrl}/order`, newOrderObject).then((result) => {
+    resolve(result);
+  })
+    .catch(error => reject(error));
+});
+
 export default {
   getAllOrders,
   getSingleOrder,
   deleteOrder,
-  getCustomerOrders
+  getCustomerOrders,
+  addOrder
 };

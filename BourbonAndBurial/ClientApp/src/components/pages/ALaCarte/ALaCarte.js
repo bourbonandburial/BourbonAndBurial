@@ -6,13 +6,19 @@ import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
 import PackageDisplay from '../PackageDisplay/PackageDisplay'
 
+const defaultPackage = {
+  name: '',
+  price: 0,
+}
+
 class ALaCarte extends React.Component {
 
   state = {
     products: [],
     shoppingCart: [],
     filteredProducts: [],
-    total: []
+    total: 0,
+    packageSelected: defaultPackage,
   }
 
   displayProducts = () => {
@@ -24,18 +30,17 @@ class ALaCarte extends React.Component {
 
   selectedProduct = (productId) => {
     productRequests.getSingleProduct(productId).then((results) => {
-      let newShoppingCart = this.state.shoppingCart;
-      newShoppingCart.push(results);
-      this.setState({ shoppingCart: newShoppingCart });
+      // pushing new item to shopping carrt
+      this.setState(prevState => ({
+        shoppingCart: [...prevState.shoppingCart, results]
+      }));
     })
       .catch(err => console.error('error with add to cart', err));
   };
 
 
   removeFromCart = (productId, state) => {
-
     let newArray = state;
-
     for (let i = 0; i < state.length; i++) {
       if (productId === state[i].productId) {
         let productIdIndex = i;
@@ -43,20 +48,19 @@ class ALaCarte extends React.Component {
         break;
       }
     }
-
-    // state.forEach(function(element) {
-    //     if (productId === element.productId) {
-    //         let productIdIndex = newArray.indexOf(element);
-    //         newArray.splice(productIdIndex, 1);
-    //     }
-    //});
     this.setState({
       shoppingCart: newArray
     });
   };
 
-  componentDidMount = () => {
-    this.displayProducts();
+  getPackageType = () => {
+    const type = this.props.match.params.package;
+    switch (type) {
+      case 'cremation': return this.setState({ packageSelected: { name: 'Cremation', price: 300 }, total: 300 });
+      case 'burial': return this.setState({ packageSelected: { name: 'Burial', price: 1000 }, total: 1000 });
+      case 'mausoleum': return this.setState({ packageSelected: { name: 'Mausoleum', price: 2999 }, total: 2999 });
+      default: return this.packageAmount('', 0);
+    }
   }
 
   onChange = (value, event) => {
@@ -75,8 +79,26 @@ class ALaCarte extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.getPackageType();
+  }
+
+  componentDidMount = () => {
+    this.displayProducts();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.shoppingCart !== this.state.shoppingCart) {
+      let tempTotal = this.state.packageSelected.price;
+      this.state.shoppingCart.forEach((item) => {
+        tempTotal += item.price;
+      })
+      this.setState({ total: Number(tempTotal).toFixed(2) });
+    }
+  }
+
   render() {
-    const { filteredProducts } = this.state;
+    const { filteredProducts, shoppingCart, total, packageSelected } = this.state;
 
     const productBuilder = this.state.products.map((product) => {
       return (
@@ -94,17 +116,13 @@ class ALaCarte extends React.Component {
       );
     });
 
-    const shoppingCartBuilder = this.state.shoppingCart.map((shoppingCart, i) => {
+    const shoppingCartBuilder = shoppingCart.map((cartItem, i) => {
       return (
         <ShoppingCart
           key={i}
-          productId={shoppingCart.productId}
-          price={shoppingCart.price}
-          image={shoppingCart.image}
-          discription={shoppingCart.productDescription}
-          quantity={shoppingCart.quantity}
-          shoppingCartState={this.state.shoppingCart}
+          shoppingCart={this.state.shoppingCart}
           removeFromCart={this.removeFromCart}
+          cartItem={cartItem}
         />
       );
     });
@@ -144,7 +162,10 @@ class ALaCarte extends React.Component {
                     <div className="area ">
                       <p>Shopping Cart</p>
                     </div>
+                    <h5>Package: {packageSelected.name}</h5>
                     {shoppingCartBuilder}
+                    <h5 className='cart-total'>Total: ${total}</h5>
+                    <button type='button' className='btn submit-order-btn'>Complete Order</button>
                   </div>
                 </div>
 
@@ -160,7 +181,6 @@ class ALaCarte extends React.Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }
