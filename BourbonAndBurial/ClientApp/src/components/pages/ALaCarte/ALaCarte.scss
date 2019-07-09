@@ -45,6 +45,11 @@
 
   }
 
+  .cart-total {
+    color: black;
+    margin: 0;
+  }
+
   .react-search-field {
     margin: 30px 0px 20px 220px;
     width: 300px;
@@ -53,4 +58,16 @@
   .productDiv{
     margin-top: -300px !important;
   }
+
+  .submit-order-btn {
+    background-color: maroon;
+    border-color: ghostwhite;
+    color: ghostwhite;
+  }
+  
+  .submit-order-btn:hover {
+    background-color: ghostwhite;
+    color: maroon;
+  }
+  
 }

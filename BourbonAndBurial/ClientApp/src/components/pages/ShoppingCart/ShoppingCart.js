@@ -1,23 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ShoppingCart.scss';
 
-class ShoppingCart extends React.Component{
+const defaultOrder = {
+    customerId: 0,
+    paymentTypeId: 0,
+    orderDate: '',
+}
+class ShoppingCart extends React.Component {
+    state = {
+        cart: [],
+        newOrder: defaultOrder,
+    }
+
+    static propTypes = {
+        removeFromCart: PropTypes.func,
+        cartItem: PropTypes.object,
+        shoppingCart: PropTypes.array,
+        itemCount: PropTypes.number,
+    }
 
     render() {
-        
+        const { removeFromCart, shoppingCart, cartItem, itemCount } = this.props;
+
         return (
             <div className="shoppingCartCard">
-            <img className="card-img-top1" src={this.props.image} alt="Card image cap"/>
+                <img className="card-img-top1" src={cartItem.image} alt="Card image cap" />
                 <div className="card-discription">
-                   <p className="card-text1"> Qty : 1</p>
-                   <p className="card-text1">{this.props.price}</p>
+                    <p className="card-text1">Quanity: 1</p>
+                    <p className="card-text1">{cartItem.price}</p>
                 </div>
                 <div>
-                <div onClick={() => this.props.removeFromCart(this.props.productId, this.props.shoppingCartState)} className="btn">X</div>
+                    <div onClick={() => removeFromCart(cartItem.productId, shoppingCart)} className="btn">X</div>
                 </div>
             </div>
         );
-      }
     }
+}
 
 export default ShoppingCart;
