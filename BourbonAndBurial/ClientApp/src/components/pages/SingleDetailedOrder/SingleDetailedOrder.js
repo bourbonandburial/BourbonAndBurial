@@ -32,7 +32,7 @@ class SingleDetailedOrder extends React.Component{
                 <span class="detailedOrderCard__category"> Date: <Moment format="YYYY/MM/DD">{this.props.orderDate}</Moment></span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> $300 </span>
+                <span class="detailedOrderCard__category"> ${this.props.total} </span>
                 </div>
                 <span class="detailedOrderCard__by">Delivered to <a href="#" class="detailedOrderCard__author" title="author">Nashville</a></span>
               </div>

@@ -29,6 +29,7 @@ state = {
               customerId = {order.customerId}
               paymentTypeId={order.paymentTypeId}
               orderDate = {order.orderDate}
+              total = {order.total}
             />);
           });
           return(

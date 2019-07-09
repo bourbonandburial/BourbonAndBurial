@@ -21,7 +21,7 @@ class SingleOrder extends React.Component {
         <td>Cremation</td>
         <td>London</td>
         <td><span className="status text-success">&bull;</span> Delivered</td>
-        <td>$300</td>
+        <td>${this.props.total}</td>
         <td><a onClick={goToOrderPage} className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
       </tr>
     );

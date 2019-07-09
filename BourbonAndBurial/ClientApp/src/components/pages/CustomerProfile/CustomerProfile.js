@@ -114,6 +114,7 @@ class CustomerProfile extends React.Component {
           customerId={order.customerId}
           paymentTypeId={order.paymentTypeId}
           orderDate={order.orderDate}
+          total = {order.total}
           displaySingleOrder={this.displaySingleOrder}
         />);
     });
@@ -155,7 +156,7 @@ class CustomerProfile extends React.Component {
                   <th>Base Package</th>
                   <th>Location</th>
                   <th>Status</th>
-                  <th>Net Amount</th>
+                  <th>Total</th>
                   <th>Action</th>
                 </tr>
               </thead>
