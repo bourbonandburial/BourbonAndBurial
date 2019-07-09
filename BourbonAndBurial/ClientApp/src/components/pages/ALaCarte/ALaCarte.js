@@ -126,11 +126,21 @@ class ALaCarte extends React.Component {
         <div className="parallax">
           <div className="container">
             <div className="">
-              <div className="textAla col-lg-11 ">
-                <ul>
+            
+            
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
                   <PackageDisplay package={this.props.match.params.package} />
-                </ul>
-              </div>
+                  </h6>
+                </div>
+              
+
+              {/* <div className="textAla col-lg-11 ">
+                  <PackageDisplay package={this.props.match.params.package} />
+              </div> */}
+
+
               <div className="searchCart">
                 <SearchField
                   className=" searchField col-sm-6 searchCart mx-auto"
@@ -143,6 +153,7 @@ class ALaCarte extends React.Component {
                       <p>Shopping Cart</p>
                     </div>
                     {shoppingCartBuilder}
+                    
                   </div>
                 </div>
 
