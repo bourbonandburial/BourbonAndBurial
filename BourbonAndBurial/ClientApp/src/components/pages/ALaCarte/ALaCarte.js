@@ -111,7 +111,6 @@ class ALaCarte extends React.Component {
 
   paymentChange = e => this.formFieldStringState('paymentTypeId', e);
 
-
   createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
     const newOrderProduct = {...this.state.newOrderProduct}
     newOrderProduct.orderId = orderId;
@@ -175,9 +174,9 @@ class ALaCarte extends React.Component {
   }
 
   render() {
-    const { filteredProducts, shoppingCart, total, packageSelected, payments, newOrder } = this.state;
+    const { filteredProducts, shoppingCart, total, packageSelected, payments, newOrder, products } = this.state;
 
-    const productBuilder = this.state.products.map((product) => {
+    const productBuilder = products.map((product) => {
       return (
         <SingleProduct
           productId={product.productId}
@@ -193,7 +192,7 @@ class ALaCarte extends React.Component {
       );
     });
 
-    const shoppingCartBuilder = this.state.shoppingCart.map((cartItem, i) => {
+    const shoppingCartBuilder = shoppingCart.map((cartItem, i) => {
       return (
         <ShoppingCart
           key={i}
