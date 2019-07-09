@@ -41,9 +41,9 @@
   
   }
 
-  .parallax {
+  // .parallax {
 
-  }
+  // }
 
   .cart-total {
     color: black;
@@ -63,6 +63,9 @@
     background-color: maroon;
     border-color: ghostwhite;
     color: ghostwhite;
+    z-index: 1000;
+    display: flex;
+    justify-content: end;
   }
   
   .submit-order-btn:hover {

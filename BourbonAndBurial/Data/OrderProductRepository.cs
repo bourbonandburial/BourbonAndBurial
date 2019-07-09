@@ -22,7 +22,7 @@ namespace BourbonAndBurial.Data
             }
         }
 
-        public static OrderProduct AddOrderProduct(int productId, int orderId)
+        public OrderProduct AddOrderProduct(int orderId, int productId)
         {
 
             using (var db = new SqlConnection(ConnectionString))
@@ -32,7 +32,7 @@ namespace BourbonAndBurial.Data
                         INSERT INTO OrderProducts(ProductId, OrderId)
                         Output Inserted.*
                         Values(@productId, @orderId)",
-                        new {orderId, productId});
+                        new {orderId, productId });
 
                 if (newOrderProduct != null)
                 {
@@ -42,6 +42,7 @@ namespace BourbonAndBurial.Data
                 throw new Exception("Could not create OrderProduct");
             }
         }
+
 
         public void DeleteOrderProduct(int orderProductId)
         {

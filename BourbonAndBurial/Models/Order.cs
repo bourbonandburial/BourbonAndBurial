@@ -11,6 +11,7 @@ namespace BourbonAndBurial.Models
             public int CustomerId { get; set; }
             public int PaymentTypeId { get; set; }
             public DateTime OrderDate { get; set; }
+            public decimal Total { get; set; }
             //public IEnumerable<OrderProduct> Products { get; set; }
     }
 }
