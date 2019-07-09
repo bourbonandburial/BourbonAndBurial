@@ -19,6 +19,7 @@ namespace BourbonAndBurial.Controllers
         {
             _orderProductRepository = new OrderProductRepository();
         }
+        
         [HttpGet]
         public ActionResult GetAll()
         {
@@ -26,11 +27,11 @@ namespace BourbonAndBurial.Controllers
             return Ok(orders);
         }
 
-        [HttpPost("addOrderProduct")]
+        [HttpPost]
 
-        public ActionResult AddOrderProduct(OrderProduct orderProductObject)
+        public ActionResult AddOrderProduct(CreateOrderProductRequest createRequest)
         {
-            var newOrderProduct = OrderProductRepository.AddOrderProduct(orderProductObject.ProductId, orderProductObject.OrderId);
+            var newOrderProduct = _orderProductRepository.AddOrderProduct(createRequest.OrderId, createRequest.ProductId);
 
             return Created($"api/createdOrderProduct/{newOrderProduct.OrderProductId}", newOrderProduct);
         }

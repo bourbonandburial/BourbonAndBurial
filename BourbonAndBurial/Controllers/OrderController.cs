@@ -47,14 +47,13 @@ namespace BourbonAndBurial.Controllers
         [HttpPost]
         public ActionResult AddOrder(CreateOrderRequest createRequest)
         {
-            var repository = new OrderRepository();
-
-            var newOrder = repository.AddOrder(
+            var newOrder = _orderRepository.AddOrder(
                 createRequest.CustomerId,
-                createRequest.PaymentTypeId
-                );
+                createRequest.PaymentTypeId,
+                createRequest.OrderDate,
+                createRequest.Total);
 
-            return Created($"/api/order/{newOrder.OrderId}", newOrder);
+            return Created($"api/product/{newOrder.OrderId}", newOrder);
         }
 
         //[HttpPost("products/ordered")]

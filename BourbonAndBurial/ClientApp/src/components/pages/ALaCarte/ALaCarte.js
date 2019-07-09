@@ -1,17 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SearchField from 'react-search-field';
 import './ALaCarte.scss';
 import productRequests from '../../../helpers/data/productRequests'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
 import PackageDisplay from '../PackageDisplay/PackageDisplay'
+import orderRequests from '../../../helpers/data/orderRequests';
+import paymentRequests from '../../../helpers/data/paymentRequests';
+import customerRequests from '../../../helpers/data/customerRequests';
+import authRequests from '../../../helpers/data/authRequests';
+import orderProductRequests from '../../../helpers/data/orderProductRequests';
 
 const defaultPackage = {
   name: '',
   price: 0,
 }
 
+const defaultOrder = {
+  customerId: 0,
+  paymentTypeId: 0,
+  orderDate: '',
+  total: 0
+}
+
+const defaultOrderProduct = {
+  orderId: 0,
+  productIdIndex: 0,
+}
+
 class ALaCarte extends React.Component {
+  static propTypes = {
+    customerObject: PropTypes.object,
+  }
 
   state = {
     products: [],
@@ -19,6 +40,9 @@ class ALaCarte extends React.Component {
     filteredProducts: [],
     total: 0,
     packageSelected: defaultPackage,
+    newOrder: defaultOrder,
+    payments: [],
+    newOrderProduct: defaultOrderProduct,
   }
 
   displayProducts = () => {
@@ -79,12 +103,64 @@ class ALaCarte extends React.Component {
     }
   }
 
+  formFieldStringState = (name, e) => {
+    const tempOrder = { ...this.state.newOrder };
+    tempOrder[name] = e.target.value;
+    this.setState({ newOrder: tempOrder });
+  }
+
+  paymentChange = e => this.formFieldStringState('paymentTypeId', e);
+
+  createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
+    const newOrderProduct = {...this.state.newOrderProduct}
+    newOrderProduct.orderId = orderId;
+    newOrderProduct.productId = item.productId;
+    orderProductRequests.addOrderProduct(newOrderProduct).then(() => {
+    }).catch(err => console.error('error adding orderProduct', err));
+  })
+
+  onSubmit = newOrder => {
+    orderRequests.addOrder(newOrder).then((results) => {
+      const order = results.data;
+      this.createOrderProducts(order.orderId);
+      alert('Congrats your order was submitted! This will eventually go to order page');
+      this.setState({
+        newOrder: defaultOrder,
+        newOrderProduct: defaultOrderProduct,
+        shoppingCart:[],
+        total: 0,
+      });
+    }).catch(err => console.error(err));
+  }
+
+  submitOrder = e => {
+    e.preventDefault();
+    const { customerObject } = this.props;
+    const { total } = this.state;
+    const newOrder = { ...this.state.newOrder };
+    const currentDate = new Date();
+    newOrder.customerId = customerObject.customerId;
+    newOrder.orderDate = currentDate;
+    newOrder.total = Number(total);
+    this.onSubmit(newOrder);
+    this.setState({
+      newOrder: defaultOrder,
+    })
+  }
+
   componentWillMount() {
     this.getPackageType();
   }
 
   componentDidMount = () => {
     this.displayProducts();
+
+    const customerFbId = authRequests.getCurrentUser().uid;
+    customerRequests.getSingleCustomer(customerFbId).then((customer) => {
+      paymentRequests.getCustomerPayments(customer.customerId).then((results) => {
+        this.setState({ payments: results });
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -98,9 +174,9 @@ class ALaCarte extends React.Component {
   }
 
   render() {
-    const { filteredProducts, shoppingCart, total, packageSelected } = this.state;
+    const { filteredProducts, shoppingCart, total, packageSelected, payments, newOrder, products } = this.state;
 
-    const productBuilder = this.state.products.map((product) => {
+    const productBuilder = products.map((product) => {
       return (
         <SingleProduct
           productId={product.productId}
@@ -141,6 +217,12 @@ class ALaCarte extends React.Component {
       />
     ));
 
+    const buildPaymentDropdown = payments.map(payment => {
+      return (
+        <option key={payment.paymentTypeId} value={payment.paymentTypeId}>{payment.cardName}</option>
+      );
+    })
+
     return (
       <div className="ALaCarte">
         <div className="parallax">
@@ -165,10 +247,16 @@ class ALaCarte extends React.Component {
                     <h5>Package: {packageSelected.name}</h5>
                     {shoppingCartBuilder}
                     <h5 className='cart-total'>Total: ${total}</h5>
-                    <button type='button' className='btn submit-order-btn'>Complete Order</button>
+                    <div className="input-group mb-3">
+                      <select className="custom-select" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
+                        {buildPaymentDropdown}
+                      </select>
+                    </div>
+                    <div className="d-flex flex-row-reverse">
+                      <button className='btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
+                    </div>
                   </div>
                 </div>
-
               </div>
               <div className=" productDiv col-sm-8">
                 <div className="row justify-content-around mt-5">

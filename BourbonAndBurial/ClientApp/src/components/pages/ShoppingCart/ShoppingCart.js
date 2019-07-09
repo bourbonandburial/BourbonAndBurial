@@ -7,10 +7,11 @@ const defaultOrder = {
     paymentTypeId: 0,
     orderDate: '',
 }
+
 class ShoppingCart extends React.Component {
     state = {
         cart: [],
-        newOrder: defaultOrder,
+        // newOrder: defaultOrder,
     }
 
     static propTypes = {
