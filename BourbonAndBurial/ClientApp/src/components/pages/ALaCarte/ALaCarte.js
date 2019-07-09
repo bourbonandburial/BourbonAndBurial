@@ -111,6 +111,22 @@ class ALaCarte extends React.Component {
     }).catch(err => console.error(err));
   }
 
+  submitOrder = e => {
+    e.preventDefault();
+    const { customerObject } = this.props;
+    const { total } = this.state;
+    const newOrder = { ...this.state.newOrder };
+    const currentDate = new Date();
+    newOrder.customerId = customerObject.customerId;
+    newOrder.orderDate = currentDate;
+    newOrder.total = Number(total);
+    this.onSubmit(newOrder);
+    console.log(newOrder);
+    this.setState({
+      newOrder: defaultOrder,
+    })
+  }
+
   componentWillMount() {
     this.getPackageType();
   }
@@ -134,21 +150,6 @@ class ALaCarte extends React.Component {
       })
       this.setState({ total: Number(tempTotal).toFixed(2) });
     }
-  }
-
-  submitOrder = e => {
-    e.preventDefault();
-    const { customerObject } = this.props;
-    const { total } = this.state;
-    const newOrder = { ...this.state.newOrder };
-    const currentDate = new Date();
-    newOrder.customerId = customerObject.customerId;
-    newOrder.orderDate = currentDate;
-    newOrder.total = Number(total);
-    this.onSubmit(newOrder);
-    this.setState({
-      newOrder: defaultOrder,
-    })
   }
 
   render() {
