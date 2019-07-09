@@ -10,6 +10,7 @@ import orderRequests from '../../../helpers/data/orderRequests';
 import paymentRequests from '../../../helpers/data/paymentRequests';
 import customerRequests from '../../../helpers/data/customerRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import orderProductRequests from '../../../helpers/data/orderProductRequests';
 
 const defaultPackage = {
   name: '',
@@ -21,6 +22,11 @@ const defaultOrder = {
   paymentTypeId: 0,
   orderDate: '',
   total: 0
+}
+
+const defaultOrderProduct = {
+  orderId: 0,
+  productIdIndex: 0,
 }
 
 class ALaCarte extends React.Component {
@@ -36,6 +42,7 @@ class ALaCarte extends React.Component {
     packageSelected: defaultPackage,
     newOrder: defaultOrder,
     payments: [],
+    newOrderProduct: defaultOrderProduct,
   }
 
   displayProducts = () => {
@@ -104,10 +111,26 @@ class ALaCarte extends React.Component {
 
   paymentChange = e => this.formFieldStringState('paymentTypeId', e);
 
+
+  createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
+    const newOrderProduct = {...this.state.newOrderProduct}
+    newOrderProduct.orderId = orderId;
+    newOrderProduct.productId = item.productId;
+    orderProductRequests.addOrderProduct(newOrderProduct).then(() => {
+    }).catch(err => console.error('error adding orderProduct', err));
+  })
+
   onSubmit = newOrder => {
     orderRequests.addOrder(newOrder).then((results) => {
-      console.log(results);
-      // createOrderProducts()
+      const order = results.data;
+      this.createOrderProducts(order.orderId);
+      alert('Congrats your order was submitted! This will eventually go to order page');
+      this.setState({
+        newOrder: defaultOrder,
+        newOrderProduct: defaultOrderProduct,
+        shoppingCart:[],
+        total: 0,
+      });
     }).catch(err => console.error(err));
   }
 
@@ -121,7 +144,6 @@ class ALaCarte extends React.Component {
     newOrder.orderDate = currentDate;
     newOrder.total = Number(total);
     this.onSubmit(newOrder);
-    console.log(newOrder);
     this.setState({
       newOrder: defaultOrder,
     })
