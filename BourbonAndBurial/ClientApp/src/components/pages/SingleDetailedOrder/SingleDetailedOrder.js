@@ -29,7 +29,7 @@ class SingleDetailedOrder extends React.Component{
                 <span class="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> Date: <Moment format="YYYY/MM/DD">{this.props.orderDate}</Moment></span>
+                <span class="detailedOrderCard__category"> Order Date: <Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></span>
                 </div>
                 <div>
                 <span class="detailedOrderCard__category"> ${this.props.total} </span>

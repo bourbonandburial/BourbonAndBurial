@@ -111,6 +111,12 @@ class ALaCarte extends React.Component {
 
   paymentChange = e => this.formFieldStringState('paymentTypeId', e);
 
+  goToOrderPage = (orderId) => {
+    const orderPage = `/${orderId}`;
+    window.location.assign(orderPage);
+  };
+
+
   createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
     const newOrderProduct = {...this.state.newOrderProduct}
     newOrderProduct.orderId = orderId;
@@ -123,7 +129,7 @@ class ALaCarte extends React.Component {
     orderRequests.addOrder(newOrder).then((results) => {
       const order = results.data;
       this.createOrderProducts(order.orderId);
-      alert('Congrats your order was submitted! This will eventually go to order page');
+      this.goToOrderPage(order.orderId);
       this.setState({
         newOrder: defaultOrder,
         newOrderProduct: defaultOrderProduct,
