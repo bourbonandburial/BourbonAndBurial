@@ -51,7 +51,8 @@ namespace BourbonAndBurial.Controllers
                 createRequest.CustomerId,
                 createRequest.PaymentTypeId,
                 createRequest.OrderDate,
-                createRequest.Total);
+                createRequest.Total,
+                createRequest.Package);
 
             return Created($"api/product/{newOrder.OrderId}", newOrder);
         }
