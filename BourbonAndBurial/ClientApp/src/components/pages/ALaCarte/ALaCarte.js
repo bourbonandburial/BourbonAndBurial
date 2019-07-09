@@ -177,15 +177,6 @@ class ALaCarte extends React.Component {
   render() {
     const { filteredProducts, shoppingCart, total, packageSelected, payments, newOrder } = this.state;
 
-    // const itemCount = itemId => {
-    //   if (shoppingCart.find(item => item.productId === itemId)) {
-    //     const itemCount = shoppingCart.filter(item => item.productId === itemId).length;
-    //     return itemCount
-    //   } else {
-    //     return itemCount = 1;
-    //   // }
-    // }
-
     const productBuilder = this.state.products.map((product) => {
       return (
         <SingleProduct
@@ -203,10 +194,6 @@ class ALaCarte extends React.Component {
     });
 
     const shoppingCartBuilder = this.state.shoppingCart.map((cartItem, i) => {
-      // console.log(shoppingCart.filter(item => item.productId === cartItem.productId));
-      // if (shoppingCart.filter(item => item.productId === cartItem.productId)) {
-
-      // } else {
       return (
         <ShoppingCart
           key={i}
