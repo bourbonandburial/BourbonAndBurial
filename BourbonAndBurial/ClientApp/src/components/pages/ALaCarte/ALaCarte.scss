@@ -1,9 +1,11 @@
-.ALaCarte {
-  background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
-  background-attachment: fixed;
-  background-repeat: none;
-  height: 93vh;
-  overflow-y: scroll;
+  .ALaCarte {
+    background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity2.png?raw=true");
+    background-attachment: fixed;
+    background-repeat: none;
+    height: 93vh;
+    overflow-y: scroll;
+    position:sticky !important;
+  }
   .builder {
     display: flex;
     flex-wrap: wrap;
@@ -19,16 +21,13 @@
 
   .textSizeAla {
     text-align: center !important;
+    display: flex;
       font-size: 40px;
       width: 500px;
-      border: 7px solid rgba(0, 0, 0, 0.39);
-      background-color: #4d111180;
-      border-radius: 30%;
+      border: 2px solid rgba(80, 4, 4, 0.39);
+      background-color: #4b4a4a80;
+      border-radius: 10%;
       padding-bottom: 20%;
-  }
-
-  .searchCart{
-    margin-left: 600px !important;
   }
 
   .textAla{
@@ -37,6 +36,9 @@
 
   .cart {
       max-height: 200px !important;
+      position: sticky !important;
+      position: -webkit-sticky !important;
+      top: 0 !important; /* required */
   }
 
   .shoppingBuilder{
@@ -72,5 +74,29 @@
     background-color: ghostwhite;
     color: maroon;
   }
-  
+
+  .input-group{
+    flex-direction: column !important;
+    
+    
+  }
+
+  .buttonDiv{
+    width: 300px !important;
+    // align-content: center !important;
+    text-align: center !important
+  }
+
+
+  .searchCart{
+    margin-left: 600px !important;
+  }
+
+  .searchFirld {
+
+  }
+
+.buttonDiv2{
+  width:300px !important;
+  justify-items: center !important;
 }

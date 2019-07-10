@@ -236,10 +236,6 @@ class ALaCarte extends React.Component {
                   </h6>
                 </div>
 
-              {/* <div className="textAla col-lg-11 ">
-                  <PackageDisplay package={this.props.match.params.package} />
-              </div> */}
-
               <div className="searchCart">
                 <SearchField
                   className=" searchField "
@@ -247,21 +243,19 @@ class ALaCarte extends React.Component {
                   onChange={this.onChange}
                 />
                 <div className="cart">
-                  <div className=" textSizeAla mr-n2">
-                    <div className="area ">
+                  <div className=" textSizeAla mr-n2 input-group ">
+                    <div className="area">
                       <p>Shopping Cart</p>
                     </div>
-                    <h5>Package: {packageSelected.name}</h5>
-                    <div className="shoppingBuilder mb-3">{shoppingCartBuilder}</div>
-                    <h5 className='cart-total'>Total: ${total}</h5>
-                    <div className="input-group mb-3">
-                      <select className="custom-select" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
+                    <h5 className="">Package: {packageSelected.name}</h5>
+                    <div className="shoppingBuilder mb-3 ">{shoppingCartBuilder}</div>
+                    <h5 className='cart-total '>Total: ${total}</h5>
+                    <div className=" mb-3 ">
+                      <select className="custom-select buttonDiv" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
                         {buildPaymentDropdown}
                       </select>
                     </div>
-                    <div className="d-flex flex-row-reverse">
-                      <button className='btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
-                    </div>
+                    <button className='mx-auto btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
                   </div>
                 </div>
               </div>
