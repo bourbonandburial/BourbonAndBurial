@@ -21,7 +21,8 @@ const defaultOrder = {
   customerId: 0,
   paymentTypeId: 0,
   orderDate: '',
-  total: 0
+  total: 0,
+  package: '',
 }
 
 const defaultOrderProduct = {
@@ -136,12 +137,13 @@ class ALaCarte extends React.Component {
   submitOrder = e => {
     e.preventDefault();
     const { customerObject } = this.props;
-    const { total } = this.state;
+    const { total, packageSelected } = this.state;
     const newOrder = { ...this.state.newOrder };
     const currentDate = new Date();
     newOrder.customerId = customerObject.customerId;
     newOrder.orderDate = currentDate;
     newOrder.total = Number(total);
+    newOrder.package = packageSelected.name;
     this.onSubmit(newOrder);
     this.setState({
       newOrder: defaultOrder,
