@@ -152,7 +152,7 @@ class PaymentForm extends React.Component {
                   id='CVV'
                   placeholder='123'
                   onChange={this.cvvChange}
-                  maxLength={3}
+                  maxLength={4}
                   value={newPayment.CVV}
                   required
                 />

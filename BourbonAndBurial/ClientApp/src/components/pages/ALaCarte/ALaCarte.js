@@ -63,6 +63,12 @@ class ALaCarte extends React.Component {
       .catch(err => console.error('error with add to cart', err));
   };
 
+  getSingleProductPrice = productId => {
+    productRequests.getSingleProduct(productId).then((product) => {
+      const newTotal = this.state.total - product.price;
+      this.setState({ total: newTotal });
+    })
+  }
 
   removeFromCart = (productId, state) => {
     let newArray = state;
@@ -73,8 +79,9 @@ class ALaCarte extends React.Component {
         break;
       }
     }
+    this.getSingleProductPrice(productId);
     this.setState({
-      shoppingCart: newArray
+      shoppingCart: newArray,
     });
   };
 
@@ -113,7 +120,7 @@ class ALaCarte extends React.Component {
   paymentChange = e => this.formFieldStringState('paymentTypeId', e);
 
   createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
-    const newOrderProduct = {...this.state.newOrderProduct}
+    const newOrderProduct = { ...this.state.newOrderProduct }
     newOrderProduct.orderId = orderId;
     newOrderProduct.productId = item.productId;
     orderProductRequests.addOrderProduct(newOrderProduct).then(() => {
@@ -128,7 +135,7 @@ class ALaCarte extends React.Component {
       this.setState({
         newOrder: defaultOrder,
         newOrderProduct: defaultOrderProduct,
-        shoppingCart:[],
+        shoppingCart: [],
         total: 0,
       });
     }).catch(err => console.error(err));
