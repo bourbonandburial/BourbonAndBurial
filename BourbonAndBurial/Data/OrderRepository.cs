@@ -12,7 +12,7 @@ namespace BourbonAndBurial.Data
     {
         const string ConnectionString = "Server=localhost;Database=BourbonAndBurial;Trusted_Connection=True;";
 
-        public Order AddOrder(int customerId, int paymentTypeId, DateTime orderDate, decimal total)
+        public Order AddOrder(int customerId, int paymentTypeId, DateTime orderDate, decimal total, string package)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -21,20 +21,23 @@ namespace BourbonAndBurial.Data
                                    ([CustomerId]
                                    ,[PaymentTypeId]
                                    ,[OrderDate]
-                                   ,[Total])
+                                   ,[Total]
+                                   ,[Package])
                         output inserted.*
                              VALUES
                                    (@customerId,
                                     @paymentTypeId,
                                     @orderDate,
-                                    @total)";
+                                    @total,
+                                    @package)";
 
                 var parameters = new
                 {
                     CustomerId = customerId,
                     PaymentTypeId = paymentTypeId,
                     OrderDate = orderDate,
-                    Total = total
+                    Total = total,
+                    Package = package
                 };
 
                 var newOrder = db.QueryFirstOrDefault<Order>(insertQuery, parameters);
@@ -47,37 +50,6 @@ namespace BourbonAndBurial.Data
                 throw new Exception("Could not create order");
             }
         }
-
-        //public CreateOrderRequest AddOrderProduct(int productId, int orderId)
-        //{
-
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-
-        //        var insertQuery = @"
-        //                INSERT INTO [dbo].[OrderProducts]
-        //                            ([ProductId]
-        //                             ,[OrderId])
-        //                     VALUES
-        //                           (3,
-        //                            1)";
-
-        //        var parameters = new
-        //        {
-        //            ProductId = productId,
-        //            OrderId = orderId,
-        //        };
-
-        //        var newTarget = db.QueryFirstOrDefault<CreateOrderRequest>(insertQuery, parameters);
-
-        //        if (newTarget != null)
-        //        {
-        //            return newTarget;
-        //        }
-
-        //        throw new Exception("Could not create target");
-        //    }
-        //}
 
         public int UpdateOrder(Order paymentTypeToUpdate)
         {

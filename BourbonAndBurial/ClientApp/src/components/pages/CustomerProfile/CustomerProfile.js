@@ -109,12 +109,13 @@ class CustomerProfile extends React.Component {
     const orderBuilder = this.state.orders.map((order) => {
       return (
         <SingleOrder
-          orderId={order.orderId}
           key={order.orderId}
           customerId={order.customerId}
           paymentTypeId={order.paymentTypeId}
           orderDate={order.orderDate}
           total = {order.total}
+          orderId={order.orderId}
+          order={order}
           displaySingleOrder={this.displaySingleOrder}
         />);
     });
@@ -154,8 +155,6 @@ class CustomerProfile extends React.Component {
                   <th>Customer #</th>
                   <th>Order Date</th>
                   <th>Base Package</th>
-                  <th>Location</th>
-                  <th>Status</th>
                   <th>Total</th>
                   <th>Action</th>
                 </tr>
