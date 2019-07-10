@@ -22,6 +22,23 @@ namespace BourbonAndBurial.Data
             }
         }
 
+        public IEnumerable<OrderProduct> GetProductDetailsForOrder(int OrderId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var getQuery = @"SELECT *
+                                 FROM Products
+                                 JOIN OrderProducts on OrderProducts.ProductId = Products.ProductId
+                                 WHERE OrderId = @orderId; ";
+
+                var parameter = new { OrderId = OrderId };
+
+                var order = db.Query<OrderProduct>(getQuery, parameter).ToList();
+
+                return order;
+            }
+        }
+
         public OrderProduct AddOrderProduct(int orderId, int productId)
         {
 
