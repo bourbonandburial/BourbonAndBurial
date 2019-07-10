@@ -38,6 +38,13 @@ class Payment extends React.Component {
     }).catch(err => console.error('error creating payments for customer', err));
   }
 
+  deletePayment = (paymentTypeId) => {
+    paymentRequests.deletePayment(paymentTypeId)
+      .then(() => {
+        this.getCustomerPayments(this.props.customerObject.customerId)
+      })
+      .catch(err => console.error('error setting isActive to false on payment', err));
+  }
 
 
   render() {
@@ -52,9 +59,9 @@ class Payment extends React.Component {
           <td><Moment format="MM/YY">{payment.expDate}</Moment></td>
           {/* <td>{payment.isActive}</td> */}
           <td className='action-icons'>
-            <button type="button" className="btn btn-link payment-edit"><i className="material-icons">edit</i></button>
-            <button type="button" className="btn btn-link payment-delete"><i className="material-icons">delete</i></button>
-            <button type="button" className="btn btn-link payment-select"><i className="material-icons">forward</i></button>
+            {/* <button type="button" className="btn btn-link payment-edit"><i className="material-icons">edit</i></button> */}
+            <button type="button" className="btn btn-link payment-delete" onClick={()=> this.deletePayment(payment.paymentTypeId)}><i className="material-icons">delete</i></button>
+            {/* <button type="button" className="btn btn-link payment-select"><i className="material-icons">forward</i></button> */}
           </td>
         </tr>
       );
