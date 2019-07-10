@@ -32,7 +32,7 @@ class ShoppingCart extends React.Component {
                     <p className="card-text1">{cartItem.price}</p>
                 </div>
                 <div>
-                    <div onClick={() => removeFromCart(cartItem.productId, shoppingCart)} className="btn">X</div>
+                    <div onClick={() => removeFromCart(cartItem.productId, shoppingCart)} className="btn"><i className="fa fa-trash fa-3x" aria-hidden="true"></i></div>
                 </div>
             </div>
         );

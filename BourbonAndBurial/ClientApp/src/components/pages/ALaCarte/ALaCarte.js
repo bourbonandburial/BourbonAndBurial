@@ -225,52 +225,41 @@ class ALaCarte extends React.Component {
 
     return (
       <div className="ALaCarte">
-        <div className="parallax">
-          <div className="container">
-            <div className="">
-            
-                <div class="card-body">
-                  <h5 class="card-title"></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                  <PackageDisplay package={this.props.match.params.package} />
-                  </h6>
-                </div>
-
-              <div className="searchCart">
-                <SearchField
-                  className=" searchField "
-                  placeholder='Search by Brand Name or Description'
-                  onChange={this.onChange}
-                />
-                <div className="cart">
-                  <div className=" textSizeAla mr-n2 input-group ">
-                    <div className="area">
-                      <p>Shopping Cart</p>
-                    </div>
-                    <h5 className="">Package: {packageSelected.name}</h5>
-                    <div className="shoppingBuilder mb-3 ">{shoppingCartBuilder}</div>
-                    <h5 className='cart-total '>Total: ${total}</h5>
-                    <div className=" mb-3 ">
-                      <select className="custom-select buttonDiv" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
-                        {buildPaymentDropdown}
-                      </select>
-                    </div>
-                    <button className='mx-auto btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
+      <div className="parallax">
+        <div className="container">
+          <div className="">
+            <div className="card-body">
+              <h5 className="card-title"></h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+                      <PackageDisplay package={this.props.match.params.package} />
+                      </h6>
+            </div>
+            <div className="searchCart">
+              <SearchField className=" searchField " placeholder='Search by Brand Name or Description' onChange={this.onChange} />
+              <div className="cart">
+                <div className=" textSizeAla mr-n2 input-group ">
+                  <div className="area">
+                    <p>Shopping Cart</p>
                   </div>
+                  <h5 className="">Package: {packageSelected.name}</h5>
+                  <div className="shoppingBuilder mb-3 ">{shoppingCartBuilder}</div>
+                  <h5 className='cart-total '>Total: ${total}</h5>
+                  <div className=" mb-3 ">
+                    <select className="custom-select buttonDiv" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>{buildPaymentDropdown}</select>
+                  </div>
+                  <button className='mx-auto btn submit-order-btn' onClick={(e)=>this.submitOrder(e)}>Complete Order</button>
                 </div>
               </div>
-              <div className=" productDiv col-sm-8">
-                <div className="row justify-content-around mt-5">
-                  <div className="row">
-                    {singleFilteredProduct}
-                    {productBuilder}
-                  </div>
-                </div>
+            </div>
+            <div className=" productDiv col-sm-8">
+              <div className="row justify-content-around mt-5">
+                <div className="row">{singleFilteredProduct} {productBuilder}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }
