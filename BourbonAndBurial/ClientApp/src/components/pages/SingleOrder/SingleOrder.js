@@ -5,8 +5,7 @@ import Moment from 'react-moment';
 class SingleOrder extends React.Component {
 
   render() {
-
-    const { orderId } = this.props;
+    const { orderId, order } = this.props;
 
     const goToOrderPage = () => {
       const orderPage = `/${orderId}`;
@@ -15,13 +14,11 @@ class SingleOrder extends React.Component {
 
     return (
       <tr>
-        <td>{this.props.orderId}</td>
-        <td>{this.props.customerId}</td>
-        <td><Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></td>
-        <td>Cremation</td>
-        <td>London</td>
-        <td><span className="status text-success">&bull;</span> Delivered</td>
-        <td>$300</td>
+        <td>{order.orderId}</td>
+        <td>{order.customerId}</td>
+        <td><Moment format="MM/DD/YYYY">{order.orderDate}</Moment></td>
+        <td>{order.package}</td>
+        <td>${order.total}</td>
         <td><a onClick={goToOrderPage} className="view" title="View Details" data-toggle="tooltip"><i className="material-icons">&#xE5C8;</i></a></td>
       </tr>
     );
