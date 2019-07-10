@@ -9,6 +9,7 @@ import {
   Row,
   Button,
 } from 'reactstrap';
+import util from '../../helpers/util';
 import './PaymentForm.scss';
 
 const defaultPayment = {
@@ -48,10 +49,6 @@ class PaymentForm extends React.Component {
     const tempPayment = { ...this.state.newPayment };
     tempPayment[name] = e.target.value;
     this.setState({ newPayment: tempPayment });
-    // tempPayment[name] = e.target.value.substring(0, 2) + "/" + e.target.value.substring(2, 4);
-    // this.setState({ newPayment: tempPayment });
-    // const dateTest = e.target.value.substring(0, 2) + "/" + e.target.value.substring(2, 4);
-    // console.log(dateTest);
   }
 
   cardNameChange = e => this.formFieldStringState('cardName', e);
@@ -65,11 +62,13 @@ class PaymentForm extends React.Component {
     const { customerObject, onSubmit } = this.props;
     const newPayment = { ...this.state.newPayment };
     newPayment.customerId = customerObject.customerId;
+    newPayment.expDate = util.formattedExpDate(newPayment.expDate);
     onSubmit(newPayment);
     this.setState({
       newPayment: defaultPayment,
     });
   };
+
 
   render() {
     const { newPayment } = this.state;
@@ -118,6 +117,9 @@ class PaymentForm extends React.Component {
                   type='text'
                   name='acctNumber'
                   id='acctNumber'
+                  pattern='[0-9]*'
+                  minLength={16}
+                  maxLength={16}
                   placeholder='1234123412341234'
                   onChange={this.cardNumberChange}
                   value={newPayment.acctNumber}
@@ -132,9 +134,8 @@ class PaymentForm extends React.Component {
                   className='cool-border'
                   name='expDate'
                   id='expDate'
-                  // type='text'
-                  // placeholder='MM/YY'
-                  type="date"
+                  pattern='[0-9]{2}/[0-9]{4}'
+                  placeholder='MM/YYYY'
                   onChange={this.expDateChange}
                   value={newPayment.expDate}
                   required
@@ -151,6 +152,7 @@ class PaymentForm extends React.Component {
                   id='CVV'
                   placeholder='123'
                   onChange={this.cvvChange}
+                  maxLength={3}
                   value={newPayment.CVV}
                   required
                 />
