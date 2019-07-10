@@ -5,4 +5,12 @@ const formattedExpDate = date => {
   return fullDate;
 }
 
-export default { formattedExpDate }
+const maskCreditCard = cardNum => {
+  const cardString = cardNum.toString();
+  return cardString.replace(/\d{4}(?=.)/g, 'XXXX ');
+}
+
+export default { 
+  formattedExpDate,
+  maskCreditCard
+ }
