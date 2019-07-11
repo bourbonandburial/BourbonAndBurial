@@ -66,7 +66,7 @@ class ALaCarte extends React.Component {
   getSingleProductPrice = productId => {
     productRequests.getSingleProduct(productId).then((product) => {
       const newTotal = this.state.total - product.price;
-      this.setState({ total: newTotal });
+      this.setState({ total: newTotal.toFixed(2) });
     })
   }
 
