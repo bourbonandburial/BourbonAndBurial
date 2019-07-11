@@ -10,14 +10,11 @@ class SingleDetailedOrder extends React.Component{
         return (
             <section className="mainArea">
             <article className="card detailedOrderCard--1">
-              <div className="detailedOrderCard__img"></div>
               <a href="#" class="detailedOrderCard_link">
-             {this.props.getPackageImage()}
-
+                {this.props.getPackageImage()}
                  <div class="detailedOrderCard__img--hover"></div>
                </a>
               <div class="detailedOrderCard__info">
-                
                 <span class="detailedOrderCard__category"> Order #{this.props.orderId}</span>
                 <div>
                 <span className="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>

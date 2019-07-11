@@ -8,8 +8,8 @@
 .mainArea {
     background-image: url("https://github.com/ke4tri/Images/blob/master/backgroundOpacity1.png?raw=true");
     width: 100%;
-    height: 500px;
-    margin-top: 0px;
+    height: 700px;
+    // margin-top: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -17,14 +17,16 @@
 }
 
 .card {
-  margin-top: 30px;
+  margin-top: 8%;
+  margin-bottom:20%;
+  max-width:400px;
   max-height: 400px;
 }
 
 .cardz-img-top {
-  height: 200px ;
-  width: 300px;
-  object-fit: cover;
+  margin-top: 3% !important;
+  display:flex !important;
+  justify-content: center !important;
 }
 
 .detailedOrderCard__like {
