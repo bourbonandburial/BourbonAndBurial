@@ -8,11 +8,11 @@ class SingleDetailedOrder extends React.Component{
 
     render() {
         return (
-            <section class="mainArea">
-            <article class="card detailedOrderCard--1">
-              <div class="detailedOrderCard__img"></div>
+            <section className="mainArea">
+            <article className="card detailedOrderCard--1">
+              <div className="detailedOrderCard__img"></div>
               <a href="#" class="detailedOrderCard_link">
-              <img className="cardz-img-top border" src={this.props.image} alt="Card image" />
+             {this.props.getPackageImage()}
 
                  <div class="detailedOrderCard__img--hover"></div>
                </a>
@@ -26,7 +26,10 @@ class SingleDetailedOrder extends React.Component{
                 <span class="detailedOrderCard__category"> Order Date: <Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> Products: {this.props.productName}</span>
+                <span class="detailedOrderCard__category"> Package: {this.props.package}</span>
+                </div>
+                <div>
+                <span class="detailedOrderCard__category"> Products: {this.props.productBuilder()}</span>
                 </div>
                 <div>
                 <span class="detailedOrderCard__category"> ${this.props.total} </span>
