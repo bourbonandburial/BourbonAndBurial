@@ -19,6 +19,7 @@ import Payment from '../components/pages/Payment/Payment';
 import './App.scss';
 import OrderDetailsPage from '../components/pages/OrderDetailsPage/OrderDetailsPage';
 
+
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   let routeChecker = props => (authed === false
     ? (<Component {...props} {...rest} />)

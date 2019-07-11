@@ -31,9 +31,19 @@ const getCustomerPayments = customerId => new Promise((resolve, reject) => {
 
 const createCustomerPayment = customerPaymentObject => axios.post(`${apiUrl}`, (customerPaymentObject));
 
+const deletePayment = paymentTypeId => new Promise((resolve, reject) => {
+  axios.put(`${apiUrl}/${paymentTypeId}`).then((result) => {
+      resolve(result.data);
+    })
+    .catch((error) => {
+      reject(error)
+    });
+});
+
 export default {
   getActivePayments,
   getAllPayments,
   getCustomerPayments,
   createCustomerPayment,
+  deletePayment
 }

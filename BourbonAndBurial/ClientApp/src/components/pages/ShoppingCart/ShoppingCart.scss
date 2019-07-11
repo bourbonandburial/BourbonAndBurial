@@ -1,17 +1,13 @@
-
 .shoppingCartCard{
   display: flex;
-  border: 3px solid black;
-  margin-left: 30px !important;
-  justify-content: center !important; 
-  margin-bottom: 10px !important;
-  width: 30vh !important;
+  margin-bottom: 8px;
   height:100px !important;
 }
 
 .card-img-top1{
  width: 100px;
  height: auto;
+ border-radius: 10%;
 }
 
 .card-text1{
@@ -21,4 +17,7 @@
 .imgThumb{
   width: 200px;
   height: auto;
+}
+.fa-trash:hover{
+  color:whitesmoke !important;
 }

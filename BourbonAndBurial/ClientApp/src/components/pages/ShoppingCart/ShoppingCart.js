@@ -25,14 +25,14 @@ class ShoppingCart extends React.Component {
         const { removeFromCart, shoppingCart, cartItem, itemCount } = this.props;
 
         return (
-            <div className="shoppingCartCard">
+            <div className="shoppingCartCard justify-content-center">
                 <img className="card-img-top1" src={cartItem.image} alt="Card image cap" />
                 <div className="card-discription">
                     <p className="card-text1">Quanity: 1</p>
                     <p className="card-text1">{cartItem.price}</p>
                 </div>
                 <div>
-                    <div onClick={() => removeFromCart(cartItem.productId, shoppingCart)} className="btn">X</div>
+                    <div onClick={() => removeFromCart(cartItem.productId, shoppingCart)} className="btn"><i className="fa fa-trash fa-3x" aria-hidden="true"></i></div>
                 </div>
             </div>
         );

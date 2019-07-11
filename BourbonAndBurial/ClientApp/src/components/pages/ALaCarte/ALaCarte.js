@@ -63,6 +63,12 @@ class ALaCarte extends React.Component {
       .catch(err => console.error('error with add to cart', err));
   };
 
+  getSingleProductPrice = productId => {
+    productRequests.getSingleProduct(productId).then((product) => {
+      const newTotal = this.state.total - product.price;
+      this.setState({ total: newTotal.toFixed(2) });
+    })
+  }
 
   removeFromCart = (productId, state) => {
     let newArray = state;
@@ -73,8 +79,9 @@ class ALaCarte extends React.Component {
         break;
       }
     }
+    this.getSingleProductPrice(productId);
     this.setState({
-      shoppingCart: newArray
+      shoppingCart: newArray,
     });
   };
 
@@ -119,7 +126,7 @@ class ALaCarte extends React.Component {
 
 
   createOrderProducts = orderId => this.state.shoppingCart.map((item) => {
-    const newOrderProduct = {...this.state.newOrderProduct}
+    const newOrderProduct = { ...this.state.newOrderProduct }
     newOrderProduct.orderId = orderId;
     newOrderProduct.productId = item.productId;
     orderProductRequests.addOrderProduct(newOrderProduct).then(() => {
@@ -134,7 +141,7 @@ class ALaCarte extends React.Component {
       this.setState({
         newOrder: defaultOrder,
         newOrderProduct: defaultOrderProduct,
-        shoppingCart:[],
+        shoppingCart: [],
         total: 0,
       });
     }).catch(err => console.error(err));
@@ -233,51 +240,41 @@ class ALaCarte extends React.Component {
 
     return (
       <div className="ALaCarte">
-        <div className="parallax">
-          <div className="container">
-            <div className="">
-              <div className="textAla col-lg-11 ">
-                <ul>
-                  <PackageDisplay package={this.props.match.params.package} />
-                </ul>
-              </div>
-              <div className="searchCart">
-                <SearchField
-                  className=" searchField col-sm-6 searchCart mx-auto"
-                  placeholder='Search by Brand Name or Description'
-                  onChange={this.onChange}
-                />
-                <div className="cart mt-2">
-                  <div className=" textSizeAla mr-n2">
-                    <div className="area ">
-                      <p>Shopping Cart</p>
-                    </div>
-                    <h5>Package: {packageSelected.name}</h5>
-                    {shoppingCartBuilder}
-                    <h5 className='cart-total'>Total: ${total}</h5>
-                    <div className="input-group mb-3">
-                      <select className="custom-select" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>
-                        {buildPaymentDropdown}
-                      </select>
-                    </div>
-                    <div className="d-flex flex-row-reverse">
-                      <button className='btn submit-order-btn' onClick={(e) => this.submitOrder(e)}>Complete Order</button>
-                    </div>
+      <div className="parallax">
+        <div className="container">
+          <div className="">
+            <div className="card-body">
+              <h5 className="card-title"></h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+                      <PackageDisplay package={this.props.match.params.package} />
+                      </h6>
+            </div>
+            <div className="searchCart">
+              <SearchField className=" searchField " placeholder='Search by Brand Name or Description' onChange={this.onChange} />
+              <div className="cart">
+                <div className=" textSizeAla mr-n2 input-group ">
+                  <div className="area">
+                    <p>Shopping Cart</p>
                   </div>
+                  <h5 className="">Package: {packageSelected.name}</h5>
+                  <div className="shoppingBuilder mb-3 ">{shoppingCartBuilder}</div>
+                  <h5 className='cart-total '>Total: ${total}</h5>
+                  <div className=" mb-3 ">
+                    <select className="custom-select buttonDiv" id="inputGroupSelect02" name="paymentTypeId" value={newOrder.paymentTypeId} onChange={this.paymentChange}>{buildPaymentDropdown}</select>
+                  </div>
+                  <button className='mx-auto btn submit-order-btn' onClick={(e)=>this.submitOrder(e)}>Complete Order</button>
                 </div>
               </div>
-              <div className=" productDiv col-sm-8">
-                <div className="row justify-content-around mt-5">
-                  <div className="row">
-                    {singleFilteredProduct}
-                    {productBuilder}
-                  </div>
-                </div>
+            </div>
+            <div className=" productDiv col-sm-8">
+              <div className="row justify-content-around mt-5">
+                <div className="row">{singleFilteredProduct} {productBuilder}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }

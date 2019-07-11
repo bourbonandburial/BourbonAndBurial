@@ -20,7 +20,7 @@ class SingleDetailedOrder extends React.Component{
                 
                 <span class="detailedOrderCard__category"> Order #{this.props.orderId}</span>
                 <div>
-                <span class="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>
+                <span className="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>
                 </div>
                 <div>
                 <span class="detailedOrderCard__category"> Order Date: <Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></span>
@@ -34,7 +34,7 @@ class SingleDetailedOrder extends React.Component{
                 <div>
                 <span class="detailedOrderCard__category"> ${this.props.total} </span>
                 </div>
-                <span class="detailedOrderCard__by">Delivered to <a href="#" class="detailedOrderCard__author" title="author">Nashville</a></span>
+                <span className="detailedOrderCard__by">Delivered to <a href="#" className="detailedOrderCard__author" title="author">Nashville</a></span>
               </div>
             </article> 
               </section>
