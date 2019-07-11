@@ -110,6 +110,10 @@ class CustomerProfile extends React.Component {
       return (
         <SingleOrder
           key={order.orderId}
+          customerId={order.customerId}
+          paymentTypeId={order.paymentTypeId}
+          orderDate={order.orderDate}
+          total = {order.total}
           orderId={order.orderId}
           order={order}
           displaySingleOrder={this.displaySingleOrder}

@@ -30,8 +30,8 @@ const getSingleProduct = productId => new Promise((resolve, reject) => {
   axios
     .get(`${apiUrl}/${productId}`)
     .then((results) => {
-      const productFiilteredById = results.data;
-      resolve(productFiilteredById);
+      const productFilteredById = results.data;
+      resolve(productFilteredById);
     })
     .catch((err) => {
       reject(err);
