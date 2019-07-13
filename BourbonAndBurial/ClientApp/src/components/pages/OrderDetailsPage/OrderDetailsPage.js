@@ -51,7 +51,6 @@ displaySingleDetailedOrder = () => {
           
           return(
             <div>
-                <div className="idk d-flex justify-content-around"><h3 className="orderReview mt-3">Review Your Order</h3> </div>
                 <div className="builder d-flex justify-content-center"> 
                 <SingleDetailedOrder
                 orderId={order.orderId}
