@@ -20,7 +20,6 @@ displaySingleDetailedOrder = () => {
     orderProductRequests.getProductDetailsForOrder(orderId)
     .then((data) => {
       this.setState({ orderProduct: data});
-      console.log(data)
     })
   }).catch(err => console.error('error getting products', err));
 }

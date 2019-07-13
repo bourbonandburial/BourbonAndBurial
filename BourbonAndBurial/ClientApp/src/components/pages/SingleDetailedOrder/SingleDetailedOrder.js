@@ -10,26 +10,26 @@ class SingleDetailedOrder extends React.Component{
         return (
             <section className="mainArea">
             <article className="card detailedOrderCard--1">
-              <a href="#" class="detailedOrderCard_link">
+              <a href="#" className="detailedOrderCard_link">
                 {this.props.getPackageImage()}
-                 <div class="detailedOrderCard__img--hover"></div>
+                 <div className="detailedOrderCard__img--hover"></div>
                </a>
-              <div class="detailedOrderCard__info">
-                <span class="detailedOrderCard__category"> Order #{this.props.orderId}</span>
+              <div className="detailedOrderCard__info">
+                <span className="detailedOrderCard__category"> Order #{this.props.orderId}</span>
                 <div>
                 <span className="detailedOrderCard__category"> Payment Type Id: {this.props.paymentTypeId}</span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> Order Date: <Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></span>
+                <span className="detailedOrderCard__category"> Order Date: <Moment format="MM/DD/YYYY">{this.props.orderDate}</Moment></span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> Package: {this.props.package}</span>
+                <span className="detailedOrderCard__category"> Package: {this.props.package}</span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> Products: {this.props.productBuilder()}</span>
+                <span className="detailedOrderCard__category"> Products: {this.props.productBuilder()}</span>
                 </div>
                 <div>
-                <span class="detailedOrderCard__category"> ${this.props.total} </span>
+                <span className="detailedOrderCard__category"> ${this.props.total} </span>
                 </div>
                 <span className="detailedOrderCard__by">Delivered to <a href="#" className="detailedOrderCard__author" title="author">Nashville</a></span>
               </div>
