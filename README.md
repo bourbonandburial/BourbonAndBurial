@@ -1,8 +1,10 @@
 # BourbonAndBurial
 
-![alt text][logo]
+<p align="center">
+  <img width="460" height="300" src="https://github.com/ke4tri/Images/blob/master/logoStandard.png?raw=true">
+</p>
 
-[logo]: https://github.com/ke4tri/Images/blob/master/logoStandard.png?raw=true
+
 
 # Landing Page
 ![alt text](https://github.com/ke4tri/Images/blob/master/Home.JPG?raw=true)
