@@ -20,7 +20,6 @@ displaySingleDetailedOrder = () => {
     orderProductRequests.getProductDetailsForOrder(orderId)
     .then((data) => {
       this.setState({ orderProduct: data});
-      console.log(data)
     })
   }).catch(err => console.error('error getting products', err));
 }
@@ -34,9 +33,9 @@ displaySingleDetailedOrder = () => {
   getPackageImage = () => {
     const { packageSelected } = this.state;
     switch (packageSelected) {
-      case 'Cremation': return <div className="cardz-img-top border"><i className="fa fa-fire fa-5x fa-icon-image mb-3"></i></div>
-      case 'Burial': return <div className="cardz-img-top borderr"><i className="fa fa-recycle fa-5x fa-icon-image mb-3" ></i></div>
-      case 'Mausoleum': return <div className="cardz-img-top border"><i className="fa fa-hospital-o fa-5x fa-icon-image mb-3"></i></div>
+      case 'Cremation': return <div className="cardz-img-top"><i className="fa fa-fire fa-5x fa-icon-image mb-3"></i></div>
+      case 'Burial': return <div className="cardz-img-top"><i className="fa fa-recycle fa-5x fa-icon-image mb-3" ></i></div>
+      case 'Mausoleum': return <div className="cardz-img-top"><i className="fa fa-hospital-o fa-5x fa-icon-image mb-3"></i></div>
       default: return <div></div>
     }
   }
@@ -52,7 +51,6 @@ displaySingleDetailedOrder = () => {
           
           return(
             <div>
-                <div className="idk d-flex justify-content-around"><h3 className="orderReview mt-3">Review Your Order</h3> </div>
                 <div className="builder d-flex justify-content-center"> 
                 <SingleDetailedOrder
                 orderId={order.orderId}
